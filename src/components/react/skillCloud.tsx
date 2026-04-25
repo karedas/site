@@ -29,7 +29,7 @@ const MOONS: Moon[] = [
   { rx: 195, period: 78, phase: 0.2, size: 3.2, color: C.sage, label: 'Platform' },
   { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan, label: 'Craft' },
   // 5th orbit: rotated ~75° so the AI moon travels on a near-vertical inclined path.
-  { rx: 180, ry: 60, rotation: 75, period: 100, phase: 0.4, size: 3, color: C.ice, label: 'AI' },
+  { rx: 180, ry: 60, rotation: 75, period: 100, phase: 0.4, size: 3, color: C.cyan, label: 'AI' },
 ];
 
 const W = 520;

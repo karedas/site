@@ -90,8 +90,8 @@ tests/
 ├── unit/                           # Vitest + Testing Library
 │   ├── setup.ts                    # jsdom + matchMedia mock + jest-dom matchers
 │   ├── useReducedMotion.test.ts
-│   ├── Telemetry.test.tsx
-│   └── TopMeta.test.tsx
+│   ├── telemetry.test.tsx
+│   └── topMeta.test.tsx
 └── e2e/                            # Playwright + axe
     └── homepage.spec.ts
 ```
