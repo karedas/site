@@ -87,7 +87,7 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
           const outerR = size * (i % 2 === 0 ? 2.6 : 2.0);
           return (
             <line
-              key={i}
+              key={`ray-${a.toFixed(6)}`}
               x1={cx + innerR * Math.cos(a)}
               y1={cy + innerR * Math.sin(a)}
               x2={cx + outerR * Math.cos(a)}
@@ -346,11 +346,11 @@ export default function SolarSystem({
     >
       {/* star field */}
       <g style={{ pointerEvents: 'none' }}>
-        {stars.map((s, i) => {
+        {stars.map((s) => {
           const tw = reduced ? 0.5 : 0.5 + 0.5 * Math.sin(t / s.tw + s.ph);
           return (
             <circle
-              key={i}
+              key={`star-${s.x.toFixed(3)}-${s.y.toFixed(3)}`}
               cx={s.x}
               cy={s.y}
               r={s.r}
@@ -388,7 +388,7 @@ export default function SolarSystem({
         const ry = rx * (1 - tilt);
         return (
           <ellipse
-            key={`o-${i}`}
+            key={`orbit-${p.a}`}
             cx={cx}
             cy={cy}
             rx={rx}
@@ -422,7 +422,7 @@ export default function SolarSystem({
         const py = cy + ry * Math.sin(angle);
         const isHover = hover === i;
         return (
-          <g key={`p-${i}`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(-1)}>
+          <g key={`planet-${p.a}`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(-1)}>
             {p.glow && (
               <circle
                 cx={px}

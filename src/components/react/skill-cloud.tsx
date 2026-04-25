@@ -84,12 +84,12 @@ export default function SkillCloud() {
         </filter>
       </defs>
 
-      {MOONS.map((m, i) => {
+      {MOONS.map((m) => {
         const ry = m.ry ?? m.rx * (1 - TILT);
         const transform = m.rotation ? `rotate(${m.rotation} ${cx} ${cy})` : undefined;
         return (
           <ellipse
-            key={`o${i}`}
+            key={`orbit-${m.label}`}
             cx={cx}
             cy={cy}
             rx={m.rx}
@@ -123,7 +123,7 @@ export default function SkillCloud() {
         fill="none"
       />
 
-      {MOONS.map((m, i) => {
+      {MOONS.map((m) => {
         const a = (t / m.period + m.phase) * Math.PI * 2;
         const ry = m.ry ?? m.rx * (1 - TILT);
         const localX = m.rx * Math.cos(a);
@@ -140,7 +140,7 @@ export default function SkillCloud() {
         // Far side of orbit (sin(a) < 0 by convention) AND visually over the planet disk.
         const behind = Math.sin(a) < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
         return (
-          <g key={`m${i}`} opacity={behind ? 0.25 : 1} style={{ transition: 'opacity 200ms' }}>
+          <g key={`moon-${m.label}`} opacity={behind ? 0.25 : 1} style={{ transition: 'opacity 200ms' }}>
             {m.core && (
               <circle
                 cx={mx}
