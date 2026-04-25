@@ -2,29 +2,20 @@
 import SectionHeader from '@/components/SectionHeader.astro';
 import SkillCloud from '@/components/react/SkillCloud.tsx';
 
-interface SkillItem { name: string; }
+interface SkillItem {
+  name: string;
+  core?: boolean;
+}
 interface Group {
   title: string;
-  pillar?: boolean;
   items: SkillItem[];
 }
 
 const groups: Group[] = [
   {
-    title: 'AI & DX',
-    pillar: true,
-    items: [
-      { name: 'AI-driven workflows' },
-      { name: 'Cursor / Claude Code' },
-      { name: 'AI for QA & quality' },
-      { name: 'Developer Experience' },
-      { name: 'Tooling & automation' },
-    ],
-  },
-  {
     title: 'Architecture',
     items: [
-      { name: 'Clean Architecture' },
+      { name: 'Clean Architecture', core: true },
       { name: 'Domain-Driven Design' },
       { name: 'Type Safety (Zod)' },
       { name: 'GraphQL contracts' },
@@ -32,21 +23,10 @@ const groups: Group[] = [
     ],
   },
   {
-    title: 'Platform',
-    items: [
-      { name: 'Nx / Turborepo' },
-      { name: 'Azure DevOps' },
-      { name: 'GitHub Enterprise' },
-      { name: 'Docker / Kubernetes' },
-      { name: 'Cloudflare Workers' },
-      { name: 'App Insights' },
-    ],
-  },
-  {
     title: 'Engineering',
     items: [
-      { name: 'TypeScript' },
-      { name: 'React / RSC' },
+      { name: 'TypeScript', core: true },
+      { name: 'React / RSC', core: true },
       { name: 'Vue 3' },
       { name: 'Node.js' },
       { name: 'GraphQL' },
@@ -54,8 +34,21 @@ const groups: Group[] = [
     ],
   },
   {
+    title: 'Platform',
+    items: [
+      { name: 'Nx / Turborepo', core: true },
+      { name: 'GitHub Enterprise', core: true },
+      { name: 'Azure DevOps' },
+      { name: 'Docker / Kubernetes' },
+      { name: 'Cloudflare Workers' },
+      { name: 'APM & monitoring' },
+      { name: 'Tooling & automation' },
+    ],
+  },
+  {
     title: 'Craft & Leadership',
     items: [
+      { name: 'Developer Experience', core: true },
       { name: 'Architectural steering' },
       { name: 'Technical governance' },
       { name: 'Mentoring & growth' },
@@ -63,10 +56,17 @@ const groups: Group[] = [
       { name: 'Writing & docs' },
     ],
   },
+  {
+    title: 'AI in practice',
+    items: [
+      { name: 'AI-augmented workflow' },
+      { name: 'Pragmatic adoption · no hype' },
+    ],
+  },
 ];
 ---
 <section class="al-section section" id="skills">
-  <SectionHeader num="02" title="Skills" subtitle="Governance, platform, and the AI shift" accent="sage" />
+  <SectionHeader num="02" title="Skills" subtitle="Where the time goes" accent="sage" />
 
   <div class="al-skills-layout layout">
     <div class="al-skills-cloud-wrap cloud-wrap">
@@ -89,14 +89,14 @@ const groups: Group[] = [
 
     <div class="al-skill-list list">
       {groups.map((g) => (
-        <div class:list={['group', g.pillar && 'pillar']}>
-          <h3 class="al-skill-group-title group-title">
-            {g.title}
-            {g.pillar && <span class="pillar-tag">&middot; CORE</span>}
-          </h3>
+        <div class="group">
+          <h3 class="al-skill-group-title group-title">{g.title}</h3>
           <div class="chips">
             {g.items.map((s) => (
-              <span class:list={['chip', g.pillar && 'chip-pillar']}>{s.name}</span>
+              <span class:list={['chip', s.core && 'chip-core']}>
+                {s.core && <span class="chip-marker" aria-hidden="true">&#9670;</span>}
+                {s.name}
+              </span>
             ))}
           </div>
         </div>
@@ -154,10 +154,6 @@ const groups: Group[] = [
     padding-left: 18px;
     border-left: 1px solid var(--border);
   }
-  .group.pillar {
-    padding-left: 22px;
-    border-left: 2px solid var(--amber);
-  }
   .group-title {
     font-family: var(--font-display);
     font-size: 11px;
@@ -170,20 +166,15 @@ const groups: Group[] = [
     gap: 10px;
     color: var(--fg-dim);
   }
-  .group.pillar .group-title { color: var(--amber); }
-
-  .pillar-tag {
-    color: var(--gold);
-    font-weight: 400;
-    letter-spacing: 0.32em;
-    font-size: 10px;
-  }
   .chips {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
   .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: var(--font-display);
     font-size: 12px;
     font-weight: 400;
@@ -200,14 +191,23 @@ const groups: Group[] = [
     border-color: var(--border);
     background: rgba(255, 255, 255, 0.02);
   }
-  .chip-pillar {
-    font-size: 13px;
-    font-weight: 500;
+  .chip-core {
     color: var(--amber);
+    font-weight: 500;
+    border-color: var(--gold-dim);
   }
-  .chip-pillar:hover {
+  .chip-core:hover {
     color: var(--gold-hi);
     border-color: var(--amber);
-    background: rgba(232, 161, 58, 0.08);
+    background: rgba(232, 161, 58, 0.06);
+  }
+  .chip-marker {
+    color: var(--gold-dim);
+    font-size: 7px;
+    line-height: 1;
+    transform: translateY(-1px);
+  }
+  .chip-core:hover .chip-marker {
+    color: var(--amber);
   }
 </style>

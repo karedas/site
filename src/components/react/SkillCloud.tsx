@@ -20,8 +20,8 @@ interface Moon {
 }
 
 const MOONS: Moon[] = [
-  { rx: 110, period:  22, phase: 0.10, size: 5,   color: C.amber,  label: 'AI',           core: true },
-  { rx: 150, period:  44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Architecture' },
+  { rx: 110, period:  22, phase: 0.10, size: 5,   color: C.amber,  label: 'Architecture', core: true },
+  { rx: 150, period:  44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Engineering' },
   { rx: 195, period:  78, phase: 0.20, size: 3.2, color: C.sage,   label: 'Platform' },
   { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan,   label: 'Craft' },
 ];
