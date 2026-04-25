@@ -422,7 +422,11 @@ export default function SolarSystem({
         const py = cy + ry * Math.sin(angle);
         const isHover = hover === i;
         return (
-          <g key={`planet-${p.a}`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(-1)}>
+          <g
+            key={`planet-${p.a}`}
+            onMouseEnter={() => setHover(i)}
+            onMouseLeave={() => setHover(-1)}
+          >
             {p.glow && (
               <circle
                 cx={px}

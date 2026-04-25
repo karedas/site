@@ -140,7 +140,11 @@ export default function SkillCloud() {
         // Far side of orbit (sin(a) < 0 by convention) AND visually over the planet disk.
         const behind = Math.sin(a) < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
         return (
-          <g key={`moon-${m.label}`} opacity={behind ? 0.25 : 1} style={{ transition: 'opacity 200ms' }}>
+          <g
+            key={`moon-${m.label}`}
+            opacity={behind ? 0.25 : 1}
+            style={{ transition: 'opacity 200ms' }}
+          >
             {m.core && (
               <circle
                 cx={mx}
