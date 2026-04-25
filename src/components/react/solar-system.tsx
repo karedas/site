@@ -282,15 +282,19 @@ export default function SolarSystem({
   const smoothedRef = useRef({ x: 0, y: 0 });
 
   // Animation loop. When reduced-motion, render a single frozen frame (t=0).
+  // We track time as ABSOLUTE elapsed seconds since mount instead of accumulating
+  // per-frame deltas — accumulation is fragile under React Strict-Mode double-mount,
+  // hidden-tab rAF throttling, and any other case where `last` may get reset while
+  // `t` carries forward (or vice versa), which manifests as planets oscillating in
+  // place / making tiny back-and-forth steps.
   useEffect(() => {
     if (reduced) return;
+    const start = performance.now();
     let raf = 0;
-    let last = performance.now();
-    const tick = (now: number) => {
+    const tick = () => {
       smoothedRef.current.x += (parallaxRef.current.x - smoothedRef.current.x) * 0.08;
       smoothedRef.current.y += (parallaxRef.current.y - smoothedRef.current.y) * 0.08;
-      setT((p) => p + (now - last) / 1000);
-      last = now;
+      setT((performance.now() - start) / 1000);
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
