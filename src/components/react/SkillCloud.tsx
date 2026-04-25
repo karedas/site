@@ -11,6 +11,10 @@ const C = {
 
 interface Moon {
   rx: number;
+  /** Defaults to `rx * (1 - TILT)` when omitted (the standard horizontal-tilt orbits). */
+  ry?: number;
+  /** Degrees, rotation around the planet center. Defaults to 0. */
+  rotation?: number;
   period: number;
   phase: number;
   size: number;
@@ -24,6 +28,8 @@ const MOONS: Moon[] = [
   { rx: 150, period:  44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Engineering' },
   { rx: 195, period:  78, phase: 0.20, size: 3.2, color: C.sage,   label: 'Platform' },
   { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan,   label: 'Craft' },
+  // 5th orbit: rotated ~75° so the AI moon travels on a near-vertical inclined path.
+  { rx: 180, ry: 60, rotation: 75, period: 100, phase: 0.40, size: 3, color: C.ice, label: 'AI' },
 ];
 
 const W = 520;
@@ -78,10 +84,19 @@ export default function SkillCloud() {
         </filter>
       </defs>
 
-      {MOONS.map((m, i) => (
-        <ellipse key={`o${i}`} cx={cx} cy={cy} rx={m.rx} ry={m.rx * (1 - TILT)}
-          fill="none" stroke="#3a4258" strokeWidth="0.7" opacity="0.55" />
-      ))}
+      {MOONS.map((m, i) => {
+        const ry = m.ry ?? m.rx * (1 - TILT);
+        const transform = m.rotation ? `rotate(${m.rotation} ${cx} ${cy})` : undefined;
+        return (
+          <ellipse
+            key={`o${i}`}
+            cx={cx} cy={cy}
+            rx={m.rx} ry={ry}
+            fill="none" stroke="#3a4258" strokeWidth="0.7" opacity="0.55"
+            transform={transform}
+          />
+        );
+      })}
 
       {/* Planet body */}
       <circle cx={cx} cy={cy} r={PLANET_R + 6} fill="url(#planet-atmo)" />
@@ -96,12 +111,20 @@ export default function SkillCloud() {
 
       {MOONS.map((m, i) => {
         const a = (t / m.period + m.phase) * Math.PI * 2;
-        const mx = cx + m.rx * Math.cos(a);
-        const my = cy + m.rx * (1 - TILT) * Math.sin(a);
-        const behind =
-          my < cy &&
-          Math.abs(mx - cx) < PLANET_R * 0.95 &&
-          Math.hypot(mx - cx, my - cy) < PLANET_R;
+        const ry = m.ry ?? m.rx * (1 - TILT);
+        const localX = m.rx * Math.cos(a);
+        const localY = ry * Math.sin(a);
+        let mx = cx + localX;
+        let my = cy + localY;
+        if (m.rotation) {
+          const rad = (m.rotation * Math.PI) / 180;
+          const cosR = Math.cos(rad);
+          const sinR = Math.sin(rad);
+          mx = cx + cosR * localX - sinR * localY;
+          my = cy + sinR * localX + cosR * localY;
+        }
+        // Far side of orbit (sin(a) < 0 by convention) AND visually over the planet disk.
+        const behind = Math.sin(a) < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
         return (
           <g key={`m${i}`} opacity={behind ? 0.25 : 1} style={{ transition: 'opacity 200ms' }}>
             {m.core && (
