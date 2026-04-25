@@ -16,35 +16,35 @@ Personal portfolio. Single page, editorial / astronomical aesthetic, animated so
 ## Development
 
 ```bash
-npm install
-npm run dev        # http://localhost:4321
+pnpm install
+pnpm dev        # http://localhost:4321
 ```
 
 ## Build
 
 ```bash
-npm run build      # type-check + Astro build -> dist/
-npm run preview    # serve the production build locally
+pnpm build      # type-check + Astro build -> dist/
+pnpm preview    # serve the production build locally
 ```
 
 ## Quality gates
 
 ```bash
-npm run lint       # Biome: lint + format check
-npm run lint:fix   # Biome: apply fixes
-npm run format     # Biome: format only
-npm run typecheck  # astro check (TS + .astro)
-npm run test       # Vitest unit tests (jsdom)
-npm run test:watch # Vitest watch mode
-npm run test:coverage  # coverage report (v8)
-npm run verify     # lint + typecheck + unit + build (full local CI)
+pnpm lint       # Biome: lint + format check
+pnpm lint:fix   # Biome: apply fixes
+pnpm format     # Biome: format only
+pnpm typecheck  # astro check (TS + .astro)
+pnpm test       # Vitest unit tests (jsdom)
+pnpm test:watch # Vitest watch mode
+pnpm test:coverage  # coverage report (v8)
+pnpm verify     # lint + typecheck + unit + build (full local CI)
 ```
 
 ### End-to-end + a11y
 
 ```bash
-npm run test:e2e:install   # one-time: install Playwright browsers
-npm run test:e2e           # build + preview + run Playwright suite
+pnpm test:e2e:install   # one-time: install Playwright browsers
+pnpm test:e2e           # build + preview + run Playwright suite
 ```
 
 The E2E suite covers section presence, console-error budget, island hydration,
