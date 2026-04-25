@@ -40,10 +40,12 @@ test.describe('homepage', () => {
 
   test('renders all four work entries in chronological order', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('Tricentis · Tosca Cloud')).toBeVisible();
-    await expect(page.getByText('Treedom')).toBeVisible();
-    await expect(page.getByText('Forzieri.com')).toBeVisible();
-    await expect(page.getByText('Easysystem')).toBeVisible();
+    const titles = page.locator('.al-w-title');
+    await expect(titles).toHaveCount(4);
+    await expect(titles.nth(0)).toContainText('Tricentis · Tosca Cloud');
+    await expect(titles.nth(1)).toContainText('Treedom');
+    await expect(titles.nth(2)).toContainText('Forzieri.com');
+    await expect(titles.nth(3)).toContainText('Easysystem');
   });
 
   test('respects prefers-reduced-motion (no LED keyframes applied)', async ({ browser }) => {

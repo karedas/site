@@ -35,7 +35,7 @@ const interests: Interest[] = [
         {languages.map((l) => (
           <li class="lang-row">
             <span class="lang-name">{l.name}</span>
-            <span class="dots" aria-label={`${l.level} of 5`}>
+            <span class="dots" role="img" aria-label={`${l.level} of 5`}>
               {Array.from({ length: 5 }).map((_, i) => (
                 <span class:list={['dot', i < l.level && 'dot-on']} aria-hidden="true"></span>
               ))}
