@@ -68,7 +68,7 @@ export default function SkillCloud() {
       height="100%"
       style={{ display: 'block' }}
       role="img"
-      aria-label="Skill cloud: a planet with four orbiting moons labelled AI, Architecture, Platform, and Craft"
+      aria-label="Skill cloud: a planet with five orbiting moons labelled Architecture, Engineering, Platform, Craft, and AI"
     >
       <defs>
         <radialGradient id="planet-fill" cx="0.38" cy="0.34" r="0.78">
