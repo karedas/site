@@ -1,6 +1,12 @@
 /* =========================================================
    Responsive overrides - Andrea Lisi Portfolio
    Breakpoints: 1024 (tablet), 768 (small tablet), 480 (mobile)
+
+   NOTE on !important: Astro injects component-scoped <style> blocks
+   AFTER global stylesheets in the cascade, so a scoped `.section { ... }`
+   beats this file's `.al-section { ... }` at equal specificity. The
+   !important keeps the responsive overrides authoritative without
+   forcing every component to mirror the breakpoints in its own scope.
    ========================================================= */
 
 /* ------------------ TABLET 1024 ------------------ */
@@ -9,26 +15,26 @@
   .al-foot,
   .al-topmeta,
   .al-hero-compose {
-    padding-left: 48px;
-    padding-right: 48px;
+    padding-left: 48px !important;
+    padding-right: 48px !important;
   }
   .al-skills-layout {
-    grid-template-columns: 1fr;
-    gap: 48px;
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
   }
   .al-skills-cloud-wrap {
-    position: static;
+    position: static !important;
   }
   .al-work-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     grid-template-areas:
       "year"
       "title"
       "role"
       "tags"
-      "note";
-    gap: 8px;
-    padding: 24px 12px;
+      "note" !important;
+    gap: 8px !important;
+    padding: 24px 12px !important;
   }
   .al-work-row > .al-w-year {
     grid-area: year;
@@ -41,11 +47,11 @@
   }
   .al-work-row > .al-w-tags {
     grid-area: tags;
-    margin-top: 4px;
+    margin-top: 4px !important;
   }
   .al-work-row > .al-w-note {
     grid-area: note;
-    margin-top: 6px;
+    margin-top: 6px !important;
   }
 }
 
@@ -55,56 +61,56 @@
   .al-foot,
   .al-topmeta,
   .al-hero-compose {
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
   }
   .al-section {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
   }
 
   .al-topmeta-name {
-    display: none;
+    display: none !important;
   }
   .al-topmeta {
-    font-size: 10px;
+    font-size: 10px !important;
   }
 
   .al-hero-welcome {
-    font-size: clamp(22px, 5.5vw, 32px);
+    font-size: clamp(22px, 5.5vw, 32px) !important;
   }
   .al-hero-role {
-    font-size: 12px;
+    font-size: 12px !important;
   }
 
   .al-about-body {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
   .al-about-lead {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .al-about-body2 {
-    font-size: 15px;
+    font-size: 15px !important;
   }
   .al-about-meta-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
   }
 
   .al-section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
   }
   .al-section-title {
-    font-size: clamp(40px, 9vw, 56px);
+    font-size: clamp(40px, 9vw, 56px) !important;
   }
 
   .al-foot-row {
-    flex-direction: column;
-    gap: 12px;
-    text-align: center;
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
   }
 }
 
@@ -114,59 +120,59 @@
   .al-foot,
   .al-topmeta,
   .al-hero-compose {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
   .al-section {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
   }
 
   .al-topmeta {
-    font-size: 9px;
-    gap: 8px;
+    font-size: 9px !important;
+    gap: 8px !important;
   }
   .al-topmeta > * {
-    letter-spacing: 0.18em;
+    letter-spacing: 0.18em !important;
   }
 
   /* Hide the hex packet counter on tiny screens to save room */
   .al-pkt-hex {
-    display: none;
+    display: none !important;
   }
 
   /* Hero solar system - smaller, less tall */
   .al-hero-solar {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 3 !important;
   }
 
   .al-work-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     grid-template-areas:
       "year"
       "title"
       "role"
       "tags"
-      "note";
-    gap: 8px;
-    padding: 24px 8px;
+      "note" !important;
+    gap: 8px !important;
+    padding: 24px 8px !important;
   }
   .al-work-row > .al-w-title {
-    font-size: 18px;
+    font-size: 18px !important;
   }
   .al-work-row > .al-w-note {
-    font-size: 13px;
+    font-size: 13px !important;
   }
 
   .al-about-meta-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   .al-skill-list {
-    gap: 28px;
+    gap: 28px !important;
   }
   .al-skill-group-title {
-    font-size: 10px;
-    letter-spacing: 0.32em;
+    font-size: 10px !important;
+    letter-spacing: 0.32em !important;
   }
 }
