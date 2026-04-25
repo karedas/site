@@ -1,0 +1,180 @@
+---
+import SectionHeader from '@/components/SectionHeader.astro';
+
+interface Language {
+  name: string;
+  level: number;
+  label: string;
+}
+
+interface Interest {
+  text: string;
+}
+
+const languages: Language[] = [
+  { name: 'Italian', level: 5, label: 'Native' },
+  { name: 'English', level: 4, label: 'Fluent' },
+  { name: 'German', level: 2, label: 'Learning' },
+];
+
+const interests: Interest[] = [
+  { text: 'Photography (analog, mostly Vienna at night)' },
+  { text: 'Reading sci-fi & design books' },
+  { text: 'Cooking — currently obsessed with bread fermentation' },
+  { text: 'Long flat rides along the Danube' },
+];
+---
+<section class="al-section section" id="off-orbit">
+  <SectionHeader num="04" title="Off-orbit" subtitle="Beyond the keyboard" accent="jade" />
+
+  <div class="layout">
+    <div class="col">
+      <h3 class="col-title">Languages</h3>
+      <ul class="lang-list">
+        {languages.map((l) => (
+          <li class="lang-row">
+            <span class="lang-name">{l.name}</span>
+            <span class="dots" aria-label={`${l.level} of 5`}>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span class:list={['dot', i < l.level && 'dot-on']} aria-hidden="true"></span>
+              ))}
+            </span>
+            <span class="lang-label">{l.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="col">
+      <h3 class="col-title">Interests</h3>
+      <ul class="interest-list">
+        {interests.map((i) => (
+          <li class="interest-row">
+            <span class="marker" aria-hidden="true">&#9670;</span>
+            <span class="interest-text">{i.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 80px;
+    position: relative;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.9fr) 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .col-title {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    margin: 0 0 28px;
+  }
+
+  /* Languages */
+  .lang-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .lang-row {
+    display: grid;
+    grid-template-columns: 90px auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .lang-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg);
+  }
+  .dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+  }
+  .dot-on {
+    background: var(--amber);
+    border-color: var(--amber);
+    box-shadow: 0 0 6px rgba(232, 161, 58, 0.35);
+  }
+  .lang-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+
+  /* Interests */
+  .interest-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .interest-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--fg);
+  }
+  .marker {
+    color: var(--amber);
+    font-size: 8px;
+    line-height: 1;
+    transform: translateY(-1px);
+    flex-shrink: 0;
+  }
+  .interest-text { text-wrap: pretty; }
+
+  @media (max-width: 1024px) {
+    .section { padding: 80px 48px; }
+    .layout { gap: 48px; }
+  }
+  @media (max-width: 768px) {
+    .section { padding: 60px 28px; }
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .lang-row { grid-template-columns: 80px auto 1fr; gap: 16px; }
+  }
+  @media (max-width: 480px) {
+    .section { padding: 48px 20px; }
+    .lang-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .dots { justify-self: start; }
+  }
+</style>
