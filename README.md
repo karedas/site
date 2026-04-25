@@ -61,25 +61,25 @@ To link a fresh repo: connect the GitHub repo in the Netlify UI (no env vars req
 ```
 src/
 ├── layouts/
-│   └── Layout.astro                # html shell, fonts, meta, global CSS
+│   └── layout.astro                # html shell, fonts, meta, global CSS
 ├── pages/
 │   └── index.astro                 # composes the page sections
 ├── components/
-│   ├── Hero.astro                  # hero section (loads React islands)
-│   ├── About.astro
-│   ├── Skills.astro                # loads SkillCloud island
-│   ├── Work.astro
-│   ├── Footer.astro
-│   ├── SectionHeader.astro
-│   ├── SocialLink.astro
-│   ├── GradientArc.astro           # static SVG, no JS
-│   ├── CornerMarks.astro
-│   ├── ScrollHint.astro
+│   ├── hero.astro                  # hero section (loads React islands)
+│   ├── about.astro
+│   ├── skills.astro                # loads SkillCloud island
+│   ├── work.astro
+│   ├── footer.astro
+│   ├── sectionHeader.astro
+│   ├── socialLink.astro
+│   ├── gradientArc.astro           # static SVG, no JS
+│   ├── cornerMarks.astro
+│   ├── scrollHint.astro
 │   └── react/                      # client islands (animated)
-│       ├── SolarSystem.tsx         # rAF, parallax via ref, hover-on-orbit
-│       ├── SkillCloud.tsx          # planet + 4 moons with labels
-│       ├── TopMeta.tsx             # GeoCoords + TransmittingTicker
-│       ├── Telemetry.tsx           # cycling eyebrow line
+│       ├── solarSystem.tsx         # rAF, parallax via ref, hover-on-orbit
+│       ├── skillCloud.tsx          # planet + 4 moons with labels
+│       ├── topMeta.tsx             # GeoCoords + TransmittingTicker
+│       ├── telemetry.tsx           # cycling eyebrow line
 │       └── useReducedMotion.ts     # shared media-query hook
 └── styles/
     ├── tokens.css                  # CSS variables (single source of truth)
