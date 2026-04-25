@@ -70,17 +70,17 @@ src/
 │   ├── skills.astro                # loads SkillCloud island
 │   ├── work.astro
 │   ├── footer.astro
-│   ├── sectionHeader.astro
-│   ├── socialLink.astro
-│   ├── gradientArc.astro           # static SVG, no JS
-│   ├── cornerMarks.astro
-│   ├── scrollHint.astro
+│   ├── section-header.astro
+│   ├── social-link.astro
+│   ├── gradient-arc.astro          # static SVG, no JS
+│   ├── corner-marks.astro
+│   ├── scroll-hint.astro
 │   └── react/                      # client islands (animated)
-│       ├── solarSystem.tsx         # rAF, parallax via ref, hover-on-orbit
-│       ├── skillCloud.tsx          # planet + 4 moons with labels
-│       ├── topMeta.tsx             # GeoCoords + TransmittingTicker
+│       ├── solar-system.tsx        # rAF, parallax via ref, hover-on-orbit
+│       ├── skill-cloud.tsx         # planet + 4 moons with labels
+│       ├── top-meta.tsx            # GeoCoords + TransmittingTicker
 │       ├── telemetry.tsx           # cycling eyebrow line
-│       └── useReducedMotion.ts     # shared media-query hook
+│       └── use-reduced-motion.ts   # shared media-query hook
 └── styles/
     ├── tokens.css                  # CSS variables (single source of truth)
     ├── global.css                  # base + keyframes + reduced-motion
@@ -89,9 +89,9 @@ src/
 tests/
 ├── unit/                           # Vitest + Testing Library
 │   ├── setup.ts                    # jsdom + matchMedia mock + jest-dom matchers
-│   ├── useReducedMotion.test.ts
+│   ├── use-reduced-motion.test.ts
 │   ├── telemetry.test.tsx
-│   └── topMeta.test.tsx
+│   └── top-meta.test.tsx
 └── e2e/                            # Playwright + axe
     └── homepage.spec.ts
 ```

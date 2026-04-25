@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useReducedMotion } from './useReducedMotion';
+import { useReducedMotion } from './use-reduced-motion';
 
 // ── Palette (single source of truth in CSS; mirrored here for SVG attrs) ──
 const C = {

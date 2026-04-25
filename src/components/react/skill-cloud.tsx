@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useReducedMotion } from './useReducedMotion';
+import { useReducedMotion } from './use-reduced-motion';
 
 const C = {
   amber: '#e8a13a',

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useReducedMotion } from './useReducedMotion';
+import { useReducedMotion } from './use-reduced-motion';
 
 function GeoCoords() {
   const reduced = useReducedMotion();

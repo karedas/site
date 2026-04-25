@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import TopMeta from '@/components/react/topMeta';
+import TopMeta from '@/components/react/top-meta';
 
 describe('TopMeta', () => {
   beforeEach(() => {

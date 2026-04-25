@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { useReducedMotion } from '@/components/react/useReducedMotion';
+import { useReducedMotion } from '@/components/react/use-reduced-motion';
 
 interface ListenerStore {
   listeners: Set<(e: MediaQueryListEvent) => void>;

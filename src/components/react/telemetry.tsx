@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useReducedMotion } from './useReducedMotion';
+import { useReducedMotion } from './use-reduced-motion';
 
 type Line = string | (() => string);
 
