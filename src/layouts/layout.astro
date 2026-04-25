@@ -25,6 +25,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="color-scheme" content="dark" />
     <meta name="generator" content={Astro.generator} />
 
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#e8a13a" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />

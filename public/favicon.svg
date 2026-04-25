@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  
+  <rect width="64" height="64" rx="12" fill="#0a0c17"></rect>
+
+  
+  <ellipse cx="32" cy="34" rx="26" ry="9" transform="rotate(-22 32 34)" fill="none" stroke="url(#ringGrad)" stroke-width="2.4"></ellipse>
+
+  
+  <circle cx="32" cy="30" r="13" fill="url(#planetGrad)"></circle>
+
+  
+  <ellipse cx="32" cy="30" rx="12.5" ry="2" transform="rotate(-22 32 30)" fill="#0a0c17" opacity="0.18"></ellipse>
+
+  
+  <path d="M 9 39 Q 32 28 55 27" fill="none" stroke="url(#ringFront)" stroke-width="2.4" stroke-linecap="round"></path>
+
+  <defs>
+    <radialGradient id="planetGrad" cx="35%" cy="32%" r="75%">
+      <stop offset="0%" stop-color="#f5d27a"></stop>
+      <stop offset="40%" stop-color="#e8a13a"></stop>
+      <stop offset="75%" stop-color="#7fc88c"></stop>
+      <stop offset="100%" stop-color="#3fb8d6"></stop>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#e8a13a"></stop>
+      <stop offset="50%" stop-color="#7fc88c"></stop>
+      <stop offset="100%" stop-color="#3fb8d6"></stop>
+    </linearGradient>
+    <linearGradient id="ringFront" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#3fb8d6"></stop>
+      <stop offset="50%" stop-color="#7fc88c"></stop>
+      <stop offset="100%" stop-color="#e8a13a"></stop>
+    </linearGradient>
+  </defs>
+</svg>
