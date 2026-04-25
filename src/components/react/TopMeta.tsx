@@ -49,7 +49,15 @@ function TransmittingTicker() {
         }}
       />
       <span>TRANSMITTING</span>
-      <span className="al-pkt-hex" style={{ color: 'var(--gold-dim)' }}>
+      <span
+        className="al-pkt-hex"
+        style={{
+          color: 'var(--gold-dim)',
+          fontFamily: 'var(--font-mono)',
+          fontVariantNumeric: 'tabular-nums',
+          letterSpacing: '0.08em',
+        }}
+      >
         0x{hex}
       </span>
       <span style={{ marginLeft: 8 }}>MMXXVI</span>
