@@ -297,14 +297,21 @@ export default function SolarSystem({
     return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
-  // Mouse parallax — ref only, no setState (avoids re-render storm)
+  // Mouse parallax — ref only, no setState (avoids re-render storm).
+  // Skipped when the SVG is off-screen: getBoundingClientRect() returns
+  // negative bounds in that case, which makes (e.clientY - r.top) / r.height
+  // explode well past ±0.5. The smoothed ease then has to wobble back into
+  // place when the user scrolls the hero into view again.
   useEffect(() => {
     if (reduced || !parallaxStrength) return;
+    const clamp = (v: number) => Math.max(-0.5, Math.min(0.5, v));
     const onMove = (e: MouseEvent) => {
-      const r = svgRef.current?.getBoundingClientRect();
-      if (!r) return;
-      const nx = (e.clientX - r.left) / r.width - 0.5;
-      const ny = (e.clientY - r.top) / r.height - 0.5;
+      const el = svgRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      const nx = clamp((e.clientX - r.left) / r.width - 0.5);
+      const ny = clamp((e.clientY - r.top) / r.height - 0.5);
       parallaxRef.current = { x: nx * parallaxStrength, y: ny * parallaxStrength };
     };
     window.addEventListener('mousemove', onMove);
@@ -348,6 +355,7 @@ export default function SolarSystem({
       <g style={{ pointerEvents: 'none' }}>
         {stars.map((s) => {
           const tw = reduced ? 0.5 : 0.5 + 0.5 * Math.sin(t / s.tw + s.ph);
+          const starOpacity = Number((s.o * (0.5 + tw * 0.5)).toFixed(6));
           return (
             <circle
               key={`star-${s.x.toFixed(3)}-${s.y.toFixed(3)}`}
@@ -355,7 +363,7 @@ export default function SolarSystem({
               cy={s.y}
               r={s.r}
               fill={C.parch}
-              opacity={s.o * (0.5 + tw * 0.5)}
+              opacity={starOpacity}
             />
           );
         })}
