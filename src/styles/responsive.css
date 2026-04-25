@@ -18,6 +18,10 @@
     padding-left: 48px !important;
     padding-right: 48px !important;
   }
+  .al-hero-solar {
+    height: min(440px, 50vh) !important;
+    margin-top: 16px !important;
+  }
   .al-skills-layout {
     grid-template-columns: 1fr !important;
     gap: 48px !important;
@@ -74,6 +78,19 @@
   }
   .al-topmeta {
     font-size: 10px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    column-gap: 16px !important;
+    row-gap: 8px !important;
+  }
+  /* Hex counter eats horizontal room — drop it earlier than 480 */
+  .al-pkt-hex {
+    display: none !important;
+  }
+
+  .al-hero-solar {
+    height: min(340px, 42vh) !important;
+    margin-top: 12px !important;
   }
 
   .al-hero-welcome {
@@ -130,20 +147,18 @@
 
   .al-topmeta {
     font-size: 9px !important;
-    gap: 8px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
   }
   .al-topmeta > * {
     letter-spacing: 0.18em !important;
   }
 
-  /* Hide the hex packet counter on tiny screens to save room */
-  .al-pkt-hex {
-    display: none !important;
-  }
-
-  /* Hero solar system - smaller, less tall */
+  /* Hero solar system - tightest size on phones */
   .al-hero-solar {
-    aspect-ratio: 4 / 3 !important;
+    height: min(260px, 36vh) !important;
+    margin-top: 8px !important;
   }
 
   .al-work-row {
