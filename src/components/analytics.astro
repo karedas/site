@@ -1,0 +1,18 @@
+---
+// Google Analytics (gtag.js). Only injected in production builds — local dev
+// and E2E test runs do not fire pageviews.
+const GA_ID = 'G-NM098RP89Y';
+const enabled = import.meta.env.PROD;
+---
+{enabled && (
+  <>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script is:inline define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    </script>
+  </>
+)}
