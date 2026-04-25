@@ -33,6 +33,7 @@ desktop.ini
 
 # astro
 .astro/
+.vite/
 
 # tests
 playwright-report/

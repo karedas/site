@@ -7,4 +7,7 @@ export default defineConfig({
   output: 'static',
   adapter: netlify({ edgeMiddleware: false }),
   integrations: [react()],
+  vite: {
+    cacheDir: '.vite',
+  },
 });
