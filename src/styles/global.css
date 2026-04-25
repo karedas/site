@@ -2,9 +2,14 @@
    Global base + keyframes + reduced-motion
    ========================================================= */
 
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -22,20 +27,26 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3, h4, .display {
+h1,
+h2,
+h3,
+h4,
+.display {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: 0.02em;
-  margin: 0 0 .6em;
+  margin: 0 0 0.6em;
   color: var(--fg);
 }
 
 a {
   color: var(--fg-gold);
   text-decoration: none;
-  transition: color .2s;
+  transition: color 0.2s;
 }
-a:hover { color: var(--gold-hi); }
+a:hover {
+  color: var(--gold-hi);
+}
 
 hr.rune {
   border: 0;
@@ -46,23 +57,30 @@ hr.rune {
 
 /* ---- LED pulse (TRANSMITTING indicator) ---- */
 @keyframes al-led-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
-    box-shadow: 0 0 6px #fe6442, 0 0 0 0 rgba(254, 100, 66, 0.4);
+    box-shadow:
+      0 0 6px #fe6442,
+      0 0 0 0 rgba(254, 100, 66, 0.4);
   }
   50% {
     opacity: 0.6;
-    box-shadow: 0 0 10px #fe6442, 0 0 0 4px rgba(254, 100, 66, 0);
+    box-shadow:
+      0 0 10px #fe6442,
+      0 0 0 4px rgba(254, 100, 66, 0);
   }
 }
 
 /* ---- Reduced motion: pause every animation ---- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }
 
