@@ -3,14 +3,14 @@ import { useReducedMotion } from './useReducedMotion';
 
 // ── Palette (single source of truth in CSS; mirrored here for SVG attrs) ──
 const C = {
-  amber:  '#e8a13a',
-  gold:   '#d4a84b',
+  amber: '#e8a13a',
+  gold: '#d4a84b',
   goldHi: '#f5d27a',
-  sage:   '#7fc88c',
-  jade:   '#4ea890',
-  cyan:   '#3fb8d6',
-  ice:    '#7fd9ea',
-  parch:  '#e8e3d4',
+  sage: '#7fc88c',
+  jade: '#4ea890',
+  cyan: '#3fb8d6',
+  ice: '#7fd9ea',
+  parch: '#e8e3d4',
 } as const;
 
 interface Planet {
@@ -24,14 +24,14 @@ interface Planet {
 }
 
 const PLANETS: Planet[] = [
-  { a: 0.16, size: 2.4, period:   8, phase: 0.10, color: C.amber,  glow: true },
-  { a: 0.26, size: 3.4, period:  14, phase: 0.55, color: C.gold },
-  { a: 0.38, size: 4.2, period:  22, phase: 0.20, color: C.goldHi },
-  { a: 0.50, size: 5.4, period:  34, phase: 0.78, color: C.sage,   ring: true },
-  { a: 0.64, size: 3.8, period:  52, phase: 0.42, color: C.jade },
-  { a: 0.78, size: 4.6, period:  78, phase: 0.62, color: C.sage },
-  { a: 0.90, size: 3.2, period: 105, phase: 0.05, color: C.cyan },
-  { a: 1.02, size: 2.8, period: 142, phase: 0.30, color: C.cyan,   glow: true },
+  { a: 0.16, size: 2.4, period: 8, phase: 0.1, color: C.amber, glow: true },
+  { a: 0.26, size: 3.4, period: 14, phase: 0.55, color: C.gold },
+  { a: 0.38, size: 4.2, period: 22, phase: 0.2, color: C.goldHi },
+  { a: 0.5, size: 5.4, period: 34, phase: 0.78, color: C.sage, ring: true },
+  { a: 0.64, size: 3.8, period: 52, phase: 0.42, color: C.jade },
+  { a: 0.78, size: 4.6, period: 78, phase: 0.62, color: C.sage },
+  { a: 0.9, size: 3.2, period: 105, phase: 0.05, color: C.cyan },
+  { a: 1.02, size: 2.8, period: 142, phase: 0.3, color: C.cyan, glow: true },
 ];
 
 type SunStyle = 'soft' | 'corona' | 'ring' | 'pulse' | 'minimal';
@@ -118,16 +118,32 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
             <stop offset="100%" stopColor={color} stopOpacity="0" />
           </radialGradient>
           <linearGradient id={`${sid}-ring`} x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stopColor={C.amber} />
-            <stop offset="50%"  stopColor={C.sage} />
+            <stop offset="0%" stopColor={C.amber} />
+            <stop offset="50%" stopColor={C.sage} />
             <stop offset="100%" stopColor={C.cyan} />
           </linearGradient>
         </defs>
         <circle cx={cx} cy={cy} r={size * 3} fill={`url(#${sid}-halo)`} />
-        <ellipse cx={cx} cy={cy} rx={size * 2.2} ry={size * 0.55}
-          fill="none" stroke={`url(#${sid}-ring)`} strokeWidth="1.2" opacity="0.8" />
-        <ellipse cx={cx} cy={cy} rx={size * 2.6} ry={size * 0.7}
-          fill="none" stroke={`url(#${sid}-ring)`} strokeWidth="0.5" opacity="0.4" />
+        <ellipse
+          cx={cx}
+          cy={cy}
+          rx={size * 2.2}
+          ry={size * 0.55}
+          fill="none"
+          stroke={`url(#${sid}-ring)`}
+          strokeWidth="1.2"
+          opacity="0.8"
+        />
+        <ellipse
+          cx={cx}
+          cy={cy}
+          rx={size * 2.6}
+          ry={size * 0.7}
+          fill="none"
+          stroke={`url(#${sid}-ring)`}
+          strokeWidth="0.5"
+          opacity="0.4"
+        />
         <circle cx={cx} cy={cy} r={size} fill={`url(#${sid}-core)`} />
       </>
     );
@@ -150,15 +166,27 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
             <feGaussianBlur stdDeviation="4" />
           </filter>
         </defs>
-        <circle cx={cx} cy={cy} r={size * 3} fill={`url(#${sid}-halo)`} filter={`url(#${sid}-blur)`}>
+        <circle
+          cx={cx}
+          cy={cy}
+          r={size * 3}
+          fill={`url(#${sid}-halo)`}
+          filter={`url(#${sid}-blur)`}
+        >
           {!reduced && (
             <>
-              <animate attributeName="r"
+              <animate
+                attributeName="r"
                 values={`${size * 2.6};${size * 3.4};${size * 2.6}`}
-                dur="4.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity"
+                dur="4.5s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
                 values="0.85;1;0.85"
-                dur="4.5s" repeatCount="indefinite" />
+                dur="4.5s"
+                repeatCount="indefinite"
+              />
             </>
           )}
         </circle>
@@ -173,8 +201,8 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
     <>
       <defs>
         <radialGradient id={`${sid}-halo`} cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0%"   stopColor={color} stopOpacity="0.55" />
-          <stop offset="60%"  stopColor={color} stopOpacity="0.18" />
+          <stop offset="0%" stopColor={color} stopOpacity="0.55" />
+          <stop offset="60%" stopColor={color} stopOpacity="0.18" />
           <stop offset="100%" stopColor={color} stopOpacity="0" />
         </radialGradient>
         <radialGradient id={`${sid}-core`} cx="0.5" cy="0.5" r="0.5">
@@ -186,7 +214,14 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
           <feGaussianBlur stdDeviation="6" />
         </filter>
       </defs>
-      <circle cx={cx} cy={cy} r={size * 4.5} fill={glowColor} filter={`url(#${sid}-blur)`} opacity="0.85" />
+      <circle
+        cx={cx}
+        cy={cy}
+        r={size * 4.5}
+        fill={glowColor}
+        filter={`url(#${sid}-blur)`}
+        opacity="0.85"
+      />
       <circle cx={cx} cy={cy} r={size * 2.4} fill={`url(#${sid}-halo)`} />
       <circle cx={cx} cy={cy} r={size} fill={`url(#${sid}-core)`} />
     </>
@@ -194,13 +229,21 @@ function Sun({ cx, cy, size, color, glowColor, style, variant, reduced }: SunPro
 }
 
 interface Star {
-  x: number; y: number; r: number; o: number; tw: number; ph: number;
+  x: number;
+  y: number;
+  r: number;
+  o: number;
+  tw: number;
+  ph: number;
 }
 
 function useStars(count: number, w: number, h: number, seed = 1): Star[] {
   return useMemo(() => {
     let s = seed;
-    const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    const rnd = () => {
+      s = (s * 9301 + 49297) % 233280;
+      return s / 233280;
+    };
     return Array.from({ length: count }).map(() => ({
       x: rnd() * w,
       y: rnd() * h,
@@ -302,29 +345,38 @@ export default function SolarSystem({
       aria-label="Solar system illustration with eight planets in elliptical orbits around a glowing sun"
     >
       {/* star field */}
-      <g style={{ pointerEvents: 'none' }} aria-hidden="true">
+      <g style={{ pointerEvents: 'none' }}>
         {stars.map((s, i) => {
           const tw = reduced ? 0.5 : 0.5 + 0.5 * Math.sin(t / s.tw + s.ph);
           return (
-            <circle key={i} cx={s.x} cy={s.y} r={s.r}
-              fill={C.parch} opacity={s.o * (0.5 + tw * 0.5)} />
+            <circle
+              key={i}
+              cx={s.x}
+              cy={s.y}
+              r={s.r}
+              fill={C.parch}
+              opacity={s.o * (0.5 + tw * 0.5)}
+            />
           );
         })}
       </g>
 
       {/* comet */}
       {cometActive && (
-        <g style={{ pointerEvents: 'none' }} opacity={Math.sin(cometP * Math.PI)} aria-hidden="true">
+        <g style={{ pointerEvents: 'none' }} opacity={Math.sin(cometP * Math.PI)}>
           <defs>
             <linearGradient id={`comet-${variant}`} x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%"   stopColor={C.ice} stopOpacity="0" />
+              <stop offset="0%" stopColor={C.ice} stopOpacity="0" />
               <stop offset="100%" stopColor={C.ice} stopOpacity="0.85" />
             </linearGradient>
           </defs>
           <line
-            x1={cometX - 80} y1={cometY - 40}
-            x2={cometX} y2={cometY}
-            stroke={`url(#comet-${variant})`} strokeWidth="1.2"
+            x1={cometX - 80}
+            y1={cometY - 40}
+            x2={cometX}
+            y2={cometY}
+            stroke={`url(#comet-${variant})`}
+            strokeWidth="1.2"
           />
           <circle cx={cometX} cy={cometY} r="1.6" fill="#e0f6ff" />
         </g>
@@ -335,17 +387,29 @@ export default function SolarSystem({
         const rx = baseRx * (p.a / maxA);
         const ry = rx * (1 - tilt);
         return (
-          <ellipse key={`o-${i}`} cx={cx} cy={cy} rx={rx} ry={ry}
-            fill="none" stroke={orbitColor}
+          <ellipse
+            key={`o-${i}`}
+            cx={cx}
+            cy={cy}
+            rx={rx}
+            ry={ry}
+            fill="none"
+            stroke={orbitColor}
             strokeWidth={hover === i ? 1.2 : 0.7}
             opacity={hover === i ? Math.min(orbitOpacity * 2.3, 0.9) : orbitOpacity}
-            style={{ transition: 'opacity 350ms ease, stroke-width 350ms ease' }} />
+            style={{ transition: 'opacity 350ms ease, stroke-width 350ms ease' }}
+          />
         );
       })}
 
       <Sun
-        cx={cx} cy={cy} size={sunSize} color={sunColor}
-        glowColor={sunGlowColor} style={sunStyle} variant={variant}
+        cx={cx}
+        cy={cy}
+        size={sunSize}
+        color={sunColor}
+        glowColor={sunGlowColor}
+        style={sunStyle}
+        variant={variant}
         reduced={reduced}
       />
 
@@ -358,22 +422,37 @@ export default function SolarSystem({
         const py = cy + ry * Math.sin(angle);
         const isHover = hover === i;
         return (
-          <g key={`p-${i}`}
-            onMouseEnter={() => setHover(i)}
-            onMouseLeave={() => setHover(-1)}>
+          <g key={`p-${i}`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(-1)}>
             {p.glow && (
-              <circle cx={px} cy={py} r={p.size * 4} fill={p.color}
+              <circle
+                cx={px}
+                cy={py}
+                r={p.size * 4}
+                fill={p.color}
                 opacity={isHover ? 0.35 : 0.18}
-                style={{ filter: 'blur(6px)', transition: 'opacity 300ms' }} />
+                style={{ filter: 'blur(6px)', transition: 'opacity 300ms' }}
+              />
             )}
             <circle cx={px} cy={py} r={Math.max(p.size * 3, 18)} fill="transparent" />
             {p.ring && (
-              <ellipse cx={px} cy={py} rx={p.size * 2.2} ry={p.size * 0.7}
-                fill="none" stroke={p.color} strokeWidth="0.8"
-                opacity={isHover ? 0.9 : 0.55} />
+              <ellipse
+                cx={px}
+                cy={py}
+                rx={p.size * 2.2}
+                ry={p.size * 0.7}
+                fill="none"
+                stroke={p.color}
+                strokeWidth="0.8"
+                opacity={isHover ? 0.9 : 0.55}
+              />
             )}
-            <circle cx={px} cy={py} r={isHover ? p.size * 1.25 : p.size}
-              fill={p.color} style={{ transition: 'r 300ms ease' }} />
+            <circle
+              cx={px}
+              cy={py}
+              r={isHover ? p.size * 1.25 : p.size}
+              fill={p.color}
+              style={{ transition: 'r 300ms ease' }}
+            />
           </g>
         );
       })}

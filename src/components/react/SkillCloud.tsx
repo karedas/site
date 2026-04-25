@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from './useReducedMotion';
 
 const C = {
-  amber:  '#e8a13a',
+  amber: '#e8a13a',
   goldHi: '#f5d27a',
-  sage:   '#7fc88c',
-  cyan:   '#3fb8d6',
+  sage: '#7fc88c',
+  cyan: '#3fb8d6',
   fgMute: '#b6ae98',
 } as const;
 
@@ -24,12 +24,12 @@ interface Moon {
 }
 
 const MOONS: Moon[] = [
-  { rx: 110, period:  22, phase: 0.10, size: 5,   color: C.amber,  label: 'Architecture', core: true },
-  { rx: 150, period:  44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Engineering' },
-  { rx: 195, period:  78, phase: 0.20, size: 3.2, color: C.sage,   label: 'Platform' },
-  { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan,   label: 'Craft' },
+  { rx: 110, period: 22, phase: 0.1, size: 5, color: C.amber, label: 'Architecture', core: true },
+  { rx: 150, period: 44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Engineering' },
+  { rx: 195, period: 78, phase: 0.2, size: 3.2, color: C.sage, label: 'Platform' },
+  { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan, label: 'Craft' },
   // 5th orbit: rotated ~75° so the AI moon travels on a near-vertical inclined path.
-  { rx: 180, ry: 60, rotation: 75, period: 100, phase: 0.40, size: 3, color: C.ice, label: 'AI' },
+  { rx: 180, ry: 60, rotation: 75, period: 100, phase: 0.4, size: 3, color: C.ice, label: 'AI' },
 ];
 
 const W = 520;
@@ -70,13 +70,13 @@ export default function SkillCloud() {
     >
       <defs>
         <radialGradient id="planet-fill" cx="0.38" cy="0.34" r="0.78">
-          <stop offset="0%"   stopColor="#3a4663" />
-          <stop offset="55%"  stopColor="#1d2440" />
+          <stop offset="0%" stopColor="#3a4663" />
+          <stop offset="55%" stopColor="#1d2440" />
           <stop offset="100%" stopColor="#0c0f20" />
         </radialGradient>
         <radialGradient id="planet-atmo" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="60%"  stopColor="rgba(127,200,140,0)" />
-          <stop offset="92%"  stopColor="rgba(127,200,140,0.18)" />
+          <stop offset="60%" stopColor="rgba(127,200,140,0)" />
+          <stop offset="92%" stopColor="rgba(127,200,140,0.18)" />
           <stop offset="100%" stopColor="rgba(127,200,140,0)" />
         </radialGradient>
         <filter id="moon-soft" x="-50%" y="-50%" width="200%" height="200%">
@@ -90,9 +90,14 @@ export default function SkillCloud() {
         return (
           <ellipse
             key={`o${i}`}
-            cx={cx} cy={cy}
-            rx={m.rx} ry={ry}
-            fill="none" stroke="#3a4258" strokeWidth="0.7" opacity="0.55"
+            cx={cx}
+            cy={cy}
+            rx={m.rx}
+            ry={ry}
+            fill="none"
+            stroke="#3a4258"
+            strokeWidth="0.7"
+            opacity="0.55"
             transform={transform}
           />
         );
@@ -101,12 +106,21 @@ export default function SkillCloud() {
       {/* Planet body */}
       <circle cx={cx} cy={cy} r={PLANET_R + 6} fill="url(#planet-atmo)" />
       <circle cx={cx} cy={cy} r={PLANET_R} fill="url(#planet-fill)" />
-      <ellipse cx={cx} cy={cy} rx={PLANET_R} ry={PLANET_R * 0.18}
-        fill="none" stroke="rgba(232,227,212,0.06)" strokeWidth="0.6" />
+      <ellipse
+        cx={cx}
+        cy={cy}
+        rx={PLANET_R}
+        ry={PLANET_R * 0.18}
+        fill="none"
+        stroke="rgba(232,227,212,0.06)"
+        strokeWidth="0.6"
+      />
       <path
         d={`M ${cx - PLANET_R * 0.92} ${cy - PLANET_R * 0.18}
             A ${PLANET_R} ${PLANET_R} 0 0 1 ${cx - PLANET_R * 0.18} ${cy - PLANET_R * 0.92}`}
-        stroke="rgba(245,210,122,0.18)" strokeWidth="1" fill="none"
+        stroke="rgba(245,210,122,0.18)"
+        strokeWidth="1"
+        fill="none"
       />
 
       {MOONS.map((m, i) => {
@@ -128,11 +142,19 @@ export default function SkillCloud() {
         return (
           <g key={`m${i}`} opacity={behind ? 0.25 : 1} style={{ transition: 'opacity 200ms' }}>
             {m.core && (
-              <circle cx={mx} cy={my} r={14} fill={m.color} opacity="0.22" filter="url(#moon-soft)" />
+              <circle
+                cx={mx}
+                cy={my}
+                r={14}
+                fill={m.color}
+                opacity="0.22"
+                filter="url(#moon-soft)"
+              />
             )}
             <circle cx={mx} cy={my} r={m.size} fill={m.color} />
             <text
-              x={mx} y={my - m.size - 8}
+              x={mx}
+              y={my - m.size - 8}
               textAnchor="middle"
               fontFamily="Montserrat, sans-serif"
               fontWeight={m.core ? 600 : 500}

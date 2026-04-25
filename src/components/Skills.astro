@@ -1,7 +1,4 @@
 ---
-import SectionHeader from '@/components/SectionHeader.astro';
-import SkillCloud from '@/components/react/SkillCloud.tsx';
-
 interface SkillItem {
   name: string;
   core?: boolean;
@@ -58,10 +55,7 @@ const groups: Group[] = [
   },
   {
     title: 'AI in practice',
-    items: [
-      { name: 'AI-augmented workflow' },
-      { name: 'Pragmatic adoption · no hype' },
-    ],
+    items: [{ name: 'AI-augmented workflow' }, { name: 'Pragmatic adoption · no hype' }],
   },
 ];
 ---
