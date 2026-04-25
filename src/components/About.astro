@@ -1,0 +1,102 @@
+---
+import SectionHeader from '@/components/SectionHeader.astro';
+---
+<section class="al-section section" id="about">
+  <SectionHeader num="01" title="About" subtitle="A short transmission" accent="amber" />
+  <div class="al-about-body body">
+    <p class="al-about-lead lead">
+      Twenty years of building on the web &mdash; as engineer, designer, sometimes both at
+      once. I sit at the seam where <span class="hl">art meets programming</span>:
+      where a typeface decision becomes a render budget, where a model&rsquo;s confidence
+      becomes an interface, where a deploy pipeline carries someone&rsquo;s intent intact.
+    </p>
+    <p class="al-about-body2 body2">
+      Currently in Vienna, leading the AI transformation of software quality at
+      Tricentis. My focus is <span class="hl">governance and platform</span> &mdash;
+      the rails other teams build on: monorepo orchestration, architectural standards,
+      observability, and the AI-driven workflows that are quietly reshaping how we ship.
+    </p>
+    <div class="al-about-meta-row meta-row">
+      <div class="meta">
+        <div class="meta-k">Based</div>
+        <div class="meta-v">Vienna, AT</div>
+      </div>
+      <div class="meta">
+        <div class="meta-k">Mode</div>
+        <div class="meta-v">Remote / Hybrid</div>
+      </div>
+      <div class="meta">
+        <div class="meta-k">Languages</div>
+        <div class="meta-v">IT &middot; EN</div>
+      </div>
+      <div class="meta">
+        <div class="meta-k">Status</div>
+        <div class="meta-v status">&#9679; In orbit &mdash; quietly building</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 80px;
+    position: relative;
+  }
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .lead {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: var(--fg);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .hl {
+    color: var(--gold-hi);
+    font-weight: 500;
+    background: linear-gradient(180deg, transparent 60%, rgba(232,161,58,0.18) 60%);
+    padding: 0 4px;
+  }
+  .body2 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 300;
+    color: var(--fg-muted);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .meta-row {
+    grid-column: 1 / -1;
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .meta { display: flex; flex-direction: column; gap: 6px; }
+  .meta-k {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .meta-v {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fg);
+  }
+  .status { color: var(--sage); }
+</style>

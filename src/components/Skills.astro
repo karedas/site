@@ -1,0 +1,213 @@
+---
+import SectionHeader from '@/components/SectionHeader.astro';
+import SkillCloud from '@/components/react/SkillCloud.tsx';
+
+interface SkillItem { name: string; }
+interface Group {
+  title: string;
+  pillar?: boolean;
+  items: SkillItem[];
+}
+
+const groups: Group[] = [
+  {
+    title: 'AI & DX',
+    pillar: true,
+    items: [
+      { name: 'AI-driven workflows' },
+      { name: 'Cursor / Claude Code' },
+      { name: 'AI for QA & quality' },
+      { name: 'Developer Experience' },
+      { name: 'Tooling & automation' },
+    ],
+  },
+  {
+    title: 'Architecture',
+    items: [
+      { name: 'Clean Architecture' },
+      { name: 'Domain-Driven Design' },
+      { name: 'Type Safety (Zod)' },
+      { name: 'GraphQL contracts' },
+      { name: 'Observability' },
+    ],
+  },
+  {
+    title: 'Platform',
+    items: [
+      { name: 'Nx / Turborepo' },
+      { name: 'Azure DevOps' },
+      { name: 'GitHub Enterprise' },
+      { name: 'Docker / Kubernetes' },
+      { name: 'Cloudflare Workers' },
+      { name: 'App Insights' },
+    ],
+  },
+  {
+    title: 'Engineering',
+    items: [
+      { name: 'TypeScript' },
+      { name: 'React / RSC' },
+      { name: 'Vue 3' },
+      { name: 'Node.js' },
+      { name: 'GraphQL' },
+      { name: 'Playwright / Vitest' },
+    ],
+  },
+  {
+    title: 'Craft & Leadership',
+    items: [
+      { name: 'Architectural steering' },
+      { name: 'Technical governance' },
+      { name: 'Mentoring & growth' },
+      { name: 'Figma / Adobe CC' },
+      { name: 'Writing & docs' },
+    ],
+  },
+];
+---
+<section class="al-section section" id="skills">
+  <SectionHeader num="02" title="Skills" subtitle="Governance, platform, and the AI shift" accent="sage" />
+
+  <div class="al-skills-layout layout">
+    <div class="al-skills-cloud-wrap cloud-wrap">
+      <SkillCloud client:visible />
+      <div class="cloud-chart">
+        <div class="chart-line">
+          <span class="chart-key">SECTOR</span>
+          <span class="chart-dot">&middot;</span>
+          <span class="chart-val">02 / SKILLS</span>
+        </div>
+        <div class="chart-line">
+          <span class="chart-key">R</span>
+          <span class="chart-val">235 AU</span>
+          <span class="chart-dot">&middot;</span>
+          <span class="chart-key">OBS</span>
+          <span class="chart-val">MMXXVI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="al-skill-list list">
+      {groups.map((g) => (
+        <div class:list={['group', g.pillar && 'pillar']}>
+          <h3 class="al-skill-group-title group-title">
+            {g.title}
+            {g.pillar && <span class="pillar-tag">&middot; CORE</span>}
+          </h3>
+          <div class="chips">
+            {g.items.map((s) => (
+              <span class:list={['chip', g.pillar && 'chip-pillar']}>{s.name}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 80px;
+    position: relative;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(360px, 0.9fr) 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .cloud-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .cloud-chart {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .chart-line {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg-dim);
+  }
+  .chart-key { color: var(--fg-muted); font-weight: 400; }
+  .chart-val { color: var(--fg); font-weight: 500; }
+  .chart-dot { color: var(--gold); font-weight: 400; letter-spacing: 0; }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .group {
+    padding-left: 18px;
+    border-left: 1px solid var(--border);
+  }
+  .group.pillar {
+    padding-left: 22px;
+    border-left: 2px solid var(--amber);
+  }
+  .group-title {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg-dim);
+  }
+  .group.pillar .group-title { color: var(--amber); }
+
+  .pillar-tag {
+    color: var(--gold);
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    font-size: 10px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--fg-muted);
+    padding: 6px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 2px;
+    transition: color 200ms, border-color 200ms, background 200ms;
+    cursor: default;
+  }
+  .chip:hover {
+    color: var(--fg);
+    border-color: var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .chip-pillar {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--amber);
+  }
+  .chip-pillar:hover {
+    color: var(--gold-hi);
+    border-color: var(--amber);
+    background: rgba(232, 161, 58, 0.08);
+  }
+</style>

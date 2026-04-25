@@ -1,0 +1,61 @@
+---
+interface Props {
+  num: string;
+  title: string;
+  subtitle: string;
+  accent?: 'amber' | 'sage' | 'cyan';
+}
+
+const { num, title, subtitle, accent = 'amber' } = Astro.props;
+const accentVar = `var(--${accent})`;
+---
+<div class="al-section-header header">
+  <div class="left">
+    <span class="num" style={`color: ${accentVar}`}>{num}</span>
+    <span class="line" style={`background: linear-gradient(90deg, ${accentVar}, transparent)`}></span>
+    <span class="sub">{subtitle}</span>
+  </div>
+  <h2 class="al-section-title title">{title}</h2>
+</div>
+
+<style>
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .num {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+  }
+  .line {
+    flex: 0 0 80px;
+    height: 1px;
+  }
+  .sub {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0;
+    text-transform: none;
+    line-height: 1.05;
+  }
+</style>

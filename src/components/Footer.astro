@@ -1,0 +1,46 @@
+---
+---
+<footer class="al-foot foot">
+  <div class="gradient-bar" aria-hidden="true"></div>
+  <div class="al-foot-row row">
+    <span class="brand">&#9670; ANDREA LISI</span>
+    <span class="dim">Built quietly, in Vienna.</span>
+    <span class="dim">&copy; MMXXVI</span>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    border-top: 1px solid var(--border);
+    padding: 40px 80px;
+    margin-top: 80px;
+    position: relative;
+  }
+  .gradient-bar {
+    position: absolute;
+    top: -1px;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--amber)    20%,
+      var(--gold-hi)  40%,
+      var(--sage)     60%,
+      var(--cyan)     80%,
+      transparent 100%);
+    opacity: 0.85;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .brand { color: var(--gold); }
+  .dim { color: var(--fg-dim); }
+</style>

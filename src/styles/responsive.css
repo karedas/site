@@ -1,0 +1,120 @@
+/* =========================================================
+   Responsive overrides - Andrea Lisi Portfolio
+   Breakpoints: 1024 (tablet), 768 (small tablet), 480 (mobile)
+   ========================================================= */
+
+/* ------------------ TABLET 1024 ------------------ */
+@media (max-width: 1024px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta,
+  .al-hero-compose {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+  .al-skills-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .al-skills-cloud-wrap {
+    position: static;
+  }
+  .al-work-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "year"
+      "title"
+      "role"
+      "tags"
+      "note";
+    gap: 8px;
+    padding: 24px 12px;
+  }
+  .al-work-row > .al-w-year  { grid-area: year;  }
+  .al-work-row > .al-w-title { grid-area: title; }
+  .al-work-row > .al-w-role  { grid-area: role;  }
+  .al-work-row > .al-w-tags  { grid-area: tags;  margin-top: 4px; }
+  .al-work-row > .al-w-note  { grid-area: note;  margin-top: 6px; }
+}
+
+/* ------------------ SMALL TABLET 768 ------------------ */
+@media (max-width: 768px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta,
+  .al-hero-compose {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .al-section { padding-top: 60px; padding-bottom: 60px; }
+
+  .al-topmeta-name { display: none; }
+  .al-topmeta { font-size: 10px; }
+
+  .al-hero-welcome { font-size: clamp(22px, 5.5vw, 32px); }
+  .al-hero-role { font-size: 12px; }
+
+  .al-about-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .al-about-lead { font-size: 18px; }
+  .al-about-body2 { font-size: 15px; }
+  .al-about-meta-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .al-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .al-section-title { font-size: clamp(40px, 9vw, 56px); }
+
+  .al-foot-row {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+/* ------------------ MOBILE 480 ------------------ */
+@media (max-width: 480px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta,
+  .al-hero-compose {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .al-section { padding-top: 48px; padding-bottom: 48px; }
+
+  .al-topmeta { font-size: 9px; gap: 8px; }
+  .al-topmeta > * { letter-spacing: 0.18em; }
+
+  /* Hide the hex packet counter on tiny screens to save room */
+  .al-pkt-hex { display: none; }
+
+  /* Hero solar system - smaller, less tall */
+  .al-hero-solar { aspect-ratio: 4 / 3; }
+
+  .al-work-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "year"
+      "title"
+      "role"
+      "tags"
+      "note";
+    gap: 8px;
+    padding: 24px 8px;
+  }
+  .al-work-row > .al-w-title { font-size: 18px; }
+  .al-work-row > .al-w-note { font-size: 13px; }
+
+  .al-about-meta-row { grid-template-columns: 1fr; }
+
+  .al-skill-list { gap: 28px; }
+  .al-skill-group-title { font-size: 10px; letter-spacing: 0.32em; }
+}

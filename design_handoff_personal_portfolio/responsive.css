@@ -1,0 +1,150 @@
+/* =========================================================
+   Responsive overrides — Andrea Lisi Portfolio
+   Strategy: most styling is inline JSX. We add classNames to
+   the key containers and override sizes / layouts here.
+   Breakpoints: 1024 (tablet), 768 (small tablet), 480 (mobile)
+   ========================================================= */
+
+/* ------------------ TABLET 1024 ------------------ */
+@media (max-width: 1024px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+  .al-hero-compose {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+  .al-skills-layout {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+  .al-skills-cloud-wrap {
+    position: static !important;
+  }
+  .al-work-row {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "year"
+      "title"
+      "role"
+      "tags"
+      "note" !important;
+    gap: 8px !important;
+    padding: 24px 12px !important;
+  }
+  .al-work-row > .al-w-year  { grid-area: year;  }
+  .al-work-row > .al-w-title { grid-area: title; }
+  .al-work-row > .al-w-role  { grid-area: role;  }
+  .al-work-row > .al-w-tags  { grid-area: tags;  margin-top: 4px; }
+  .al-work-row > .al-w-note  { grid-area: note;  margin-top: 6px; }
+}
+
+/* ------------------ SMALL TABLET 768 ------------------ */
+@media (max-width: 768px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  .al-hero-compose {
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  .al-section { padding-top: 60px !important; padding-bottom: 60px !important; }
+
+  /* topMeta — keep coords + transmitting, drop center name */
+  .al-topmeta-name { display: none !important; }
+  .al-topmeta { font-size: 10px !important; }
+
+  /* hero name scale */
+  .al-hero-name { font-size: clamp(56px, 14vw, 110px) !important; }
+  .al-hero-eyebrow { font-size: 10px !important; }
+  .al-hero-welcome { font-size: clamp(22px, 5.5vw, 32px) !important; }
+  .al-hero-role { font-size: 12px !important; }
+
+  /* about */
+  .al-about-body { padding: 0 !important; }
+  .al-about-lead { font-size: 18px !important; }
+  .al-about-body2 { font-size: 15px !important; }
+  .al-about-meta-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* sections headers */
+  .al-section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .al-section-title { font-size: clamp(40px, 9vw, 56px) !important; }
+
+  /* footer */
+  .al-foot-row {
+    flex-direction: column !important;
+    gap: 12px !important;
+    text-align: center !important;
+  }
+
+  /* tweak panel — pin to bottom-left, smaller */
+  .al-tweak-panel {
+    width: calc(100vw - 32px) !important;
+    right: 16px !important;
+    left: 16px !important;
+    bottom: 16px !important;
+  }
+}
+
+/* ------------------ MOBILE 480 ------------------ */
+@media (max-width: 480px) {
+  .al-section,
+  .al-foot,
+  .al-topmeta {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .al-hero-compose {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .al-section { padding-top: 48px !important; padding-bottom: 48px !important; }
+
+  .al-topmeta { font-size: 9px !important; gap: 8px !important; }
+  .al-topmeta > span { letter-spacing: 0.18em !important; }
+
+  /* Hide the hex packet counter on tiny screens to save room */
+  .al-pkt-hex { display: none !important; }
+
+  /* hero solar system — smaller, less tall */
+  .al-hero-solar { aspect-ratio: 4 / 3 !important; }
+
+  .al-work-row {
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "year"
+      "title"
+      "role"
+      "tags"
+      "note" !important;
+    gap: 8px !important;
+    padding: 24px 8px !important;
+  }
+  .al-work-row > .al-w-title {
+    font-size: 18px !important;
+  }
+  .al-work-row > .al-w-note {
+    font-size: 13px !important;
+  }
+
+  .al-about-meta-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Skill chips row */
+  .al-skill-list { gap: 28px !important; }
+  .al-skill-group-title { font-size: 10px !important; letter-spacing: 0.32em !important; }
+}

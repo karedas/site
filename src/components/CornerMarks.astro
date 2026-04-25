@@ -1,0 +1,21 @@
+---
+---
+<div class="corner top-left" aria-hidden="true"></div>
+<div class="corner top-right" aria-hidden="true"></div>
+<div class="corner bottom-left" aria-hidden="true"></div>
+<div class="corner bottom-right" aria-hidden="true"></div>
+
+<style>
+  .corner {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+    z-index: 50;
+    pointer-events: none;
+  }
+  .top-left { top: 22px; left: 22px; border-top: 1px solid var(--gold-dim); border-left: 1px solid var(--gold-dim); }
+  .top-right { top: 22px; right: 22px; border-top: 1px solid var(--gold-dim); border-right: 1px solid var(--gold-dim); }
+  .bottom-left { bottom: 22px; left: 22px; border-bottom: 1px solid var(--gold-dim); border-left: 1px solid var(--gold-dim); }
+  .bottom-right { bottom: 22px; right: 22px; border-bottom: 1px solid var(--gold-dim); border-right: 1px solid var(--gold-dim); }
+</style>

@@ -1,0 +1,79 @@
+/* =========================================================
+   Global base + keyframes + reduced-motion
+   ========================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 .6em;
+  color: var(--fg);
+}
+
+a {
+  color: var(--fg-gold);
+  text-decoration: none;
+  transition: color .2s;
+}
+a:hover { color: var(--gold-hi); }
+
+hr.rune {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  margin: 2em 0;
+}
+
+/* ---- LED pulse (TRANSMITTING indicator) ---- */
+@keyframes al-led-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 6px #fe6442, 0 0 0 0 rgba(254, 100, 66, 0.4);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 10px #fe6442, 0 0 0 4px rgba(254, 100, 66, 0);
+  }
+}
+
+/* ---- Reduced motion: pause every animation ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(232, 161, 58, 0.25);
+  color: var(--gold-hi);
+}
+
+/* ---- Focus ring ---- */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+}

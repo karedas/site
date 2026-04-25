@@ -1,0 +1,31 @@
+---
+---
+<div class="scroll-hint" aria-hidden="true">
+  <span class="line"></span>
+  <span class="text">SCROLL</span>
+</div>
+
+<style>
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .line {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(180deg, transparent, var(--gold-dim));
+  }
+  .text {
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    color: var(--fg-dim);
+  }
+</style>

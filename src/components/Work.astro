@@ -1,0 +1,152 @@
+---
+import SectionHeader from '@/components/SectionHeader.astro';
+
+interface Work {
+  year: string;
+  title: string;
+  location: string;
+  role: string;
+  tags: string[];
+  note: string;
+}
+
+const works: Work[] = [
+  {
+    year: '2023 — present',
+    title: 'Tricentis · Tosca Cloud',
+    location: 'Vienna',
+    role: 'Senior Software Engineer · Governance & Platform',
+    tags: ['AI Transformation', 'Nx Monorepo', 'Azure DevOps'],
+    note: 'Technical governance and architectural validation across teams. Leading the adoption of AI-driven workflows for software quality.',
+  },
+  {
+    year: '2019 — 2023',
+    title: 'Treedom',
+    location: 'Florence',
+    role: 'Senior Frontend · Tech Lead',
+    tags: ['React', 'Vue', 'GraphQL', 'MongoDB'],
+    note: 'Direction of the frontend team through 3x growth — recruiting, mentoring, and a full-stack modernization with focus on scalability.',
+  },
+  {
+    year: '2017 — 2019',
+    title: 'Forzieri.com',
+    location: 'Florence',
+    role: 'Frontend Developer',
+    tags: ['React', 'Webpack', 'Angular 2'],
+    note: 'E-commerce migration from ASP to React/Webpack and a modular Angular 2 backoffice.',
+  },
+  {
+    year: '2007 — 2017',
+    title: 'Easysystem',
+    location: 'Figline Valdarno',
+    role: 'Head of Web · Full-Stack Designer',
+    tags: ['Adobe Suite', 'Full-stack', 'Windows Server'],
+    note: 'Sole owner of the web department — creative direction, full-stack delivery, and Active Directory sysadmin.',
+  },
+];
+---
+<section class="al-section section" id="work">
+  <SectionHeader num="03" title="Selected Work" subtitle="The ones that mattered" accent="cyan" />
+  <div class="list">
+    {works.map((w) => (
+      <div class="al-work-row row">
+        <span class="al-w-year year">{w.year}</span>
+        <span class="al-w-title title">
+          {w.title}
+          <span class="location">{w.location}</span>
+        </span>
+        <span class="al-w-role role">{w.role}</span>
+        <span class="al-w-tags tags">
+          {w.tags.map((t) => (
+            <span class="tag">{t}</span>
+          ))}
+        </span>
+        <span class="al-w-note note">{w.note}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 80px;
+    position: relative;
+  }
+  .list { display: flex; flex-direction: column; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 130px 1.6fr 1.2fr 1.3fr 2.0fr;
+    align-items: center;
+    gap: 24px;
+    padding: 28px 12px;
+    border-top: 1px solid var(--border);
+    transition: background 250ms, border-color 250ms;
+  }
+  .row:hover {
+    border-top-color: var(--gold);
+    background: linear-gradient(90deg, rgba(232, 161, 58, 0.05), transparent 60%);
+  }
+  .row:hover .title { color: var(--gold-hi); }
+
+  .year {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    white-space: nowrap;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+    transition: color 200ms;
+  }
+  .location {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    margin-top: 6px;
+    line-height: 1;
+  }
+  .role {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    padding: 4px 8px;
+    border-radius: 2px;
+  }
+  .note {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--fg-muted);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+</style>

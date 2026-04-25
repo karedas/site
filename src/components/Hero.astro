@@ -1,0 +1,133 @@
+---
+import SolarSystem from '@/components/react/SolarSystem.tsx';
+import TopMeta from '@/components/react/TopMeta.tsx';
+import Telemetry from '@/components/react/Telemetry.tsx';
+import GradientArc from '@/components/GradientArc.astro';
+import SocialLink from '@/components/SocialLink.astro';
+import ScrollHint from '@/components/ScrollHint.astro';
+---
+<section class="hero">
+  <div class="al-topmeta topmeta">
+    <TopMeta client:load />
+  </div>
+
+  <div class="al-hero-solar system-wrap">
+    <SolarSystem client:visible />
+  </div>
+
+  <div class="al-hero-compose compose">
+    <div class="al-hero-eyebrow telemetry">
+      <Telemetry client:idle />
+    </div>
+
+    <p class="al-hero-welcome welcome">
+      Hi, I&rsquo;m <em class="welcome-em">Andrea</em>.
+    </p>
+
+    <GradientArc />
+
+    <div class="al-hero-role role">
+      Senior Software Engineer
+      <span class="role-sep"> / </span>
+      <span class="role-sub">twenty years of art merging into code.</span>
+    </div>
+
+    <div class="links">
+      <SocialLink label="github"    href="https://github.com/andrealisi" />
+      <span class="sep" aria-hidden="true">&#9670;</span>
+      <SocialLink label="linkedin"  href="https://www.linkedin.com/in/andrealisi/" />
+      <span class="sep" aria-hidden="true">&#9670;</span>
+      <SocialLink label="instagram" href="https://www.instagram.com/andrealisi/" />
+      <span class="sep" aria-hidden="true">&#9670;</span>
+      <SocialLink label="email"     href="mailto:hello@andrea-lisi.com" />
+    </div>
+  </div>
+
+  <ScrollHint />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 35%, #11142a 0%, var(--bg) 65%, var(--ink) 100%);
+    padding-top: 56px;
+    padding-bottom: 80px;
+    overflow: hidden;
+  }
+  .topmeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+  }
+  .system-wrap {
+    position: relative;
+    width: 100%;
+    height: min(620px, 60vh);
+    margin-top: 30px;
+  }
+  .compose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 24px;
+    margin-top: 20px;
+  }
+  .telemetry {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5em;
+    color: var(--fg-dim);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .welcome {
+    margin: 0 0 18px;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(28px, 3.6vw, 44px);
+    color: var(--fg);
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .welcome-em {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(95deg, var(--amber) 0%, var(--gold-hi) 30%, var(--sage) 60%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .role {
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--fg);
+    letter-spacing: 0.04em;
+  }
+  .role-sep { color: var(--fg-dim); margin: 0 4px; }
+  .role-sub { color: var(--fg-muted); font-style: italic; font-weight: 300; }
+  .links {
+    margin-top: 38px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sep {
+    color: var(--fg-dim);
+    margin: 0 18px;
+    font-size: 10px;
+  }
+</style>
