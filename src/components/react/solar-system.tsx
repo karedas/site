@@ -312,7 +312,7 @@ export default function SolarSystem({
   const orbitOpacity = 0.45;
 
   // Comet pacing: one diagonal streak every 18s, traversing in ~2.2s.
-  const cometCycle = 18;
+  const cometCycle = 42;
   const cometDuration = 2.2;
   const cycleT = t % cometCycle;
   const cometActive = !reduced && showComet && cycleT < cometDuration;
@@ -341,9 +341,9 @@ export default function SolarSystem({
   // Alien craft: traces a quadratic curve through the lower part of the canvas,
   // dipping below the orbits before climbing back up to the opposite edge.
   // Different rhythm from the comet so the two scenery elements rarely overlap.
-  const shipCycle = 9;
+  const shipCycle = 65;
   const shipDuration = 8;
-  const shipCycleT = (t + 9) % shipCycle;
+  const shipCycleT = (t + 25) % shipCycle;
   const shipActive = !reduced && showShip && shipCycleT < shipDuration;
   const shipP = shipCycleT / shipDuration;
 
