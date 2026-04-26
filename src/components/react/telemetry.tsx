@@ -39,7 +39,7 @@ export default function Telemetry() {
         whiteSpace: 'nowrap',
       }}
     >
-      — {text} —
+      · {text} ·
     </div>
   );
 }

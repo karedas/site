@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useReducedMotion } from './use-reduced-motion';
 
 // ── Palette (single source of truth in CSS; mirrored here for SVG attrs) ──
@@ -260,9 +260,9 @@ interface Props {
   height?: number;
   tilt?: number;
   sunStyle?: SunStyle;
-  parallaxStrength?: number;
   starCount?: number;
   showComet?: boolean;
+  showShip?: boolean;
 }
 
 export default function SolarSystem({
@@ -270,20 +270,17 @@ export default function SolarSystem({
   height = 620,
   tilt = 0.62,
   sunStyle = 'pulse',
-  parallaxStrength = 18,
   starCount = 140,
   showComet = true,
+  showShip = true,
 }: Props) {
   const reduced = useReducedMotion();
-  const svgRef = useRef<SVGSVGElement | null>(null);
   const [t, setT] = useState(0);
   const [hover, setHover] = useState(-1);
-  const parallaxRef = useRef({ x: 0, y: 0 });
-  const smoothedRef = useRef({ x: 0, y: 0 });
 
   // Animation loop. When reduced-motion, render a single frozen frame (t=0).
   // We track time as ABSOLUTE elapsed seconds since mount instead of accumulating
-  // per-frame deltas — accumulation is fragile under React Strict-Mode double-mount,
+  // per-frame deltas; accumulation is fragile under React Strict-Mode double-mount,
   // hidden-tab rAF throttling, and any other case where `last` may get reset while
   // `t` carries forward (or vice versa), which manifests as planets oscillating in
   // place / making tiny back-and-forth steps.
@@ -292,8 +289,6 @@ export default function SolarSystem({
     const start = performance.now();
     let raf = 0;
     const tick = () => {
-      smoothedRef.current.x += (parallaxRef.current.x - smoothedRef.current.x) * 0.08;
-      smoothedRef.current.y += (parallaxRef.current.y - smoothedRef.current.y) * 0.08;
       setT((performance.now() - start) / 1000);
       raf = requestAnimationFrame(tick);
     };
@@ -301,31 +296,10 @@ export default function SolarSystem({
     return () => cancelAnimationFrame(raf);
   }, [reduced]);
 
-  // Mouse parallax — ref only, no setState (avoids re-render storm).
-  // Skipped when the SVG is off-screen: getBoundingClientRect() returns
-  // negative bounds in that case, which makes (e.clientY - r.top) / r.height
-  // explode well past ±0.5. The smoothed ease then has to wobble back into
-  // place when the user scrolls the hero into view again.
-  useEffect(() => {
-    if (reduced || !parallaxStrength) return;
-    const clamp = (v: number) => Math.max(-0.5, Math.min(0.5, v));
-    const onMove = (e: MouseEvent) => {
-      const el = svgRef.current;
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > window.innerHeight) return;
-      const nx = clamp((e.clientX - r.left) / r.width - 0.5);
-      const ny = clamp((e.clientY - r.top) / r.height - 0.5);
-      parallaxRef.current = { x: nx * parallaxStrength, y: ny * parallaxStrength };
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [parallaxStrength, reduced]);
-
   const centerOffsetX = 0;
   const centerOffsetY = 30;
-  const cx = width / 2 + centerOffsetX + smoothedRef.current.x;
-  const cy = height / 2 + centerOffsetY + smoothedRef.current.y;
+  const cx = width / 2 + centerOffsetX;
+  const cy = height / 2 + centerOffsetY;
   const maxA = Math.max(...PLANETS.map((p) => p.a));
   const baseRx = (Math.min(width, height * 1.6) / 2) * 0.92;
   const stars = useStars(starCount, width, height, 7);
@@ -364,9 +338,43 @@ export default function SolarSystem({
   const cometTailX = cometX - (cometDx / cometLen) * cometTailPx;
   const cometTailY = cometY - (cometDy / cometLen) * cometTailPx;
 
+  // Alien craft: traces a quadratic curve through the lower part of the canvas,
+  // dipping below the orbits before climbing back up to the opposite edge.
+  // Different rhythm from the comet so the two scenery elements rarely overlap.
+  const shipCycle = 9;
+  const shipDuration = 8;
+  const shipCycleT = (t + 9) % shipCycle;
+  const shipActive = !reduced && showShip && shipCycleT < shipDuration;
+  const shipP = shipCycleT / shipDuration;
+
+  // Quadratic Bezier control points; the middle one sits below the canvas
+  // so the visible portion is a clean U-shaped sweep across the lower half.
+  const shipP0X = width + 40;
+  const shipP0Y = height * 0.86;
+  const shipP1X = width / 2;
+  const shipP1Y = height * 1.02;
+  const shipP2X = -40;
+  const shipP2Y = height * 0.86;
+  const shipOM = 1 - shipP;
+  const shipX = shipOM * shipOM * shipP0X + 2 * shipOM * shipP * shipP1X + shipP * shipP * shipP2X;
+  const shipY = shipOM * shipOM * shipP0Y + 2 * shipOM * shipP * shipP1Y + shipP * shipP * shipP2Y;
+
+  // Tangent vector; used to point the engine wake opposite to the motion.
+  const shipTanX = 2 * shipOM * (shipP1X - shipP0X) + 2 * shipP * (shipP2X - shipP1X);
+  const shipTanY = 2 * shipOM * (shipP1Y - shipP0Y) + 2 * shipP * (shipP2Y - shipP1Y);
+  const shipTanLen = Math.hypot(shipTanX, shipTanY) || 1;
+  const shipTrailUx = -shipTanX / shipTanLen;
+  const shipTrailUy = -shipTanY / shipTanLen;
+  const shipTrailInnerX = shipX + shipTrailUx * 9;
+  const shipTrailInnerY = shipY + shipTrailUy * 9;
+  const shipTrailOuterX = shipX + shipTrailUx * 36;
+  const shipTrailOuterY = shipY + shipTrailUy * 36;
+
+  const shipFade = Math.sin(shipP * Math.PI);
+  const shipPulse = 0.55 + 0.45 * Math.sin(t * 3.2);
+
   return (
     <svg
-      ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       width="100%"
       height="100%"
@@ -449,6 +457,93 @@ export default function SolarSystem({
             style={{ filter: 'blur(2.5px)' }}
           />
           <circle cx={cometX} cy={cometY} r="1.8" fill="#ffffff" />
+        </g>
+      )}
+
+      {/* alien craft; curves through the lower half, well clear of the orbits */}
+      {shipActive && (
+        <g style={{ pointerEvents: 'none' }} opacity={shipFade}>
+          <defs>
+            <linearGradient
+              id="ship-trail"
+              gradientUnits="userSpaceOnUse"
+              x1={shipTrailOuterX}
+              y1={shipTrailOuterY}
+              x2={shipTrailInnerX}
+              y2={shipTrailInnerY}
+            >
+              <stop offset="0%" stopColor={C.cyan} stopOpacity="0" />
+              <stop offset="100%" stopColor={C.cyan} stopOpacity="0.75" />
+            </linearGradient>
+            <radialGradient id="ship-body" cx="0.35" cy="0.3" r="0.75">
+              <stop offset="0%" stopColor="#cfeef7" />
+              <stop offset="35%" stopColor="#5b9fb8" />
+              <stop offset="100%" stopColor="#0f1a2e" />
+            </radialGradient>
+            <radialGradient id="ship-halo" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stopColor={C.cyan} stopOpacity="0.45" />
+              <stop offset="100%" stopColor={C.cyan} stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          <line
+            x1={shipTrailOuterX}
+            y1={shipTrailOuterY}
+            x2={shipTrailInnerX}
+            y2={shipTrailInnerY}
+            stroke="url(#ship-trail)"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+            opacity="0.7"
+          />
+
+          <circle cx={shipX} cy={shipY} r="20" fill="url(#ship-halo)" />
+          <circle
+            cx={shipX}
+            cy={shipY + 5.5}
+            r="3.5"
+            fill={C.cyan}
+            opacity="0.5"
+            style={{ filter: 'blur(2.5px)' }}
+          />
+
+          <ellipse cx={shipX} cy={shipY + 0.4} rx="13" ry="2.7" fill={C.cyan} opacity="0.14" />
+          <ellipse
+            cx={shipX}
+            cy={shipY + 0.4}
+            rx="13"
+            ry="2.7"
+            fill="none"
+            stroke={C.cyan}
+            strokeWidth="0.8"
+            opacity="0.7"
+          />
+
+          <circle
+            cx={shipX}
+            cy={shipY}
+            r="6"
+            fill="url(#ship-body)"
+            stroke={C.cyan}
+            strokeWidth="0.55"
+            opacity="0.97"
+          />
+          <ellipse
+            cx={shipX - 1.4}
+            cy={shipY - 2.2}
+            rx="2.4"
+            ry="1.4"
+            fill={C.ice}
+            opacity={0.45 + 0.4 * shipPulse}
+          />
+
+          <circle
+            cx={shipX}
+            cy={shipY + 5.2}
+            r="1.2"
+            fill="#ff7060"
+            opacity={0.65 + 0.35 * shipPulse}
+          />
         </g>
       )}
 

@@ -34,7 +34,7 @@ test.describe('homepage', () => {
   test('hydrates the skill cloud island', async ({ page }) => {
     await page.goto('/');
     const cloud = page.getByLabel(/skill cloud/i);
-    // Below the fold — scroll to it so client:visible triggers.
+    // Below the fold: scroll to it so client:visible triggers.
     await cloud.scrollIntoViewIfNeeded();
     await expect(cloud).toBeVisible();
   });

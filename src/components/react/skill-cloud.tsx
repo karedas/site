@@ -42,7 +42,7 @@ export default function SkillCloud() {
   const ref = useRef<SVGSVGElement | null>(null);
   const [t, setT] = useState(0);
 
-  // Absolute elapsed time since mount — see SolarSystem for the rationale.
+  // Absolute elapsed time since mount; see SolarSystem for the rationale.
   // Accumulating per-frame deltas was producing oscillating "tiny step forward,
   // tiny step back" motion under some scroll/hydration scenarios.
   useEffect(() => {

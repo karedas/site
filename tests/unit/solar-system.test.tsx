@@ -26,7 +26,7 @@ describe('SolarSystem', () => {
 
   it('renders all 8 planets (one filled circle per planet color in the dataset)', () => {
     const { container } = render(<SolarSystem />);
-    // There are also halo + hit-target circles per planet — count only solid
+    // There are also halo + hit-target circles per planet; count only solid
     // fills using known palette colors.
     const circles = Array.from(container.querySelectorAll('circle[fill]'));
     const planetFills = circles.filter((c) => PLANET_COLORS.has(c.getAttribute('fill') ?? ''));
