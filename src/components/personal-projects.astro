@@ -1,0 +1,251 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+
+interface ProjectLink {
+  label: string;
+  href: string;
+}
+
+interface Project {
+  title: string;
+  tagline: string;
+  status: string;
+  description: string;
+  stack: string[];
+  links: ProjectLink[];
+}
+
+const projects: Project[] = [
+  {
+    title: 'Lumina',
+    tagline: 'Il reame sospeso · The suspended realm',
+    status: 'In development',
+    description:
+      'A passion project, built with a small circle of friends. At heart a fantasy MUD — words shape the world, not polygons — but the React client wraps it in a modern interface, with a live world map and a UX far beyond the telnet ancestors of the genre. Node.js keeps the realm alive, MongoDB persists its history, and Socket.io carries every whisper between players.',
+    stack: ['Node.js', 'MongoDB', 'Socket.io', 'React', 'Photoshop', 'Cloudflare'],
+    links: [{ label: 'Visit', href: 'https://luminamud.com' }],
+  },
+];
+---
+<section class="al-section section" id="projects">
+  <SectionHeader
+    num="04"
+    title="Personal Projects"
+    subtitle="Built after hours"
+    accent="gold"
+  />
+
+  <div class="al-projects-grid grid">
+    {projects.map((p) => (
+      <article class="al-project-card card">
+        <header class="card-head">
+          <span class="status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="status-label">{p.status}</span>
+          </span>
+          <span class="marker" aria-hidden="true">&#9670;</span>
+        </header>
+
+        <h3 class="title">{p.title}</h3>
+        <p class="tagline">{p.tagline}</p>
+
+        <p class="description">{p.description}</p>
+
+        <div class="stack">
+          {p.stack.map((s) => (
+            <span class="chip">{s}</span>
+          ))}
+        </div>
+
+        <footer class="links">
+          {p.links.map((l) => (
+            <a class="link" href={l.href} target="_blank" rel="noopener noreferrer">
+              <span>{l.label}</span>
+              <span class="link-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          ))}
+        </footer>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 80px;
+    position: relative;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 24px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      linear-gradient(180deg, rgba(232, 161, 58, 0.025), transparent 40%),
+      var(--field);
+    transition: border-color 250ms, transform 250ms, box-shadow 250ms;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(232, 161, 58, 0.18), transparent 30%);
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+  .card:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(232, 161, 58, 0.55);
+    animation: al-status-pulse 2.4s ease-in-out infinite;
+  }
+  .status-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .marker {
+    color: var(--gold-dim);
+    font-size: 9px;
+    line-height: 1;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0;
+    line-height: 1.05;
+  }
+  .tagline {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--fg-gold);
+    margin: 0;
+  }
+
+  .description {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--fg-muted);
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .chip {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .link:hover { color: var(--gold-hi); }
+  .link-arrow {
+    transition: transform 200ms;
+  }
+  .link:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  @keyframes al-status-pulse {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 8px rgba(232, 161, 58, 0.55), 0 0 0 0 rgba(232, 161, 58, 0.35);
+    }
+    50% {
+      opacity: 0.65;
+      box-shadow: 0 0 12px rgba(232, 161, 58, 0.55), 0 0 0 6px rgba(232, 161, 58, 0);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .section { padding: 48px 48px; }
+  }
+  @media (max-width: 768px) {
+    .section { padding: 40px 28px; }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .card { padding: 24px; }
+    .title { font-size: 26px; }
+  }
+  @media (max-width: 480px) {
+    .section { padding: 32px 20px; }
+    .card { padding: 20px; gap: 14px; }
+    .title { font-size: 22px; }
+    .description { font-size: 13px; }
+  }
+</style>

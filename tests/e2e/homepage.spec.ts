@@ -2,12 +2,13 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 test.describe('homepage', () => {
-  test('renders the four major sections', async ({ page }) => {
+  test('renders the five major sections', async ({ page }) => {
     await page.goto('/');
 
     await expect(page.getByRole('heading', { name: 'About' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Skills' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Selected Work' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Personal Projects' })).toBeVisible();
     await expect(page.getByText('Hi, I')).toBeVisible();
   });
 

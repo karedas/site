@@ -337,13 +337,32 @@ export default function SolarSystem({
   const orbitColor = '#3a4258';
   const orbitOpacity = 0.45;
 
-  // Comet pacing: appears every 18s, streaks across in 3s.
+  // Comet pacing: one diagonal streak every 18s, traversing in ~2.2s.
   const cometCycle = 18;
-  const cometT = (t % cometCycle) / cometCycle;
-  const cometActive = !reduced && showComet && cometT < 0.18;
-  const cometP = cometT / 0.18;
-  const cometX = -100 + cometP * (width + 200);
-  const cometY = height * 0.18 + cometP * (height * 0.55);
+  const cometDuration = 2.2;
+  const cycleT = t % cometCycle;
+  const cometActive = !reduced && showComet && cycleT < cometDuration;
+  const cometP = cycleT / cometDuration;
+
+  // Trajectory crosses the full viewport diagonally so the streak visibly
+  // cuts through the orbits instead of grazing one corner. Endpoints sit
+  // outside the viewBox on both ends to avoid pop-in.
+  const cometStartX = -180;
+  const cometStartY = -100;
+  const cometEndX = width + 180;
+  const cometEndY = height + 80;
+  const cometX = cometStartX + cometP * (cometEndX - cometStartX);
+  const cometY = cometStartY + cometP * (cometEndY - cometStartY);
+
+  // Tail vector aligned with motion (opposite of velocity, fixed pixel length).
+  // Without this, the tail looks pinned at a constant angle and the comet
+  // reads as a sliding sprite rather than something flying through the system.
+  const cometDx = cometEndX - cometStartX;
+  const cometDy = cometEndY - cometStartY;
+  const cometLen = Math.hypot(cometDx, cometDy);
+  const cometTailPx = 140;
+  const cometTailX = cometX - (cometDx / cometLen) * cometTailPx;
+  const cometTailY = cometY - (cometDy / cometLen) * cometTailPx;
 
   return (
     <svg
@@ -377,20 +396,59 @@ export default function SolarSystem({
       {cometActive && (
         <g style={{ pointerEvents: 'none' }} opacity={Math.sin(cometP * Math.PI)}>
           <defs>
-            <linearGradient id={`comet-${variant}`} x1="0" y1="0" x2="1" y2="0">
+            <linearGradient
+              id={`comet-${variant}`}
+              gradientUnits="userSpaceOnUse"
+              x1={cometTailX}
+              y1={cometTailY}
+              x2={cometX}
+              y2={cometY}
+            >
               <stop offset="0%" stopColor={C.ice} stopOpacity="0" />
-              <stop offset="100%" stopColor={C.ice} stopOpacity="0.85" />
+              <stop offset="55%" stopColor={C.ice} stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#e0f6ff" stopOpacity="0.95" />
+            </linearGradient>
+            <linearGradient
+              id={`comet-${variant}-glow`}
+              gradientUnits="userSpaceOnUse"
+              x1={cometTailX}
+              y1={cometTailY}
+              x2={cometX}
+              y2={cometY}
+            >
+              <stop offset="0%" stopColor={C.ice} stopOpacity="0" />
+              <stop offset="100%" stopColor={C.ice} stopOpacity="0.55" />
             </linearGradient>
           </defs>
           <line
-            x1={cometX - 80}
-            y1={cometY - 40}
+            x1={cometTailX}
+            y1={cometTailY}
+            x2={cometX}
+            y2={cometY}
+            stroke={`url(#comet-${variant}-glow)`}
+            strokeWidth="4"
+            strokeLinecap="round"
+            opacity="0.5"
+            style={{ filter: 'blur(3px)' }}
+          />
+          <line
+            x1={cometTailX}
+            y1={cometTailY}
             x2={cometX}
             y2={cometY}
             stroke={`url(#comet-${variant})`}
-            strokeWidth="1.2"
+            strokeWidth="1.4"
+            strokeLinecap="round"
           />
-          <circle cx={cometX} cy={cometY} r="1.6" fill="#e0f6ff" />
+          <circle
+            cx={cometX}
+            cy={cometY}
+            r="4.5"
+            fill="#e0f6ff"
+            opacity="0.45"
+            style={{ filter: 'blur(2.5px)' }}
+          />
+          <circle cx={cometX} cy={cometY} r="1.8" fill="#ffffff" />
         </g>
       )}
 
