@@ -5,17 +5,24 @@ import SectionHeader from '@/components/section-header.astro';
   <SectionHeader num="01" title="About" subtitle="A short transmission" accent="amber" />
   <div class="al-about-body body">
     <p class="al-about-lead lead">
-      Twenty years of building on the web &mdash; as engineer, designer, sometimes both at
-      once. I sit at the seam where <span class="hl">art meets programming</span>:
-      where a typeface decision becomes a render budget, where a model&rsquo;s confidence
-      becomes an interface, where a deploy pipeline carries someone&rsquo;s intent intact.
+      Twenty years of building for the web, driven by the same curiosity I had on day one. I&rsquo;m
+      Italian, from Florence. I like working the way I like being worked with:
+      <span class="hl">approachable, plain-spoken, low ego</span>, and lightly sarcastic when the stack
+      pretends to be the smartest person in the room.
     </p>
-    <p class="al-about-body2 body2">
-      Currently in Vienna, on the Tosca Cloud team at Tricentis. My focus is
-      <span class="hl">governance and platform</span> &mdash; monorepo orchestration,
-      architectural standards, observability, the rails other teams build on. I also
-      build on those rails myself: interfaces and features, hands still in the code.
-    </p>
+    <div class="al-about-secondary secondary">
+      <p class="al-about-body2 body2">
+        I care about <span class="hl">art in every form I can reach</span>: physical work and software,
+        same rigor on structure and intent. In teams I stay <span class="hl">friendly and hands-on</span>
+        by default: small meetings, pair when it helps, no mystique around who broke the build last week.
+      </p>
+      <p class="al-about-body2 body2">
+        My focus is on governance and architectural standards: building the rails that strip away friction
+        so teams can focus on shipping excellence. I remain in the code, balancing strategy with learning.
+        <span class="hl">Pragmatism over hype</span>. If we over-engineered it, I&rsquo;ll say so kindly,
+        then help you delete it. That counts as a good day.
+      </p>
+    </div>
     <div class="al-about-meta-row meta-row">
       <div class="meta">
         <div class="meta-k">Based</div>
@@ -73,6 +80,11 @@ import SectionHeader from '@/components/section-header.astro';
     color: var(--fg-muted);
     margin: 0;
     text-wrap: pretty;
+  }
+  .secondary {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35em;
   }
   .meta-row {
     grid-column: 1 / -1;

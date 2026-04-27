@@ -24,10 +24,10 @@ interface Moon {
 }
 
 const MOONS: Moon[] = [
-  { rx: 110, period: 22, phase: 0.1, size: 5, color: C.amber, label: 'Architecture', core: true },
-  { rx: 150, period: 44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Engineering' },
-  { rx: 195, period: 78, phase: 0.2, size: 3.2, color: C.sage, label: 'Platform' },
-  { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan, label: 'Craft' },
+  { rx: 110, period: 22, phase: 0.1, size: 5, color: C.amber, label: 'Tech strategy', core: true },
+  { rx: 150, period: 44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Core excellence' },
+  { rx: 195, period: 78, phase: 0.2, size: 3.2, color: C.sage, label: 'Dev enablement' },
+  { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan, label: 'Leadership' },
   // 5th orbit: rotated ~75° so the AI moon travels on a near-vertical inclined path.
   { rx: 180, ry: 60, rotation: 75, period: 10, phase: 0.4, size: 3, color: C.cyan, label: 'AI' },
 ];
@@ -68,7 +68,7 @@ export default function SkillCloud() {
       height="100%"
       style={{ display: 'block' }}
       role="img"
-      aria-label="Skill cloud: a planet with five orbiting moons labelled Architecture, Engineering, Platform, Craft, and AI"
+      aria-label="Skill cloud: a planet with five orbiting moons labelled Tech strategy, Core excellence, Dev enablement, Leadership, and AI"
     >
       <defs>
         <radialGradient id="planet-fill" cx="0.38" cy="0.34" r="0.78">

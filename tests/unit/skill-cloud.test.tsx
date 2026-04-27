@@ -12,14 +12,14 @@ describe('SkillCloud', () => {
     const svg = container.querySelector('svg[role="img"]');
     expect(svg).toBeInTheDocument();
     const label = svg?.getAttribute('aria-label') ?? '';
-    for (const moon of ['Architecture', 'Engineering', 'Platform', 'Craft', 'AI']) {
+    for (const moon of ['Tech strategy', 'Core excellence', 'Dev enablement', 'Leadership', 'AI']) {
       expect(label).toContain(moon);
     }
   });
 
   it('renders one labelled <text> per moon', () => {
     render(<SkillCloud />);
-    for (const moon of ['Architecture', 'Engineering', 'Platform', 'Craft', 'AI']) {
+    for (const moon of ['Tech strategy', 'Core excellence', 'Dev enablement', 'Leadership', 'AI']) {
       expect(screen.getByText(moon)).toBeInTheDocument();
     }
   });
