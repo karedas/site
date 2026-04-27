@@ -67,11 +67,8 @@ const MOONS: Moon[] = [
 
 const W = 1150;
 const H = 1150;
-/**
- * Extra viewBox margin (user units) so orbit extremes + longest labels stay inside the SVG.
- * Larger than needed shrinks the graphic inside the layout box; keep tight but clip-safe.
- */
-const VIEW_PAD = 136;
+/** Extra viewBox margin so orbits + labels stay inside the SVG (matches the preferred framing). */
+const VIEW_PAD = 188;
 const TILT = 0.62;
 const PLANET_R = 142;
 const CORE_GLOW_R = 28;
@@ -79,6 +76,39 @@ const CORE_GLOW_R = 28;
 const LABEL_FONT_CORE = 36;
 const LABEL_FONT = 30;
 const LABEL_TRACKING = '0.08em';
+const LABEL_GAP = 20;
+
+/**
+ * Moves the label anchor toward the canvas center when the moon sits in an outer band,
+ * so long uppercase labels stay readable without relying on clipping.
+ */
+function nudgeLabelTowardCenter(
+  moonX: number,
+  textY: number,
+  w: number,
+  h: number,
+): { x: number; y: number } {
+  const bandX = w * 0.17;
+  const bandY = h * 0.14;
+  const pullX = 0.52;
+  const pullY = 0.42;
+  let x = moonX;
+  let y = textY;
+
+  if (moonX < bandX) {
+    x = moonX + (bandX - moonX) * pullX;
+  } else if (moonX > w - bandX) {
+    x = moonX - (moonX - (w - bandX)) * pullX;
+  }
+
+  if (textY < bandY) {
+    y = textY + (bandY - textY) * pullY;
+  } else if (textY > h - bandY) {
+    y = textY - (textY - (h - bandY)) * pullY;
+  }
+
+  return { x, y };
+}
 
 export default function SkillCloud() {
   const reduced = useReducedMotion();
@@ -113,7 +143,7 @@ export default function SkillCloud() {
       width="100%"
       style={{
         display: 'block',
-        overflow: 'hidden',
+        overflow: 'visible',
         maxWidth: '100%',
         height: 'auto',
         verticalAlign: 'middle',
@@ -188,6 +218,8 @@ export default function SkillCloud() {
         const my = cy + sinR * localX + cosR * localY;
         // Parametric "back" of the ellipse vs planet disk (same phase test as pre-rotation).
         const behind = localY < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
+        const rawTextY = my - m.size - LABEL_GAP;
+        const { x: labelX, y: labelY } = nudgeLabelTowardCenter(mx, rawTextY, W, H);
         return (
           <g
             key={`moon-${m.label}`}
@@ -206,8 +238,8 @@ export default function SkillCloud() {
             )}
             <circle cx={mx} cy={my} r={m.size} fill={m.color} />
             <text
-              x={mx}
-              y={my - m.size - 20}
+              x={labelX}
+              y={labelY}
               textAnchor="middle"
               fontFamily="Montserrat, sans-serif"
               fontWeight={m.core ? 600 : 500}

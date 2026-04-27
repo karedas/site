@@ -100,14 +100,17 @@ const items: Item[] = [
     gap: 0;
   }
   /* Thin horizontal rail. The rocket rides on it (rocket is on top, the
-     rail passes behind it). Aligned with the link dots. */
+     rail passes behind it). Centered on the link-dot center: dots use
+     `top: 0` + translateY(-50%) inside .menu-link, so their center sits
+     at .menu-list's padding-top (4px). */
   .menu-list::before {
     content: "";
     position: absolute;
     left: 5%;
     right: 5%;
-    top: 8px;
+    top: 4px;
     height: 1px;
+    transform: translateY(-50%);
     background: linear-gradient(
       90deg,
       transparent 0%,
@@ -206,7 +209,7 @@ const items: Item[] = [
 
   .menu-rocket {
     position: absolute;
-    top: -4px;
+    top: -8px;
     left: 0;
     transform: translateX(var(--rocket-x, 0px)) translateX(-50%);
     pointer-events: none;
@@ -221,7 +224,7 @@ const items: Item[] = [
     position: relative;
     transform: rotate(var(--rocket-rot, 90deg));
     transform-origin: 50% 50%;
-    transition: transform 220ms cubic-bezier(0.4, 0, 0.4, 1);
+    transition: transform 360ms cubic-bezier(0.33, 0.86, 0.2, 1);
     will-change: transform;
   }
   .menu-rocket-svg {
@@ -237,6 +240,10 @@ const items: Item[] = [
     width: 8px;
     height: 16px;
     border-radius: 50% 50% 50% 50% / 35% 35% 75% 75%;
+    transition:
+      opacity 420ms ease,
+      transform 420ms ease,
+      filter 420ms ease;
     background:
       radial-gradient(
         ellipse 4px 7px at 50% 22%,
@@ -257,6 +264,15 @@ const items: Item[] = [
     opacity: 1;
     filter: drop-shadow(0 0 5px rgba(255, 170, 70, 0.7));
     pointer-events: none;
+  }
+  .menu.rocket-engine-off .menu-flame {
+    animation: none;
+    opacity: 0;
+    transform: translate(-50%, 2px) scale(0.25, 0.15);
+    filter: none;
+  }
+  .menu.rocket-engine-off .menu-rocket-svg {
+    filter: drop-shadow(0 0 2px rgba(232, 161, 58, 0.15));
   }
   @keyframes al-menu-flame {
     0%,
@@ -292,6 +308,9 @@ const items: Item[] = [
       font-size: 9px;
       letter-spacing: 0.14em;
     }
+    .menu-rocket {
+      top: -6.5px;
+    }
     .menu-rocket-svg {
       width: 14px;
       height: 21px;
@@ -310,13 +329,16 @@ const items: Item[] = [
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) {
     .menu-flame {
       animation: none;
       opacity: 0.7;
     }
     .menu-rocket-inner {
       transition: none;
+    }
+    .menu.rocket-engine-off .menu-flame {
+      opacity: 0;
     }
   }
 </style>
@@ -364,10 +386,6 @@ const items: Item[] = [
     let direction: 1 | -1 = 1;
     /** Accumulated rotation in degrees; default 90° (nose right). */
     let rotation = 90;
-    /** Last observed scroll position, used to derive scroll direction. */
-    let lastScrollY = window.scrollY;
-    /** Last detected scroll direction (sticky between non-zero deltas). */
-    let scrollDir: 1 | -1 = 1;
     inner.style.setProperty('--rocket-rot', `${rotation}deg`);
 
     const recomputeAnchors = (): void => {
@@ -502,40 +520,26 @@ const items: Item[] = [
         if (isActive) l.setAttribute('aria-current', 'location');
         else l.removeAttribute('aria-current');
       }
-    };
-
-    const updateScrollDir = (): void => {
-      const sy = window.scrollY;
-      const delta = sy - lastScrollY;
-      if (delta > 0.5) scrollDir = 1;
-      else if (delta < -0.5) scrollDir = -1;
-      lastScrollY = sy;
+      menu.classList.toggle('rocket-engine-off', target === 'off-orbit');
     };
 
     /**
-     * Returns the direction the rocket should face right now.
-     * Forces "right" on the first half of the home→about block and
-     * "left" on the second half of the projects→off-orbit block, so the
-     * rocket flips before reaching the very ends. Otherwise it follows
-     * the user's scroll direction.
+     * Single-axis state: rocket points east unless scroll has crossed the
+     * midpoint between Projects and Off-orbit (then it points west). Uses
+     * a small hysteresis around the threshold so trackpad inertia / browser
+     * smooth-scroll overshoot cannot bounce the orientation.
      */
     const computeDesiredDirection = (): 1 | -1 => {
-      if (anchors.length >= 2) {
-        const sy = window.scrollY;
-        const first = anchors[0];
-        const second = anchors[1];
-        const lastButOne = anchors[anchors.length - 2];
-        const last = anchors[anchors.length - 1];
-        if (first && second) {
-          const midFirst = (first.scrollY + second.scrollY) / 2;
-          if (sy < midFirst) return 1;
-        }
-        if (lastButOne && last) {
-          const midLast = (lastButOne.scrollY + last.scrollY) / 2;
-          if (sy > midLast) return -1;
-        }
-      }
-      return scrollDir;
+      const proj = anchors.find((a) => a.target === 'projects');
+      const off = anchors.find((a) => a.target === 'off-orbit');
+      if (!proj || !off || off.scrollY <= proj.scrollY + 8) return direction;
+
+      const sy = window.scrollY;
+      const mid = (proj.scrollY + off.scrollY) / 2;
+      const eps = Math.max(12, (off.scrollY - proj.scrollY) * 0.02);
+      if (sy >= mid + eps) return -1;
+      if (sy <= mid - eps) return 1;
+      return direction;
     };
 
     const applyDirection = (desired: 1 | -1): void => {
@@ -547,7 +551,6 @@ const items: Item[] = [
 
     const tick = (): void => {
       if (navMode === 'anchor') {
-        updateScrollDir();
         const denom = anchorToY - anchorFromY;
         const t =
           Math.abs(denom) < 0.5
@@ -576,7 +579,6 @@ const items: Item[] = [
       }
 
       if (dirty) {
-        updateScrollDir();
         const active = findActiveTarget();
         setActive(active);
         targetX = readActiveDotX(active);
@@ -645,6 +647,16 @@ const items: Item[] = [
     window.addEventListener('hashchange', schedule, { passive: true });
 
     recomputeAnchors();
+    {
+      const proj = anchors.find((a) => a.target === 'projects');
+      const off = anchors.find((a) => a.target === 'off-orbit');
+      if (proj && off && off.scrollY > proj.scrollY + 8) {
+        const mid = (proj.scrollY + off.scrollY) / 2;
+        direction = window.scrollY >= mid ? -1 : 1;
+        rotation = direction === 1 ? 90 : 270;
+        inner.style.setProperty('--rocket-rot', `${rotation}deg`);
+      }
+    }
     const initial = findActiveTarget();
     setActive(initial);
     targetX = readActiveDotX(initial);
