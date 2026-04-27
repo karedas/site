@@ -160,11 +160,11 @@ export default function SkillCloud() {
             <circle cx={mx} cy={my} r={m.size} fill={m.color} />
             <text
               x={mx}
-              y={my - m.size - 8}
+              y={my - m.size - 9}
               textAnchor="middle"
               fontFamily="Montserrat, sans-serif"
               fontWeight={m.core ? 600 : 500}
-              fontSize={m.core ? 11 : 10}
+              fontSize={m.core ? 13 : 12}
               letterSpacing="0.32em"
               fill={m.core ? C.goldHi : C.fgMute}
               style={{ textTransform: 'uppercase' }}

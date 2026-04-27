@@ -74,7 +74,7 @@
     display: none;
   }
   #al-site .al-topmeta {
-    font-size: 10px;
+    font-size: 12px;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 16px;
@@ -96,11 +96,11 @@
   }
 
   #al-site .al-hero-welcome {
-    font-size: clamp(34px, 8.5vw, 48px);
+    font-size: clamp(36px, 9vw, 52px);
     margin-bottom: 14px;
   }
   #al-site .al-hero-role {
-    font-size: 15px;
+    font-size: 17px;
     margin-top: 22px;
   }
   /* Hero socials: drop the ◆ separators on small screens; they get
@@ -120,10 +120,10 @@
     gap: 24px;
   }
   #al-site .al-about-lead {
-    font-size: 18px;
+    font-size: 20px;
   }
   #al-site .al-about-body2 {
-    font-size: 15px;
+    font-size: 16px;
   }
   #al-site .al-about-meta-row {
     grid-template-columns: 1fr 1fr;
@@ -136,7 +136,7 @@
     gap: 12px;
   }
   #al-site .al-section-title {
-    font-size: clamp(40px, 9vw, 56px);
+    font-size: clamp(42px, 9.5vw, 60px);
   }
 
   #al-site .al-foot-row {
@@ -161,7 +161,7 @@
   }
 
   #al-site .al-topmeta {
-    font-size: 9px;
+    font-size: 11px;
     flex-direction: column;
     align-items: center;
     gap: 6px;
@@ -171,10 +171,10 @@
   }
 
   #al-site .al-hero-welcome {
-    font-size: clamp(32px, 10vw, 44px);
+    font-size: clamp(34px, 10.5vw, 48px);
   }
   #al-site .al-hero-role {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   /* Hero solar system - tightest size on phones */
@@ -198,10 +198,10 @@
     padding: 24px 8px;
   }
   #al-site .al-work-row > .al-w-title {
-    font-size: 18px;
+    font-size: 20px;
   }
   #al-site .al-work-row > .al-w-note {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   #al-site .al-about-meta-row {
@@ -212,7 +212,7 @@
     gap: 28px;
   }
   #al-site .al-skill-group-title {
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.32em;
   }
 }
