@@ -343,7 +343,7 @@ export default function SolarSystem({
   // Different rhythm from the comet so the two scenery elements rarely overlap.
   const shipCycle = 65;
   const shipDuration = 8;
-  const shipCycleT = (t + 25) % shipCycle;
+  const shipCycleT = (t + 52) % shipCycle;
   const shipActive = !reduced && showShip && shipCycleT < shipDuration;
   const shipP = shipCycleT / shipDuration;
 
