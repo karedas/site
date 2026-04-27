@@ -92,6 +92,7 @@ const items: Item[] = [
     margin: 0;
     padding: 4px 0 4px;
     position: relative;
+    isolation: isolate;
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -124,8 +125,11 @@ const items: Item[] = [
     margin: 0;
     padding: 0;
     position: relative;
+    z-index: 0;
   }
   .menu-link {
+    position: relative;
+    z-index: 0;
     display: inline-flex;
     align-items: baseline;
     gap: 8px;
@@ -147,6 +151,7 @@ const items: Item[] = [
     position: absolute;
     left: 50%;
     top: 0;
+    z-index: 0;
     width: 5px;
     height: 5px;
     border-radius: 50%;
@@ -156,7 +161,8 @@ const items: Item[] = [
     transition:
       background 200ms ease,
       border-color 200ms ease,
-      box-shadow 200ms ease;
+      box-shadow 200ms ease,
+      opacity 160ms ease;
     pointer-events: none;
   }
   .menu-num {
@@ -192,6 +198,11 @@ const items: Item[] = [
     border-color: var(--amber);
     box-shadow: 0 0 8px rgba(232, 161, 58, 0.5);
   }
+  /* Hide the active dot once the rocket has caught up (avoids double mark). */
+  .menu.rocket-settled .menu-link.is-active::before {
+    opacity: 0;
+    box-shadow: none;
+  }
 
   .menu-rocket {
     position: absolute;
@@ -200,7 +211,7 @@ const items: Item[] = [
     transform: translateX(var(--rocket-x, 0px)) translateX(-50%);
     pointer-events: none;
     will-change: transform;
-    z-index: 1;
+    z-index: 10;
   }
   /* Inner wrapper holds the rotation so X translation stays JS-driven.
      The rotation animates briefly (visible but quick) so the user sees
@@ -312,10 +323,10 @@ const items: Item[] = [
 
 <script>
   /**
-   * Section menu behavior: scroll-synced rocket on a horizontal track.
-   * The rocket translates on X with the scroll position and rotates to
-   * face the scroll direction, with a forced "bounce" orientation in
-   * the first/last halves of the menu.
+   * Section menu: rocket on a horizontal track.
+   * — Wheel / trackpad scroll: rocket eases toward the active section dot.
+   * — In-page link click (long jumps): rocket moves linearly from start to
+   *   destination dot vs scroll progress, avoiding intermediate “stops”.
    */
   interface Anchor {
     link: HTMLAnchorElement;
@@ -341,6 +352,14 @@ const items: Item[] = [
     let currentX = 0;
     let rafId = 0;
     let dirty = true;
+    type NavMode = 'scroll' | 'anchor';
+    let navMode: NavMode = 'scroll';
+    let anchorFromY = 0;
+    let anchorToY = 0;
+    let anchorFromX = 0;
+    let anchorToX = 0;
+    let anchorGoalTarget = '';
+    let anchorFallbackId = 0;
     /** +1 = pointing right, -1 = pointing left. */
     let direction: 1 | -1 = 1;
     /** Accumulated rotation in degrees; default 90° (nose right). */
@@ -355,6 +374,10 @@ const items: Item[] = [
       anchors.length = 0;
       const listRect = list.getBoundingClientRect();
       const activationOffset = window.innerHeight * 0.35;
+      const scrollMax = Math.max(
+        0,
+        document.documentElement.scrollHeight - window.innerHeight,
+      );
       for (const link of links) {
         const target = link.dataset.target;
         if (!target) continue;
@@ -370,28 +393,93 @@ const items: Item[] = [
         anchors.push({ link, target, scrollY, dotX });
       }
       anchors.sort((a, b) => a.scrollY - b.scrollY);
+      const tail = anchors[anchors.length - 1];
+      const prev = anchors[anchors.length - 2];
+      if (tail) {
+        /* Last section's activation Y can exceed max scroll; then sy never
+           reaches it and the final link never becomes active. */
+        const capped = Math.min(tail.scrollY, scrollMax);
+        tail.scrollY = prev ? Math.max(capped, prev.scrollY) : capped;
+      }
     };
 
-    const computeTargetX = (): number => {
+    const dotXForTarget = (target: string): number => {
       if (anchors.length === 0) return 0;
-      const sy = window.scrollY;
-      const first = anchors[0];
-      const last = anchors[anchors.length - 1];
-      if (!first || !last) return 0;
-      if (sy <= first.scrollY) return first.dotX;
-      if (sy >= last.scrollY) return last.dotX;
-      for (let i = 0; i < anchors.length - 1; i++) {
-        const a = anchors[i];
-        const b = anchors[i + 1];
-        if (!a || !b) continue;
-        if (sy >= a.scrollY && sy < b.scrollY) {
-          const range = b.scrollY - a.scrollY;
-          if (range <= 0) return a.dotX;
-          const t = (sy - a.scrollY) / range;
-          return a.dotX + (b.dotX - a.dotX) * t;
-        }
-      }
-      return last.dotX;
+      const hit = anchors.find((a) => a.target === target);
+      return hit?.dotX ?? anchors[0]!.dotX;
+    };
+
+    /** Dot center from live layout (after is-active toggles, labels reflow). */
+    const readActiveDotX = (target: string): number => {
+      const listRect = list.getBoundingClientRect();
+      const link = links.find((l) => l.dataset.target === target);
+      if (!link) return dotXForTarget(target);
+      const r = link.getBoundingClientRect();
+      return r.left - listRect.left + r.width / 2;
+    };
+
+    /** Same threshold for final snap and for hiding the dot under the rocket. */
+    const snapEps = 0.04;
+
+    const markSettled = (): void => {
+      menu.classList.toggle('rocket-settled', Math.abs(targetX - currentX) < snapEps);
+    };
+
+    const scrollMaxY = (): number =>
+      Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+    /** Document scrollY the browser will aim for when jumping to `el`. */
+    const computeScrollTargetY = (el: HTMLElement): number => {
+      const sm = parseFloat(getComputedStyle(el).scrollMarginTop || '0');
+      const rootVar = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--topbar-h') || '0',
+      );
+      const margin =
+        !Number.isNaN(sm) && sm > 0 ? sm : !Number.isNaN(rootVar) && rootVar > 0 ? rootVar : 88;
+      const y = window.scrollY + el.getBoundingClientRect().top - margin;
+      return Math.min(Math.max(0, y), scrollMaxY());
+    };
+
+    const exitAnchorNav = (): void => {
+      navMode = 'scroll';
+      anchorGoalTarget = '';
+      window.clearTimeout(anchorFallbackId);
+      anchorFallbackId = 0;
+      recomputeAnchors();
+      const active = findActiveTarget();
+      setActive(active);
+      targetX = readActiveDotX(active);
+      currentX = targetX;
+      rocket.style.setProperty('--rocket-x', `${currentX}px`);
+      markSettled();
+      rafId = 0;
+      dirty = false;
+    };
+
+    const beginAnchorNav = (target: string): void => {
+      const sectionEl =
+        target === 'top'
+          ? (document.getElementById('top') ?? document.querySelector<HTMLElement>('.hero'))
+          : document.getElementById(target);
+      if (!sectionEl) return;
+
+      anchorGoalTarget = target;
+      anchorFromY = window.scrollY;
+      anchorFromX = currentX;
+      anchorToY = computeScrollTargetY(sectionEl);
+      anchorToX = readActiveDotX(target);
+
+      const denom = anchorToY - anchorFromY;
+      if (Math.abs(denom) < 1 && Math.abs(anchorToX - anchorFromX) < snapEps) return;
+
+      navMode = 'anchor';
+      window.clearTimeout(anchorFallbackId);
+      anchorFallbackId = window.setTimeout(() => {
+        if (navMode === 'anchor') exitAnchorNav();
+      }, 900);
+
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(tick);
     };
 
     const findActiveTarget = (): string => {
@@ -458,43 +546,111 @@ const items: Item[] = [
     };
 
     const tick = (): void => {
+      if (navMode === 'anchor') {
+        updateScrollDir();
+        const denom = anchorToY - anchorFromY;
+        const t =
+          Math.abs(denom) < 0.5
+            ? 1
+            : Math.min(1, Math.max(0, (window.scrollY - anchorFromY) / denom));
+        targetX = anchorFromX + (anchorToX - anchorFromX) * t;
+        currentX = targetX;
+        rocket.style.setProperty('--rocket-x', `${currentX}px`);
+        setActive(findActiveTarget());
+        applyDirection(computeDesiredDirection());
+        markSettled();
+
+        const sy = window.scrollY;
+        const done =
+          t >= 0.998 ||
+          (denom >= 0 && sy >= anchorToY - 1.5) ||
+          (denom < 0 && sy <= anchorToY + 1.5) ||
+          Math.abs(sy - anchorToY) < 2.5;
+
+        if (done) {
+          exitAnchorNav();
+          return;
+        }
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+
       if (dirty) {
         updateScrollDir();
-        targetX = computeTargetX();
-        setActive(findActiveTarget());
+        const active = findActiveTarget();
+        setActive(active);
+        targetX = readActiveDotX(active);
         applyDirection(computeDesiredDirection());
         dirty = false;
       }
       const dx = targetX - currentX;
-      if (reduced || Math.abs(dx) < 0.25) {
+      const k = 0.28;
+      if (reduced) {
         currentX = targetX;
         rocket.style.setProperty('--rocket-x', `${currentX}px`);
+        markSettled();
         rafId = 0;
         return;
       }
-      currentX += dx * 0.18;
+      if (Math.abs(dx) < snapEps) {
+        currentX = targetX;
+        rocket.style.setProperty('--rocket-x', `${currentX}px`);
+        markSettled();
+        rafId = 0;
+        return;
+      }
+      currentX += dx * k;
       rocket.style.setProperty('--rocket-x', `${currentX}px`);
+      markSettled();
       rafId = requestAnimationFrame(tick);
     };
 
     const schedule = (): void => {
+      if (navMode === 'anchor') return;
       dirty = true;
       if (!rafId) rafId = requestAnimationFrame(tick);
     };
 
     const onResize = (): void => {
       recomputeAnchors();
-      schedule();
+      if (navMode === 'anchor' && anchorGoalTarget) {
+        const goal = anchorGoalTarget;
+        const sectionEl =
+          goal === 'top'
+            ? (document.getElementById('top') ?? document.querySelector<HTMLElement>('.hero'))
+            : document.getElementById(goal);
+        if (sectionEl) anchorToY = computeScrollTargetY(sectionEl);
+        anchorToX = readActiveDotX(goal);
+      } else {
+        schedule();
+      }
     };
+
+    menu.addEventListener(
+      'click',
+      (e: MouseEvent) => {
+        const a = (e.target as HTMLElement).closest('[data-menu-link]') as HTMLAnchorElement | null;
+        if (!a) return;
+        if (e.defaultPrevented) return;
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const target = a.dataset.target;
+        if (!target) return;
+        beginAnchorNav(target);
+      },
+      true,
+    );
 
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('hashchange', schedule, { passive: true });
 
     recomputeAnchors();
-    targetX = computeTargetX();
+    const initial = findActiveTarget();
+    setActive(initial);
+    targetX = readActiveDotX(initial);
     currentX = targetX;
     rocket.style.setProperty('--rocket-x', `${currentX}px`);
-    setActive(findActiveTarget());
+    markSettled();
   }
 
   if (document.readyState === 'loading') {

@@ -13,7 +13,7 @@ interface Moon {
   rx: number;
   /** Defaults to `rx * (1 - TILT)` when omitted (the standard horizontal-tilt orbits). */
   ry?: number;
-  /** Degrees, rotation around the planet center. Defaults to 0. */
+  /** Degrees CCW around the planet center; 0 = orbit major axis horizontal. */
   rotation?: number;
   period: number;
   phase: number;
@@ -24,18 +24,61 @@ interface Moon {
 }
 
 const MOONS: Moon[] = [
-  { rx: 110, period: 22, phase: 0.1, size: 5, color: C.amber, label: 'Tech strategy', core: true },
-  { rx: 150, period: 44, phase: 0.55, size: 3.6, color: C.goldHi, label: 'Core excellence' },
-  { rx: 195, period: 78, phase: 0.2, size: 3.2, color: C.sage, label: 'Dev enablement' },
-  { rx: 235, period: 130, phase: 0.78, size: 2.8, color: C.cyan, label: 'Leadership' },
-  // 5th orbit: rotated ~75° so the AI moon travels on a near-vertical inclined path.
-  { rx: 180, ry: 60, rotation: 75, period: 10, phase: 0.4, size: 3, color: C.cyan, label: 'AI' },
+  {
+    rx: 244,
+    rotation: 26,
+    period: 22,
+    phase: 0.1,
+    size: 11,
+    color: C.amber,
+    label: 'Tech strategy',
+    core: true,
+  },
+  {
+    rx: 331,
+    rotation: -24,
+    period: 44,
+    phase: 0.55,
+    size: 7.9,
+    color: C.goldHi,
+    label: 'Core excellence',
+  },
+  {
+    rx: 431,
+    rotation: 38,
+    period: 78,
+    phase: 0.2,
+    size: 7.2,
+    color: C.sage,
+    label: 'Dev enablement',
+  },
+  {
+    rx: 478,
+    rotation: -34,
+    period: 130,
+    phase: 0.78,
+    size: 6.4,
+    color: C.cyan,
+    label: 'Leadership',
+  },
+  /** Horizontal track; labels sit above/below the wide path instead of piling on the sides. */
+  { rx: 318, rotation: 0, period: 10, phase: 0.4, size: 6.6, color: C.cyan, label: 'AI' },
 ];
 
-const W = 520;
-const H = 520;
+const W = 1150;
+const H = 1150;
+/**
+ * Extra viewBox margin (user units) so orbit extremes + longest labels stay inside the SVG.
+ * Larger than needed shrinks the graphic inside the layout box; keep tight but clip-safe.
+ */
+const VIEW_PAD = 136;
 const TILT = 0.62;
-const PLANET_R = 64;
+const PLANET_R = 142;
+const CORE_GLOW_R = 28;
+
+const LABEL_FONT_CORE = 36;
+const LABEL_FONT = 30;
+const LABEL_TRACKING = '0.08em';
 
 export default function SkillCloud() {
   const reduced = useReducedMotion();
@@ -60,13 +103,21 @@ export default function SkillCloud() {
   const cx = W / 2;
   const cy = H / 2;
 
+  const vbW = W + 2 * VIEW_PAD;
+  const vbH = H + 2 * VIEW_PAD;
+
   return (
     <svg
       ref={ref}
-      viewBox={`0 0 ${W} ${H}`}
+      viewBox={`${-VIEW_PAD} ${-VIEW_PAD} ${vbW} ${vbH}`}
       width="100%"
-      height="100%"
-      style={{ display: 'block' }}
+      style={{
+        display: 'block',
+        overflow: 'hidden',
+        maxWidth: '100%',
+        height: 'auto',
+        verticalAlign: 'middle',
+      }}
       role="img"
       aria-label="Skill cloud: a planet with five orbiting moons labelled Tech strategy, Core excellence, Dev enablement, Leadership, and AI"
     >
@@ -82,13 +133,13 @@ export default function SkillCloud() {
           <stop offset="100%" stopColor="rgba(127,200,140,0)" />
         </radialGradient>
         <filter id="moon-soft" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" />
+          <feGaussianBlur stdDeviation="8" />
         </filter>
       </defs>
 
       {MOONS.map((m) => {
         const ry = m.ry ?? m.rx * (1 - TILT);
-        const transform = m.rotation ? `rotate(${m.rotation} ${cx} ${cy})` : undefined;
+        const rot = m.rotation ?? 0;
         return (
           <ellipse
             key={`orbit-${m.label}`}
@@ -98,9 +149,9 @@ export default function SkillCloud() {
             ry={ry}
             fill="none"
             stroke="#3a4258"
-            strokeWidth="0.7"
+            strokeWidth="1.15"
             opacity="0.55"
-            transform={transform}
+            transform={`rotate(${rot} ${cx} ${cy})`}
           />
         );
       })}
@@ -115,13 +166,13 @@ export default function SkillCloud() {
         ry={PLANET_R * 0.18}
         fill="none"
         stroke="rgba(232,227,212,0.06)"
-        strokeWidth="0.6"
+        strokeWidth="1.05"
       />
       <path
         d={`M ${cx - PLANET_R * 0.92} ${cy - PLANET_R * 0.18}
             A ${PLANET_R} ${PLANET_R} 0 0 1 ${cx - PLANET_R * 0.18} ${cy - PLANET_R * 0.92}`}
         stroke="rgba(245,210,122,0.18)"
-        strokeWidth="1"
+        strokeWidth="1.6"
         fill="none"
       />
 
@@ -130,17 +181,13 @@ export default function SkillCloud() {
         const ry = m.ry ?? m.rx * (1 - TILT);
         const localX = m.rx * Math.cos(a);
         const localY = ry * Math.sin(a);
-        let mx = cx + localX;
-        let my = cy + localY;
-        if (m.rotation) {
-          const rad = (m.rotation * Math.PI) / 180;
-          const cosR = Math.cos(rad);
-          const sinR = Math.sin(rad);
-          mx = cx + cosR * localX - sinR * localY;
-          my = cy + sinR * localX + cosR * localY;
-        }
-        // Far side of orbit (sin(a) < 0 by convention) AND visually over the planet disk.
-        const behind = Math.sin(a) < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
+        const rot = ((m.rotation ?? 0) * Math.PI) / 180;
+        const cosR = Math.cos(rot);
+        const sinR = Math.sin(rot);
+        const mx = cx + cosR * localX - sinR * localY;
+        const my = cy + sinR * localX + cosR * localY;
+        // Parametric "back" of the ellipse vs planet disk (same phase test as pre-rotation).
+        const behind = localY < 0 && Math.hypot(mx - cx, my - cy) < PLANET_R;
         return (
           <g
             key={`moon-${m.label}`}
@@ -151,7 +198,7 @@ export default function SkillCloud() {
               <circle
                 cx={mx}
                 cy={my}
-                r={14}
+                r={CORE_GLOW_R}
                 fill={m.color}
                 opacity="0.22"
                 filter="url(#moon-soft)"
@@ -160,12 +207,12 @@ export default function SkillCloud() {
             <circle cx={mx} cy={my} r={m.size} fill={m.color} />
             <text
               x={mx}
-              y={my - m.size - 9}
+              y={my - m.size - 20}
               textAnchor="middle"
               fontFamily="Montserrat, sans-serif"
               fontWeight={m.core ? 600 : 500}
-              fontSize={m.core ? 13 : 12}
-              letterSpacing="0.32em"
+              fontSize={m.core ? LABEL_FONT_CORE : LABEL_FONT}
+              letterSpacing={LABEL_TRACKING}
               fill={m.core ? C.goldHi : C.fgMute}
               style={{ textTransform: 'uppercase' }}
             >

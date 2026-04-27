@@ -21,6 +21,9 @@
   }
   #al-site .al-skills-layout {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "cloud"
+      "list";
     gap: 48px;
   }
   #al-site .al-skills-cloud-wrap {
