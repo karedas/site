@@ -2,15 +2,10 @@
 import GradientArc from '@/components/gradient-arc.astro';
 import SolarSystem from '@/components/react/solar-system';
 import Telemetry from '@/components/react/telemetry';
-import TopMeta from '@/components/react/top-meta';
 import ScrollHint from '@/components/scroll-hint.astro';
 import SocialLink from '@/components/social-link.astro';
 ---
-<section class="hero">
-  <div class="al-topmeta topmeta">
-    <TopMeta client:load />
-  </div>
-
+<section class="hero" id="top">
   <div class="al-hero-solar system-wrap">
     <SolarSystem client:load />
   </div>
@@ -53,21 +48,9 @@ import SocialLink from '@/components/social-link.astro';
     flex-direction: column;
     min-height: 100vh;
     background: radial-gradient(ellipse at 50% 35%, #11142a 0%, var(--bg) 70%, var(--bg) 100%);
-    padding-top: 56px;
+    padding-top: calc(24px + var(--topbar-h, 88px));
     padding-bottom: 24px;
     overflow: hidden;
-  }
-  .topmeta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 80px;
-    font-family: var(--font-display);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.42em;
-    color: var(--fg-dim);
-    text-transform: uppercase;
   }
   .system-wrap {
     position: relative;

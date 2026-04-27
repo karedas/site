@@ -3,6 +3,7 @@ import '@/styles/tokens.css';
 import '@/styles/global.css';
 import '@/styles/responsive.css';
 import Analytics from '@/components/analytics.astro';
+import TopBar from '@/components/top-bar.astro';
 
 interface Props {
   title?: string;
@@ -63,6 +64,7 @@ const ogImage = new URL('/og-image.jpg', Astro.site).toString();
     <Analytics />
   </head>
   <body id="al-site">
+    <TopBar />
     <slot />
   </body>
 </html>

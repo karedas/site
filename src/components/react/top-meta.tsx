@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from './use-reduced-motion';
 
-function GeoCoords() {
+export function GeoCoords() {
   const reduced = useReducedMotion();
   const [t, setT] = useState(0);
 
@@ -21,7 +21,7 @@ function GeoCoords() {
   );
 }
 
-function TransmittingTicker() {
+export function TransmittingTicker() {
   const reduced = useReducedMotion();
   const [pkt, setPkt] = useState(0x7f4a2c);
 

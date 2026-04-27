@@ -14,6 +14,14 @@ body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: var(--topbar-h, 88px);
+}
+
 body {
   background: var(--bg);
   color: var(--fg);

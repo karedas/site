@@ -1,0 +1,505 @@
+---
+interface Item {
+  num: string;
+  label: string;
+  target: string;
+}
+
+const items: Item[] = [
+  { num: '00', label: 'Home', target: 'top' },
+  { num: '01', label: 'About', target: 'about' },
+  { num: '02', label: 'Skills', target: 'skills' },
+  { num: '03', label: 'Work', target: 'work' },
+  { num: '04', label: 'Projects', target: 'projects' },
+  { num: '05', label: 'Off-orbit', target: 'off-orbit' },
+];
+---
+<nav class="al-menu menu" aria-label="Sections" data-menu>
+  <ol class="menu-list" data-menu-list>
+    {items.map((it) => (
+      <li class="menu-item">
+        <a
+          class="menu-link"
+          href={`#${it.target}`}
+          data-menu-link
+          data-target={it.target}
+        >
+          <span class="menu-num" aria-hidden="true">{it.num}</span>
+          <span class="menu-label">{it.label}</span>
+        </a>
+      </li>
+    ))}
+    <span class="menu-rocket" data-menu-rocket aria-hidden="true">
+      <span class="menu-rocket-inner" data-menu-rocket-inner>
+        <svg
+          class="menu-rocket-svg"
+          viewBox="0 0 16 24"
+          width="16"
+          height="24"
+          xmlns="http://www.w3.org/2000/svg"
+          focusable="false"
+          role="presentation"
+        >
+          <path
+            d="M8 1.5 L11.5 7 H4.5 Z"
+            stroke="var(--gold-hi)"
+            stroke-width="1"
+            fill="none"
+            stroke-linejoin="round"
+          />
+          <rect
+            x="4.5"
+            y="7"
+            width="7"
+            height="11"
+            rx="1.5"
+            stroke="var(--gold)"
+            stroke-width="1"
+            fill="rgba(232, 161, 58, 0.06)"
+          />
+          <circle cx="8" cy="11.5" r="1.4" fill="var(--cyan)" />
+          <path
+            d="M4.5 18 L1.5 22 L4.5 22 Z"
+            stroke="var(--gold)"
+            stroke-width="1"
+            fill="none"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M11.5 18 L14.5 22 L11.5 22 Z"
+            stroke="var(--gold)"
+            stroke-width="1"
+            fill="none"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span class="menu-flame" aria-hidden="true"></span>
+      </span>
+    </span>
+  </ol>
+</nav>
+
+<style>
+  .menu {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    pointer-events: auto;
+  }
+  .menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 24px 0 8px;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+  /* Thin horizontal rail. The rocket rides on it (rocket is on top, the
+     rail passes behind it). Aligned with the link dots. */
+  .menu-list::before {
+    content: "";
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 24px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--gold-dim) 8%,
+      var(--amber) 30%,
+      var(--sage) 55%,
+      var(--cyan) 80%,
+      transparent 100%
+    );
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .menu-item {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .menu-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 14px 14px 0;
+    text-decoration: none;
+    color: var(--fg-muted);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: color 200ms ease;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  /* Small dot tying each link to the rail above it. */
+  .menu-link::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--gold-dim);
+    transform: translate(-50%, -50%);
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+    pointer-events: none;
+  }
+  .menu-num {
+    color: var(--fg-dim);
+    font-variant-numeric: tabular-nums;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    transition: color 200ms ease;
+  }
+  .menu-label {
+    color: inherit;
+  }
+  .menu-link:hover,
+  .menu-link:focus-visible {
+    color: var(--fg);
+  }
+  .menu-link:hover .menu-num,
+  .menu-link:focus-visible .menu-num {
+    color: var(--gold);
+  }
+  .menu-link:hover::before,
+  .menu-link:focus-visible::before {
+    border-color: var(--gold);
+  }
+  .menu-link.is-active {
+    color: var(--amber);
+  }
+  .menu-link.is-active .menu-num {
+    color: var(--amber);
+  }
+  .menu-link.is-active::before {
+    background: var(--amber);
+    border-color: var(--amber);
+    box-shadow: 0 0 8px rgba(232, 161, 58, 0.5);
+  }
+
+  .menu-rocket {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    transform: translateX(var(--rocket-x, 0px)) translateX(-50%);
+    pointer-events: none;
+    will-change: transform;
+    z-index: 1;
+  }
+  /* Inner wrapper holds the rotation so X translation stays JS-driven.
+     The rotation animates briefly (visible but quick) so the user sees
+     the rocket physically turn around. */
+  .menu-rocket-inner {
+    display: inline-block;
+    position: relative;
+    transform: rotate(var(--rocket-rot, 90deg));
+    transform-origin: 50% 50%;
+    transition: transform 220ms cubic-bezier(0.4, 0, 0.4, 1);
+    will-change: transform;
+  }
+  .menu-rocket-svg {
+    display: block;
+    filter: drop-shadow(0 0 4px rgba(232, 161, 58, 0.35));
+  }
+  /* Flame: hot white core fading through gold → amber → ember red, with
+     an outer halo so it reads against the dark background. */
+  .menu-flame {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 8px;
+    height: 16px;
+    border-radius: 50% 50% 50% 50% / 35% 35% 75% 75%;
+    background:
+      radial-gradient(
+        ellipse 4px 7px at 50% 22%,
+        #fff5d8 0%,
+        rgba(255, 222, 150, 0.85) 35%,
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        var(--gold-hi) 0%,
+        var(--amber) 38%,
+        #c54a1a 78%,
+        rgba(197, 74, 26, 0) 100%
+      );
+    transform: translate(-50%, -2px);
+    transform-origin: top center;
+    animation: al-menu-flame 0.9s ease-in-out infinite;
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(255, 170, 70, 0.7));
+    pointer-events: none;
+  }
+  @keyframes al-menu-flame {
+    0%,
+    100% {
+      transform: translate(-50%, -2px) scale(1, 1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, -2px) scale(0.85, 0.7);
+      opacity: 0.85;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .menu-link {
+      padding: 12px 10px 0;
+      gap: 6px;
+      letter-spacing: 0.18em;
+    }
+  }
+  @media (max-width: 768px) {
+    .menu-list {
+      padding: 24px 0 6px;
+      gap: 0;
+    }
+    .menu-link {
+      padding: 10px 6px 0;
+      gap: 4px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+    }
+    .menu-num {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+    }
+    .menu-rocket-svg {
+      width: 14px;
+      height: 21px;
+    }
+  }
+  @media (max-width: 560px) {
+    .menu-label {
+      display: none;
+    }
+    .menu-link {
+      padding: 10px 8px 0;
+    }
+    .menu-num {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-flame {
+      animation: none;
+      opacity: 0.7;
+    }
+    .menu-rocket-inner {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Section menu behavior: scroll-synced rocket on a horizontal track.
+   * The rocket translates on X with the scroll position and rotates to
+   * face the scroll direction, with a forced "bounce" orientation in
+   * the first/last halves of the menu.
+   */
+  interface Anchor {
+    link: HTMLAnchorElement;
+    target: string;
+    scrollY: number;
+    dotX: number;
+  }
+
+  function init(): void {
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    if (!menu) return;
+
+    const list = menu.querySelector<HTMLElement>('[data-menu-list]');
+    const rocket = menu.querySelector<HTMLElement>('[data-menu-rocket]');
+    const inner = menu.querySelector<HTMLElement>('[data-menu-rocket-inner]');
+    const links = Array.from(menu.querySelectorAll<HTMLAnchorElement>('[data-menu-link]'));
+    if (!list || !rocket || !inner || links.length === 0) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const anchors: Anchor[] = [];
+    let activeTarget = '';
+    let targetX = 0;
+    let currentX = 0;
+    let rafId = 0;
+    let dirty = true;
+    /** +1 = pointing right, -1 = pointing left. */
+    let direction: 1 | -1 = 1;
+    /** Accumulated rotation in degrees; default 90° (nose right). */
+    let rotation = 90;
+    /** Last observed scroll position, used to derive scroll direction. */
+    let lastScrollY = window.scrollY;
+    /** Last detected scroll direction (sticky between non-zero deltas). */
+    let scrollDir: 1 | -1 = 1;
+    inner.style.setProperty('--rocket-rot', `${rotation}deg`);
+
+    const recomputeAnchors = (): void => {
+      anchors.length = 0;
+      const listRect = list.getBoundingClientRect();
+      const activationOffset = window.innerHeight * 0.35;
+      for (const link of links) {
+        const target = link.dataset.target;
+        if (!target) continue;
+        let scrollY = 0;
+        if (target !== 'top') {
+          const sectionEl = document.getElementById(target);
+          if (!sectionEl) continue;
+          const sectionRect = sectionEl.getBoundingClientRect();
+          scrollY = sectionRect.top + window.scrollY - activationOffset;
+        }
+        const linkRect = link.getBoundingClientRect();
+        const dotX = linkRect.left - listRect.left + linkRect.width / 2;
+        anchors.push({ link, target, scrollY, dotX });
+      }
+      anchors.sort((a, b) => a.scrollY - b.scrollY);
+    };
+
+    const computeTargetX = (): number => {
+      if (anchors.length === 0) return 0;
+      const sy = window.scrollY;
+      const first = anchors[0];
+      const last = anchors[anchors.length - 1];
+      if (!first || !last) return 0;
+      if (sy <= first.scrollY) return first.dotX;
+      if (sy >= last.scrollY) return last.dotX;
+      for (let i = 0; i < anchors.length - 1; i++) {
+        const a = anchors[i];
+        const b = anchors[i + 1];
+        if (!a || !b) continue;
+        if (sy >= a.scrollY && sy < b.scrollY) {
+          const range = b.scrollY - a.scrollY;
+          if (range <= 0) return a.dotX;
+          const t = (sy - a.scrollY) / range;
+          return a.dotX + (b.dotX - a.dotX) * t;
+        }
+      }
+      return last.dotX;
+    };
+
+    const findActiveTarget = (): string => {
+      if (anchors.length === 0) return '';
+      const sy = window.scrollY;
+      let active = anchors[0];
+      for (const a of anchors) {
+        if (sy >= a.scrollY - 1) active = a;
+        else break;
+      }
+      return active?.target ?? '';
+    };
+
+    const setActive = (target: string): void => {
+      if (target === activeTarget) return;
+      activeTarget = target;
+      for (const l of links) {
+        const isActive = l.dataset.target === target;
+        l.classList.toggle('is-active', isActive);
+        if (isActive) l.setAttribute('aria-current', 'location');
+        else l.removeAttribute('aria-current');
+      }
+    };
+
+    const updateScrollDir = (): void => {
+      const sy = window.scrollY;
+      const delta = sy - lastScrollY;
+      if (delta > 0.5) scrollDir = 1;
+      else if (delta < -0.5) scrollDir = -1;
+      lastScrollY = sy;
+    };
+
+    /**
+     * Returns the direction the rocket should face right now.
+     * Forces "right" on the first half of the home→about block and
+     * "left" on the second half of the projects→off-orbit block, so the
+     * rocket flips before reaching the very ends. Otherwise it follows
+     * the user's scroll direction.
+     */
+    const computeDesiredDirection = (): 1 | -1 => {
+      if (anchors.length >= 2) {
+        const sy = window.scrollY;
+        const first = anchors[0];
+        const second = anchors[1];
+        const lastButOne = anchors[anchors.length - 2];
+        const last = anchors[anchors.length - 1];
+        if (first && second) {
+          const midFirst = (first.scrollY + second.scrollY) / 2;
+          if (sy < midFirst) return 1;
+        }
+        if (lastButOne && last) {
+          const midLast = (lastButOne.scrollY + last.scrollY) / 2;
+          if (sy > midLast) return -1;
+        }
+      }
+      return scrollDir;
+    };
+
+    const applyDirection = (desired: 1 | -1): void => {
+      if (desired === direction) return;
+      direction = desired;
+      rotation += desired === 1 ? 180 : -180;
+      inner.style.setProperty('--rocket-rot', `${rotation}deg`);
+    };
+
+    const tick = (): void => {
+      if (dirty) {
+        updateScrollDir();
+        targetX = computeTargetX();
+        setActive(findActiveTarget());
+        applyDirection(computeDesiredDirection());
+        dirty = false;
+      }
+      const dx = targetX - currentX;
+      if (reduced || Math.abs(dx) < 0.25) {
+        currentX = targetX;
+        rocket.style.setProperty('--rocket-x', `${currentX}px`);
+        rafId = 0;
+        return;
+      }
+      currentX += dx * 0.18;
+      rocket.style.setProperty('--rocket-x', `${currentX}px`);
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const schedule = (): void => {
+      dirty = true;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    };
+
+    const onResize = (): void => {
+      recomputeAnchors();
+      schedule();
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+
+    recomputeAnchors();
+    targetX = computeTargetX();
+    currentX = targetX;
+    rocket.style.setProperty('--rocket-x', `${currentX}px`);
+    setActive(findActiveTarget());
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+</script>

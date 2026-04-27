@@ -1,0 +1,144 @@
+---
+import { GeoCoords, TransmittingTicker } from '@/components/react/top-meta';
+import SectionMenu from '@/components/section-menu.astro';
+---
+<header class="al-topbar topbar" data-topbar>
+  <div class="topbar-row">
+    <div class="topbar-cell topbar-cell--start">
+      <GeoCoords client:idle />
+    </div>
+    <div class="topbar-cell topbar-cell--center">
+      <SectionMenu />
+    </div>
+    <div class="topbar-cell topbar-cell--end">
+      <TransmittingTicker client:idle />
+    </div>
+  </div>
+</header>
+
+<style>
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 250ms ease,
+      border-color 250ms ease;
+  }
+  /* Backdrop appears only AFTER the hero has fully scrolled past.
+     Neutral near-black, no blue cast, no blur. JS toggles the class. */
+  .topbar.is-scrolled {
+    background: rgba(8, 8, 10, 0.92);
+    border-bottom-color: rgba(212, 168, 75, 0.08);
+  }
+  /* Single-row grid: geo on the left, menu in the middle, transmitting
+     on the right. Baseline alignment puts geo/transmitting on the same
+     baseline as the menu numbers — the rocket and rail float above. */
+  .topbar-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: baseline;
+    column-gap: 24px;
+    padding: 0 64px 6px;
+  }
+  .topbar-cell {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    line-height: 1;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+  }
+  .topbar-cell--start {
+    justify-self: start;
+  }
+  .topbar-cell--center {
+    justify-self: center;
+  }
+  .topbar-cell--end {
+    justify-self: end;
+  }
+
+  @media (max-width: 1280px) {
+    .topbar-row {
+      padding-left: 40px;
+      padding-right: 40px;
+      column-gap: 16px;
+    }
+  }
+  @media (max-width: 1024px) {
+    .topbar-row {
+      padding-left: 28px;
+      padding-right: 28px;
+      column-gap: 12px;
+    }
+    .topbar-cell {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+    }
+  }
+  @media (max-width: 880px) {
+    .topbar-cell--start,
+    .topbar-cell--end {
+      display: none;
+    }
+    .topbar-row {
+      grid-template-columns: 1fr;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Toggle the topbar backdrop once the hero has fully scrolled past.
+   * Uses IntersectionObserver to avoid layout-timing bugs (fonts, async
+   * islands) that can mis-measure the hero's height at boot.
+   */
+  function init(): void {
+    const topbar = document.querySelector<HTMLElement>('[data-topbar]');
+    if (!topbar) return;
+    const hero =
+      document.getElementById('top') ?? document.querySelector<HTMLElement>('.al-hero, .hero');
+    if (!hero) return;
+
+    const root = document.documentElement;
+    const publishHeight = (): void => {
+      root.style.setProperty('--topbar-h', `${Math.round(topbar.offsetHeight)}px`);
+    };
+    publishHeight();
+    window.addEventListener('resize', publishHeight);
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(publishHeight).observe(topbar);
+    }
+
+    const apply = (scrolled: boolean): void => {
+      topbar.classList.toggle('is-scrolled', scrolled);
+    };
+
+    apply(false);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          apply(!entry.isIntersecting);
+        }
+      },
+      { threshold: 0, rootMargin: '0px' },
+    );
+    observer.observe(hero);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+</script>
