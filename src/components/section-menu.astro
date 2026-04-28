@@ -345,9 +345,8 @@ const items: Item[] = [
 <script>
   /**
    * Section menu: rocket on a horizontal track.
-   * — Wheel / trackpad scroll: rocket eases toward the active section dot.
-   * — In-page link click (long jumps): rocket moves linearly from start to
-   *   destination dot vs scroll progress, avoiding intermediate “stops”.
+   * The rocket eases toward the active section's dot. Browser smooth-scroll
+   * handles in-page link clicks; the rocket follows the resulting scroll.
    */
   interface Anchor {
     link: HTMLAnchorElement;
@@ -373,14 +372,6 @@ const items: Item[] = [
     let currentX = 0;
     let rafId = 0;
     let dirty = true;
-    type NavMode = 'scroll' | 'anchor';
-    let navMode: NavMode = 'scroll';
-    let anchorFromY = 0;
-    let anchorToY = 0;
-    let anchorFromX = 0;
-    let anchorToX = 0;
-    let anchorGoalTarget = '';
-    let anchorFallbackId = 0;
     /** +1 = pointing right, -1 = pointing left. */
     let direction: 1 | -1 = 1;
     /** Accumulated rotation in degrees; default 90° (nose right). */
@@ -389,6 +380,16 @@ const items: Item[] = [
     let lastTargetX = 0;
     /** Minimum |Δ targetX| before considering the rocket "in motion" (px). */
     const MOTION_EPS = 0.3;
+    /** Snap threshold (px) for end-of-easing and "settled" state. */
+    const SNAP_EPS = 0.25;
+    /** Easing factor (0..1); higher = snappier. */
+    const K_EASE = 0.28;
+    /** When non-null, pin the target to this section's dot until scroll arrives
+        or the fallback timeout fires. Prevents stuttering through intermediate
+        section dots during a long click-driven smooth-scroll. */
+    let clickGoal: string | null = null;
+    let clickGoalScrollY = 0;
+    let clickGoalTimeoutId = 0;
     inner.style.setProperty('--rocket-rot', `${rotation}deg`);
 
     const recomputeAnchors = (): void => {
@@ -424,107 +425,8 @@ const items: Item[] = [
       }
     };
 
-    const dotXForTarget = (target: string): number => {
-      if (anchors.length === 0) return 0;
-      const hit = anchors.find((a) => a.target === target);
-      return hit?.dotX ?? anchors[0]!.dotX;
-    };
-
-    /** Dot center from live layout (after is-active toggles, labels reflow). */
-    const readActiveDotX = (target: string): number => {
-      const listRect = list.getBoundingClientRect();
-      const link = links.find((l) => l.dataset.target === target);
-      if (!link) return dotXForTarget(target);
-      const r = link.getBoundingClientRect();
-      return r.left - listRect.left + r.width / 2;
-    };
-
-    /**
-     * Continuous target X based on scroll position: linearly interpolate
-     * between the two adjacent anchor dots so the rocket glides along the
-     * rail with the scroll, instead of jumping when activeTarget switches.
-     */
-    const computeTrackXForScroll = (sy: number): number => {
-      if (anchors.length === 0) return 0;
-      if (anchors.length === 1) return anchors[0]!.dotX;
-      const first = anchors[0]!;
-      const last = anchors[anchors.length - 1]!;
-      if (sy <= first.scrollY) return first.dotX;
-      if (sy >= last.scrollY) return last.dotX;
-      for (let i = 0; i < anchors.length - 1; i++) {
-        const a = anchors[i]!;
-        const b = anchors[i + 1]!;
-        if (sy >= a.scrollY && sy < b.scrollY) {
-          const denom = b.scrollY - a.scrollY;
-          const u = denom > 0 ? (sy - a.scrollY) / denom : 0;
-          return a.dotX + (b.dotX - a.dotX) * u;
-        }
-      }
-      return last.dotX;
-    };
-
-    /** Same threshold for final snap and for hiding the dot under the rocket. */
-    const snapEps = 0.04;
-
     const markSettled = (): void => {
-      menu.classList.toggle('rocket-settled', Math.abs(targetX - currentX) < snapEps);
-    };
-
-    const scrollMaxY = (): number =>
-      Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-
-    /** Document scrollY the browser will aim for when jumping to `el`. */
-    const computeScrollTargetY = (el: HTMLElement): number => {
-      const sm = parseFloat(getComputedStyle(el).scrollMarginTop || '0');
-      const rootVar = parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue('--topbar-h') || '0',
-      );
-      const margin =
-        !Number.isNaN(sm) && sm > 0 ? sm : !Number.isNaN(rootVar) && rootVar > 0 ? rootVar : 88;
-      const y = window.scrollY + el.getBoundingClientRect().top - margin;
-      return Math.min(Math.max(0, y), scrollMaxY());
-    };
-
-    const exitAnchorNav = (): void => {
-      navMode = 'scroll';
-      anchorGoalTarget = '';
-      window.clearTimeout(anchorFallbackId);
-      anchorFallbackId = 0;
-      recomputeAnchors();
-      setActive(findActiveTarget());
-      targetX = computeTrackXForScroll(window.scrollY);
-      currentX = targetX;
-      rocket.style.setProperty('--rocket-x', `${currentX}px`);
-      lastTargetX = targetX;
-      markSettled();
-      rafId = 0;
-      dirty = false;
-    };
-
-    const beginAnchorNav = (target: string): void => {
-      const sectionEl =
-        target === 'top'
-          ? (document.getElementById('top') ?? document.querySelector<HTMLElement>('.hero'))
-          : document.getElementById(target);
-      if (!sectionEl) return;
-
-      anchorGoalTarget = target;
-      anchorFromY = window.scrollY;
-      anchorFromX = currentX;
-      anchorToY = computeScrollTargetY(sectionEl);
-      anchorToX = readActiveDotX(target);
-
-      const denom = anchorToY - anchorFromY;
-      if (Math.abs(denom) < 1 && Math.abs(anchorToX - anchorFromX) < snapEps) return;
-
-      navMode = 'anchor';
-      window.clearTimeout(anchorFallbackId);
-      anchorFallbackId = window.setTimeout(() => {
-        if (navMode === 'anchor') exitAnchorNav();
-      }, 900);
-
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(tick);
+      menu.classList.toggle('rocket-settled', Math.abs(targetX - currentX) < SNAP_EPS);
     };
 
     const findActiveTarget = (): string => {
@@ -536,6 +438,11 @@ const items: Item[] = [
         else break;
       }
       return active?.target ?? '';
+    };
+
+    const dotXFor = (target: string): number => {
+      const a = anchors.find((x) => x.target === target);
+      return a?.dotX ?? anchors[0]?.dotX ?? 0;
     };
 
     const setActive = (target: string): void => {
@@ -569,84 +476,68 @@ const items: Item[] = [
       lastTargetX = newTargetX;
     };
 
+    const clearClickGoal = (): void => {
+      clickGoal = null;
+      window.clearTimeout(clickGoalTimeoutId);
+      clickGoalTimeoutId = 0;
+    };
+
     const tick = (): void => {
-      if (navMode === 'anchor') {
-        const denom = anchorToY - anchorFromY;
-        const t =
-          Math.abs(denom) < 0.5
-            ? 1
-            : Math.min(1, Math.max(0, (window.scrollY - anchorFromY) / denom));
-        targetX = anchorFromX + (anchorToX - anchorFromX) * t;
-        currentX = targetX;
-        rocket.style.setProperty('--rocket-x', `${currentX}px`);
-        setActive(findActiveTarget());
-        updateDirectionFromMotion(targetX);
-        markSettled();
-
-        const sy = window.scrollY;
-        const done =
-          t >= 0.998 ||
-          (denom >= 0 && sy >= anchorToY - 1.5) ||
-          (denom < 0 && sy <= anchorToY + 1.5) ||
-          Math.abs(sy - anchorToY) < 2.5;
-
-        if (done) {
-          exitAnchorNav();
-          return;
-        }
-        rafId = requestAnimationFrame(tick);
-        return;
-      }
-
       if (dirty) {
-        setActive(findActiveTarget());
-        targetX = computeTrackXForScroll(window.scrollY);
+        if (clickGoal !== null) {
+          targetX = dotXFor(clickGoal);
+          if (Math.abs(window.scrollY - clickGoalScrollY) < 4) {
+            clearClickGoal();
+            const active = findActiveTarget();
+            setActive(active);
+            targetX = dotXFor(active);
+          }
+        } else {
+          const active = findActiveTarget();
+          setActive(active);
+          targetX = dotXFor(active);
+        }
         updateDirectionFromMotion(targetX);
         dirty = false;
       }
       const dx = targetX - currentX;
-      const k = 0.28;
-      if (reduced) {
+      if (reduced || Math.abs(dx) < SNAP_EPS) {
         currentX = targetX;
         rocket.style.setProperty('--rocket-x', `${currentX}px`);
         markSettled();
         rafId = 0;
         return;
       }
-      if (Math.abs(dx) < snapEps) {
-        currentX = targetX;
-        rocket.style.setProperty('--rocket-x', `${currentX}px`);
-        markSettled();
-        rafId = 0;
-        return;
-      }
-      currentX += dx * k;
+      currentX += dx * K_EASE;
       rocket.style.setProperty('--rocket-x', `${currentX}px`);
       markSettled();
       rafId = requestAnimationFrame(tick);
     };
 
     const schedule = (): void => {
-      if (navMode === 'anchor') return;
       dirty = true;
       if (!rafId) rafId = requestAnimationFrame(tick);
     };
 
     const onResize = (): void => {
       recomputeAnchors();
-      if (navMode === 'anchor' && anchorGoalTarget) {
-        const goal = anchorGoalTarget;
+      if (clickGoal) {
         const sectionEl =
-          goal === 'top'
+          clickGoal === 'top'
             ? (document.getElementById('top') ?? document.querySelector<HTMLElement>('.hero'))
-            : document.getElementById(goal);
-        if (sectionEl) anchorToY = computeScrollTargetY(sectionEl);
-        anchorToX = readActiveDotX(goal);
-      } else {
-        schedule();
+            : document.getElementById(clickGoal);
+        if (sectionEl) {
+          const sm = parseFloat(getComputedStyle(sectionEl).scrollMarginTop || '0');
+          const margin = !Number.isNaN(sm) && sm > 0 ? sm : 88;
+          clickGoalScrollY = sectionEl.getBoundingClientRect().top + window.scrollY - margin;
+        }
       }
+      schedule();
     };
 
+    /* Click: pin the rocket target to the destination dot for the duration of
+       the browser smooth-scroll, so the rocket glides directly to it instead
+       of stuttering through intermediate section dots. */
     menu.addEventListener(
       'click',
       (e: MouseEvent) => {
@@ -654,9 +545,30 @@ const items: Item[] = [
         if (!a) return;
         if (e.defaultPrevented) return;
         if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        const target = a.dataset.target;
-        if (!target) return;
-        beginAnchorNav(target);
+        const goal = a.dataset.target;
+        if (!goal) return;
+        recomputeAnchors();
+        const sectionEl =
+          goal === 'top'
+            ? (document.getElementById('top') ?? document.querySelector<HTMLElement>('.hero'))
+            : document.getElementById(goal);
+        if (sectionEl) {
+          const sm = parseFloat(getComputedStyle(sectionEl).scrollMarginTop || '0');
+          const margin = !Number.isNaN(sm) && sm > 0 ? sm : 88;
+          clickGoalScrollY = sectionEl.getBoundingClientRect().top + window.scrollY - margin;
+        } else {
+          clickGoalScrollY = window.scrollY;
+        }
+        clickGoal = goal;
+        setActive(goal);
+        window.clearTimeout(clickGoalTimeoutId);
+        clickGoalTimeoutId = window.setTimeout(() => {
+          if (clickGoal !== null) {
+            clearClickGoal();
+            schedule();
+          }
+        }, 1400);
+        schedule();
       },
       true,
     );
@@ -666,8 +578,9 @@ const items: Item[] = [
     window.addEventListener('hashchange', schedule, { passive: true });
 
     recomputeAnchors();
-    setActive(findActiveTarget());
-    targetX = computeTrackXForScroll(window.scrollY);
+    const initial = findActiveTarget();
+    setActive(initial);
+    targetX = dotXFor(initial);
     currentX = targetX;
     lastTargetX = targetX;
     rocket.style.setProperty('--rocket-x', `${currentX}px`);
