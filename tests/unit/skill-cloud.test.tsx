@@ -30,13 +30,16 @@ describe('SkillCloud', () => {
     expect(orbits.length).toBe(5);
   });
 
-  it('rotates the 5th orbit (~75°) so the AI moon travels off-axis', () => {
+  it('tilts every orbit with rotate(cx cy) and keeps the AI path horizontal (0°)', () => {
     const { container } = render(<SkillCloud />);
     const orbits = Array.from(container.querySelectorAll('ellipse[stroke="#3a4258"]'));
     const transforms = orbits.map((o) => o.getAttribute('transform'));
-    const rotated = transforms.filter((t) => t?.startsWith('rotate('));
-    expect(rotated.length).toBe(1);
-    expect(rotated[0]).toMatch(/^rotate\(75 /);
+    expect(transforms.length).toBe(5);
+    for (const t of transforms) {
+      expect(t).toMatch(/^rotate\(-?\d+(\.\d+)?\s+[\d.]+\s+[\d.]+\)/);
+    }
+    // Last orbit is AI: major axis horizontal (0°) so labels stay above/below, not to the sides.
+    expect(transforms[4]).toMatch(/^rotate\(0\s/);
   });
 
   it('does not start the rAF loop when prefers-reduced-motion is set', () => {
