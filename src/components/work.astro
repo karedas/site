@@ -51,10 +51,10 @@ const works: Work[] = [
     {works.map((w) => (
       <div class="al-work-row row">
         <span class="al-w-year year">{w.year}</span>
-        <span class="al-w-title title">
+        <h3 class="al-w-title title">
           {w.title}
           <span class="location">{w.location}</span>
-        </span>
+        </h3>
         <span class="al-w-role role">{w.role}</span>
         <span class="al-w-tags tags">
           {w.tags.map((t) => (
@@ -100,6 +100,7 @@ const works: Work[] = [
     white-space: nowrap;
   }
   .title {
+    margin: 0;
     font-family: var(--font-display);
     font-size: 24px;
     font-weight: 600;

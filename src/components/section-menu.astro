@@ -14,8 +14,22 @@ const items: Item[] = [
   { num: '05', label: 'Off-orbit', target: 'off-orbit' },
 ];
 ---
-<nav class="al-menu menu" aria-label="Sections" data-menu>
-  <ol class="menu-list" data-menu-list>
+<nav class="al-menu menu" aria-label="Sections" data-menu data-menu-open="false">
+  <button
+    type="button"
+    class="menu-burger"
+    data-menu-burger
+    aria-expanded="false"
+    aria-controls="al-menu-list"
+    aria-label="Open navigation menu"
+  >
+    <span class="burger-bars" aria-hidden="true">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </span>
+  </button>
+  <ol id="al-menu-list" class="menu-list" data-menu-list>
     {items.map((it) => (
       <li class="menu-item">
         <a
@@ -290,6 +304,68 @@ const items: Item[] = [
     }
   }
 
+  /* Burger trigger (mobile only). On desktop the list itself is the nav. */
+  .menu-burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    color: var(--fg-muted);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      color 200ms ease,
+      border-color 200ms ease,
+      background 200ms ease;
+  }
+  .menu-burger:hover,
+  .menu-burger:focus-visible {
+    color: var(--gold);
+    border-color: var(--gold-dim);
+  }
+  .burger-bars {
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 14px;
+  }
+  .burger-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 1px;
+    transition:
+      transform 220ms ease,
+      opacity 160ms ease,
+      top 220ms ease;
+  }
+  .burger-bar:nth-child(1) { top: 0; }
+  .burger-bar:nth-child(2) { top: 50%; transform: translateY(-50%); }
+  .burger-bar:nth-child(3) { top: 100%; transform: translateY(-100%); }
+
+  .menu[data-menu-open="true"] .menu-burger {
+    color: var(--gold-hi);
+    border-color: var(--gold-dim);
+  }
+  .menu[data-menu-open="true"] .burger-bar:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .menu[data-menu-open="true"] .burger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu[data-menu-open="true"] .burger-bar:nth-child(3) {
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
   @media (max-width: 1024px) {
     .menu-link {
       padding: 12px 10px 0;
@@ -297,39 +373,131 @@ const items: Item[] = [
       letter-spacing: 0.18em;
     }
   }
+
+  /* ── Mobile (<= 768px): burger toggles a vertical drop-down panel ── */
   @media (max-width: 768px) {
-    .menu-list {
-      padding: 4px 0 4px;
-      gap: 0;
+    .menu {
+      position: relative;
     }
-    .menu-link {
-      padding: 12px 6px 0;
+    .menu-burger {
+      display: inline-flex;
+    }
+
+    /* List collapses into a fixed dropdown panel below the topbar.
+       Hidden by default; revealed when [data-menu-open="true"]. We also
+       toggle `visibility` so links are removed from the focus/AT tree
+       while the panel is closed. */
+    .menu-list {
+      position: fixed;
+      top: calc(var(--topbar-h, 88px) + 8px);
+      left: 16px;
+      right: 16px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
       gap: 4px;
-      font-size: 10px;
-      letter-spacing: 0.14em;
+      padding: 22px 24px 22px 56px;
+      background: rgba(8, 8, 10, 0.96);
+      border: 1px solid rgba(212, 168, 75, 0.18);
+      border-radius: 10px;
+      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7);
+      transform: translateY(-6px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        transform 200ms ease,
+        opacity 200ms ease,
+        visibility 0s linear 200ms;
+      z-index: 50;
+    }
+    .menu[data-menu-open="true"] .menu-list {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        transform 200ms ease,
+        opacity 200ms ease,
+        visibility 0s linear 0s;
+    }
+
+    /* Vertical rail along the left side of the panel (replaces the
+       horizontal rail). Aligned with the column of dots at left: 32px. */
+    .menu-list::before {
+      left: 32px;
+      right: auto;
+      top: 22px;
+      bottom: 22px;
+      width: 1px;
+      height: auto;
+      transform: none;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        var(--gold-dim) 8%,
+        var(--amber) 30%,
+        var(--sage) 55%,
+        var(--cyan) 80%,
+        transparent 100%
+      );
+      opacity: 0.5;
+    }
+
+    .menu-item {
+      width: 100%;
+    }
+    /* Roomier hit area, calmer typography: sentence-case label, larger
+       size, gentle tracking. Numbers stay uppercase + tracked for the
+       editorial feel. */
+    .menu-link {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 18px;
+      padding: 16px 8px 16px 0;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+    /* Dot moves from the top of each link to its left edge. */
+    .menu-link::before {
+      left: -24px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
+      height: 6px;
     }
     .menu-num {
-      font-size: 9px;
-      letter-spacing: 0.14em;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: var(--fg-dim);
+      min-width: 28px;
     }
+    .menu-link.is-active .menu-num {
+      color: var(--amber);
+    }
+    .menu-label {
+      display: inline;
+    }
+
+    /* Rocket: rides the vertical rail. Static rotation (nose down),
+       no horizontal motion: targetY drives the position. */
     .menu-rocket {
-      top: -6.5px;
+      top: 22px;
+      left: 32px;
+      transform: translateY(var(--rocket-y, 0px)) translate(-50%, -50%);
+    }
+    .menu-rocket-inner {
+      transform: rotate(180deg);
+      transition: none;
     }
     .menu-rocket-svg {
       width: 14px;
       height: 21px;
-    }
-  }
-  @media (max-width: 560px) {
-    .menu-label {
-      display: none;
-    }
-    .menu-link {
-      padding: 12px 8px 0;
-    }
-    .menu-num {
-      font-size: 11px;
-      letter-spacing: 0.18em;
     }
   }
 
@@ -343,6 +511,10 @@ const items: Item[] = [
     }
     .menu.rocket-engine-off .menu-flame {
       opacity: 0;
+    }
+    .menu-list,
+    .burger-bar {
+      transition: none;
     }
   }
 </style>
@@ -358,6 +530,7 @@ const items: Item[] = [
     target: string;
     scrollY: number;
     dotX: number;
+    dotY: number;
   }
 
   function init(): void {
@@ -367,6 +540,7 @@ const items: Item[] = [
     const list = menu.querySelector<HTMLElement>('[data-menu-list]');
     const rocket = menu.querySelector<HTMLElement>('[data-menu-rocket]');
     const inner = menu.querySelector<HTMLElement>('[data-menu-rocket-inner]');
+    const burger = menu.querySelector<HTMLButtonElement>('[data-menu-burger]');
     const links = Array.from(menu.querySelectorAll<HTMLAnchorElement>('[data-menu-link]'));
     if (!list || !rocket || !inner || links.length === 0) return;
 
@@ -375,6 +549,7 @@ const items: Item[] = [
     let activeTarget = '';
     let targetX = 0;
     let currentX = 0;
+    let targetY = 0;
     let rafId = 0;
     let dirty = true;
     /** +1 = pointing right, -1 = pointing left. */
@@ -417,7 +592,8 @@ const items: Item[] = [
         }
         const linkRect = link.getBoundingClientRect();
         const dotX = linkRect.left - listRect.left + linkRect.width / 2;
-        anchors.push({ link, target, scrollY, dotX });
+        const dotY = linkRect.top - listRect.top + linkRect.height / 2;
+        anchors.push({ link, target, scrollY, dotX, dotY });
       }
       anchors.sort((a, b) => a.scrollY - b.scrollY);
       const tail = anchors[anchors.length - 1];
@@ -448,6 +624,11 @@ const items: Item[] = [
     const dotXFor = (target: string): number => {
       const a = anchors.find((x) => x.target === target);
       return a?.dotX ?? anchors[0]?.dotX ?? 0;
+    };
+
+    const dotYFor = (target: string): number => {
+      const a = anchors.find((x) => x.target === target);
+      return a?.dotY ?? anchors[0]?.dotY ?? 0;
     };
 
     const setActive = (target: string): void => {
@@ -491,18 +672,22 @@ const items: Item[] = [
       if (dirty) {
         if (clickGoal !== null) {
           targetX = dotXFor(clickGoal);
+          targetY = dotYFor(clickGoal);
           if (Math.abs(window.scrollY - clickGoalScrollY) < 4) {
             clearClickGoal();
             const active = findActiveTarget();
             setActive(active);
             targetX = dotXFor(active);
+            targetY = dotYFor(active);
           }
         } else {
           const active = findActiveTarget();
           setActive(active);
           targetX = dotXFor(active);
+          targetY = dotYFor(active);
         }
         updateDirectionFromMotion(targetX);
+        rocket.style.setProperty('--rocket-y', `${targetY}px`);
         dirty = false;
       }
       const dx = targetX - currentX;
@@ -586,12 +771,58 @@ const items: Item[] = [
     const initial = findActiveTarget();
     setActive(initial);
     targetX = dotXFor(initial);
+    targetY = dotYFor(initial);
     currentX = targetX;
     lastTargetX = targetX;
     rocket.style.setProperty('--rocket-x', `${currentX}px`);
+    rocket.style.setProperty('--rocket-y', `${targetY}px`);
     markSettled();
     requestAnimationFrame(() => {
       menu.classList.add('rocket-ready');
+    });
+
+    /**
+     * Burger menu: opens a vertical drop-down on small screens. The list
+     * is hidden via CSS until [data-menu-open="true"]. Closes on link
+     * click, Escape, and outside click.
+     */
+    const setOpen = (open: boolean): void => {
+      menu.dataset.menuOpen = open ? 'true' : 'false';
+      if (burger) {
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute(
+          'aria-label',
+          open ? 'Close navigation menu' : 'Open navigation menu',
+        );
+      }
+      if (open) {
+        recomputeAnchors();
+        schedule();
+      }
+    };
+
+    burger?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.dataset.menuOpen === 'true';
+      setOpen(!isOpen);
+    });
+
+    list.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest('[data-menu-link]');
+      if (!a) return;
+      if (menu.dataset.menuOpen === 'true') setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.dataset.menuOpen === 'true') {
+        setOpen(false);
+        burger?.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (menu.dataset.menuOpen !== 'true') return;
+      if (!menu.contains(e.target as Node)) setOpen(false);
     });
   }
 

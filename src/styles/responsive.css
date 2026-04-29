@@ -73,6 +73,20 @@
     padding-bottom: 40px;
   }
 
+  /* Skill cloud: bleed out of section padding to gain ~17% in radius and
+     give the moons room to breathe. The chart caption underneath is
+     re-aligned with the section content via inset padding. */
+  #al-site .al-skills-layout {
+    gap: 32px;
+  }
+  #al-site .al-skills-cloud-wrap {
+    margin-inline: -28px;
+    padding-inline: 0;
+  }
+  #al-site .al-skills-cloud-wrap .cloud-chart {
+    padding-inline: 28px;
+  }
+
   #al-site .al-topmeta-name {
     display: none;
   }
@@ -161,6 +175,13 @@
   #al-site .al-section {
     padding-top: 32px;
     padding-bottom: 32px;
+  }
+
+  #al-site .al-skills-cloud-wrap {
+    margin-inline: -20px;
+  }
+  #al-site .al-skills-cloud-wrap .cloud-chart {
+    padding-inline: 20px;
   }
 
   #al-site .al-topmeta {
