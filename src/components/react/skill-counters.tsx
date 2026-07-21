@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
+import { SKILL_COUNTS } from '@/data/skill-inventory';
 import { useReducedMotion } from './use-reduced-motion';
 
-const TARGETS = { expert: 76, solid: 42, familiar: 19 } as const;
 const DURATION = 1100;
 
 /**
  * Skill-matrix legend with counters that ease from 0 to their targets the
  * first time the legend scrolls into view. Static under reduced motion.
+ * Targets are derived from the shared skill inventory, so the legend always
+ * matches the chips rendered in the full-inventory panel.
  */
 export function SkillCounters() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -26,9 +28,9 @@ export function SkillCounters() {
         const p = Math.min(1, (now - t0) / DURATION);
         const e = 1 - (1 - p) ** 3;
         setN({
-          expert: Math.round(TARGETS.expert * e),
-          solid: Math.round(TARGETS.solid * e),
-          familiar: Math.round(TARGETS.familiar * e),
+          expert: Math.round(SKILL_COUNTS.expert * e),
+          solid: Math.round(SKILL_COUNTS.solid * e),
+          familiar: Math.round(SKILL_COUNTS.familiar * e),
         });
         if (p < 1) raf = requestAnimationFrame(step);
         else setDone(true);
@@ -50,7 +52,7 @@ export function SkillCounters() {
     // Failsafe: if the observer never fires, settle on the final values.
     const failsafe = setTimeout(() => {
       if (!raf) {
-        setN({ ...TARGETS });
+        setN({ ...SKILL_COUNTS });
         setDone(true);
       }
     }, 1400);
@@ -62,7 +64,7 @@ export function SkillCounters() {
     };
   }, [reduceMotion, done]);
 
-  const shown = reduceMotion || done ? TARGETS : n;
+  const shown = reduceMotion || done ? SKILL_COUNTS : n;
 
   return (
     <div ref={rootRef} className="skill-legend" data-testid="skill-legend">
@@ -75,7 +77,7 @@ export function SkillCounters() {
       <span>
         <span className="sq familiar">■</span> {shown.familiar} FAMILIAR
       </span>
-      <span className="meta">SELF-ASSESSED · 179 ITEMS · 2026</span>
+      <span className="meta">SELF-ASSESSED · DISTILLED FROM 179 ITEMS · 2026</span>
     </div>
   );
 }

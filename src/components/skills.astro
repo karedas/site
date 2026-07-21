@@ -1,6 +1,7 @@
 ---
 import SkillCounters from '@/components/react/skill-counters';
 import SectionHeader from '@/components/section-header.astro';
+import { SKILL_DOMAINS, SKILL_TOTAL } from '@/data/skill-inventory';
 
 const matrix = [
   { name: 'Web platform', pcts: [70, 22, 8], top: 'TypeScript · modern CSS · DOM & Web APIs' },
@@ -57,6 +58,28 @@ const neutralChips = ['MCP', 'RAG & embeddings', 'LLM APIs & evals', 'OWASP LLM 
       </div>
     ))}
   </div>
+
+  <details class="inventory" data-rv>
+    <summary>
+      <span class="sum-label"><span class="chev" aria-hidden="true">▸</span> FULL INVENTORY · {SKILL_TOTAL} ITEMS</span>
+      <span class="sum-hint">■ EXPERT · □ SOLID · ┄ FAMILIAR</span>
+    </summary>
+    <div class="inv-body">
+      {SKILL_DOMAINS.map((dom) => (
+        <div class="inv-row">
+          <div class="inv-dom">
+            {dom.name}
+            {dom.note && <small>{dom.note}</small>}
+          </div>
+          <div class="inv-tags">
+            {dom.expert.map((s) => <span class="chip-inv expert">{s}</span>)}
+            {dom.solid.map((s) => <span class="chip-inv solid">{s}</span>)}
+            {dom.familiar.map((s) => <span class="chip-inv familiar">{s}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </details>
 
   <div class="ai-panel" data-rv>
     <div class="ai-head">
@@ -195,6 +218,116 @@ const neutralChips = ['MCP', 'RAG & embeddings', 'LLM APIs & evals', 'OWASP LLM 
     flex: 0 1 340px;
     font: 400 12px var(--font-mono);
     color: var(--fg-65);
+  }
+
+  .inventory {
+    margin-top: 22px;
+    border: 1px solid var(--line-12);
+  }
+
+  .inventory summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px 20px;
+    flex-wrap: wrap;
+    padding: 14px 22px;
+    cursor: pointer;
+    list-style: none;
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--fg-65);
+    transition:
+      color 0.2s,
+      background 0.2s;
+  }
+
+  .inventory summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .inventory summary:hover {
+    color: var(--accent);
+    background: rgba(237, 229, 220, 0.03);
+  }
+
+  .inventory .chev {
+    display: inline-block;
+    color: var(--accent);
+    margin-right: 8px;
+    transition: transform 0.2s;
+  }
+
+  .inventory[open] .chev {
+    transform: rotate(90deg);
+  }
+
+  .inventory .sum-hint {
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--fg-52);
+  }
+
+  .inv-body {
+    border-top: 1px solid var(--line-12);
+    padding: 6px 22px 20px;
+  }
+
+  .inv-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line-08);
+  }
+
+  .inv-row:last-child {
+    border-bottom: none;
+  }
+
+  .inv-dom {
+    flex: 0 0 200px;
+    font: 500 13px var(--font-display);
+    padding-top: 3px;
+  }
+
+  .inv-dom small {
+    display: block;
+    margin-top: 2px;
+    font: 400 9px var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-52);
+  }
+
+  .inv-tags {
+    flex: 1 1 320px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-content: start;
+  }
+
+  .chip-inv {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.02em;
+    padding: 4px 10px;
+    height: fit-content;
+  }
+
+  .chip-inv.expert {
+    border: 1px solid rgba(232, 112, 58, 0.6);
+    color: var(--fg);
+  }
+
+  .chip-inv.solid {
+    border: 1px solid var(--line-25);
+    color: var(--fg-70);
+  }
+
+  .chip-inv.familiar {
+    border: 1px dashed var(--line-18);
+    color: var(--fg-56);
   }
 
   .ai-panel {

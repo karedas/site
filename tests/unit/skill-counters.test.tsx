@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import SkillCounters from '@/components/react/skill-counters';
+import { SKILL_COUNTS } from '@/data/skill-inventory';
 
 function stubMatchMedia(matches: boolean) {
   vi.stubGlobal(
@@ -31,7 +32,7 @@ describe('SkillCounters', () => {
     expect(legend).toHaveTextContent('EXPERT');
     expect(legend).toHaveTextContent('SOLID');
     expect(legend).toHaveTextContent('FAMILIAR');
-    expect(legend).toHaveTextContent('SELF-ASSESSED · 179 ITEMS · 2026');
+    expect(legend).toHaveTextContent('SELF-ASSESSED · DISTILLED FROM 179 ITEMS · 2026');
   });
 
   it('starts the counters at 0 before the legend intersects', () => {
@@ -47,9 +48,9 @@ describe('SkillCounters', () => {
     stubMatchMedia(true);
     render(<SkillCounters />);
     const legend = screen.getByTestId('skill-legend');
-    expect(legend).toHaveTextContent('76 EXPERT');
-    expect(legend).toHaveTextContent('42 SOLID');
-    expect(legend).toHaveTextContent('19 FAMILIAR');
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.expert} EXPERT`);
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.solid} SOLID`);
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.familiar} FAMILIAR`);
   });
 
   it('observes the legend for intersection when motion is allowed', () => {
@@ -77,8 +78,8 @@ describe('SkillCounters', () => {
       await vi.advanceTimersByTimeAsync(1500);
     });
     const legend = screen.getByTestId('skill-legend');
-    expect(legend).toHaveTextContent('76 EXPERT');
-    expect(legend).toHaveTextContent('42 SOLID');
-    expect(legend).toHaveTextContent('19 FAMILIAR');
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.expert} EXPERT`);
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.solid} SOLID`);
+    expect(legend).toHaveTextContent(`${SKILL_COUNTS.familiar} FAMILIAR`);
   });
 });

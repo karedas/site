@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
+import { SKILL_COUNTS, SKILL_TOTAL } from '../../src/data/skill-inventory';
 
 test.describe('homepage', () => {
   test('renders the hero and the five numbered sections', async ({ page }) => {
@@ -51,9 +52,23 @@ test.describe('homepage', () => {
     const legend = page.getByTestId('skill-legend');
     await legend.scrollIntoViewIfNeeded();
     await expect(legend).toBeVisible();
-    await expect(legend).toContainText('76 EXPERT');
-    await expect(legend).toContainText('42 SOLID');
-    await expect(legend).toContainText('19 FAMILIAR');
+    await expect(legend).toContainText(`${SKILL_COUNTS.expert} EXPERT`);
+    await expect(legend).toContainText(`${SKILL_COUNTS.solid} SOLID`);
+    await expect(legend).toContainText(`${SKILL_COUNTS.familiar} FAMILIAR`);
+  });
+
+  test('expands the full skill inventory and its chips match the legend counts', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const inventory = page.locator('details.inventory');
+    await inventory.scrollIntoViewIfNeeded();
+    await inventory.locator('summary').click();
+    await expect(inventory).toHaveAttribute('open', '');
+    await expect(inventory.locator('summary')).toContainText(`${SKILL_TOTAL} ITEMS`);
+    await expect(inventory.locator('.chip-inv.expert')).toHaveCount(SKILL_COUNTS.expert);
+    await expect(inventory.locator('.chip-inv.solid')).toHaveCount(SKILL_COUNTS.solid);
+    await expect(inventory.locator('.chip-inv.familiar')).toHaveCount(SKILL_COUNTS.familiar);
   });
 
   test('renders all four work entries in chronological order', async ({ page }) => {
