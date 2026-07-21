@@ -49,6 +49,8 @@ export const SKILL_DOMAINS: SkillDomain[] = [
       'Atomic design',
       'MUI',
       'Ant Design',
+      'Radix UI / shadcn',
+      'PrimeReact / PrimeNG',
     ],
     solid: ['Tailwind CSS', 'Bootstrap', 'PostCSS', 'vanilla-extract'],
     familiar: [],
