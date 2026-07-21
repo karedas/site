@@ -10,7 +10,7 @@ test.describe('homepage', () => {
     await expect(page.getByRole('heading', { name: /Skill matrix/ })).toBeVisible();
     await expect(page.getByRole('heading', { name: /Selected work/ })).toBeVisible();
     await expect(page.getByRole('heading', { name: /Personal projects/ })).toBeVisible();
-    await expect(page.getByRole('heading', { name: /Off-orbit/ })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Off duty/ })).toBeVisible();
   });
 
   test('shows the mission-console status bar', async ({ page }) => {

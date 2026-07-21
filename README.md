@@ -78,7 +78,7 @@ src/
 │   ├── skills.astro               # 02 · matrix bars + counters + AI panel
 │   ├── work.astro                 # 03 · selected work rows
 │   ├── personal-projects.astro    # 04 · Lumina card with scan beam
-│   ├── off-orbit.astro            # 05 · languages + interests
+│   ├── off-orbit.astro            # 05 · "Off duty": languages + interests
 │   ├── footer.astro
 │   ├── section-header.astro       # giant outlined number + H2_ + eyebrow
 │   ├── analytics.astro            # GA, production only

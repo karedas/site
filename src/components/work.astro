@@ -1,6 +1,7 @@
 ---
 import SectionHeader from '@/components/section-header.astro';
 
+// Bold spans mirror the emphasis used in the CV PDF (rendered via set:html).
 const jobs = [
   {
     years: '2023 · NOW',
@@ -8,7 +9,8 @@ const jobs = [
     company: 'Tricentis · Tosca Cloud',
     role: 'Frontend Platform & Governance · Staff scope',
     tags: ['Nx Monorepo', 'Micro-frontends', 'RFC culture', 'Agentic AI'],
-    desc: 'Own the frontend platform architecture: Nx monorepo, module boundaries and CI topology across 16 projects. Co-lead governance for 12+ dev teams and drive the maintenance, modernization and scalability of the entire product: micro-frontend architecture, repo and build tooling, engineering standards, observability. Re-engineered the CI/CD pipelines, migrating from Azure DevOps to GitHub, with build and test times cut by more than half, and AI integrated at every level of delivery.',
+    current: true,
+    desc: 'Own the <b>frontend platform architecture</b>: Nx monorepo, module boundaries and CI topology across 16 projects. Co-lead <b>governance for 12+ dev teams</b> and drive the <b>maintenance, modernization and scalability of the entire product</b>: micro-frontend architecture, repo and build tooling, engineering standards, observability. Re-engineered the <b>CI/CD pipelines, migrating from Azure DevOps to GitHub</b>, with build and test times cut by more than half, and <b>AI integrated at every level</b> of delivery.',
   },
   {
     years: '2019 · 2023',
@@ -16,7 +18,8 @@ const jobs = [
     company: 'Treedom',
     role: 'Frontend Developer',
     tags: ['React', 'Vue', 'GraphQL'],
-    desc: 'Joined to reinforce the storefront, then helped drive the full migration away from the monolith in a core team of four, owning the frontend track with React, Vue and GraphQL. The foundations we laid supported growth to 25 developers, building high-traffic campaign pages for a platform that planted millions of trees.',
+    current: false,
+    desc: 'Joined to reinforce the storefront, then helped drive the <b>full migration away from the monolith</b> in a core team of four, owning the frontend track with React, Vue and GraphQL. The <b>foundations we laid supported growth to 25 developers</b>, building <b>high-traffic campaign pages</b> for a platform that planted millions of trees.',
   },
   {
     years: '2017 · 2019',
@@ -24,7 +27,8 @@ const jobs = [
     company: 'Forzieri.com',
     role: 'Frontend Developer',
     tags: ['React', 'Webpack', 'jQuery → React'],
-    desc: 'Modernized a legacy ASP luxury e-commerce end to end: an incremental migration first to jQuery, then to React with a Webpack toolchain, spanning frontend, backend and database integration, while the live shop kept shipping features.',
+    current: false,
+    desc: 'Modernized a <b>legacy ASP e-commerce end to end</b>: an incremental migration first to jQuery, then to <b>React with a Webpack toolchain</b>, spanning frontend, backend and database integration, while the <b>live luxury shop kept shipping features</b>.',
   },
   {
     years: '2007 · 2017',
@@ -32,7 +36,8 @@ const jobs = [
     company: 'Easysystem',
     role: 'Head of Web · Full-Stack Designer',
     tags: ['Design', 'Full-stack', 'Infrastructure'],
-    desc: "Hired as the studio's designer, prototypes and visual identities drawn from scratch, then grown into the on-premise infrastructure technician: servers, networking and firewalls inside client companies, notably Tuscany's leather and fashion district. A decade of end-to-end ownership across dozens of clients, design to Windows Server operations.",
+    current: false,
+    desc: "Hired as the studio's designer, <b>prototypes and visual identities drawn from scratch</b>, then grown into the <b>on-premise infrastructure technician</b>: servers, networking and firewalls inside client companies, notably Tuscany's leather and fashion district. A decade of <b>end-to-end ownership across dozens of clients</b>, design to Windows Server operations.",
   },
 ];
 ---
@@ -41,15 +46,19 @@ const jobs = [
 
   <div class="jobs">
     {jobs.map((job) => (
-      <article class="job" data-rv>
+      <article class:list={['job', { current: job.current }]} data-rv>
+        <span class="node" aria-hidden="true"></span>
         <div class="when">
           <div class="years">{job.years}</div>
           <div class="place">{job.place}</div>
+          {job.current && (
+            <div class="badge"><span class="dot" aria-hidden="true"></span>CURRENT</div>
+          )}
         </div>
         <div class="what">
           <h3 class="company">{job.company}</h3>
           <div class="role">{job.role}</div>
-          <p class="desc">{job.desc}</p>
+          <p class="desc" set:html={job.desc} />
         </div>
         <div class="tags">
           {job.tags.map((tag) => <span class="mono-tag">{tag}</span>)}
@@ -67,16 +76,59 @@ const jobs = [
   }
 
   .job {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 20px 32px;
-    padding: 34px 24px;
+    padding: 34px 24px 34px 58px;
     border-bottom: 1px solid var(--line-12);
     transition: background 0.2s;
   }
 
   .job:hover {
     background: rgba(237, 229, 220, 0.03);
+  }
+
+  /* Timeline spine: commit-style nodes, echoing the CV's git-graph. */
+  .node {
+    position: absolute;
+    left: 24px;
+    top: 39px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent-rust);
+    background: var(--bg);
+  }
+
+  .job::after {
+    content: "";
+    position: absolute;
+    left: 29px;
+    top: 56px;
+    bottom: -40px;
+    width: 1px;
+    background: var(--line-12);
+    pointer-events: none;
+  }
+
+  .job:last-child::after {
+    display: none;
+  }
+
+  .job.current {
+    background: rgba(232, 112, 58, 0.04);
+  }
+
+  .job.current:hover {
+    background: rgba(232, 112, 58, 0.07);
+  }
+
+  .job.current .node {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(232, 112, 58, 0.6);
+    animation: pulseDot 2s infinite;
   }
 
   .when {
@@ -93,6 +145,26 @@ const jobs = [
     font: 400 11px var(--font-mono);
     letter-spacing: 0.1em;
     color: var(--fg-56);
+  }
+
+  .badge {
+    display: inline-block;
+    margin-top: 12px;
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    border: 1px solid var(--accent-line);
+    padding: 5px 10px;
+  }
+
+  .badge .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 7px;
+    animation: pulseDot 2s infinite;
   }
 
   .what {
@@ -118,6 +190,11 @@ const jobs = [
     color: var(--fg-70);
     max-width: 620px;
     text-wrap: pretty;
+  }
+
+  .desc :global(b) {
+    font-weight: 500;
+    color: var(--fg);
   }
 
   .tags {

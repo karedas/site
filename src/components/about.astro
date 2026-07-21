@@ -65,7 +65,11 @@ const info = [
   .terminal {
     font: 400 13px/1.9 var(--font-mono);
     color: var(--fg-75);
-    background: var(--panel);
+    background-color: var(--panel);
+    background-image:
+      linear-gradient(rgba(237, 229, 220, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 229, 220, 0.03) 1px, transparent 1px);
+    background-size: 42px 42px;
     border: 1px solid var(--line);
     border-radius: 6px;
     padding: 26px 30px;

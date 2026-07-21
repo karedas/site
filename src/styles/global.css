@@ -53,6 +53,30 @@ button:focus-visible {
   border-top: 1px solid var(--line);
 }
 
+/* Dim corner ticks: echo the hero crosshairs without competing with them. */
+.section::before,
+.section::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.section::before {
+  top: 18px;
+  left: 18px;
+  border-top: 1px solid rgba(232, 112, 58, 0.28);
+  border-left: 1px solid rgba(232, 112, 58, 0.28);
+}
+
+.section::after {
+  bottom: 18px;
+  right: 18px;
+  border-bottom: 1px solid rgba(232, 112, 58, 0.28);
+  border-right: 1px solid rgba(232, 112, 58, 0.28);
+}
+
 .section-num {
   position: absolute;
   top: 24px;
