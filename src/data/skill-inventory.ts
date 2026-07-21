@@ -47,8 +47,10 @@ export const SKILL_DOMAINS: SkillDomain[] = [
       'Design systems',
       'Figma',
       'Atomic design',
+      'MUI',
+      'Ant Design',
     ],
-    solid: ['Tailwind CSS', 'PostCSS', 'vanilla-extract'],
+    solid: ['Tailwind CSS', 'Bootstrap', 'PostCSS', 'vanilla-extract'],
     familiar: [],
   },
   {
