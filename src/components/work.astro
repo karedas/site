@@ -1,0 +1,131 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+
+const jobs = [
+  {
+    years: '2023 · NOW',
+    place: 'VIENNA, AT',
+    company: 'Tricentis · Tosca Cloud',
+    role: 'Frontend Platform & Governance · Staff scope',
+    tags: ['Nx Monorepo', 'Micro-frontends', 'RFC culture', 'Agentic AI'],
+    desc: 'Own the frontend platform architecture: Nx monorepo, module boundaries and CI topology across 16 projects. Co-lead governance for 12+ dev teams and drive the modernization and scalability of the entire product, from micro-frontend architecture to re-engineered CI/CD, with AI integrated at every level of delivery.',
+  },
+  {
+    years: '2019 · 2023',
+    place: 'FLORENCE, IT',
+    company: 'Treedom',
+    role: 'Frontend Developer',
+    tags: ['React', 'Vue', 'GraphQL'],
+    desc: 'Core team of four driving the migration away from the monolith, owning the frontend track. The foundations we laid supported growth to 25 developers, on a platform that planted millions of trees.',
+  },
+  {
+    years: '2017 · 2019',
+    place: 'FLORENCE, IT',
+    company: 'Forzieri.com',
+    role: 'Frontend Developer',
+    tags: ['React', 'Webpack', 'jQuery → React'],
+    desc: 'Modernized a legacy ASP luxury e-commerce end to end, incrementally to React and Webpack, while the live shop kept shipping features.',
+  },
+  {
+    years: '2007 · 2017',
+    place: 'FIGLINE VALDARNO, IT',
+    company: 'Easysystem',
+    role: 'Head of Web · Full-Stack Designer',
+    tags: ['Design', 'Full-stack', 'Infrastructure'],
+    desc: 'From studio designer to infrastructure technician: a decade of end-to-end ownership across dozens of clients, design to Windows Server operations.',
+  },
+];
+---
+<section id="work" data-sec="3" class="section">
+  <SectionHeader num="03" title="Selected work" eyebrow="THE ONES THAT MATTERED" />
+
+  <div class="jobs">
+    {jobs.map((job) => (
+      <article class="job" data-rv>
+        <div class="when">
+          <div class="years">{job.years}</div>
+          <div class="place">{job.place}</div>
+        </div>
+        <div class="what">
+          <h3 class="company">{job.company}</h3>
+          <div class="role">{job.role}</div>
+          <p class="desc">{job.desc}</p>
+        </div>
+        <div class="tags">
+          {job.tags.map((tag) => <span class="mono-tag">{tag}</span>)}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .jobs {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-12);
+  }
+
+  .job {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    padding: 34px 0;
+    border-bottom: 1px solid var(--line-12);
+    transition: background 0.2s;
+  }
+
+  .job:hover {
+    background: rgba(237, 229, 220, 0.03);
+  }
+
+  .when {
+    flex: 0 0 150px;
+  }
+
+  .years {
+    font: 500 13px var(--font-mono);
+    color: var(--accent);
+  }
+
+  .place {
+    margin-top: 8px;
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.1em;
+    color: var(--fg-56);
+  }
+
+  .what {
+    flex: 1 1 320px;
+    min-width: 260px;
+  }
+
+  .company {
+    margin: 0;
+    font: 600 24px var(--font-display);
+    color: var(--accent);
+  }
+
+  .role {
+    margin-top: 4px;
+    font: 400 14px var(--font-display);
+    color: rgba(237, 229, 220, 0.6);
+  }
+
+  .desc {
+    margin: 14px 0 0;
+    font: 300 15px/1.7 var(--font-display);
+    color: var(--fg-70);
+    max-width: 620px;
+    text-wrap: pretty;
+  }
+
+  .tags {
+    flex: 1 1 200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: start;
+    justify-content: flex-end;
+  }
+</style>

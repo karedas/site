@@ -1,0 +1,299 @@
+---
+import SkillCounters from '@/components/react/skill-counters';
+import SectionHeader from '@/components/section-header.astro';
+
+const matrix = [
+  { name: 'Web platform', pcts: [70, 22, 8], top: 'TypeScript · modern CSS · DOM & Web APIs' },
+  {
+    name: 'Frameworks & architecture',
+    pcts: [55, 28, 17],
+    top: 'React · Next.js · micro-frontend · Module Federation',
+  },
+  {
+    name: 'Platform & tooling',
+    pcts: [60, 30, 10],
+    top: 'Nx · Vite · CI/CD · Docker · monorepo governance',
+  },
+  {
+    name: 'Quality · perf · security',
+    pcts: [68, 24, 8],
+    top: 'Vitest · RTL · Core Web Vitals · WCAG 2.2 · CSP',
+  },
+  {
+    name: 'Design & leadership',
+    pcts: [78, 16, 6],
+    top: 'design systems · RFCs · mentoring · Figma',
+  },
+];
+
+const starChips = [
+  'Agentic engineering · Claude Code / Cursor / Copilot, IDE & CI',
+  'Prompt & context engineering',
+];
+const diamondChips = ['Agent context design · CLAUDE.md / AGENTS.md'];
+const neutralChips = ['MCP', 'RAG & embeddings', 'LLM APIs & evals', 'OWASP LLM Top 10'];
+---
+<section id="skills" data-sec="2" class="section">
+  <SectionHeader num="02" title="Skill matrix" eyebrow="WHERE THE TIME GOES" />
+
+  <div class="legend-row" data-rv>
+    <SkillCounters client:visible />
+  </div>
+
+  <div class="matrix" data-rv data-matrix>
+    {matrix.map((row) => (
+      <div class="row" data-rv>
+        <span class="name">{row.name}</span>
+        <div
+          class="bars"
+          role="img"
+          aria-label={`${row.name}: ${row.pcts[0]}% expert, ${row.pcts[1]}% solid, ${row.pcts[2]}% familiar`}
+        >
+          <div class="b1" style={`--w:${row.pcts[0]}%`}></div>
+          <div class="b2" style={`--w:${row.pcts[1]}%`}></div>
+          <div class="b3" style={`--w:${row.pcts[2]}%`}></div>
+        </div>
+        <span class="top">{row.top}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="ai-panel" data-rv>
+    <div class="ai-head">
+      <span class="ai-title">◆ AI IN PRACTICE · STRATEGIC LEVER</span>
+      <span class="ai-sub">DAILY TOOLKIT, NOT A DEMO</span>
+    </div>
+    <div class="ai-body">
+      <div>
+        <p class="ai-lede">
+          AI as core engineering infrastructure, not a demo. I designed the agentic delivery
+          practice all 12+ dev teams work with: agents run with the platform's context baked in,
+          and every AI change lands through the same gates as human code.
+        </p>
+        <div class="chips">
+          {starChips.map((chip) => (
+            <span class="chip featured"><span class="mark">★</span> {chip}</span>
+          ))}
+          {diamondChips.map((chip) => (
+            <span class="chip featured"><span class="mark">◆</span> {chip}</span>
+          ))}
+          {neutralChips.map((chip) => <span class="chip">● {chip}</span>)}
+        </div>
+      </div>
+      <div class="roadmap">
+        <span class="prompt">&gt;</span> now_shipping_with: [ "agents", "MCP servers" ]<br />
+        <span class="prompt">&gt;</span> next_frontier: [ "AI product engineering",<br />&nbsp;&nbsp;&nbsp;"Vercel
+        AI SDK", "streaming UX" ]<br />
+        <span class="prompt">&gt;</span> policy: pragmatic_adoption · hype = false
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Legend lives inside a React island: style it globally. */
+  .skill-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 26px;
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.12em;
+    color: var(--fg-65);
+  }
+
+  .skill-legend .sq.expert {
+    color: var(--accent);
+  }
+
+  .skill-legend .sq.solid {
+    color: var(--fg-75);
+  }
+
+  .skill-legend .sq.familiar {
+    color: var(--fg-52);
+  }
+
+  .skill-legend .meta {
+    color: var(--fg-52);
+  }
+</style>
+
+<style>
+  .section :global(.section-head) {
+    margin-bottom: 14px;
+  }
+
+  .legend-row {
+    margin-bottom: 36px;
+  }
+
+  .matrix {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-12);
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 30px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line-12);
+    transition: background 0.2s;
+  }
+
+  .row:hover {
+    background: rgba(237, 229, 220, 0.03);
+  }
+
+  .name {
+    flex: 0 0 200px;
+    font: 500 15px var(--font-display);
+  }
+
+  .bars {
+    flex: 1 1 220px;
+    min-width: 200px;
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--line-08);
+  }
+
+  .bars div {
+    width: 0;
+    transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .bars .b1 {
+    background: var(--accent);
+  }
+
+  .bars .b2 {
+    background: var(--fg-65);
+    transition-delay: 0.12s;
+  }
+
+  .bars .b3 {
+    background: var(--line-25);
+    transition-delay: 0.24s;
+  }
+
+  .matrix.bars-on .bars div {
+    width: var(--w);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bars div {
+      width: var(--w);
+    }
+  }
+
+  .top {
+    flex: 0 1 340px;
+    font: 400 12px var(--font-mono);
+    color: var(--fg-65);
+  }
+
+  .ai-panel {
+    margin-top: 36px;
+    border: 1px solid var(--accent-line);
+    background: rgba(232, 112, 58, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ai-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 20px;
+    flex-wrap: wrap;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--accent-line-soft);
+    background: rgba(232, 112, 58, 0.08);
+  }
+
+  .ai-title {
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+
+  .ai-sub {
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--fg-62);
+  }
+
+  .ai-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 30px 28px;
+  }
+
+  .ai-lede {
+    margin: 0;
+    font: 300 21px/1.5 var(--font-display);
+    text-wrap: pretty;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .chip {
+    font: 300 13px var(--font-display);
+    padding: 7px 14px;
+    border: 1px solid var(--line-25);
+    color: rgba(237, 229, 220, 0.8);
+  }
+
+  .chip.featured {
+    font-weight: 400;
+    border-color: rgba(232, 112, 58, 0.6);
+    color: var(--fg);
+  }
+
+  .chip .mark {
+    color: var(--accent);
+  }
+
+  .roadmap {
+    align-self: center;
+    font: 400 13px/2 var(--font-mono);
+    color: var(--fg-75);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px 26px;
+  }
+
+  .roadmap .prompt {
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  // Animate the stacked bars from 0 to their widths on first view.
+  const matrix = document.querySelector<HTMLElement>('[data-matrix]');
+  if (matrix) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          matrix.classList.add('bars-on');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(matrix);
+    setTimeout(() => matrix.classList.add('bars-on'), 1400);
+  }
+</script>

@@ -1,0 +1,138 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+
+const tags = ['Node.js', 'MongoDB', 'Socket.io', 'React', 'Cloudflare'];
+---
+<section id="projects" data-sec="4" class="section">
+  <SectionHeader num="04" title="Personal projects" eyebrow="BUILT AFTER HOURS" />
+
+  <div class="card" data-rv>
+    <div class="scan-beam" aria-hidden="true"></div>
+    <div class="badge"><span class="dot" aria-hidden="true"></span>IN DEVELOPMENT</div>
+    <div class="proj-num">PROJECT 01</div>
+    <h3 class="title">Lumina</h3>
+    <div class="subtitle">Il reame sospeso · The suspended realm</div>
+    <p class="desc">
+      A fantasy MUD built with a small circle of friends, where words shape the world, not
+      polygons. Node.js keeps the realm alive, MongoDB persists its history, Socket.io carries
+      every whisper between players. The React client wraps it all in an interface its telnet
+      ancestors could only dream of, live world map included.
+    </p>
+    <div class="bottom">
+      <div class="tags">
+        {tags.map((tag) => <span class="mono-tag">{tag}</span>)}
+      </div>
+      <a class="cta" href="https://luminamud.com" target="_blank" rel="noopener noreferrer">
+        ENTER THE REALM →
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .card {
+    position: relative;
+    border: 1px solid var(--line-12);
+    background-image: linear-gradient(rgba(237, 229, 220, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237, 229, 220, 0.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+    padding: clamp(24px, 4.5vw, 44px) clamp(24px, 5vw, 48px);
+    overflow: hidden;
+  }
+
+  .scan-beam {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(232, 112, 58, 0.75), transparent);
+    animation: scanY 5.5s linear infinite;
+    pointer-events: none;
+  }
+
+  .badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    border: 1px solid var(--accent-line);
+    padding: 6px 12px;
+  }
+
+  .badge .dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 7px;
+    animation: pulseDot 2s infinite;
+  }
+
+  .proj-num {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.22em;
+    color: var(--fg-58);
+  }
+
+  .title {
+    margin: 16px 0 0;
+    font: 600 56px var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    margin-top: 4px;
+    font: 300 16px var(--font-display);
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .desc {
+    margin: 24px 0 0;
+    max-width: 640px;
+    font: 300 15px/1.75 var(--font-display);
+    color: var(--fg-75);
+    text-wrap: pretty;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 32px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cta {
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.14em;
+    padding: 12px 24px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .cta:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  @media (max-width: 719px) {
+    .title {
+      font-size: 42px;
+    }
+  }
+</style>

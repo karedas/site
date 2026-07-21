@@ -1,0 +1,27 @@
+---
+import About from '@/components/about.astro';
+import Footer from '@/components/footer.astro';
+import Hero from '@/components/hero.astro';
+import OffOrbit from '@/components/off-orbit.astro';
+import PersonalProjects from '@/components/personal-projects.astro';
+import Rail from '@/components/rail.astro';
+import Skills from '@/components/skills.astro';
+import StatusBar from '@/components/status-bar.astro';
+import Work from '@/components/work.astro';
+import Layout from '@/layouts/layout.astro';
+---
+<Layout>
+  <Rail />
+  <div class="console">
+    <StatusBar />
+    <main id="main-content">
+      <Hero />
+      <About />
+      <Skills />
+      <Work />
+      <PersonalProjects />
+      <OffOrbit />
+    </main>
+    <Footer />
+  </div>
+</Layout>

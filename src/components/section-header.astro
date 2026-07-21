@@ -1,0 +1,16 @@
+---
+// Shared section header: giant outlined number, H2 with blinking cursor,
+// right-aligned mono eyebrow.
+interface Props {
+  num: string;
+  title: string;
+  eyebrow: string;
+}
+
+const { num, title, eyebrow } = Astro.props;
+---
+<div class="section-num" aria-hidden="true">{num}</div>
+<div class="section-head" data-rv>
+  <h2>{title}<span class="cursor" aria-hidden="true">_</span></h2>
+  <span class="eyebrow">{num} / {eyebrow}</span>
+</div>

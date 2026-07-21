@@ -1,0 +1,204 @@
+/* =========================================================
+   Andrea Lisi · Mission Console global styles
+   Base element styles, shared utilities, keyframes.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* ---- Content offset for the fixed rail ---- */
+.console {
+  margin-left: var(--rail-w);
+}
+
+/* ---- Section shell ---- */
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: var(--section-pad);
+  border-top: 1px solid var(--line);
+}
+
+.section-num {
+  position: absolute;
+  top: 24px;
+  right: -10px;
+  font: 700 clamp(140px, 26vw, 300px) / 0.8 var(--font-display);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent-stroke);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  animation: numFloat 7s ease-in-out infinite;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px 24px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.section-head h2 {
+  margin: 0;
+  font: 600 44px var(--font-display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.section-head .cursor {
+  color: var(--accent);
+  animation: pulseDot 1.3s steps(1) infinite;
+}
+
+.section-head .eyebrow {
+  font: 400 10px var(--font-mono);
+  letter-spacing: 0.16em;
+  color: var(--fg-56);
+}
+
+/* ---- Shared bits ---- */
+.mono-tag {
+  font: 400 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border: 1px solid var(--line-18);
+  color: var(--fg-70);
+  height: fit-content;
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  animation: pulseDot 2s infinite;
+}
+
+.grid-paper {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ---- Reveal on scroll (script adds .rv-in; failsafe in layout) ---- */
+[data-rv] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+[data-rv].rv-in,
+.no-js [data-rv] {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Keyframes ---- */
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes numFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes scanY {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.7;
+  }
+  92% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ---- Breakpoint: rail -> bottom bar ---- */
+@media (max-width: 719px) {
+  .console {
+    margin-left: 0;
+    padding-bottom: 56px;
+  }
+
+  .section-head h2 {
+    font-size: 34px;
+  }
+}
+
+/* ---- Reduced motion kill-switch ---- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-rv] {
+    opacity: 1;
+    transform: none;
+  }
+}

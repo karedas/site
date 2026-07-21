@@ -1,0 +1,136 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+
+const languages = [
+  { name: 'Italian', level: 'NATIVE', tone: 'accent' },
+  { name: 'English', level: 'FLUENT', tone: 'bright' },
+  { name: 'German', level: 'COURSE FROM 09/2026', tone: 'mid' },
+  { name: 'Shyriiwook', level: 'LISTENING', tone: 'dim' },
+];
+
+const interests = [
+  'Art and architecture: galleries, courtyards, the way a city is put together.',
+  'Sci-fi and design books, usually both open at once.',
+  'Video games: drawn to the worlds, not the leaderboards.',
+  'Cooking, currently obsessed with bread fermentation.',
+  'Long flat rides along the Danube.',
+  'Dogs: friends on sight, no exceptions.',
+];
+---
+<section id="off-orbit" data-sec="5" class="section last">
+  <SectionHeader num="05" title="Off-orbit" eyebrow="BEYOND THE KEYBOARD" />
+
+  <div class="cols">
+    <div class="languages" data-rv>
+      <div class="lang-head">LANGUAGES</div>
+      {languages.map((lang) => (
+        <div class="lang-row">
+          <span class="lang-name">{lang.name}</span>
+          <span class:list={['lang-level', lang.tone]}>{lang.level}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="interests" data-rv>
+      {interests.map((text) => (
+        <div class="interest" data-rv>
+          <span class="mark" aria-hidden="true">◆</span>
+          <p>{text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .last {
+    padding-bottom: 100px;
+  }
+
+  .cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .languages {
+    flex: 1 1 280px;
+    max-width: 380px;
+    border: 1px solid var(--line-12);
+  }
+
+  .lang-head {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line-12);
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.18em;
+    color: var(--fg-62);
+  }
+
+  .lang-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line-08);
+  }
+
+  .lang-row:last-child {
+    border-bottom: none;
+  }
+
+  .lang-name {
+    font: 400 15px var(--font-display);
+  }
+
+  .lang-level {
+    font: 400 11px var(--font-mono);
+    text-align: right;
+  }
+
+  .lang-level.accent {
+    color: var(--accent);
+  }
+
+  .lang-level.bright {
+    color: var(--fg-70);
+  }
+
+  .lang-level.mid {
+    color: var(--fg-62);
+  }
+
+  .lang-level.dim {
+    color: var(--fg-52);
+  }
+
+  .interests {
+    flex: 1 1 340px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 14px;
+    align-content: start;
+  }
+
+  .interest {
+    padding: 20px 24px;
+    border: 1px solid var(--line-12);
+    transition: border-color 0.2s;
+  }
+
+  .interest:hover {
+    border-color: var(--accent-line);
+  }
+
+  .interest .mark {
+    color: var(--accent);
+    font: 400 11px var(--font-mono);
+  }
+
+  .interest p {
+    margin: 10px 0 0;
+    font: 300 15px/1.6 var(--font-display);
+    color: rgba(237, 229, 220, 0.8);
+  }
+</style>

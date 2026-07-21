@@ -1,0 +1,170 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+
+const info = [
+  { label: 'BASED', value: 'Vienna, Austria' },
+  { label: 'MODE', value: 'Remote / Hybrid' },
+  { label: 'LANGUAGES', value: 'IT · EN' },
+];
+---
+<section id="about" data-sec="1" class="section">
+  <SectionHeader num="01" title="About" eyebrow="A SHORT TRANSMISSION" />
+
+  <div class="grid">
+    <div class="terminal" data-rv data-term>
+      <div data-tline><span class="prompt">$</span> whoami</div>
+      <div data-tline>A developer, first of all. Italian, from Florence.</div>
+      <div data-tline>Incurably curious, easy going,</div>
+      <div data-tline>a problem solver by instinct. I talk with everyone:</div>
+      <div data-tline>explaining how something works to a junior</div>
+      <div data-tline>genuinely excites me.</div>
+      <div data-tline class="gap"></div>
+      <div data-tline><span class="prompt">$</span> cat /etc/philosophy</div>
+      <div data-tline>Two loves, technology and art, one rule:</div>
+      <div data-tline>pragmatism over hype. If we over-engineered it,</div>
+      <div data-tline>I will say so kindly, then help you delete it.</div>
+      <div data-tline class="gap"></div>
+      <div data-tline><span class="prompt">$</span> <span class="caret" aria-hidden="true">▌</span></div>
+    </div>
+
+    <div data-rv>
+      <p class="lede">
+        I care about art in every form I can reach: physical work and software, same rigor on
+        structure and intent.
+      </p>
+      <p class="body">
+        In teams I stay friendly and hands-on by default: I explain what exists, what is needed and
+        why, to seniors and juniors alike, and it never gets old. My focus is governance and
+        architectural standards, and I remain in the code while doing it: strategy with one hand,
+        commits with the other.
+      </p>
+      <div class="info-grid">
+        {info.map((cell) => (
+          <div class="cell">
+            <div class="lbl">{cell.label}</div>
+            <div class="val">{cell.value}</div>
+          </div>
+        ))}
+        <div class="cell">
+          <div class="lbl">STATUS</div>
+          <div class="val accent"><span class="dot" aria-hidden="true"></span>Quietly building</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
+    align-items: start;
+  }
+
+  .terminal {
+    font: 400 13px/1.9 var(--font-mono);
+    color: var(--fg-75);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 26px 30px;
+  }
+
+  .terminal .gap {
+    height: 1em;
+  }
+
+  .prompt {
+    color: var(--accent);
+  }
+
+  .caret {
+    animation: pulseDot 1.2s steps(1) infinite;
+  }
+
+  [data-tline] {
+    transition: opacity 0.3s ease;
+  }
+
+  .lede {
+    margin: 0;
+    font: 300 24px/1.5 var(--font-display);
+    text-wrap: pretty;
+  }
+
+  .body {
+    margin: 20px 0 0;
+    font: 300 15px/1.75 var(--font-display);
+    color: var(--fg-65);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line-12);
+    border: 1px solid var(--line-12);
+    margin-top: 32px;
+  }
+
+  .cell {
+    padding: 16px 20px;
+    background: var(--bg);
+  }
+
+  .lbl {
+    font: 400 9px var(--font-mono);
+    letter-spacing: 0.2em;
+    color: var(--fg-56);
+  }
+
+  .val {
+    margin-top: 6px;
+    font: 400 15px var(--font-display);
+  }
+
+  .val.accent {
+    color: var(--accent);
+  }
+
+  .val .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    animation: pulseDot 2.4s infinite;
+  }
+</style>
+
+<script>
+  // Terminal lines fade in one after the other when the card scrolls into view.
+  const term = document.querySelector<HTMLElement>('[data-term]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (term && !reduce) {
+    const lines = Array.from(term.querySelectorAll<HTMLElement>('[data-tline]'));
+    for (const l of lines) l.style.opacity = '0';
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect();
+          lines.forEach((l, i) => {
+            setTimeout(() => {
+              l.style.opacity = '1';
+            }, 200 + i * 200);
+          });
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(term);
+
+    setTimeout(() => {
+      for (const l of lines) l.style.opacity = '1';
+    }, 4000);
+  }
+</script>

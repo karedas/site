@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Andrea Lisi asteroid mark</title>
+  <rect width="64" height="64" rx="12" fill="#191412"></rect>
+
+  <!-- corner crosshairs -->
+  <path d="M 10 14 V 10 H 14" stroke="rgba(232,112,58,.8)" stroke-width="2"></path>
+  <path d="M 50 10 H 54 V 14" stroke="rgba(232,112,58,.8)" stroke-width="2"></path>
+  <path d="M 10 50 V 54 H 14" stroke="rgba(232,112,58,.8)" stroke-width="2"></path>
+  <path d="M 54 50 V 54 H 50" stroke="rgba(232,112,58,.8)" stroke-width="2"></path>
+
+  <!-- asteroid -->
+  <polygon
+    points="32,15 43,20 48,31 44,42 33,48 21,44 16,33 20,21"
+    fill="#9c5f3e"
+    stroke="#e8703a"
+    stroke-width="1.5"
+  ></polygon>
+  <polygon points="32,15 43,20 40,32 27,29" fill="#e8703a" opacity="0.55"></polygon>
+  <polygon points="21,44 33,48 34,36 27,29" fill="#c4542e" opacity="0.5"></polygon>
+
+  <!-- gold dust -->
+  <circle cx="52" cy="24" r="1.6" fill="#d9b36a"></circle>
+  <circle cx="13" cy="40" r="1.3" fill="#d9b36a"></circle>
+  <circle cx="46" cy="50" r="1.2" fill="#d9b36a" opacity="0.7"></circle>
+</svg>

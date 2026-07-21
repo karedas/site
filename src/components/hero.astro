@@ -1,0 +1,234 @@
+---
+import Asteroid from '@/components/react/asteroid';
+import SignalCanvas from '@/components/react/signal-canvas';
+
+const stats = [
+  { label: 'EXPERIENCE', value: '18+ years', accent: false },
+  { label: 'FOCUS', value: 'Platform & governance', accent: false },
+  { label: 'WORKFLOW', value: 'AI-augmented', accent: true },
+  { label: 'DISPOSITION', value: 'Pragmatic, no hype', accent: false },
+];
+---
+<section id="top" data-sec="0" class="hero grid-paper">
+  <SignalCanvas client:load />
+  <div class="glow" aria-hidden="true"></div>
+  <div class="crosshair tl" aria-hidden="true"></div>
+  <div class="crosshair tr" aria-hidden="true"></div>
+  <div class="crosshair bl" aria-hidden="true"></div>
+  <div class="crosshair br" aria-hidden="true"></div>
+
+  <div class="cols">
+    <div class="text">
+      <div class="eyebrow" data-rv>STAFF FRONTEND ENGINEER · PLATFORM & GOVERNANCE · VIENNA</div>
+      <h1 data-rv>Andrea<br />Lisi<span class="dot">.</span></h1>
+
+      <div class="stats" data-rv>
+        {stats.map((s) => (
+          <div class="stat">
+            <div class="lbl">{s.label}</div>
+            <div class:list={['val', { accent: s.accent }]}>{s.value}</div>
+          </div>
+        ))}
+      </div>
+
+      <p class="intro" data-rv>
+        Eighteen years across the full arc of the web, from hand-built servers to cloud platform
+        governance. My job is making other engineers faster, safer and more ambitious.
+      </p>
+
+      <div class="buttons" data-rv>
+        <a href="https://github.com/karedas" target="_blank" rel="noopener noreferrer">GITHUB</a>
+        <a href="https://www.linkedin.com/in/andrea-lisi84" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+        <a href="https://www.instagram.com/alandr.1984/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+        <a class="outline-accent" href="mailto:lisandr84@gmail.com">EMAIL</a>
+        <a class="solid-accent" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">CV.PDF ↓</a>
+      </div>
+    </div>
+
+    <div class="three-box">
+      <Asteroid client:media="(min-width: 720px)" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 92vh;
+    padding: 100px max(24px, calc((100% - var(--content-max)) / 2)) 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .glow {
+    position: absolute;
+    top: -25%;
+    right: -12%;
+    width: 58vw;
+    height: 58vw;
+    background: radial-gradient(circle, rgba(232, 112, 58, 0.12), transparent 62%);
+    pointer-events: none;
+  }
+
+  .crosshair {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+  }
+
+  .crosshair.tl {
+    top: 24px;
+    left: 24px;
+    border-top: 1px solid rgba(232, 112, 58, 0.7);
+    border-left: 1px solid rgba(232, 112, 58, 0.7);
+  }
+
+  .crosshair.tr {
+    top: 24px;
+    right: 24px;
+    border-top: 1px solid rgba(232, 112, 58, 0.7);
+    border-right: 1px solid rgba(232, 112, 58, 0.7);
+  }
+
+  .crosshair.bl {
+    bottom: 24px;
+    left: 24px;
+    border-bottom: 1px solid rgba(232, 112, 58, 0.7);
+    border-left: 1px solid rgba(232, 112, 58, 0.7);
+  }
+
+  .crosshair.br {
+    bottom: 24px;
+    right: 24px;
+    border-bottom: 1px solid rgba(232, 112, 58, 0.7);
+    border-right: 1px solid rgba(232, 112, 58, 0.7);
+  }
+
+  .cols {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .text {
+    flex: 1 1 560px;
+    min-width: 0;
+  }
+
+  .eyebrow {
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.3em;
+    color: var(--accent);
+  }
+
+  h1 {
+    margin: 26px 0 0;
+    font: 600 clamp(64px, 9vw, 118px) / 0.95 var(--font-display);
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .dot {
+    color: var(--accent);
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 54px;
+    max-width: 980px;
+  }
+
+  .stat {
+    flex: 1 1 220px;
+    padding: 16px 26px;
+    border: 1px solid var(--line-12);
+    margin: -1px 0 0 -1px;
+    background: var(--bg);
+  }
+
+  .stat .lbl {
+    font: 400 9px var(--font-mono);
+    letter-spacing: 0.2em;
+    color: var(--fg-56);
+  }
+
+  .stat .val {
+    margin-top: 6px;
+    font: 500 21px var(--font-display);
+  }
+
+  .stat .val.accent {
+    color: var(--accent);
+  }
+
+  .intro {
+    margin: 40px 0 0;
+    max-width: 540px;
+    font: 300 17px/1.65 var(--font-display);
+    color: var(--fg-70);
+    text-wrap: pretty;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .buttons a {
+    font: 500 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    padding: 10px 20px;
+    border: 1px solid var(--line-20);
+    transition:
+      color 0.2s,
+      border-color 0.2s,
+      background 0.2s;
+  }
+
+  .buttons a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .buttons .outline-accent {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .buttons .outline-accent:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .buttons .solid-accent {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .buttons .solid-accent:hover {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .three-box {
+    flex: 1 1 340px;
+    max-width: 480px;
+    min-width: 0;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 719px) {
+    .three-box {
+      display: none;
+    }
+  }
+</style>
