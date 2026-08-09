@@ -1,0 +1,97 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: 24px clamp(24px, 4vw, 64px);
+  padding-top: clamp(36px, 8vh, 84px);
+  padding-bottom: clamp(28px, 5vh, 56px);
+}
+
+.hero .eyebrow {
+  margin: 0 0 20px;
+}
+
+.hero .name {
+  font-size: clamp(54px, 8.5vw, 108px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+/* The one drop of accent in the text. */
+.hero .dot {
+  color: var(--accent);
+}
+
+.hero .intro {
+  max-width: 30em;
+  margin: 22px 0 0;
+  font-size: clamp(18px, 1.7vw, 21px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.hero .facts {
+  margin: 20px 0 0;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--ink-soft);
+}
+
+.hero .fact-k {
+  margin-right: 6px;
+}
+
+.hero .fact-sep {
+  color: var(--accent);
+  margin: 0 7px;
+}
+
+.hero .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 24px 0 0;
+  font-size: 16px;
+}
+
+.hero .links .cv {
+  color: var(--accent-ink);
+  text-decoration-color: var(--accent-soft);
+}
+
+/* The scene: constellation above, drawn figure at the bottom center. */
+.hero .scene {
+  position: relative;
+  height: clamp(300px, 42vh, 440px);
+  color: var(--ink);
+}
+
+.hero .scene .omino {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  height: clamp(120px, 18vh, 170px);
+  width: auto;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero .intro {
+    margin-inline: auto;
+  }
+
+  .hero .links {
+    justify-content: center;
+  }
+
+  .hero .scene {
+    height: 260px;
+    order: -1;
+  }
+}

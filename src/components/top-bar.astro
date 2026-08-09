@@ -1,0 +1,16 @@
+---
+import '@/components/top-bar.css';
+import LangSwitch from '@/components/lang-switch.astro';
+import { hrefFor, type Locale, type PageKey } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+  page: PageKey;
+};
+
+const { locale, page } = Astro.props;
+---
+<header class="top-bar table">
+  <a class="name" href={hrefFor(locale, 'home')}>Andrea Lisi</a>
+  <LangSwitch locale={locale} page={page} />
+</header>

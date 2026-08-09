@@ -1,0 +1,22 @@
+---
+import Bento from '@/components/bento/bento.astro';
+import Footer from '@/components/footer.astro';
+import Hero from '@/components/hero.astro';
+import TopBar from '@/components/top-bar.astro';
+import { hrefFor, type Locale } from '@/i18n';
+import Layout from '@/layouts/layout.astro';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+---
+<Layout locale={locale} page="home">
+  <TopBar locale={locale} page="home" />
+  <main id="main-content">
+    <Hero locale={locale} />
+    <Bento locale={locale} />
+  </main>
+  <Footer aiHref={hrefFor(locale, 'ai')} />
+</Layout>

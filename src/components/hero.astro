@@ -1,0 +1,51 @@
+---
+import '@/components/hero.css';
+import Omino from '@/components/illustrations/omino.astro';
+import HeroField from '@/components/react/hero-field';
+import { getCopy, type Locale } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const { hero } = getCopy(locale);
+---
+<section class="hero table" id="top">
+  <div class="text">
+    <p class="eyebrow label">{hero.eyebrow}</p>
+
+    {/* JS scatters the letters and lets them settle; without JS this is
+        plain text. See src/scripts/assemble.ts. */}
+    <h1 class="name" data-assemble>Andrea Lisi<span class="dot">.</span></h1>
+
+    <p class="intro" data-rv>{hero.intro}</p>
+
+    <p class="facts" data-rv>
+      {hero.stats.map((s, i) => (
+        <>
+          {i > 0 && <span class="fact-sep" aria-hidden="true"> · </span>}
+          <span class="fact"><span class="fact-k label">{s.label}</span> {s.value}</span>
+        </>
+      ))}
+    </p>
+
+    <p class="links" data-rv>
+      <a href="https://github.com/karedas" target="_blank" rel="noopener noreferrer">
+        {hero.buttons.github}
+      </a>
+      <a href="https://www.linkedin.com/in/andrea-lisi84" target="_blank" rel="noopener noreferrer">
+        {hero.buttons.linkedin}
+      </a>
+      <a href="mailto:lisandr84@gmail.com">{hero.buttons.email}</a>
+      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">{hero.buttons.cv}</a>
+    </p>
+  </div>
+
+  {/* The figure holds a live constellation: nodes wander, the pointer
+      nudges them, the strings pull everything back into shape. */}
+  <div class="scene" data-rv>
+    <HeroField client:load />
+    <Omino />
+  </div>
+</section>

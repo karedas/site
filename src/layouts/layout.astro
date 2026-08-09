@@ -1,0 +1,101 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import '@/styles/motion.css';
+import Analytics from '@/components/analytics.astro';
+import { DEFAULT_LOCALE, getCopy, hrefFor, LOCALES, type Locale, type PageKey } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+  page: PageKey;
+};
+
+const { locale, page } = Astro.props;
+const copy = getCopy(locale);
+const meta = page === 'ai' ? copy.aiMeta : copy.meta;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL('/og-image.png', Astro.site).toString();
+/* Roman only: no italic axes, nothing on the site uses them. */
+const fontHref =
+  'https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap';
+---
+<!doctype html>
+<html lang={copy.htmlLang} class="no-js">
+  <head>
+    <script is:inline>
+      // Drop the no-js flag before first paint: entrance styles hide
+      // [data-rv] blocks, so without JS they must stay visible.
+      document.documentElement.classList.remove('no-js');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f9f5ec" />
+    <meta name="color-scheme" content="light" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <meta name="author" content="Andrea Lisi" />
+    <link rel="canonical" href={canonicalURL} />
+
+    {LOCALES.map((code) => (
+      <link
+        rel="alternate"
+        hreflang={code}
+        href={new URL(hrefFor(code, page), Astro.site).toString()}
+      />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(hrefFor(DEFAULT_LOCALE, page), Astro.site).toString()}
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={locale === 'it' ? 'it_IT' : 'en_US'} />
+    <meta property="og:site_name" content="Andrea Lisi" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={copy.meta.ogImageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={meta.title} />
+    <meta name="twitter:description" content={meta.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={copy.meta.ogImageAlt} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {/* Loaded off the critical path: as a plain stylesheet the fonts request
+        blocks first paint. media="print" defers it, onload promotes it. */}
+    <link rel="preload" as="style" href={fontHref} />
+    <link rel="stylesheet" href={fontHref} media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href={fontHref} />
+    </noscript>
+
+    <Analytics />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{copy.skipLink}</a>
+    <slot />
+    <script>
+      import { initAssemble } from '@/scripts/assemble';
+      import { initOverlays } from '@/scripts/overlays';
+      import { initReveal } from '@/scripts/reveal';
+
+      initReveal();
+      initAssemble();
+      initOverlays();
+    </script>
+  </body>
+</html>

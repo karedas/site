@@ -1,0 +1,100 @@
+/* =========================================================
+   Motion. Short, time-based, once. Never scroll-pinned.
+   Logic: src/scripts/reveal.ts, assemble.ts, overlays.ts.
+   ========================================================= */
+
+/* Fade-rise on first viewport entry. */
+[data-rv] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-rv].rv-in,
+html.no-js [data-rv] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scattered letters assembling: spans injected by JS, so without JS the
+   heading is plain text and needs no fallback rules. */
+.split-char {
+  display: inline-block;
+  transform: translate(var(--dx, 0), var(--dy, 0)) rotate(var(--dr, 0deg));
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+  transition-delay: calc(var(--i, 0) * 26ms);
+  will-change: transform;
+}
+
+.assembled .split-char {
+  transform: none;
+  opacity: 1;
+}
+
+/* Card overlays: native <dialog>, quick entrance, no drama. */
+dialog.overlay {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  padding: 0;
+  max-width: min(620px, calc(100vw - 32px));
+  width: 100%;
+  box-shadow: 0 24px 60px -24px rgba(38, 29, 21, 0.35);
+}
+
+dialog.overlay::backdrop {
+  background: rgba(38, 29, 21, 0.28);
+}
+
+/* Without JS the overlays cannot open: render them inline instead. The
+   no-js class is stripped by an inline script before first paint. */
+html.no-js dialog.overlay {
+  display: block;
+  position: static;
+  box-shadow: none;
+  margin-top: 10px;
+  max-width: none;
+}
+
+html.no-js dialog.overlay [data-overlay-close] {
+  display: none;
+}
+
+dialog.overlay[open] {
+  animation: overlay-in 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-rv] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .split-char {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  dialog.overlay[open] {
+    animation: none;
+  }
+}

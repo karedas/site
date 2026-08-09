@@ -1,0 +1,25 @@
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 500 11px var(--mono);
+  letter-spacing: 0.12em;
+}
+
+.lang .opt {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.lang .opt:hover,
+.lang .opt:focus-visible {
+  color: var(--accent-ink);
+}
+
+.lang .opt.current {
+  color: var(--ink);
+}
+
+.lang .sep {
+  color: var(--hairline);
+}

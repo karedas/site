@@ -1,0 +1,37 @@
+/* =========================================================
+   Andrea Lisi · v3 "Il tavolo" tokens
+   The CV's paper: warm cream, espresso ink, one burnt-orange
+   accent. Single source of truth.
+   ========================================================= */
+
+:root {
+  /* ---- Surfaces ---- */
+  --paper: #f9f5ec;
+  --card: #fdfaf3;
+
+  /* ---- Ink ---- */
+  --ink: #261d15;
+  --ink-soft: #5a4c3f;
+  /* Dark enough for 11px mono labels on paper: 4.5:1 minimum. */
+  --muted: #6e6150;
+
+  /* ---- Accent: burnt orange, used small ---- */
+  --accent: #b84715;
+  /* For accent-colored TEXT: passes 4.5:1 on paper and on the tint. */
+  --accent-ink: #9a3a10;
+  --accent-soft: #f8e3d4;
+
+  /* ---- Hairlines ---- */
+  --hairline: #e3d9c7;
+  --hairline-soft: #ece4d4;
+
+  /* ---- Typography (roman only, no italics anywhere) ---- */
+  --serif-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --serif-text: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  /* ---- Layout ---- */
+  --table-max: 74rem; /* the whole table */
+  --gutter: clamp(18px, 4vw, 44px);
+  --radius: 4px;
+}

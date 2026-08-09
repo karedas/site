@@ -1,0 +1,60 @@
+---
+import AiContent from '@/components/ai-content.astro';
+import Footer from '@/components/footer.astro';
+import TopBar from '@/components/top-bar.astro';
+import { getCopy, hrefFor, type Locale } from '@/i18n';
+import Layout from '@/layouts/layout.astro';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+---
+<Layout locale={locale} page="ai">
+  <TopBar locale={locale} page="ai" />
+  <main id="main-content" class="ai-page table">
+    <header class="head" data-rv>
+      <p class="label"><span class="tick">02</span> · {copy.sections.ai.title}</p>
+      <h1 class="title">{copy.ai.heading}</h1>
+    </header>
+    <div class="prose" data-rv>
+      <AiContent locale={locale} />
+    </div>
+  </main>
+  <Footer aiHref={hrefFor(locale, 'ai')} />
+</Layout>
+
+<style>
+  .ai-page {
+    min-height: 62vh;
+    max-width: 46rem;
+    padding-top: clamp(28px, 7vh, 72px);
+    padding-bottom: clamp(36px, 6vh, 64px);
+  }
+
+  .head .label {
+    margin: 0 0 12px;
+  }
+
+  .title {
+    font-size: clamp(34px, 5vw, 50px);
+    line-height: 1.1;
+    margin-bottom: 26px;
+  }
+
+  .prose {
+    color: var(--ink-soft);
+  }
+
+  .prose :global(p) {
+    margin: 0 0 1em;
+    text-wrap: pretty;
+  }
+
+  .prose :global(b) {
+    font-weight: 600;
+    color: var(--ink);
+  }
+</style>

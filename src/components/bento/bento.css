@@ -1,0 +1,86 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: clamp(36px, 6vh, 64px);
+}
+
+/* Default card size: three per row. */
+.bento > * {
+  grid-column: span 2;
+}
+
+/* The AI card and the contact card share a row. */
+.bento > .span-3 {
+  grid-column: span 3;
+}
+
+/* The timeline runs the full width of the table. */
+.bento > .timeline {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 1000px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bento > *,
+  .bento > .span-3 {
+    grid-column: span 1;
+  }
+
+  .bento > .timeline {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Contact card: no overlay, the links are the content. ---- */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px 16px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.contact-card .card-label {
+  font-size: 10px;
+}
+
+.contact-card .glyph {
+  width: 44px;
+  height: 44px;
+  color: var(--ink-soft);
+}
+
+.contact-card .contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0;
+  font-family: var(--serif-display);
+  font-size: 20px;
+}
+
+.contact-card .instagram {
+  font: 400 11px var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ---- Inside the AI overlay ---- */
+.ai-permalink {
+  font: 400 11px var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}

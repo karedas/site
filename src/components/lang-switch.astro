@@ -1,0 +1,28 @@
+---
+import '@/components/lang-switch.css';
+import { getCopy, hrefFor, LOCALES, type Locale, type PageKey } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+  page: PageKey;
+};
+
+const { locale, page } = Astro.props;
+const copy = getCopy(locale);
+---
+<nav class="lang" aria-label={copy.langSwitchLabel}>
+  {LOCALES.map((code, i) => (
+    <>
+      {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+      <a
+        href={hrefFor(code, page)}
+        hreflang={code}
+        lang={code}
+        class:list={['opt', { current: code === locale }]}
+        aria-current={code === locale ? 'true' : undefined}
+      >
+        {getCopy(code).langName}
+      </a>
+    </>
+  ))}
+</nav>
