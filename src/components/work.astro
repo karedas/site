@@ -1,48 +1,21 @@
 ---
 import SectionHeader from '@/components/section-header.astro';
+import { getCopy, type Locale } from '@/i18n';
 
-// Bold spans mirror the emphasis used in the CV PDF (rendered via set:html).
-const jobs = [
-  {
-    years: '2023 · NOW',
-    place: 'VIENNA, AT',
-    company: 'Tricentis · Tosca Cloud',
-    role: 'Frontend Platform & Governance · Staff scope',
-    tags: ['Nx Monorepo', 'Micro-frontends', 'RFC culture', 'Agentic AI'],
-    current: true,
-    desc: 'Own the <b>frontend platform architecture</b>: Nx monorepo, module boundaries and CI topology across 16 projects. Co-lead <b>governance for 12+ dev teams</b> and drive the <b>maintenance, modernization and scalability of the entire product</b>, all round: engineering standards and best practices, security and vulnerability management, upgrades, performance, design system integration, repo and delivery tooling, with <b>AI supporting developers at every level</b>.',
-  },
-  {
-    years: '2019 · 2023',
-    place: 'FLORENCE, IT',
-    company: 'Treedom',
-    role: 'Frontend Developer',
-    tags: ['React', 'Vue', 'GraphQL'],
-    current: false,
-    desc: 'Joined to reinforce the storefront, then helped drive the <b>full migration away from the monolith</b> in a core team of four, owning the frontend track with React, Vue and GraphQL, while constantly improving product, platform and core architecture. The <b>foundations we laid held as the company scaled from ~20 to 150+ people</b>, with IT growing to 25 developers, building <b>high-traffic campaign pages</b> for a platform that planted millions of trees.',
-  },
-  {
-    years: '2017 · 2019',
-    place: 'FLORENCE, IT',
-    company: 'Forzieri.com',
-    role: 'Frontend Developer',
-    tags: ['React', 'Webpack', 'jQuery → React'],
-    current: false,
-    desc: 'Modernized a <b>legacy ASP e-commerce end to end</b>: an incremental migration first to jQuery, then to <b>React with a Webpack toolchain</b>, spanning frontend, backend and database integration, while the <b>live luxury shop kept shipping features</b>.',
-  },
-  {
-    years: '2007 · 2017',
-    place: 'FIGLINE VALDARNO, IT',
-    company: 'Easysystem',
-    role: 'Head of Web · Full-Stack Designer',
-    tags: ['Design', 'Full-stack', 'Infrastructure'],
-    current: false,
-    desc: "Hired as the studio's designer, <b>prototypes and visual identities drawn from scratch</b>, then grown into the <b>on-premise infrastructure technician</b>: servers, networking and firewalls inside client companies, notably Tuscany's leather and fashion district. Ten years owning <b>every step for dozens of clients, from the first sketch of a brand to the servers it ran on</b>.",
-  },
-];
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const head = copy.sections.experience;
+// The first card carries the whole current story; the other three stay short.
+// Paragraphs render via set:html: one <b> per paragraph at most, so the bold
+// words alone read as a summary of the card.
+const jobs = copy.work;
 ---
-<section id="work" data-sec="3" class="section">
-  <SectionHeader num="03" title="Selected work" eyebrow="THE ONES THAT MATTERED" />
+<section id="experience" data-sec="3" class="section">
+  <SectionHeader num={head.num} title={head.title} eyebrow={head.eyebrow} />
 
   <div class="jobs">
     {jobs.map((job) => (
@@ -58,7 +31,9 @@ const jobs = [
         <div class="what">
           <h3 class="company">{job.company}</h3>
           <div class="role">{job.role}</div>
-          <p class="desc" set:html={job.desc} />
+          {job.paragraphs.map((para) => (
+            <p class="desc" set:html={para} />
+          ))}
         </div>
         <div class="tags">
           {job.tags.map((tag) => <span class="mono-tag">{tag}</span>)}
@@ -168,7 +143,7 @@ const jobs = [
   }
 
   .what {
-    flex: 1 1 320px;
+    flex: 3 1 380px;
     min-width: 260px;
   }
 
@@ -192,13 +167,15 @@ const jobs = [
     text-wrap: pretty;
   }
 
+  /* Emphasis reads as brightness, not hue: orange stays reserved for the
+     company, the years and the labels. */
   .desc :global(b) {
     font-weight: 500;
     color: var(--fg);
   }
 
   .tags {
-    flex: 1 1 200px;
+    flex: 1 1 170px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;

@@ -1,10 +1,20 @@
 ---
-// Sticky mission-console status bar.
+import LangSwitch from '@/components/lang-switch.astro';
+import type { Locale, PageKey } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+}
+
+const { locale, page } = Astro.props;
 ---
 <div class="status-bar">
-  <span><span class="pulse-dot" aria-hidden="true"></span>SYS NOMINAL</span>
-  <span class="coords">N 48°12′31.4″ · E 16°22′38.7″</span>
-  <span>UPTIME: 18+ YRS</span>
+  <span class="who"><span class="pulse-dot" aria-hidden="true"></span>ANDREA LISI</span>
+  <span class="right">
+    <span class="coords">N 48&deg;12&prime;31.4&Prime; &middot; E 16&deg;22&prime;38.7&Prime;</span>
+    <LangSwitch locale={locale} page={page} />
+  </span>
 </div>
 
 <style>
@@ -23,6 +33,12 @@
     color: var(--fg-62);
     background: rgba(25, 20, 18, 0.92);
     backdrop-filter: blur(8px);
+  }
+
+  .right {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
   }
 
   @media (max-width: 719px) {

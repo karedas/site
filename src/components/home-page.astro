@@ -1,0 +1,32 @@
+---
+import AiSection from '@/components/ai-section.astro';
+import Approach from '@/components/approach.astro';
+import Contact from '@/components/contact.astro';
+import Footer from '@/components/footer.astro';
+import Hero from '@/components/hero.astro';
+import Rail from '@/components/rail.astro';
+import StatusBar from '@/components/status-bar.astro';
+import Work from '@/components/work.astro';
+import type { Locale } from '@/i18n';
+import Layout from '@/layouts/layout.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+<Layout locale={locale} page="home">
+  <Rail locale={locale} />
+  <div class="console">
+    <StatusBar locale={locale} page="home" />
+    <main id="main-content">
+      <Hero locale={locale} />
+      <Approach locale={locale} />
+      <AiSection locale={locale} />
+      <Work locale={locale} />
+      <Contact locale={locale} />
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,171 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+import { getCopy, hrefFor, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+  /** 'section' sits inside the home page, 'page' owns the <h1> at /ai. */
+  variant?: 'section' | 'page';
+}
+
+const { locale, variant = 'section' } = Astro.props;
+const copy = getCopy(locale);
+const head = copy.sections.ai;
+const { ai } = copy;
+const aiHref = hrefFor(locale, 'ai');
+---
+<section id="ai" data-sec="2" class="section">
+  {variant === 'section' ? (
+    <SectionHeader num={head.num} title={head.title} eyebrow={head.eyebrow} />
+  ) : (
+    <div class="page-head" data-rv>
+      <h1>{head.title}<span class="cursor" aria-hidden="true">_</span></h1>
+      <span class="page-eyebrow">ANDREA LISI &middot; {copy.hero.eyebrow}</span>
+    </div>
+  )}
+
+  <div class="panel" data-rv>
+    <div class="panel-head">
+      <span class="panel-title">&#9670; {ai.heading.toUpperCase()}</span>
+    </div>
+
+    <div class="panel-body">
+      {ai.paragraphs.map((para, i) => (
+        <p class:list={['para', { lede: i === 0 }]} set:html={para} />
+      ))}
+
+      <div class="keywords">
+        {ai.keywords.map((line) => (
+          <p class="keyword-line">
+            {line.map((keyword, i) => (
+              <>
+                {i > 0 && <span class="sep" aria-hidden="true"> &middot; </span>}
+                {keyword}
+              </>
+            ))}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* aria-label starts with the visible text: WCAG 2.5.3, Label in Name. */}
+  {variant === 'section' && (
+    <a class="permalink" href={aiHref} data-rv aria-label={`${aiHref}, ${ai.permalinkSuffix}`}>
+      {aiHref}
+    </a>
+  )}
+</section>
+
+<style>
+  .page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px 24px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  .page-head h1 {
+    margin: 0;
+    font: 600 44px var(--font-display);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .page-head .cursor {
+    color: var(--accent);
+    animation: pulseDot 1.3s steps(1) infinite;
+  }
+
+  .page-eyebrow {
+    font: 400 10px var(--font-mono);
+    letter-spacing: 0.16em;
+    color: var(--fg-56);
+  }
+
+  .panel {
+    border: 1px solid var(--accent-line);
+    background: rgba(232, 112, 58, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .panel-head {
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--accent-line-soft);
+    background: rgba(232, 112, 58, 0.08);
+  }
+
+  .panel-title {
+    font: 500 12px var(--font-mono);
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+
+  .panel-body {
+    padding: 32px 28px;
+    max-width: 86ch;
+  }
+
+  .para {
+    margin: 0 0 1.3em;
+    font: 300 16px/1.8 var(--font-display);
+    color: var(--fg-75);
+    text-wrap: pretty;
+  }
+
+  .para.lede {
+    font: 300 21px/1.6 var(--font-display);
+    color: var(--fg);
+  }
+
+  .para:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .para :global(b) {
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .keywords {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--accent-line-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .keyword-line {
+    margin: 0;
+    font: 400 12px/1.9 var(--font-mono);
+    letter-spacing: 0.04em;
+    color: var(--fg-70);
+  }
+
+  .keyword-line .sep {
+    color: var(--accent);
+  }
+
+  .permalink {
+    margin-top: 24px;
+    display: inline-block;
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.14em;
+    color: var(--fg-58);
+    border-bottom: 1px solid var(--line-18);
+    padding-bottom: 3px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .permalink:hover,
+  .permalink:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+</style>

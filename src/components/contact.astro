@@ -1,0 +1,103 @@
+---
+import SectionHeader from '@/components/section-header.astro';
+import { getCopy, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const head = copy.sections.contact;
+
+const primary = [
+  { label: copy.contact.cv, href: '/andrea-lisi-cv.pdf', download: 'andrea-lisi-cv.pdf' },
+  { label: copy.contact.github, href: 'https://github.com/karedas' },
+  { label: copy.contact.linkedin, href: 'https://www.linkedin.com/in/andrea-lisi84' },
+  { label: copy.contact.email, href: 'mailto:lisandr84@gmail.com' },
+];
+
+const isExternal = (href: string): boolean => href.startsWith('http');
+---
+<section id="contact" data-sec="4" class="section last">
+  <SectionHeader num={head.num} title={head.title} eyebrow={head.eyebrow} />
+
+  <div class="links" data-rv>
+    <ul class="primary">
+      {primary.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            download={link.download}
+            target={isExternal(link.href) ? '_blank' : undefined}
+            rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <ul class="secondary">
+      <li>
+        <a
+          href="https://www.instagram.com/alandr.1984/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {copy.contact.instagram}
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .last {
+    padding-bottom: 100px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 16px 44px;
+  }
+
+  .primary a {
+    display: inline-block;
+    font: 500 clamp(24px, 3.4vw, 40px) var(--font-display);
+    letter-spacing: -0.01em;
+    border-bottom: 1px solid var(--line-18);
+    padding-bottom: 6px;
+    transition:
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .primary a:hover,
+  .primary a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .secondary {
+    margin-top: 32px;
+  }
+
+  .secondary a {
+    font: 400 11px var(--font-mono);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-58);
+    transition: color 0.2s;
+  }
+
+  .secondary a:hover,
+  .secondary a:focus-visible {
+    color: var(--accent);
+  }
+</style>

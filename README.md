@@ -7,7 +7,7 @@ procedurally generated three.js asteroid whose faces pulse with warm colors.
 ## Stack
 
 - **[Astro](https://astro.build/)** — static output, partial hydration via React islands.
-- **React 19** — only for the animated islands (`SignalCanvas`, `Asteroid`, `SkillCounters`).
+- **React 19** — only for the animated islands (`SignalCanvas`, `Asteroid`).
 - **[three.js](https://threejs.org/)** — the hero asteroid: displaced icosahedron, pulsing
   vertex-color patches, orbiting fragments and a gold dust ring, scroll-linked rotation.
 - **CSS** — `tokens.css` is the variable source of truth, scoped Astro `<style>` blocks per
@@ -49,12 +49,18 @@ pnpm verify     # lint + typecheck + unit + build (full local CI)
 
 ```bash
 pnpm test:e2e:install   # one-time: install Playwright browsers
-pnpm test:e2e           # dev server + Playwright suite
+pnpm test:e2e           # build + preview on :4323 + Playwright suite
 ```
 
-The E2E suite covers section presence, console-error budget, island hydration (canvas +
-WebGL asteroid), the skill-matrix animation, the CV download link, the mobile bottom bar,
-the prefers-reduced-motion path, and a WCAG 2.1 AA axe scan.
+The suite runs against the production build, not the dev server: on-demand
+compilation made the first hit from each worker time out, and the built site is
+what actually ships. Workers are capped at 4 because every page runs a WebGL
+loop and a canvas rAF loop, and one Chromium per core starves them all.
+
+The E2E suite covers section presence, the absence of the removed sections and of the
+flagged copy patterns, console-error budget, island hydration (canvas + WebGL asteroid),
+the CV download link, the nav labels, the mobile bottom bar, a no-JavaScript render, the
+prefers-reduced-motion path, the `/ai` deep link, and a WCAG 2.1 AA axe scan on both pages.
 
 ## Deploy
 
@@ -68,25 +74,37 @@ connect the GitHub repo in the Netlify UI (no env vars required) — `netlify.to
 src/
 ├── layouts/
 │   └── layout.astro               # html shell, fonts, meta, reveal-on-scroll script
-├── pages/
-│   └── index.astro                # composes rail + status bar + sections
+├── pages/                         # thin: each page just picks a locale
+│   ├── index.astro                # /        -> <Home locale="en" />
+│   ├── ai.astro                   # /ai      -> <AiPage locale="en" />
+│   └── it/
+│       ├── index.astro            # /it/     -> <Home locale="it" />
+│       └── ai.astro               # /it/ai   -> <AiPage locale="it" />
+├── i18n/
+│   ├── types.ts                   # the Copy shape both locales must fill
+│   ├── en.ts                      # English, the published voice
+│   ├── it.ts                      # Italian, the author's original voice
+│   └── index.ts                   # locales, getCopy, hrefFor
 ├── components/
+│   ├── home-page.astro            # the whole home page, for one locale
+│   ├── ai-page.astro              # the /ai deep link, for one locale
+│   ├── lang-switch.astro          # EN / IT, keeps you on the same page
 │   ├── rail.astro                 # fixed left rail / mobile bottom bar + scrollspy
-│   ├── status-bar.astro           # sticky SYS NOMINAL bar
+│   ├── status-bar.astro           # sticky name + coordinates strip
 │   ├── hero.astro                 # 00 · name, stat strip, buttons, canvas + asteroid
-│   ├── about.astro                # 01 · terminal card with staggered lines
-│   ├── skills.astro               # 02 · matrix bars + counters + AI panel
-│   ├── work.astro                 # 03 · selected work rows
-│   ├── personal-projects.astro    # 04 · Lumina card with scan beam
-│   ├── off-orbit.astro            # 05 · "Off duty": languages + interests
+│   ├── approach.astro             # 01 · "How I work": six prose blocks
+│   ├── ai-section.astro           # 02 · AI, shared by the home page and /ai
+│   ├── work.astro                 # 03 · Experience timeline
+│   ├── contact.astro              # 04 · CV, profiles, email
 │   ├── footer.astro
 │   ├── section-header.astro       # giant outlined number + H2_ + eyebrow
 │   ├── analytics.astro            # GA, production only
 │   └── react/                     # client islands
 │       ├── signal-canvas.tsx      # 2D canvas: sine waves + rising dots
 │       ├── asteroid.tsx           # three.js asteroid (desktop only)
-│       ├── skill-counters.tsx     # count-up legend (76 / 42 / 19)
 │       └── use-reduced-motion.ts  # shared media-query hook
+├── data/
+│   └── ai.ts                      # AI copy, shared by the section and the page
 └── styles/
     ├── tokens.css                 # CSS variables (single source of truth)
     └── global.css                 # base, section shell, keyframes, reduced motion
@@ -107,10 +125,11 @@ tests/
 |-----------------|----------------------------------|----------------------------------------------|
 | `SignalCanvas`  | `client:load`                    | Full-bleed hero background, visible at once. |
 | `Asteroid`      | `client:media="(min-width: 720px)"` | WebGL: desktop only, never loads on mobile. |
-| `SkillCounters` | `client:visible`                 | Below the fold, animates on first view.      |
 
-Everything else is server-rendered at build time. Scrollspy, reveal-on-scroll, terminal
-lines and skill bars are plain inline scripts (no framework runtime).
+Everything else is server-rendered at build time. Scrollspy and reveal-on-scroll are plain
+inline scripts (no framework runtime). Reveal-on-scroll hides `[data-rv]` blocks until the
+observer fires, so `<html class="no-js">` plus an inline script in `<head>` keeps every
+block visible when JavaScript never runs.
 
 ## Reduced motion
 

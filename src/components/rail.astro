@@ -1,31 +1,36 @@
 ---
 // Fixed left rail (desktop) + bottom bar (mobile) with scrollspy nav.
-const navItems = [
-  { num: '00', label: 'Home', href: '#top' },
-  { num: '01', label: 'About', href: '#about' },
-  { num: '02', label: 'Skills', href: '#skills' },
-  { num: '03', label: 'Work', href: '#work' },
-  { num: '04', label: 'Projects', href: '#projects' },
-  { num: '05', label: 'Off duty', href: '#off-duty' },
-];
+// The label ships next to the number: a number alone is unreadable for
+// anyone skimming, and on mobile the title attribute never surfaces.
+import { getCopy, type Locale } from '@/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { nav } = getCopy(locale);
+const navItems = nav.items.map((it) => ({ ...it, href: `#${it.target}` }));
 ---
-<nav class="rail" aria-label="Section navigation">
-  <a class="logo" href="#top" aria-label="Back to top">AL</a>
+<nav class="rail" aria-label={nav.ariaLabel}>
+  <a class="logo" href="#top" aria-label={nav.logoLabel}>AL</a>
   <div class="spacer" aria-hidden="true"></div>
   <div class="links">
     {navItems.map((nv) => (
-      <a href={nv.href} title={nv.label} data-nav>{nv.num}</a>
+      <a href={nv.href} data-nav>
+        <span class="num" aria-hidden="true">{nv.num}</span>
+        <span class="label">{nv.label}</span>
+      </a>
     ))}
   </div>
   <div class="spacer" aria-hidden="true"></div>
-  <div class="year" aria-hidden="true">MMXXVI</div>
 </nav>
 
-<nav class="bottom-bar" aria-label="Section navigation">
-  <a class="logo" href="#top" aria-label="Back to top">AL</a>
+<nav class="bottom-bar" aria-label={nav.ariaLabel}>
+  <a class="logo" href="#top" aria-label={nav.logoLabel}>AL</a>
   <div class="links">
-    {navItems.map((nv) => (
-      <a href={nv.href} title={nv.label} data-nav>{nv.num}</a>
+    {navItems.slice(1).map((nv) => (
+      <a href={nv.href} data-nav>{nv.label}</a>
     ))}
   </div>
 </nav>
@@ -40,9 +45,9 @@ const navItems = [
     border-right: 1px solid var(--line);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 24px 0;
-    gap: 26px;
+    align-items: stretch;
+    padding: 24px 20px;
+    gap: 22px;
     background: var(--bg);
     z-index: 50;
   }
@@ -56,18 +61,30 @@ const navItems = [
   .spacer {
     flex: 1;
     width: 1px;
+    align-self: center;
     background: var(--line);
   }
 
   .rail .links {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    font: 500 10px var(--font-mono);
+    gap: 16px;
   }
 
-  .links a {
+  .rail .links a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font: 500 10px var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--fg-58);
+    transition: color 0.2s;
+  }
+
+  .rail .links .num {
+    color: var(--fg-52);
+    font-variant-numeric: tabular-nums;
     transition: color 0.2s;
   }
 
@@ -76,11 +93,9 @@ const navItems = [
     color: var(--accent);
   }
 
-  .year {
-    writing-mode: vertical-rl;
-    font: 400 9px var(--font-mono);
-    letter-spacing: 0.3em;
-    color: var(--fg-52);
+  .rail .links a:hover .num,
+  .rail .links a.active .num {
+    color: var(--accent);
   }
 
   .bottom-bar {
@@ -91,8 +106,8 @@ const navItems = [
     right: 0;
     height: 56px;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+    gap: 16px;
+    padding: 0 16px;
     border-top: 1px solid var(--line);
     background: rgba(25, 20, 18, 0.95);
     backdrop-filter: blur(8px);
@@ -100,17 +115,29 @@ const navItems = [
   }
 
   .bottom-bar .logo {
+    flex: none;
     font: 700 14px var(--font-display);
     color: var(--accent);
   }
 
+  /* Labels can outgrow a narrow phone: let the row scroll rather than wrap
+     or truncate. */
   .bottom-bar .links {
     display: flex;
     gap: 18px;
-    font: 500 11px var(--font-mono);
+    overflow-x: auto;
+    scrollbar-width: none;
+    font: 500 10px var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
-  @media (max-width: 719px) {
+  .bottom-bar .links::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 899px) {
     .rail {
       display: none;
     }
@@ -122,7 +149,7 @@ const navItems = [
 </style>
 
 <script>
-  // Scrollspy: highlight the nav number of the section in view.
+  // Scrollspy: highlight the nav entry of the section in view.
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav]'));
   const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-sec]'));
 

@@ -40,7 +40,7 @@
   --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 
   /* ---- Layout ---- */
-  --rail-w: 68px;
+  --rail-w: 168px;
   --content-max: 1320px;
   --section-pad: 90px max(24px, calc((100% - var(--content-max)) / 2));
 }
