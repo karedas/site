@@ -140,3 +140,19 @@
 .work .chip.root svg {
   color: var(--root);
 }
+
+/*
+ * Measured: the head row starts wrapping at 600px, the current role first
+ * because it carries the badge too. margin-left:auto is a desktop gesture, and
+ * once the row wraps it strands the dates alone against the right gutter, hard
+ * against the edge. Below the wrap they just follow the title in normal flow.
+ */
+@media (max-width: 620px) {
+  .work .job-head {
+    gap: 6px 12px;
+  }
+
+  .work .years {
+    margin-left: 0;
+  }
+}

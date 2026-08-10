@@ -52,7 +52,7 @@ const ROOT_TAGS = new Set(['Design']);
         )}
         <span class:list={['years', { live: job.current }]}>{job.years}</span>
       </div>
-      <p class="meta">{job.role} · {job.place}</p>
+      <p class="meta">{job.context} · {job.place}</p>
 
       <div class="duties">
         {job.paragraphs.map((duty) => (

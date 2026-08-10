@@ -54,10 +54,10 @@ export const it: Copy = {
   },
 
   sections: {
-    approach: { num: '01', title: 'Come lavoro', eyebrow: 'PAROLE MIE' },
+    approach: { num: '01', title: 'Come lavoro' },
     ai: { num: '02', title: 'AI', eyebrow: 'GLI AGENTI E LE REGOLE IN CUI LAVORANO' },
-    experience: { num: '03', title: 'Esperienza', eyebrow: 'DICIOTTO ANNI, QUATTRO POSTI' },
-    contact: { num: '04', title: 'Restiamo in contatto', eyebrow: 'CV E PROFILI' },
+    experience: { num: '03', title: 'Esperienza' },
+    contact: { num: '04', title: 'Restiamo in contatto' },
   },
 
   approach: [
@@ -105,7 +105,7 @@ export const it: Copy = {
       place: 'VIENNA, AT',
       title: 'Senior Software Engineer',
       company: 'Tricentis',
-      role: 'Platform & Governance',
+      context: 'Tosca Cloud',
       tags: ['Architettura', 'Governance', 'Standard', 'Agentic AI'],
       current: true,
       paragraphs: [
@@ -122,7 +122,7 @@ export const it: Copy = {
       place: 'FIRENZE, IT',
       title: 'Frontend Developer',
       company: 'Treedom',
-      role: 'Frontend Developer',
+      context: 'Piattaforma e-commerce per piantare alberi',
       tags: ['React', 'Vue', 'GraphQL'],
       paragraphs: [
         'Sono arrivato a rinforzare due sviluppatori sullo storefront, e ho finito per riscriverlo mentre il team cresceva intorno a noi e tutto usciva dal monolite.',
@@ -135,7 +135,7 @@ export const it: Copy = {
       place: 'FIRENZE, IT',
       title: 'Frontend Developer',
       company: 'Forzieri.com',
-      role: 'Frontend Developer',
+      context: 'E-commerce di lusso',
       tags: ['React', 'Webpack'],
       paragraphs: [
         'Ho modernizzato <b>un e-commerce ASP legacy da cima a fondo</b>, con una migrazione incrementale prima a jQuery e poi a React.',
@@ -148,10 +148,10 @@ export const it: Copy = {
       place: 'FIGLINE VALDARNO, IT',
       title: 'Head of Web · Full-Stack Designer',
       company: 'Easysystem',
-      role: 'Head of Web · Full-Stack Designer',
+      context: 'Agenzia web e servizi IT',
       tags: ['Design', 'Full-stack', 'Infrastruttura'],
       paragraphs: [
-        'Assunto come web designer: prototipi, grafica per la stampa e identità visive disegnate da zero, mai montate da un modello comprato.',
+        'Assunto come web designer: prototipi, grafica per la stampa e identità visive disegnate da zero con la suite Adobe, mai montate da un modello comprato.',
         'In parallelo ho fatto <b>infrastruttura vera</b>: reti installate dentro le aziende dei clienti, con i firewall e i server che ci stavano dietro. Il networking l’ho imparato mettendoci le mani.',
         'Dieci anni a tenere insieme tutto questo <b>da solo</b>, per decine di clienti, dal primo schizzo di un marchio alle macchine su cui girava.',
       ],

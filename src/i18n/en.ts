@@ -48,10 +48,10 @@ export const en: Copy = {
   },
 
   sections: {
-    approach: { num: '01', title: 'How I work', eyebrow: 'IN MY OWN WORDS' },
+    approach: { num: '01', title: 'How I work' },
     ai: { num: '02', title: 'AI', eyebrow: 'AGENTS AND THE RULES THEY WORK IN' },
-    experience: { num: '03', title: 'Experience', eyebrow: 'EIGHTEEN YEARS, FOUR PLACES' },
-    contact: { num: '04', title: 'Get in touch', eyebrow: 'CV AND PROFILES' },
+    experience: { num: '03', title: 'Experience' },
+    contact: { num: '04', title: 'Get in touch' },
   },
 
   approach: [
@@ -99,7 +99,7 @@ export const en: Copy = {
       place: 'VIENNA, AT',
       title: 'Senior Software Engineer',
       company: 'Tricentis',
-      role: 'Platform & Governance',
+      context: 'Tosca Cloud',
       tags: ['Architecture', 'Governance', 'Standards', 'Agentic AI'],
       current: true,
       paragraphs: [
@@ -116,7 +116,7 @@ export const en: Copy = {
       place: 'FLORENCE, IT',
       title: 'Frontend Developer',
       company: 'Treedom',
-      role: 'Frontend Developer',
+      context: 'E-commerce platform for tree planting',
       tags: ['React', 'Vue', 'GraphQL'],
       paragraphs: [
         'I came in to reinforce two developers on the storefront, and ended up rewriting it as the team grew around us and the whole thing came off the monolith.',
@@ -129,7 +129,7 @@ export const en: Copy = {
       place: 'FLORENCE, IT',
       title: 'Frontend Developer',
       company: 'Forzieri.com',
-      role: 'Frontend Developer',
+      context: 'Luxury e-commerce',
       tags: ['React', 'Webpack'],
       paragraphs: [
         'I modernized a <b>legacy ASP e-commerce end to end</b>, an incremental migration first to jQuery and then to React.',
@@ -142,10 +142,10 @@ export const en: Copy = {
       place: 'FIGLINE VALDARNO, IT',
       title: 'Head of Web · Full-Stack Designer',
       company: 'Easysystem',
-      role: 'Head of Web · Full-Stack Designer',
+      context: 'Web agency and IT services',
       tags: ['Design', 'Full-stack', 'Infrastructure'],
       paragraphs: [
-        'Hired as the web designer: prototypes, print work, and visual identities drawn from scratch, never assembled from a bought template.',
+        'Hired as the web designer: prototypes, print work, and visual identities drawn from scratch in the Adobe suite, never assembled from a bought template.',
         'Alongside it I did <b>real infrastructure</b>: networks installed inside client companies, with the firewalls and the servers behind them. I learned networking with my hands on it.',
         'Ten years holding all of that together <b>on my own</b>, for dozens of clients, from the first sketch of a brand to the machines it ran on.',
       ],

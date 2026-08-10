@@ -4,11 +4,19 @@
  * cannot drift apart silently.
  */
 
-export interface SectionHead {
+export type SectionHead = {
   num: string;
   title: string;
+};
+
+/**
+ * Only the AI section carries a label. It is the one enclosed block on the page,
+ * and the label is part of what sets it apart, so the field belongs to that
+ * section alone rather than sitting unused on the other three.
+ */
+export type LabelledSectionHead = SectionHead & {
   eyebrow: string;
-}
+};
 
 /**
  * Which of the two named colours a piece of content belongs to. Left off, it
@@ -16,33 +24,38 @@ export interface SectionHead {
  */
 export type Tone = 'now' | 'root';
 
-export interface Stat {
+export type Stat = {
   label: string;
   value: string;
   tone?: Tone;
-}
+};
 
-export interface ApproachBlock {
+export type ApproachBlock = {
   title: string;
   /** HTML: the body may carry inline emphasis. */
   body: string;
   tone?: Tone;
-}
+};
 
-export interface WorkEntry {
+export type WorkEntry = {
   /** Job title, shown before the company. */
   title: string;
   years: string;
   place: string;
   company: string;
-  role: string;
+  /**
+   * What the place was, on the line under the title. Never the job title again:
+   * three of these repeated it word for word, which the phone layout made
+   * obvious by stacking the two lines.
+   */
+  context: string;
   tags: string[];
   /** HTML: at most one <b> per paragraph. */
   paragraphs: string[];
   current?: boolean;
-}
+};
 
-export interface Copy {
+export type Copy = {
   /** Value for the <html lang> attribute. */
   htmlLang: string;
   /** Name of this language, in this language, for the switcher. */
@@ -81,7 +94,7 @@ export interface Copy {
 
   sections: {
     approach: SectionHead;
-    ai: SectionHead;
+    ai: LabelledSectionHead;
     experience: SectionHead;
     contact: SectionHead;
   };
@@ -116,4 +129,4 @@ export interface Copy {
     email: string;
     instagram: string;
   };
-}
+};

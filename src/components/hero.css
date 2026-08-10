@@ -138,3 +138,30 @@
   outline: 2px solid var(--acc);
   outline-offset: 7px;
 }
+
+/*
+ * Measured: the hero wraps between 740px and 720px, when the text can no longer
+ * hold its 460px minimum beside the portrait. Once it wraps, the portrait lands
+ * last, which put the face below the CV button with nothing after it. Above the
+ * greeting instead, so the reading order is face, name, then the rest.
+ *
+ * Visual order only: the img has no focusable content, and its alt is the name,
+ * so nothing depends on where a screen reader meets it.
+ */
+@media (max-width: 740px) {
+  .hero {
+    gap: 24px;
+  }
+
+  .hero .portrait {
+    order: -1;
+    /* Left edge shared with the text: the hero has one axis, not two. */
+    margin: 0;
+  }
+
+  .hero .portrait img {
+    width: 104px;
+    height: 104px;
+    outline-offset: 5px;
+  }
+}
