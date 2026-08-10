@@ -2,24 +2,26 @@
 import AiSection from '@/components/ai-section.astro';
 import Approach from '@/components/approach.astro';
 import Contact from '@/components/contact.astro';
-import Footer from '@/components/footer.astro';
+import DotField from '@/components/dot-field.astro';
 import Hero from '@/components/hero.astro';
-import Rail from '@/components/rail.astro';
-import StatusBar from '@/components/status-bar.astro';
+import Loader from '@/components/loader.astro';
+import SiteFooter from '@/components/site-footer.astro';
+import SiteHeader from '@/components/site-header.astro';
 import Work from '@/components/work.astro';
 import type { Locale } from '@/i18n';
 import Layout from '@/layouts/layout.astro';
 
-interface Props {
+type Props = {
   locale: Locale;
-}
+};
 
 const { locale } = Astro.props;
 ---
 <Layout locale={locale} page="home">
-  <Rail locale={locale} />
-  <div class="console">
-    <StatusBar locale={locale} page="home" />
+  <Loader />
+  <DotField />
+  <div class="shell">
+    <SiteHeader locale={locale} page="home" />
     <main id="main-content">
       <Hero locale={locale} />
       <Approach locale={locale} />
@@ -27,6 +29,6 @@ const { locale } = Astro.props;
       <Work locale={locale} />
       <Contact locale={locale} />
     </main>
-    <Footer />
+    <SiteFooter locale={locale} />
   </div>
 </Layout>

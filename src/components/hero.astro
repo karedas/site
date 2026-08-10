@@ -1,241 +1,72 @@
 ---
-import Asteroid from '@/components/react/asteroid';
-import SignalCanvas from '@/components/react/signal-canvas';
+import '@/components/hero.css';
+import Icon from '@/components/icon.astro';
 import { getCopy, type Locale } from '@/i18n';
 
-interface Props {
+type Props = {
   locale: Locale;
-}
+};
 
 const { locale } = Astro.props;
 const { hero } = getCopy(locale);
-const { stats } = hero;
+
+/* Hero content is above the fold, so it enters on load with a short stagger
+   rather than waiting for a scroll observer. */
+const step = (i: number): string => `animation-delay:${(0.05 * i).toFixed(2)}s`;
 ---
-<section id="top" data-sec="0" class="hero grid-paper">
-  <SignalCanvas client:load />
-  <div class="glow" aria-hidden="true"></div>
-  <div class="crosshair tl" aria-hidden="true"></div>
-  <div class="crosshair tr" aria-hidden="true"></div>
-  <div class="crosshair bl" aria-hidden="true"></div>
-  <div class="crosshair br" aria-hidden="true"></div>
+<section class="hero" id="top">
+  <div class="text">
+    <p class="greeting enter" style={step(0)}>{hero.greeting}</p>
+    <h1 class="name enter" style={step(1)}>Andrea Lisi.</h1>
+    <p class="tagline enter" style={step(2)}>{hero.tagline}</p>
+    <p class="intro enter" style={step(3)}>{hero.intro}</p>
+    <p class="role enter" style={step(4)}>{hero.eyebrow}</p>
 
-  <div class="cols">
-    <div class="text">
-      {/* No data-rv in the hero: it is above the fold, so the reveal fade buys
-          nothing and delays LCP by the transition plus its stagger. */}
-      <div class="eyebrow">{hero.eyebrow}</div>
-      <h1>Andrea<br />Lisi<span class="dot">.</span></h1>
-
-      <div class="stats">
-        {stats.map((s) => (
-          <div class="stat">
-            <div class="lbl">{s.label}</div>
-            <div class:list={['val', { accent: s.accent }]}>{s.value}</div>
-          </div>
-        ))}
-      </div>
-
-      <p class="intro">{hero.intro}</p>
-
-      <div class="buttons">
-        <a href="https://github.com/karedas" target="_blank" rel="noopener noreferrer">
-          {hero.buttons.github}
-        </a>
-        <a href="https://www.linkedin.com/in/andrea-lisi84" target="_blank" rel="noopener noreferrer">
-          {hero.buttons.linkedin}
-        </a>
-        <a class="outline-accent" href="mailto:lisandr84@gmail.com">{hero.buttons.email}</a>
-        <a class="solid-accent" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">
-          {hero.buttons.cv}
-        </a>
-      </div>
+    <div class="facts enter" style={step(5)}>
+      {hero.stats.map((s) => (
+        <div class="fact">
+          <span class="fact-k">{s.label}</span>
+          <span class:list={['fact-v', s.tone && `tone-${s.tone}`]}>{s.value}</span>
+        </div>
+      ))}
     </div>
 
-    <div class="three-box">
-      <Asteroid client:media="(min-width: 720px)" />
+    <div class="actions enter" style={step(6)}>
+      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">{hero.buttons.cv}</a>
+      <a
+        class="social"
+        href="https://github.com/karedas"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={hero.buttons.github}
+      >
+        <Icon name="github" />
+      </a>
+      <a
+        class="social"
+        href="https://www.linkedin.com/in/andrea-lisi84"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={hero.buttons.linkedin}
+      >
+        <Icon name="linkedin" />
+      </a>
+      <a class="social" href="mailto:lisandr84@gmail.com" aria-label={hero.buttons.email}>
+        <Icon name="mail" />
+      </a>
     </div>
   </div>
+
+  <div class="portrait enter" style={step(3)}>
+    <picture>
+      <source srcset="/andrea-lisi-424.webp 424w, /andrea-lisi.webp 848w" type="image/webp" />
+      <img
+        src="/andrea-lisi.jpg"
+        width="424"
+        height="424"
+        alt="Andrea Lisi"
+        fetchpriority="high"
+      />
+    </picture>
+  </div>
 </section>
-
-<style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-    min-height: 92vh;
-    padding: 100px max(24px, calc((100% - var(--content-max)) / 2)) 80px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .glow {
-    position: absolute;
-    top: -25%;
-    right: -12%;
-    width: 58vw;
-    height: 58vw;
-    background: radial-gradient(circle, rgba(232, 112, 58, 0.12), transparent 62%);
-    pointer-events: none;
-  }
-
-  .crosshair {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-  }
-
-  .crosshair.tl {
-    top: 24px;
-    left: 24px;
-    border-top: 1px solid rgba(232, 112, 58, 0.7);
-    border-left: 1px solid rgba(232, 112, 58, 0.7);
-  }
-
-  .crosshair.tr {
-    top: 24px;
-    right: 24px;
-    border-top: 1px solid rgba(232, 112, 58, 0.7);
-    border-right: 1px solid rgba(232, 112, 58, 0.7);
-  }
-
-  .crosshair.bl {
-    bottom: 24px;
-    left: 24px;
-    border-bottom: 1px solid rgba(232, 112, 58, 0.7);
-    border-left: 1px solid rgba(232, 112, 58, 0.7);
-  }
-
-  .crosshair.br {
-    bottom: 24px;
-    right: 24px;
-    border-bottom: 1px solid rgba(232, 112, 58, 0.7);
-    border-right: 1px solid rgba(232, 112, 58, 0.7);
-  }
-
-  .cols {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 40px;
-    width: 100%;
-  }
-
-  .text {
-    flex: 1 1 560px;
-    min-width: 0;
-  }
-
-  .eyebrow {
-    font: 500 11px var(--font-mono);
-    letter-spacing: 0.3em;
-    color: var(--accent);
-  }
-
-  h1 {
-    margin: 26px 0 0;
-    font: 600 clamp(64px, 9vw, 118px) / 0.95 var(--font-display);
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-  }
-
-  .dot {
-    color: var(--accent);
-  }
-
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 54px;
-    max-width: 980px;
-  }
-
-  .stat {
-    flex: 1 1 220px;
-    padding: 16px 26px;
-    border: 1px solid var(--line-12);
-    margin: -1px 0 0 -1px;
-    background: var(--bg);
-  }
-
-  .stat .lbl {
-    font: 400 9px var(--font-mono);
-    letter-spacing: 0.2em;
-    color: var(--fg-56);
-  }
-
-  .stat .val {
-    margin-top: 6px;
-    font: 500 19px/1.3 var(--font-display);
-    text-wrap: pretty;
-  }
-
-  .stat .val.accent {
-    color: var(--accent);
-  }
-
-  .intro {
-    margin: 40px 0 0;
-    max-width: 580px;
-    font: 300 17px/1.65 var(--font-display);
-    color: var(--fg-70);
-    text-wrap: pretty;
-  }
-
-  .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 36px;
-  }
-
-  .buttons a {
-    font: 500 11px var(--font-mono);
-    letter-spacing: 0.14em;
-    padding: 10px 20px;
-    border: 1px solid var(--line-20);
-    transition:
-      color 0.2s,
-      border-color 0.2s,
-      background 0.2s;
-  }
-
-  .buttons a:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .buttons .outline-accent {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .buttons .outline-accent:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  .buttons .solid-accent {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  .buttons .solid-accent:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .three-box {
-    flex: 1 1 340px;
-    max-width: 480px;
-    min-width: 0;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 719px) {
-    .three-box {
-      display: none;
-    }
-  }
-</style>

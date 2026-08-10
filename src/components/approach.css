@@ -1,0 +1,48 @@
+.approach .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  gap: 34px 48px;
+}
+
+/* Each block reads as title then body, so the two need real distance:
+   the title is bigger, brighter and carries the accent tick; the body
+   drops to the muted tone. Without this the list looked flat. */
+.approach .block-title {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin: 0 0 9px;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--head);
+}
+
+.approach .block-title .tick {
+  flex: none;
+  color: var(--acc);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* The block about drawing takes the mark of the hero's art-school line. The
+   title stays the same brightness as the other five, so the list still scans
+   as one list: only the tick changes. */
+.approach .block-title .tick.tone-root {
+  color: var(--root);
+}
+
+.approach .block-body {
+  margin: 0;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+}
+
+.approach .block-body b {
+  color: var(--head);
+  font-weight: 600;
+}

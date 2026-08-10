@@ -10,19 +10,28 @@ export interface SectionHead {
   eyebrow: string;
 }
 
+/**
+ * Which of the two named colours a piece of content belongs to. Left off, it
+ * takes the ordinary body tone. See tokens.css for what each one means.
+ */
+export type Tone = 'now' | 'root';
+
 export interface Stat {
   label: string;
   value: string;
-  accent?: boolean;
+  tone?: Tone;
 }
 
 export interface ApproachBlock {
-  /** HTML: the first block carries an inline <code>any</code>. */
   title: string;
+  /** HTML: the body may carry inline emphasis. */
   body: string;
+  tone?: Tone;
 }
 
 export interface WorkEntry {
+  /** Job title, shown before the company. */
+  title: string;
   years: string;
   place: string;
   company: string;
@@ -60,6 +69,10 @@ export interface Copy {
   };
 
   hero: {
+    /** Spoken greeting above the name. */
+    greeting: string;
+    /** The short line under the name: says the job in one breath. */
+    tagline: string;
     eyebrow: string;
     stats: Stat[];
     intro: string;
@@ -79,20 +92,26 @@ export interface Copy {
     heading: string;
     /** HTML: two <b> spans in the whole block, no more. */
     paragraphs: string[];
-    /** One array per printed line. The only keyword list on the site. */
-    keywords: string[][];
-    /**
-     * Appended after the visible href to build the permalink's accessible
-     * name. It must stay a suffix: WCAG 2.5.3 wants the name to start with
-     * the visible text, and that text differs per locale (/ai vs /it/ai).
-     */
-    permalinkSuffix: string;
+    /** Visible label of the link to the /ai page. */
+    permalinkLabel: string;
     backLabel: string;
   };
 
   work: WorkEntry[];
 
+  /** Small print at the very bottom. */
+  footer: {
+    built: string;
+  };
+
+  /** Badge on the role that is current. */
+  nowBadge: string;
+
   contact: {
+    /** The short line that closes the page. Set as a lead, so keep it one breath. */
+    invite: string;
+    /** The sentence under it, at body size. Carries the reason, not the invitation. */
+    inviteMore: string;
     cv: string;
     github: string;
     linkedin: string;

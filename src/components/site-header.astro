@@ -1,0 +1,18 @@
+---
+import '@/components/site-header.css';
+import LangSwitch from '@/components/lang-switch.astro';
+import { hrefFor, type Locale, type PageKey } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+  page: PageKey;
+};
+
+const { locale, page } = Astro.props;
+---
+<header class="site-header enter">
+  <span class="mark" aria-hidden="true"></span>
+  <a class="name" href={hrefFor(locale, 'home')}>Andrea Lisi</a>
+  <span class="place mono">Vienna, AT</span>
+  <LangSwitch locale={locale} page={page} />
+</header>

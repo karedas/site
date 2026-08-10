@@ -1,185 +1,76 @@
 ---
-import SectionHeader from '@/components/section-header.astro';
+import '@/components/work.css';
+import Icon from '@/components/icon.astro';
+import SectionTitle from '@/components/section-title.astro';
 import { getCopy, type Locale } from '@/i18n';
 
-interface Props {
+type Props = {
   locale: Locale;
-}
+};
 
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const head = copy.sections.experience;
-// The first card carries the whole current story; the other three stay short.
-// Paragraphs render via set:html: one <b> per paragraph at most, so the bold
-// words alone read as a summary of the card.
-const jobs = copy.work;
+
+/* One line icon per chip label, so the marks mean something instead of
+   repeating the same dot four times. */
+const ICONS: Record<string, Parameters<typeof Icon>[0]['name']> = {
+  Architettura: 'layers',
+  Architecture: 'layers',
+  Governance: 'shield',
+  Standard: 'grid',
+  Standards: 'grid',
+  'Agentic AI': 'bot',
+  React: 'react',
+  Vue: 'box',
+  GraphQL: 'graph',
+  Webpack: 'box',
+  Design: 'pen',
+  'Full-stack': 'stack',
+  Infrastructure: 'server',
+  Infrastruttura: 'server',
+};
+
+/* Tags whose icon carries the art-foundation colour: the same lilac as the
+   school in the hero, on the job where the drawing was the job. */
+const ROOT_TAGS = new Set(['Design']);
 ---
-<section id="experience" data-sec="3" class="section">
-  <SectionHeader num={head.num} title={head.title} eyebrow={head.eyebrow} />
+<section class="work section" id="experience">
+  <SectionTitle num={head.num} title={head.title} />
 
-  <div class="jobs">
-    {jobs.map((job) => (
-      <article class:list={['job', { current: job.current }]} data-rv>
-        <span class="node" aria-hidden="true"></span>
-        <div class="when">
-          <div class="years">{job.years}</div>
-          <div class="place">{job.place}</div>
-          {job.current && (
-            <div class="badge"><span class="dot" aria-hidden="true"></span>CURRENT</div>
-          )}
-        </div>
-        <div class="what">
-          <h3 class="company">{job.company}</h3>
-          <div class="role">{job.role}</div>
-          {job.paragraphs.map((para) => (
-            <p class="desc" set:html={para} />
-          ))}
-        </div>
-        <div class="tags">
-          {job.tags.map((tag) => <span class="mono-tag">{tag}</span>)}
-        </div>
-      </article>
-    ))}
-  </div>
+  {copy.work.map((job) => (
+    <article class="job" data-reveal>
+      <div class="job-head">
+        <h3 class="job-title">
+          {job.title} <span class="at">@ {job.company}</span>
+        </h3>
+        {job.current && (
+          <span class="now">
+            <span class="pulse" aria-hidden="true"></span>
+            {copy.nowBadge}
+          </span>
+        )}
+        <span class:list={['years', { live: job.current }]}>{job.years}</span>
+      </div>
+      <p class="meta">{job.role} · {job.place}</p>
+
+      <div class="duties">
+        {job.paragraphs.map((duty) => (
+          <div class="duty">
+            <span class="mark" aria-hidden="true">▹</span>
+            <p set:html={duty} />
+          </div>
+        ))}
+      </div>
+
+      <div class="chips">
+        {job.tags.map((tag) => (
+          <span class:list={['chip', { root: ROOT_TAGS.has(tag) }]}>
+            <Icon name={ICONS[tag] ?? 'box'} size={17} />
+            {tag}
+          </span>
+        ))}
+      </div>
+    </article>
+  ))}
 </section>
-
-<style>
-  .jobs {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--line-12);
-  }
-
-  .job {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 32px;
-    padding: 34px 24px 34px 58px;
-    border-bottom: 1px solid var(--line-12);
-    transition: background 0.2s;
-  }
-
-  .job:hover {
-    background: rgba(237, 229, 220, 0.03);
-  }
-
-  /* Timeline spine: commit-style nodes, echoing the CV's git-graph. */
-  .node {
-    position: absolute;
-    left: 24px;
-    top: 39px;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent-rust);
-    background: var(--bg);
-  }
-
-  .job::after {
-    content: "";
-    position: absolute;
-    left: 29px;
-    top: 56px;
-    bottom: -40px;
-    width: 1px;
-    background: var(--line-12);
-    pointer-events: none;
-  }
-
-  .job:last-child::after {
-    display: none;
-  }
-
-  .job.current {
-    background: rgba(232, 112, 58, 0.04);
-  }
-
-  .job.current:hover {
-    background: rgba(232, 112, 58, 0.07);
-  }
-
-  .job.current .node {
-    border-color: var(--accent);
-    background: var(--accent);
-    box-shadow: 0 0 12px rgba(232, 112, 58, 0.6);
-    animation: pulseDot 2s infinite;
-  }
-
-  .when {
-    flex: 0 0 150px;
-  }
-
-  .years {
-    font: 500 13px var(--font-mono);
-    color: var(--accent);
-  }
-
-  .place {
-    margin-top: 8px;
-    font: 400 11px var(--font-mono);
-    letter-spacing: 0.1em;
-    color: var(--fg-56);
-  }
-
-  .badge {
-    display: inline-block;
-    margin-top: 12px;
-    font: 400 10px var(--font-mono);
-    letter-spacing: 0.16em;
-    color: var(--accent);
-    border: 1px solid var(--accent-line);
-    padding: 5px 10px;
-  }
-
-  .badge .dot {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    margin-right: 7px;
-    animation: pulseDot 2s infinite;
-  }
-
-  .what {
-    flex: 3 1 380px;
-    min-width: 260px;
-  }
-
-  .company {
-    margin: 0;
-    font: 600 24px var(--font-display);
-    color: var(--accent);
-  }
-
-  .role {
-    margin-top: 4px;
-    font: 400 14px var(--font-display);
-    color: rgba(237, 229, 220, 0.6);
-  }
-
-  .desc {
-    margin: 14px 0 0;
-    font: 300 15px/1.7 var(--font-display);
-    color: var(--fg-70);
-    max-width: 620px;
-    text-wrap: pretty;
-  }
-
-  /* Emphasis reads as brightness, not hue: orange stays reserved for the
-     company, the years and the labels. */
-  .desc :global(b) {
-    font-weight: 500;
-    color: var(--fg);
-  }
-
-  .tags {
-    flex: 1 1 170px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-content: start;
-    justify-content: flex-end;
-  }
-</style>

@@ -1,46 +1,56 @@
 /* =========================================================
-   Andrea Lisi · Mission Console tokens
-   Single source of truth for colors and typography.
+   Andrea Lisi · tokens
+
+   Navy surfaces, two greys, three colours. Each colour has one
+   job and appears only where that job applies, so a reader picks
+   up the code without being told it:
+
+     --acc   structure and interaction. Numbers, ticks, links,
+             company names. The page's constant.
+     --now   the present tense. What he does now, and the role
+             that is still open.
+     --root  where the eye comes from. The art school, and the
+             places the drawing still shows.
+
+   Every one clears 4.5:1 on --bg and on --panel.
    ========================================================= */
 
 :root {
-  /* ---- Surfaces ---- */
-  --bg: #191412;
-  --panel: #1f1916;
+  --bg: #0a192f;
+  --panel: #112240;
+  --line: #233554;
 
-  /* ---- Text ---- */
-  --fg: #ede5dc;
-  --fg-75: rgba(237, 229, 220, 0.75);
-  --fg-70: rgba(237, 229, 220, 0.7);
-  --fg-65: rgba(237, 229, 220, 0.65);
-  --fg-62: rgba(237, 229, 220, 0.62);
-  --fg-58: rgba(237, 229, 220, 0.58);
-  --fg-56: rgba(237, 229, 220, 0.56);
-  --fg-52: rgba(237, 229, 220, 0.52);
+  --head: #ccd6f6;
+  --body: #8892b0;
+  /* The design shipped #5f6c8c here, which gives 3.36:1 on --bg and fails AA
+     for the dates, the chips and the meta lines it is used on. Lifted to the
+     nearest tone in the same hue that clears 4.5:1. */
+  --dim: #7683a3;
 
-  /* ---- Accents ---- */
-  --accent: #e8703a;
-  --accent-gold: #d9b36a;
-  --accent-rust: #c4542e;
+  /* Emerald, deliberately greener than the #64ffda mint that every navy
+     portfolio uses: hue 161 against its 166, and darker, so it reads as
+     emerald rather than as that template. 9.5:1 on --bg. */
+  --acc: #35d6a4;
+  --acc-soft: rgba(53, 214, 164, 0.1);
+  --acc-line: rgba(53, 214, 164, 0.22);
 
-  /* ---- Hairlines / borders ---- */
-  --line: rgba(237, 229, 220, 0.1);
-  --line-12: rgba(237, 229, 220, 0.12);
-  --line-08: rgba(237, 229, 220, 0.08);
-  --line-18: rgba(237, 229, 220, 0.18);
-  --line-20: rgba(237, 229, 220, 0.2);
-  --line-25: rgba(237, 229, 220, 0.25);
-  --accent-line: rgba(232, 112, 58, 0.5);
-  --accent-line-soft: rgba(232, 112, 58, 0.3);
-  --accent-stroke: rgba(232, 112, 58, 0.13);
-  --grid-line: rgba(237, 229, 220, 0.035);
+  /* Gold, hue 42. Marks the present: the focus in the hero, the badge on the
+     open role, and that role's dates. 9.4:1 on --bg. */
+  --now: #f0b429;
+  --now-line: rgba(240, 180, 41, 0.4);
 
-  /* ---- Typography ---- */
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  /* Lilac, hue 255. Marks the art foundation wherever it surfaces: the school
+     in the hero, the block about drawing, the design work it started in.
+     8.2:1 on --bg, and far enough from both other hues to never be mistaken
+     for either. */
+  --root: #b8a6f0;
 
-  /* ---- Layout ---- */
-  --rail-w: 168px;
-  --content-max: 1320px;
-  --section-pad: 90px max(24px, calc((100% - var(--content-max)) / 2));
+  /* The dot grid, and the glow that follows the pointer across it. */
+  --dot: #1c2a45;
+
+  --font-sans: "Figtree", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  --measure: 980px;
+  --gutter: clamp(22px, 5vw, 48px);
 }

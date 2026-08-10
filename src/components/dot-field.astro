@@ -1,0 +1,17 @@
+---
+import '@/components/dot-field.css';
+/**
+ * A dot grid across the whole page, with a soft glow that follows the
+ * pointer. The grid is one CSS gradient, the glow is one more layer masked
+ * to a circle: no canvas, no per-frame work beyond writing two CSS
+ * variables. Decorative, so it stays out of the accessibility tree, and it
+ * disappears entirely under prefers-reduced-motion.
+ */
+---
+<div class="dot-field" aria-hidden="true" data-dot-field></div>
+
+<script>
+  import { initDotField } from '@/scripts/dot-field';
+
+  initDotField();
+</script>

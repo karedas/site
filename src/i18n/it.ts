@@ -13,13 +13,13 @@ export const it: Copy = {
   meta: {
     title: 'Andrea Lisi · Staff Engineer · Platform & Governance',
     description:
-      'Staff Engineer a Vienna. Diciotto anni sul web, oggi governo una monorepo a micro-frontend e decido come l’AI ci entra dentro.',
+      'Staff Engineer a Vienna. Diciotto anni sul web. Tengo insieme sistemi che cambiano ogni giorno, e decido come l’AI ci entra dentro.',
     ogImageAlt: 'Andrea Lisi, Staff Engineer a Vienna',
   },
   aiMeta: {
     title: 'AI · Andrea Lisi · Staff Engineer',
     description:
-      'Come ci lavoro davvero: il lavoro si è spostato dallo scrivere al decidere, e gran parte del valore sta nel sapere quando fermarsi.',
+      'Come ci lavoro davvero: il lavoro si è spostato dallo scrivere al decidere, e delego solo quello che sono in grado di verificare.',
   },
 
   skipLink: 'Vai al contenuto',
@@ -38,15 +38,18 @@ export const it: Copy = {
   },
 
   hero: {
+    greeting: 'Ciao. Mi chiamo',
+    tagline: 'Al codice ci sono arrivato dall’arte.',
     eyebrow: 'STAFF ENGINEER · PLATFORM & GOVERNANCE · VIENNA',
     stats: [
       { label: 'ESPERIENZA', value: '18+ anni' },
-      { label: 'FOCUS', value: 'Piattaforma, governance, AI', accent: true },
+      { label: 'FOCUS', value: 'Piattaforma, governance, AI', tone: 'now' },
       { label: 'BASE', value: 'Vienna, remoto o ibrido' },
       { label: 'LINGUE', value: 'IT · EN · DE in corso' },
+      { label: 'FORMAZIONE', value: 'Istituto d’Arte, Firenze', tone: 'root' },
     ],
     intro:
-      'Diciotto anni sul web, arrivato al codice passando dal design e dalla musica. Tengo insieme un sistema che cambia ogni giorno, e decido come l’AI ci entra dentro senza che il codice ne risenta.',
+      'Diciotto anni sul web. Tengo insieme sistemi che cambiano ogni giorno, e decido come l’AI ci entra dentro senza che il codice ne risenta.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
@@ -54,49 +57,46 @@ export const it: Copy = {
     approach: { num: '01', title: 'Come lavoro', eyebrow: 'PAROLE MIE' },
     ai: { num: '02', title: 'AI', eyebrow: 'GLI AGENTI E LE REGOLE IN CUI LAVORANO' },
     experience: { num: '03', title: 'Esperienza', eyebrow: 'DICIOTTO ANNI, QUATTRO POSTI' },
-    contact: { num: '04', title: 'Contatti', eyebrow: 'CV E PROFILI' },
+    contact: { num: '04', title: 'Restiamo in contatto', eyebrow: 'CV E PROFILI' },
   },
 
   approach: [
     {
       title: 'Pulito dal primo minuto',
-      body: 'Non esiste per me un progetto avviato sporco. Anche una prima demo la scrivo minimale, ma con ogni pezzo al suo posto, pronto a crescere o a essere buttato. Mi viene così, e non mi costa un minuto in più. <code>any</code> non lo scrivo mai: di solito lo scrive chi TypeScript non lo sa.',
+      body: 'Non esiste per me un progetto avviato sporco. Anche una prima demo la scrivo minimale, ma con ogni pezzo al suo posto, pronto a crescere o a essere buttato. Pulito per me vuol dire che i confini si vedono da fuori: dove va una cosa, e cosa può dipendere da cosa. Mi viene così, e non mi costa un minuto in più.',
     },
     {
       title: 'In casa d’altri non brucio niente',
-      body: 'Se arrivo su un progetto messo male non voglio ripulirlo tutto subito: sarebbe il modo più veloce per farmi odiare e non finire niente. Metto delle priorità e comincio da quello che dà risultato immediato. Un linter lo aggiungo al volo. Ma se apro una cartella e trovo un file da cinquemila righe, quello lo divido prima di ogni altra cosa: costa mezza giornata, e da lì in poi non lo paghi più.',
+      body: 'Se arrivo su un progetto messo male non voglio ripulirlo tutto subito: sarebbe il modo più veloce per farmi odiare e non finire niente. Metto delle priorità e comincio da quello che dà risultato immediato, perché chi ci lavora deve vedere il guadagno prima di sentire il costo. Ma c’è sempre quello che frena tutti, il punto da cui ogni modifica deve passare, e quello lo divido prima di ogni altra cosa. Si paga una volta sola.',
     },
     {
       title: 'Il perché prima della regola',
-      body: 'Prima di imporre una regola vado a cercarmi il motivo, lo scrivo e passo il link. Solo allora si applica, con una scadenza che una persona può reggere. Nessuno deve fidarsi di me sulla parola, e non voglio che lo faccia.',
+      body: 'Prima di imporre una regola vado a cercarmi il motivo, e lo scrivo. La regola arriva sempre insieme al suo perché, e con una scadenza che una persona può reggere. Nessuno deve fidarsi di me sulla parola, e non voglio che lo faccia. Quando è chiara smetto di ripeterla: finisce in pipeline come warning da risolvere, e io passo alla successiva.',
     },
     {
-      title: 'Con le persone parlo, la ripetizione la lascio alla macchina',
-      body: 'Vado a parlare di persona, sempre, perché una regola spiegata a voce si discute e una regola scritta si subisce. Quello che non voglio è dire venti volte la stessa cosa. Quando la regola è chiara finisce in pipeline come warning da risolvere, e io passo alla successiva.',
+      title: 'Accorcio le distanze',
+      body: 'Con le persone ci parlo, tutte, e non aspetto il momento giusto. Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma: mi interessa la persona molto prima del ruolo che ha. Il tono serio lo tengo per le cose che lo meritano davvero, e sono molte meno di quante sembri. Sul resto si fa prima a guardarsi in faccia.',
     },
     {
       title: 'A volte il mio lavoro è non risolvere il problema',
-      body: 'Potrei chiudere certe cose in cinque minuti. Preferisco perderci mezz’ora: scrivo il documento, apro il task, avviso il team, do una scadenza. Quel lavoro è loro. Se lo faccio sempre io, smettono di sapere che esiste.',
+      body: 'Certe cose potrei chiuderle da solo in silenzio, e nessuno se ne accorgerebbe. Preferisco spenderci il tempo che serve a passarle: scrivo il documento, apro il task, avviso il team, do una scadenza. Quel lavoro è loro. Se lo faccio sempre io, smettono di sapere che esiste.',
     },
     {
-      title: 'Vengo dall’arte',
-      body: 'La grafica prima, poi il violino, che ho suonato per anni. Non è un passato che ho chiuso: programmare per me è arte, e deve comportarsi come tale. Una cosa fatta bene si riconosce a vista, e regge anche quando la smonti. Guardo un’interfaccia e un albero di cartelle con lo stesso occhio, e comincio quasi sempre dagli interventi che si vedono.',
+      title: 'Una cartella è un dipinto',
+      tone: 'root',
+      body: 'Ho fatto l’istituto d’arte, e disegnare non ho mai smesso. Prima il disegno, poi anni di violino. Di un’interfaccia mi interessa se è bella e perché è fatta così, e sono due domande che non riesco a separare. Lo stesso metro lo applico all’architettura: una cartella per me è un dipinto, e si vede a colpo d’occhio se dentro c’è un ordine o soltanto roba messa via.',
     },
   ],
 
   ai: {
     heading: 'Come ci lavoro davvero',
     paragraphs: [
-      'Quello che l’AI mi ha dato è la possibilità di tenere aperti più fronti insieme di quanti ne reggerei da solo. Mentre una cosa va avanti ne apro un’altra. Il lavoro si è spostato dallo scrivere al decidere, e descrivere il problema in modo netto, mai vago, è diventata la parte che conta davvero. Da quasi un anno leggo e correggo molto più codice di quanto ne scriva.',
-      '<b>Gran parte del valore sta nel fermare.</b> Un agente ti propone di ricostruire una cosa che esiste già, e suona pure convincente. Serve qualcuno che abbia l’insieme in testa e dica no. Taglio i commenti che spiegano quello che il codice già dice, e le astrazioni tirate su per un solo punto di utilizzo. Quello che resta è la forma più semplice che regge.',
-      '<b>So anche quando non usarla</b>, e questa è la parte che in azienda non insegna nessuno. Si spinge tutti ad andare più veloci, poi dove fermarsi ognuno se lo deve trovare da sé. Non se lo trova. Ho visto un collega accettare un suggerimento dopo l’altro senza mai fermarsi a chiedersi cosa stesse accettando.',
-      'E poi c’è il lavoro strutturale: le regole del repo strette perché anche gli agenti producano codice a standard. È governance applicata a un nuovo tipo di contributore.',
+      'Quello che l’AI mi ha dato è la possibilità di tenere aperti più fronti insieme di quanti ne reggerei da solo. Mentre una cosa va avanti ne apro un’altra. Il lavoro si è spostato dallo scrivere al decidere, e descrivere il problema in modo netto è diventata la parte che conta davvero. Ormai leggo e correggo molto più codice di quanto ne scriva.',
+      '<b>Il valore vero sta in quello che viene dopo.</b> Un agente ti propone di ricostruire una cosa che esiste già, e suona convincente. Oppure risolve il sintomo e lascia in piedi la causa. Di ogni proposta guardo prima se quella cosa deve esistere nel progetto, e solo dopo se funziona. Quasi sempre la rimando indietro almeno una volta, e quello che torna al secondo giro è più semplice di quello che era partito.',
+      '<b>Delego solo quello che sono in grado di verificare.</b> Se leggere e capire una risposta mi costa più che scriverla, non ho risparmiato niente: ho solo spostato il lavoro dove si vede meno. Vale per le migrazioni che non si tornano indietro e per i problemi che non riesco ancora a descrivere con precisione, perché lì un agente ti dà una risposta sicura alla domanda sbagliata.',
+      'E poi c’è il lavoro strutturale, la parte meno visibile e quella che tiene. Gli stessi confini che valgono per i team ora devono valere per un contributore che non è una persona: le regole diventano strette e verificabili in pipeline, perché un agente non le intuisce, le legge. È governance applicata a un nuovo tipo di contributore, uno che prende alla lettera tutto quello che scrivi.',
     ],
-    keywords: [
-      ['Agentic coding in IDE and CI', 'Prompt and context engineering', 'MCP'],
-      ['RAG and embeddings', 'LLM APIs and evals', 'OWASP LLM Top 10', 'Agentic review in CI'],
-    ],
-    permalinkSuffix: 'questa sezione in una pagina a sé',
+    permalinkLabel: 'Questa sezione ha una pagina sua',
     backLabel: 'ANDREA LISI',
   },
 
@@ -104,51 +104,70 @@ export const it: Copy = {
     {
       years: '2023 · OGGI',
       place: 'VIENNA, AT',
-      company: 'Tricentis · Tosca Cloud',
+      title: 'Staff Engineer',
+      company: 'Tricentis',
       role: 'Platform & Governance · Senior Software Engineer',
-      tags: ['Monorepo', 'Micro-frontend', 'Governance', 'Agentic AI'],
+      tags: ['Architettura', 'Governance', 'Standard', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'Sono entrato nel team di una singola applicazione. Poco dopo mi occupavo <b>della governance e della ristrutturazione architetturale dell’intera monorepo</b>.',
-        'È una monorepo a micro-frontend con più team dentro, e il mio compito è tenerla insieme mentre cambia ogni giorno.',
-        '<b>Sto in mezzo.</b> Le direzioni del design, le direttive degli stakeholder, le decisioni sull’integrazione dell’AI: arrivano tutte al mio team. Decidiamo come si implementano e le portiamo ai team delle applicazioni.',
-        '<b>Decido quali tecnologie entrano</b>, come è fatta la struttura di un’applicazione e dove va un file. Do la struttura e lo scaffolding, e chi sviluppa lavora dentro quei confini.',
-        '<b>E resto dentro anch’io</b>: se esce una vulnerabilità che blocca le pipeline, la correggo io.',
+        'Sono entrato per una sola applicazione. Poco dopo il mio fuoco era <b>l’architettura</b>: la forma del repository, le pipeline, gli standard, e il lavoro continuo per rendere l’insieme più solido.',
+        'Il mio compito è tenere insieme un sistema grande, con dentro parecchi team, mentre cambia ogni giorno.',
+        '<b>Sono un gateway fra i team.</b> Quello che un team costruisce a livello di prodotto è suo. Il mio pezzo è l’infrastruttura che li tiene in piedi, e il modo in cui le cose ci entrano: le direzioni del design, le richieste degli stakeholder e le decisioni sull’AI passano da qui, e le traduco in qualcosa con cui si possa lavorare.',
+        '<b>Decido cosa entra e cosa resta fuori</b>, come è fatta la struttura e dove va ogni cosa. Do la forma, e chi sviluppa lavora dentro quei confini.',
+        '<b>E resto dentro anch’io</b>: quando salta qualcosa che blocca tutti, lo sistemo io.',
       ],
     },
     {
       years: '2019 · 2023',
       place: 'FIRENZE, IT',
+      title: 'Frontend Developer',
       company: 'Treedom',
       role: 'Frontend Developer',
       tags: ['React', 'Vue', 'GraphQL'],
       paragraphs: [
-        'Sono arrivato a rinforzare due sviluppatori sullo storefront, poi l’ho riscritto mentre il team cresceva intorno a noi e tutto usciva dal monolite. Da lì ho preso i sistemi interni con cui i forestali gestiscono gli alberi, e <b>quell’interfaccia l’ho scritta da zero</b>. Le fondamenta che abbiamo posato hanno retto mentre l’azienda passava da una ventina di persone a <b>più di centocinquanta</b>.',
+        'Sono arrivato a rinforzare due sviluppatori sullo storefront, e ho finito per riscriverlo mentre il team cresceva intorno a noi e tutto usciva dal monolite.',
+        'Nell’ultimo anno <b>ho costruito da zero il backend dei sistemi interni</b>, quelli con cui i forestali gestiscono gli alberi, dentro un team di backend pur venendo dal frontend.',
+        'Le fondamenta che abbiamo posato hanno retto mentre l’azienda passava da una ventina di persone a <b>più di centocinquanta</b>.',
       ],
     },
     {
       years: '2017 · 2019',
       place: 'FIRENZE, IT',
+      title: 'Frontend Developer',
       company: 'Forzieri.com',
       role: 'Frontend Developer',
       tags: ['React', 'Webpack'],
       paragraphs: [
-        'Ho modernizzato <b>un e-commerce ASP legacy da cima a fondo</b>, una migrazione incrementale prima a jQuery e poi a React, mentre il negozio di lusso continuava a rilasciare funzionalità.',
+        'Ho modernizzato <b>un e-commerce ASP legacy da cima a fondo</b>, con una migrazione incrementale prima a jQuery e poi a React.',
+        'Il backend è venuto con il resto: <b>un CMS su misura</b> che gestiva gli ordini e la vita quotidiana del negozio.',
+        'Il negozio di lusso ha continuato a rilasciare funzionalità per tutta la transizione, senza mai fermarsi.',
       ],
     },
     {
       years: '2007 · 2017',
       place: 'FIGLINE VALDARNO, IT',
+      title: 'Head of Web · Full-Stack Designer',
       company: 'Easysystem',
       role: 'Head of Web · Full-Stack Designer',
       tags: ['Design', 'Full-stack', 'Infrastruttura'],
       paragraphs: [
-        'Assunto come grafico dello studio, prototipi e identità visive disegnati da zero, e finito a fare il <b>tecnico dell’infrastruttura on-premise</b>: server, e reti che disegnavo e cablavo su misura dentro le aziende dei clienti. Dieci anni a seguire ogni passaggio per decine di clienti, <b>dal primo schizzo di un marchio alle macchine su cui girava</b>.',
+        'Assunto come web designer: prototipi, grafica per la stampa e identità visive disegnate da zero, mai montate da un modello comprato.',
+        'In parallelo ho fatto <b>infrastruttura vera</b>: reti installate dentro le aziende dei clienti, con i firewall e i server che ci stavano dietro. Il networking l’ho imparato mettendoci le mani.',
+        'Dieci anni a tenere insieme tutto questo <b>da solo</b>, per decine di clienti, dal primo schizzo di un marchio alle macchine su cui girava.',
       ],
     },
   ],
 
+  footer: {
+    built: 'Scritto, disegnato e messo online da me.',
+  },
+
+  nowBadge: 'IN CORSO',
+
   contact: {
+    invite: 'Scrivimi quando vuoi, anche solo per parlare.',
+    inviteMore:
+      'Una conversazione nuova non mi ha mai dato fastidio, e una proposta che mi incuriosisce ancora meno.',
     cv: 'CV (PDF)',
     github: 'GitHub',
     linkedin: 'LinkedIn',

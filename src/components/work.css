@@ -1,0 +1,142 @@
+.work .job {
+  padding: 30px 0 34px;
+  border-top: 1px solid var(--line);
+}
+
+.work .job:first-of-type {
+  padding-top: 0;
+  border-top: none;
+}
+
+.work .job-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  align-items: baseline;
+}
+
+.work .job-title {
+  margin: 0;
+  font-size: 19.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.work .job-title .at {
+  color: var(--acc);
+}
+
+.work .years {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+/* Badge on the left, dates on the far right: the same gold at both ends
+   brackets the row that is still open. */
+.work .years.live {
+  color: var(--now);
+}
+
+.work .now {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--now);
+  border: 1px solid var(--now-line);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+
+.work .now .pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--now);
+  animation: nowPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes nowPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work .now .pulse {
+    animation: none;
+  }
+}
+
+.work .meta {
+  margin: 5px 0 16px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--dim);
+}
+
+/* Bullets, not a paragraph: in a row they read as the duties of a role. */
+.work .duties {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  max-width: 62ch;
+}
+
+.work .duty {
+  display: flex;
+  gap: 13px;
+}
+
+.work .duty .mark {
+  flex: none;
+  color: var(--acc);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.work .duty p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.work .duty b {
+  color: var(--head);
+  font-weight: 600;
+}
+
+.work .chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 18px;
+}
+
+.work .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.work .chip svg {
+  color: var(--body);
+}
+
+/* Ten years of drawing started here, so the mark matches the hero. */
+.work .chip.root svg {
+  color: var(--root);
+}

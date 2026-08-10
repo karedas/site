@@ -1,63 +1,24 @@
 ---
 import AiSection from '@/components/ai-section.astro';
-import Footer from '@/components/footer.astro';
-import LangSwitch from '@/components/lang-switch.astro';
-import { getCopy, hrefFor, type Locale } from '@/i18n';
+import DotField from '@/components/dot-field.astro';
+import SiteFooter from '@/components/site-footer.astro';
+import SiteHeader from '@/components/site-header.astro';
+import type { Locale } from '@/i18n';
 import Layout from '@/layouts/layout.astro';
 
-interface Props {
+type Props = {
   locale: Locale;
-}
+};
 
 const { locale } = Astro.props;
-const copy = getCopy(locale);
 ---
 <Layout locale={locale} page="ai">
-  <div class="deep-bar">
-    <a class="back" href={hrefFor(locale, 'home')}>
-      <span class="arrow" aria-hidden="true">&larr;</span> {copy.ai.backLabel}
-    </a>
-    <LangSwitch locale={locale} page="ai" />
+  <DotField />
+  <div class="shell">
+    <SiteHeader locale={locale} page="ai" />
+    <main id="main-content" style="min-height:62vh">
+      <AiSection locale={locale} variant="page" />
+    </main>
+    <SiteFooter locale={locale} />
   </div>
-  <main id="main-content">
-    <AiSection locale={locale} variant="page" />
-  </main>
-  <Footer />
 </Layout>
-
-<style>
-  .deep-bar {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 14px clamp(16px, 4vw, 40px);
-    border-bottom: 1px solid var(--line);
-    background: rgba(25, 20, 18, 0.92);
-    backdrop-filter: blur(8px);
-    font: 500 10px var(--font-mono);
-    letter-spacing: 0.16em;
-  }
-
-  .back {
-    color: var(--fg-62);
-    transition: color 0.2s;
-  }
-
-  .back:hover,
-  .back:focus-visible {
-    color: var(--accent);
-  }
-
-  .back .arrow {
-    display: inline-block;
-    transition: transform 0.2s;
-  }
-
-  .back:hover .arrow {
-    transform: translateX(-3px);
-  }
-</style>
