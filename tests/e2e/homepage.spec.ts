@@ -135,6 +135,12 @@ for (const locale of ['en', 'it'] as const) {
         await expect(card.locator('.duty')).toHaveCount(job.paragraphs.length);
         await expect(card.locator('.chip')).toHaveCount(job.tags.length);
       }
+
+      // The closing line only means anything after the entries, so it has to be
+      // the last thing in the section, not a lead over it.
+      const closing = page.locator('.work .closing');
+      await expect(closing).toHaveText(plain(copy.workClosing));
+      expect(await closing.evaluate((el) => el === el.parentElement?.lastElementChild)).toBe(true);
     });
 
     test('closes on an invitation, with the address behind the mail icon', async ({ page }) => {

@@ -43,7 +43,7 @@ export const en: Copy = {
       { label: 'FOUNDATION', value: 'Art school, Florence', tone: 'root' },
     ],
     intro:
-      'What keeps me switched on is a hard problem, and I don’t leave it until it is solved the way it deserves. It still gets me when something is made well and you see it at first glance: that is what I was after when I was drawing. It is not enough that a thing works, I want to know why.',
+      'What keeps me switched on is a hard problem, and I don’t leave it until it is solved the way it deserves. It still gets me when something is made well and you see it at first glance: that is what I was after when I was drawing.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
@@ -143,6 +143,9 @@ export const en: Copy = {
       ],
     },
   ],
+
+  workClosing:
+    'Every step moved my attention a little further out from the code. I came to programming through art, looking for the same structural harmony, and today I don’t look at the single feature: I look at the foundations, the automation and the rules that hold the whole thing up. <b>I fix things at the root</b>, because it is not enough that one piece works: I need to know it holds the rest.',
 
   footer: {
     built: 'Written, designed and shipped by me.',

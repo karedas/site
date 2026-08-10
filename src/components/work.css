@@ -136,6 +136,24 @@
   color: var(--body);
 }
 
+/* What the four entries add up to. It reads as the conclusion of the section,
+   so it gets the rule above it that separates the cards and a little more size
+   than the duties it follows. */
+.work .closing {
+  margin: 34px 0 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--line);
+  max-width: 66ch;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--body);
+}
+
+.work .closing b {
+  color: var(--head);
+  font-weight: 600;
+}
+
 /* Ten years of drawing started here, so the mark matches the hero. */
 .work .chip.root svg {
   color: var(--root);

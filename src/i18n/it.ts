@@ -49,7 +49,7 @@ export const it: Copy = {
       { label: 'FORMAZIONE', value: 'Istituto d’Arte, Firenze', tone: 'root' },
     ],
     intro:
-      'Quello che mi tiene acceso è un problema difficile, e non lo lascio finché non è risolto come si deve. Mi fa ancora effetto quando una cosa è fatta bene e si capisce al primo sguardo: è quello che cercavo quando disegnavo. Non mi basta che funzioni, voglio sapere perché.',
+      'Quello che mi tiene acceso è un problema difficile, e non lo lascio finché non è risolto come si deve. Mi fa ancora effetto quando una cosa è fatta bene e si capisce al primo sguardo: è quello che cercavo quando disegnavo.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
@@ -149,6 +149,9 @@ export const it: Copy = {
       ],
     },
   ],
+
+  workClosing:
+    'Ogni tappa mi ha spostato lo sguardo un po’ più in là del codice. Alla programmazione ci sono arrivato dall’arte, cercando la stessa armonia strutturale, e oggi non guardo la singola feature: guardo le fondamenta, le automazioni e le regole che tengono in piedi l’insieme. <b>Risolvo alla radice</b>, perché non mi basta che un pezzo funzioni: devo sapere che regge tutto il resto.',
 
   footer: {
     built: 'Scritto, disegnato e messo online da me.',
