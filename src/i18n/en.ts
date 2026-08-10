@@ -85,10 +85,9 @@ export const en: Copy = {
   ai: {
     heading: 'How I actually work with it',
     paragraphs: [
-      'What AI gave me is the ability to keep more fronts open at once than I could hold on my own. While one thing moves I start another. The work shifted from writing to deciding, and putting the problem sharply became the part that actually counts. By now I read and correct far more code than I write.',
-      '<b>The real value is in what comes after.</b> An agent will offer to rebuild something that already exists, and it will sound convincing. Or it fixes the symptom and leaves the cause standing. With any proposal I look first at whether that thing belongs in the project, and only then at whether it works. Most of the time I send it back at least once, and what comes back on the second pass is simpler than what set out.',
-      '<b>I only delegate what I am able to verify.</b> If reading and understanding an answer costs me more than writing it, I have saved nothing: I have moved the work somewhere it shows less. That holds for migrations you cannot walk back, and for problems I cannot yet describe precisely, because there an agent hands you a confident answer to the wrong question.',
-      'Then there is the structural work, the least visible part and the one that holds. The same boundaries that apply across teams now have to apply to a contributor that isn’t a person: the rules get strict and checkable in the pipeline, because an agent does not sense them, it reads them. It’s governance applied to a new kind of contributor, one that takes everything you write literally.',
+      'What AI gave me is keeping more fronts open than I could hold on my own. The work shifted from writing to deciding, and by now I read and correct far more code than I write.',
+      '<b>I only delegate what I am able to verify.</b> With any proposal I look first at whether that thing belongs in the project, and only then at whether it works: an agent will happily rebuild what already exists, or fix the symptom and leave the cause standing. If reading an answer costs me more than writing it, I have saved nothing.',
+      '<b>Then there is the structural part, and it is the part that holds.</b> The same boundaries that apply across teams have to apply to a contributor that isn’t a person: the rules get strict and checkable in the pipeline, because an agent does not sense them, it reads them.',
     ],
     backLabel: 'ANDREA LISI',
   },
@@ -103,11 +102,9 @@ export const en: Copy = {
       tags: ['Architecture', 'Governance', 'Standards', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'I came in on a team building features for specific Tosca Cloud products, Inventory and the API simulation behind api-playground and api-messages, shoulder to shoulder with the same team’s backend engineers, and as the project grew <b>I was promoted into a team created to hold its reins</b>, architecture included.',
-        '<b>I look after the governance of the repository</b>, and it is the centre of the role: a micro-frontend monorepo with sixteen projects inside it, released by different teams and still expected to read as one product. What comes in and what stays out, how it is structured, where everything goes and which boundaries each team works inside.',
-        '<b>Underneath sits the architectural maintenance</b>: module boundaries, the dependency graph, build times, and the pipelines with what has to fail in CI before it reaches main, the moment something breaks and blocks everyone included.',
-        '<b>I keep the dependencies and the reuse in order</b>: package upgrades and integration across the platform, with the breakage absorbed before it reaches the teams, and shared resources built once instead of by each team on its own.',
-        '<b>On standards I act as the gateway between design and the internal teams</b>: the direction comes from there and I turn it into rules and components people can work with, taking apart bad practice when I see it turning into habit.',
+        'I came in on a team building features for specific Tosca Cloud products, Inventory and the API simulation behind api-playground and api-messages, shoulder to shoulder with the same team’s backend engineers, and as the project grew <b>I was promoted into a team created to hold its reins</b>.',
+        '<b>I look after the governance of the repository</b>: a micro-frontend monorepo with sixteen projects, released by different teams and still expected to read as one product. What comes in and what stays out, the module boundaries, the dependency graph, and the pipelines with what has to fail before it reaches main.',
+        '<b>I act as the gateway between design and the internal teams</b> on standards, and I build the shared resources used instead of rebuilding them: that is where bad practice stops before it turns into habit.',
         '<b>AI I integrate at every level</b>, from developer experience to the pipelines, on the same rules and the same gates as code written by hand.',
       ],
     },

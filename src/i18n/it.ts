@@ -91,10 +91,9 @@ export const it: Copy = {
   ai: {
     heading: 'Come ci lavoro davvero',
     paragraphs: [
-      'Quello che l’AI mi ha dato è la possibilità di tenere aperti più fronti insieme di quanti ne reggerei da solo. Mentre una cosa va avanti ne apro un’altra. Il lavoro si è spostato dallo scrivere al decidere, e descrivere il problema in modo netto è diventata la parte che conta davvero. Ormai leggo e correggo molto più codice di quanto ne scriva.',
-      '<b>Il valore vero sta in quello che viene dopo.</b> Un agente ti propone di ricostruire una cosa che esiste già, e suona convincente. Oppure risolve il sintomo e lascia in piedi la causa. Di ogni proposta guardo prima se quella cosa deve esistere nel progetto, e solo dopo se funziona. Quasi sempre la rimando indietro almeno una volta, e quello che torna al secondo giro è più semplice di quello che era partito.',
-      '<b>Delego solo quello che sono in grado di verificare.</b> Se leggere e capire una risposta mi costa più che scriverla, non ho risparmiato niente: ho solo spostato il lavoro dove si vede meno. Vale per le migrazioni che non si tornano indietro e per i problemi che non riesco ancora a descrivere con precisione, perché lì un agente ti dà una risposta sicura alla domanda sbagliata.',
-      'E poi c’è il lavoro strutturale, la parte meno visibile e quella che tiene. Gli stessi confini che valgono per i team ora devono valere per un contributore che non è una persona: le regole diventano strette e verificabili in pipeline, perché un agente non le intuisce, le legge. È governance applicata a un nuovo tipo di contributore, uno che prende alla lettera tutto quello che scrivi.',
+      'Quello che l’AI mi ha dato è tenere aperti più fronti di quanti ne reggerei da solo. Il lavoro si è spostato dallo scrivere al decidere, e ormai leggo e correggo molto più codice di quanto ne scriva.',
+      '<b>Delego solo quello che sono in grado di verificare.</b> Di ogni proposta guardo prima se quella cosa deve esistere nel progetto, e solo dopo se funziona: un agente ricostruisce volentieri quello che c’è già, o risolve il sintomo e lascia in piedi la causa. Se leggere una risposta mi costa più che scriverla, non ho risparmiato niente.',
+      '<b>Poi c’è la parte strutturale, che è quella che tiene.</b> Gli stessi confini che valgono per i team devono valere per un contributore che non è una persona: le regole diventano strette e verificabili in pipeline, perché un agente non le intuisce, le legge.',
     ],
     backLabel: 'ANDREA LISI',
   },
@@ -109,11 +108,9 @@ export const it: Copy = {
       tags: ['Architettura', 'Governance', 'Standard', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'Sono entrato in un team che sviluppava features per prodotti precisi di Tosca Cloud, Inventory e la simulazione delle API dietro api-playground e api-messages, gomito a gomito con i backend dello stesso team, e quando il progetto è cresciuto <b>mi hanno promosso in un team creato apposta per tenerne le redini</b>, architettura compresa.',
-        '<b>Mi occupo della governance della repository</b>, ed è il centro del ruolo: una monorepo a microfrontend con sedici progetti dentro, rilasciati da team diversi e che devono restare un prodotto solo. Cosa entra e cosa resta fuori, come è strutturata, dove va ogni cosa e quali confini ha davanti ogni team.',
-        '<b>Sotto c’è la manutenzione architetturale</b>: confini fra i moduli, grafo delle dipendenze, tempi di build, e le pipeline con quello che deve fallire in CI prima di arrivare in main, compreso il momento in cui si rompe qualcosa che blocca tutti.',
-        '<b>Tengo in ordine le dipendenze e il riuso</b>: aggiornamento e integrazione dei pacchetti su tutta la piattaforma, con le rotture assorbite prima che arrivino ai team, e le risorse condivise costruite una volta invece che da ognuno per conto proprio.',
-        '<b>Sugli standard faccio da gateway fra il design e i team interni</b>: le direzioni arrivano da lì e le traduco in regole e componenti con cui si possa lavorare, smontando le bad practice quando vedo che stanno diventando abitudine.',
+        'Sono entrato in un team che sviluppava features per prodotti precisi di Tosca Cloud, Inventory e la simulazione delle API dietro api-playground e api-messages, gomito a gomito con i backend dello stesso team, e quando il progetto è cresciuto <b>mi hanno promosso in un team creato apposta per tenerne le redini</b>.',
+        '<b>Mi occupo della governance della repository</b>: una monorepo a microfrontend con sedici progetti, rilasciati da team diversi e che devono restare un prodotto solo. Cosa entra e cosa resta fuori, i confini fra i moduli, il grafo delle dipendenze, e le pipeline con quello che deve fallire prima di arrivare in main.',
+        '<b>Faccio da gateway fra il design e i team interni</b> sugli standard, e costruisco le risorse condivise che si usano al posto di rifarle: è lì che le bad practice si fermano prima di diventare abitudine.',
         '<b>L’AI la integro a tutti i livelli</b>, dalla developer experience alle pipeline, con le stesse regole e gli stessi gate del codice scritto a mano.',
       ],
     },
