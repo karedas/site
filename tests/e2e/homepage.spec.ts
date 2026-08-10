@@ -156,12 +156,10 @@ for (const locale of ['en', 'it'] as const) {
       ).toBeVisible();
     });
 
-    test('does not ship the retired copy or the labels that pigeonhole him', async ({ page }) => {
+    test('does not ship the retired copy', async ({ page }) => {
       await page.goto(home);
       for (const banned of [
         /quietly/i,
-        /micro-?frontend/i,
-        /monorepo/i,
         /TypeScript/,
         /five thousand/i,
         /cinquemila/i,
@@ -169,6 +167,21 @@ for (const locale of ['en', 'it'] as const) {
       ]) {
         await expect(page.getByText(banned), String(banned)).toHaveCount(0);
       }
+    });
+
+    /*
+     * The architecture is named once, as the thing he governs. In the work
+     * history that is evidence of scale. In the hero or in how-I-work it would
+     * read as the only thing he does, which is why it was cut the first time.
+     * The rule was never the word, it was the position.
+     */
+    test('names the architecture as evidence, never as a label', async ({ page }) => {
+      await page.goto(home);
+      const architecture = /micro-?frontend|monorepo/i;
+
+      await expect(page.locator('.hero').getByText(architecture)).toHaveCount(0);
+      await expect(page.locator('.approach').getByText(architecture)).toHaveCount(0);
+      await expect(page.locator('.work').getByText(architecture).first()).toBeVisible();
     });
 
     test('spends its three colours only where each one means something', async ({ page }) => {

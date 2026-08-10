@@ -104,8 +104,8 @@ export const en: Copy = {
       tags: ['Architecture', 'Governance', 'Standards', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'I came in on a team that had one of Tosca Cloud’s frontend applications, then two, and ended up restructuring and redesigning significant parts of them, so before long I was <b>promoted into the team that holds the platform’s governance</b>, and from there the focus became the architecture.',
-        '<b>The governance of the repository is mine, all of it</b>, and it is the core of the role: what comes in and what stays out, how it is structured, where everything goes and which boundaries each team works inside.',
+        'I came in on a team that had one of Tosca Cloud’s applications, then two, and ended up restructuring and redesigning significant parts of them, so before long I was <b>promoted into the team that holds the platform’s governance</b>.',
+        '<b>The governance of the repository is mine, all of it</b>, and it is the core of the role: a micro-frontend monorepo with sixteen projects inside it, released by different teams and still expected to read as one product. I decide what comes in and what stays out, how it is structured, where everything goes and which boundaries each team works inside.',
         '<b>I maintain it at the architectural level</b>: module boundaries, the dependency graph, build times and pipelines, what has to fail in CI before it reaches main, and when something breaks and blocks everyone the fix is mine.',
         '<b>Package upgrades and integration</b> across the whole platform: major versions, vulnerabilities, and the breakage I absorb before it reaches the teams.',
         '<b>I build the shared resources</b> teams use instead of each rebuilding their own, and I take apart bad practice when I see it turning into habit.',
