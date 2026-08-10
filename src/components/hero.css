@@ -26,14 +26,23 @@
   letter-spacing: -0.02em;
 }
 
-/* The line that says the job in one breath, deliberately as loud as the name. */
+/*
+ * The line under the name. It used to run at 54px against the name's 72px,
+ * three quarters of its size and the same weight, and at that distance the eye
+ * read the two as one sentence: "Andrea Lisi. Al codice..." looked like the name
+ * had continued into a typo. Half the name's size and a lighter weight, so it
+ * is unmistakably the next thing rather than the rest of the first.
+ */
 .hero .tagline {
-  margin: 6px 0 0;
-  font-weight: 700;
-  font-size: clamp(28px, 5vw, 54px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  margin: 12px 0 0;
+  font-weight: 500;
+  font-size: clamp(21px, 3.1vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
   color: var(--body);
+  /* Breaks at the comma instead of leaving "al server." alone on a line. */
+  text-wrap: balance;
+  max-width: 24ch;
 }
 
 .hero .intro {

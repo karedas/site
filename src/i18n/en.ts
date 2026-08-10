@@ -7,7 +7,7 @@ export const en: Copy = {
   meta: {
     title: 'Andrea Lisi · Platform & Governance · Vienna',
     description:
-      'Platform and governance in Vienna. Eighteen years on the web. I hold together systems that change every day, and I decide how AI gets into them.',
+      'Platform and governance in Vienna. Eighteen years on the web, from the drawing to the server: today I hold a large platform together, many teams inside.',
     ogImageAlt: 'Andrea Lisi, platform and governance engineer in Vienna',
   },
   aiMeta: {
@@ -33,7 +33,7 @@ export const en: Copy = {
 
   hero: {
     greeting: 'Ciao. My name is',
-    tagline: 'I came to code from art.',
+    tagline: 'Eighteen years on the web, from the drawing to the server.',
     eyebrow: 'PLATFORM & GOVERNANCE · SENIOR SOFTWARE ENGINEER · VIENNA',
     stats: [
       { label: 'EXPERIENCE', value: '18+ years' },
@@ -43,7 +43,7 @@ export const en: Copy = {
       { label: 'FOUNDATION', value: 'Art school, Florence', tone: 'root' },
     ],
     intro:
-      'Eighteen years on the web. I hold together systems that change every day, and I decide how AI gets into them without the code paying for it.',
+      'Today I hold a large platform together, with a good number of teams inside it. I look after how it is built and how people work in it, and the part I still like best is talking to the people building it.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 

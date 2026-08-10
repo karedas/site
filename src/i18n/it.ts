@@ -13,7 +13,7 @@ export const it: Copy = {
   meta: {
     title: 'Andrea Lisi · Platform & Governance · Vienna',
     description:
-      'Piattaforma e governance a Vienna. Diciotto anni sul web. Tengo insieme sistemi che cambiano ogni giorno, e decido come l’AI ci entra dentro.',
+      'Platform & Governance a Vienna. Diciotto anni sul web, dal disegno al server: oggi tengo insieme una piattaforma grande, con parecchi team dentro.',
     ogImageAlt: 'Andrea Lisi, piattaforma e governance a Vienna',
   },
   aiMeta: {
@@ -39,7 +39,7 @@ export const it: Copy = {
 
   hero: {
     greeting: 'Ciao. Mi chiamo',
-    tagline: 'Al codice ci sono arrivato dall’arte.',
+    tagline: 'Diciotto anni sul web, dal disegno al server.',
     eyebrow: 'PLATFORM & GOVERNANCE · SENIOR SOFTWARE ENGINEER · VIENNA',
     stats: [
       { label: 'ESPERIENZA', value: '18+ anni' },
@@ -49,7 +49,7 @@ export const it: Copy = {
       { label: 'FORMAZIONE', value: 'Istituto d’Arte, Firenze', tone: 'root' },
     ],
     intro:
-      'Diciotto anni sul web. Tengo insieme sistemi che cambiano ogni giorno, e decido come l’AI ci entra dentro senza che il codice ne risenta.',
+      'Oggi tengo insieme una piattaforma grande, con parecchi team dentro. Mi occupo di come è fatta e di come ci si lavora, e la parte che mi piace di più resta parlare con le persone che la costruiscono.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
