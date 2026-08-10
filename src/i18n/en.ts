@@ -57,34 +57,34 @@ export const en: Copy = {
   approach: [
     {
       label: 'Clean_Start',
-      title: 'Clean from minute one',
-      body: 'Even a first demo comes out minimal, with <em>the boundaries showing from outside</em>. It costs me nothing.',
+      title: 'Even a demo I write clean',
+      body: 'Minimal, but with <em>the boundaries showing from outside</em>: where a thing goes and what may depend on what. It costs me nothing.',
     },
     {
-      label: 'Triage_First',
-      title: 'In someone else’s house, nothing burns',
-      body: 'I don’t clean all of it at once: I start where the result shows, and <em>the point that slows everyone down</em> I break up before anything else.',
+      label: 'No_Rewrite',
+      title: 'I don’t rewrite it all on day one',
+      body: 'On a codebase in bad shape I start where the result shows immediately, and <em>the point that slows everyone down</em> I break up before anything else.',
     },
     {
       label: 'The_Why',
-      title: 'The reason before the rule',
-      body: 'Every rule arrives with its reason written down. Once it is settled <em>I stop repeating it</em>: it goes into CI.',
+      title: 'Every rule comes with its reason',
+      body: 'I go and find the reason and write it down, because nobody should take my word for it. Then <em>I stop repeating it</em>: it goes into CI.',
     },
     {
       label: 'No_Org_Chart',
-      title: 'I close the distance',
-      body: 'I talk to everyone, I joke, and who I talk to <em>was never decided by an org chart</em>. I save the serious tone for what deserves it.',
+      title: 'I talk to everyone, rank aside',
+      body: 'I joke, I laugh, and <em>who I talk to was never decided by an org chart</em>. I save the serious tone for what really deserves it.',
     },
     {
       label: 'Hand_It_Over',
-      title: 'Sometimes my job is not solving it',
-      body: 'I could close them alone and nobody would know. I hand them over, because <em>if I keep doing it they stop knowing it exists</em>.',
+      title: 'Some things I hand over, not fix',
+      body: 'I could close them alone and nobody would know. I hand them over with a document and a date, because <em>if I keep doing it they stop knowing it exists</em>.',
     },
     {
       label: 'Art_School',
-      title: 'A folder is a painting',
+      title: 'I come from art, and the code shows it',
       tone: 'root',
-      body: 'Art school, then years of the violin, and I never stopped drawing. <em>I hold architecture to the same standard</em>.',
+      body: 'Art school, then years of the violin, and I never stopped drawing. <em>A folder is a painting to me</em>, and I hold architecture to the same standard.',
     },
   ],
 

@@ -63,34 +63,34 @@ export const it: Copy = {
   approach: [
     {
       label: 'Clean_Start',
-      title: 'Pulito dal primo minuto',
-      body: 'Anche una prima demo la scrivo minimale, con <em>i confini che si vedono da fuori</em>. Non mi costa un minuto in più.',
+      title: 'Anche una demo la scrivo pulita',
+      body: 'Minimale, ma con <em>i confini che si vedono da fuori</em>: dove va una cosa e cosa può dipendere da cosa. Non mi costa un minuto in più.',
     },
     {
-      label: 'Triage_First',
-      title: 'In casa d’altri non brucio niente',
-      body: 'Non ripulisco tutto subito: comincio da dove il risultato si vede, e <em>il punto che frena tutti</em> lo divido prima di ogni altra cosa.',
+      label: 'No_Rewrite',
+      title: 'Non riscrivo tutto il primo giorno',
+      body: 'Su un progetto messo male comincio da dove il risultato si vede subito, e <em>il punto che frena tutti</em> lo divido prima di ogni altra cosa.',
     },
     {
       label: 'The_Why',
-      title: 'Il perché prima della regola',
-      body: 'Ogni regola arriva col suo motivo scritto. Quando è chiara <em>smetto di ripeterla</em>: finisce in pipeline.',
+      title: 'Ogni regola arriva con il suo perché',
+      body: 'Il motivo lo cerco e lo scrivo, perché nessuno deve fidarsi di me sulla parola. Poi <em>smetto di ripeterla</em>: finisce in pipeline.',
     },
     {
       label: 'No_Org_Chart',
-      title: 'Accorcio le distanze',
-      body: 'Parlo con tutti, scherzo, e con chi parlo <em>non l’ha mai deciso un organigramma</em>. Il tono serio lo tengo per quello che lo merita.',
+      title: 'Parlo con tutti, il ruolo non conta',
+      body: 'Scherzo, rido, e <em>con chi parlo non l’ha mai deciso un organigramma</em>. Il tono serio lo tengo per quello che lo merita davvero.',
     },
     {
       label: 'Hand_It_Over',
-      title: 'A volte il mio lavoro è non risolverlo',
-      body: 'Potrei chiuderle da solo e nessuno se ne accorgerebbe. Le passo, perché <em>se lo faccio sempre io smettono di sapere che esiste</em>.',
+      title: 'Certe cose le passo, non le risolvo',
+      body: 'Potrei chiuderle da solo e nessuno lo saprebbe. Le passo con un documento e una scadenza, perché <em>se lo faccio sempre io smettono di sapere che esiste</em>.',
     },
     {
       label: 'Art_School',
-      title: 'Una cartella è un dipinto',
+      title: 'Vengo dall’arte, e nel codice si vede',
       tone: 'root',
-      body: 'Istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. <em>Lo stesso metro lo applico all’architettura</em>.',
+      body: 'Istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. <em>Una cartella per me è un dipinto</em>, e all’architettura applico lo stesso metro.',
     },
   ],
 
