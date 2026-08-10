@@ -1,54 +1,44 @@
+/*
+ * One column, not a two-by-three grid. Six cards side by side read as a deck of
+ * slogans no matter how plainly each one is written; four paragraphs stacked at
+ * a reading measure read as somebody talking.
+ */
 .approach .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
-  gap: 38px 56px;
+  gap: 30px;
+  max-width: 70ch;
 }
 
-/* A hairline down the left of each block, so six of them read as a set of
-   entries rather than as one wall of paragraphs. */
+/* A hairline down the left of each one, so they stay four entries rather than
+   dissolving into a single wall of text. */
 .approach .block {
-  padding-left: 16px;
+  padding-left: 18px;
   border-left: 1px solid var(--line);
 }
 
-/*
- * Three treatments stacked, each unmistakably a different kind of thing: a mono
- * tag, a sans title, then one line of body. It replaces the decorative tick
- * that used to sit before the title, which would only have been noise above a
- * label that carries actual words.
- */
 .approach .block-label {
-  margin: 0 0 7px;
+  margin: 0 0 8px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--acc);
 }
 
-/* The art block takes the lilac here now that the tick is gone. */
+/* The art block's lilac, the one place a second colour appears here. */
 .approach .block-label.tone-root {
   color: var(--root);
 }
 
-.approach .block-title {
-  margin: 0 0 8px;
-  font-size: 17.5px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--head);
-}
-
 .approach .block-body {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 15.5px;
+  line-height: 1.75;
   color: var(--body);
 }
 
-/* One per body, on the phrase the block turns on. Emphasis by colour, never by
-   italics: the display face has no italic worth reading. */
-.approach .block-body em {
-  font-style: normal;
+/* The lead opens the sentence instead of sitting above it as a headline, which
+   is what turned these into slogans. One per block, and nothing else lifted. */
+.approach .block-body b {
   color: var(--head);
+  font-weight: 600;
 }

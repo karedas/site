@@ -83,7 +83,7 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    test('renders all six ways-of-working blocks, tag then title then a line', async ({ page }) => {
+    test('renders the ways-of-working blocks as tagged prose', async ({ page }) => {
       await page.goto(home);
       const blocks = page.locator('.approach .block');
       await expect(blocks).toHaveCount(copy.approach.length);
@@ -91,13 +91,21 @@ for (const locale of ['en', 'it'] as const) {
       for (const [i, block] of copy.approach.entries()) {
         const el = blocks.nth(i);
         await expect(el.locator('.block-label')).toHaveText(block.label);
-        await expect(el.locator('.block-title')).toHaveText(block.title);
-        // Kept short on purpose: past roughly this length nobody reads six of
-        // them in a row.
-        expect(plain(block.body).length, block.label).toBeLessThan(160);
-        // Exactly one highlighted phrase per block, never more.
-        await expect(el.locator('.block-body em')).toHaveCount(1);
+        // No headline over the paragraph: a title above a single line is what
+        // made each of these read as a slogan.
+        await expect(el.locator('.block-title')).toHaveCount(0);
+        // The lead opens the sentence, and it is the only emphasis in it.
+        await expect(el.locator('.block-body b')).toHaveCount(1);
+        // Long enough to be prose, short enough that four of them still get
+        // read. Six one-liners was too fragmented; six paragraphs was a brick.
+        const length = plain(block.body).length;
+        expect(length, `${block.label} is ${length}`).toBeGreaterThan(150);
+        expect(length, `${block.label} is ${length}`).toBeLessThan(360);
       }
+
+      // Four, not six: the count is the difference between a discussion and a
+      // deck of cards.
+      expect(copy.approach.length).toBe(4);
     });
 
     test('sets the AI section apart as the one enclosed block', async ({ page }) => {

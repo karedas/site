@@ -56,35 +56,21 @@ export const en: Copy = {
 
   approach: [
     {
-      label: 'Clean_Start',
-      title: 'Even a demo I write clean',
-      body: 'Minimal, but with <em>the boundaries showing from outside</em>: where a thing goes and what may depend on what. It costs me nothing.',
+      label: 'The_Code',
+      body: '<b>I start clean even when it is only a demo</b>: boundaries that show from outside cost nothing to put in straight away. On a codebase already in bad shape I don’t rewrite it all on day one, I start where the result shows, and the point that slows everyone down I break up before anything else.',
     },
     {
-      label: 'No_Rewrite',
-      title: 'I don’t rewrite it all on day one',
-      body: 'On a codebase in bad shape I start where the result shows immediately, and <em>the point that slows everyone down</em> I break up before anything else.',
+      label: 'The_Rules',
+      body: '<b>Every rule arrives with its reason</b>, because nobody should take my word for it, and once it is settled I stop repeating it: it goes into CI. Some things I could close on my own and nobody would know, and I hand them over anyway with a document and a date: if I keep doing them, the team stops knowing they exist.',
     },
     {
-      label: 'The_Why',
-      title: 'Every rule comes with its reason',
-      body: 'I go and find the reason and write it down, because nobody should take my word for it. Then <em>I stop repeating it</em>: it goes into CI.',
-    },
-    {
-      label: 'No_Org_Chart',
-      title: 'I talk to everyone, rank aside',
-      body: 'I joke, I laugh, and <em>who I talk to was never decided by an org chart</em>. I save the serious tone for what really deserves it.',
-    },
-    {
-      label: 'Hand_It_Over',
-      title: 'Some things I hand over, not fix',
-      body: 'I could close them alone and nobody would know. I hand them over with a document and a date, because <em>if I keep doing it they stop knowing it exists</em>.',
+      label: 'The_People',
+      body: '<b>I talk to everyone, and rank does not come into it.</b> I joke, I laugh, and who I talk to was never decided by an org chart. I save the serious tone for what really deserves it, and that is far fewer things than it looks.',
     },
     {
       label: 'Art_School',
-      title: 'I come from art, and the code shows it',
       tone: 'root',
-      body: 'Art school, then years of the violin, and I never stopped drawing. <em>A folder is a painting to me</em>, and I hold architecture to the same standard.',
+      body: '<b>I come from art</b>: art school, then years of the violin, and I never stopped drawing. A folder is a painting to me, and I hold architecture to the same standard: you can tell at a glance whether there is an order inside it or just things put away.',
     },
   ],
 

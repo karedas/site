@@ -18,7 +18,6 @@ const head = copy.sections.approach;
     {copy.approach.map((block) => (
       <div class="block">
         <p class:list={['block-label', block.tone && `tone-${block.tone}`]}>{block.label}</p>
-        <p class="block-title">{block.title}</p>
         <p class="block-body" set:html={block.body} />
       </div>
     ))}

@@ -62,35 +62,21 @@ export const it: Copy = {
 
   approach: [
     {
-      label: 'Clean_Start',
-      title: 'Anche una demo la scrivo pulita',
-      body: 'Minimale, ma con <em>i confini che si vedono da fuori</em>: dove va una cosa e cosa può dipendere da cosa. Non mi costa un minuto in più.',
+      label: 'The_Code',
+      body: '<b>Comincio pulito anche quando è solo una demo</b>: i confini che si vedono da fuori non costa niente metterli subito. Su un progetto già messo male invece non riscrivo tutto il primo giorno, comincio da dove il risultato si vede, e il punto che frena tutti lo divido prima di ogni altra cosa.',
     },
     {
-      label: 'No_Rewrite',
-      title: 'Non riscrivo tutto il primo giorno',
-      body: 'Su un progetto messo male comincio da dove il risultato si vede subito, e <em>il punto che frena tutti</em> lo divido prima di ogni altra cosa.',
+      label: 'The_Rules',
+      body: '<b>Ogni regola arriva con il suo perché</b>, perché nessuno deve fidarsi di me sulla parola, e quando è chiara smetto di ripeterla: finisce in pipeline. Certe cose potrei chiuderle da solo e nessuno lo saprebbe, e le passo comunque con un documento e una scadenza: se le faccio sempre io, il team smette di sapere che esistono.',
     },
     {
-      label: 'The_Why',
-      title: 'Ogni regola arriva con il suo perché',
-      body: 'Il motivo lo cerco e lo scrivo, perché nessuno deve fidarsi di me sulla parola. Poi <em>smetto di ripeterla</em>: finisce in pipeline.',
-    },
-    {
-      label: 'No_Org_Chart',
-      title: 'Parlo con tutti, il ruolo non conta',
-      body: 'Scherzo, rido, e <em>con chi parlo non l’ha mai deciso un organigramma</em>. Il tono serio lo tengo per quello che lo merita davvero.',
-    },
-    {
-      label: 'Hand_It_Over',
-      title: 'Certe cose le passo, non le risolvo',
-      body: 'Potrei chiuderle da solo e nessuno lo saprebbe. Le passo con un documento e una scadenza, perché <em>se lo faccio sempre io smettono di sapere che esiste</em>.',
+      label: 'The_People',
+      body: '<b>Parlo con tutti, e il ruolo non conta.</b> Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma. Il tono serio lo tengo per quello che lo merita davvero, e sono molte meno cose di quante sembri.',
     },
     {
       label: 'Art_School',
-      title: 'Vengo dall’arte, e nel codice si vede',
       tone: 'root',
-      body: 'Istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. <em>Una cartella per me è un dipinto</em>, e all’architettura applico lo stesso metro.',
+      body: '<b>Vengo dall’arte</b>: istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. Una cartella per me è un dipinto, e all’architettura applico lo stesso metro: si vede a colpo d’occhio se dentro c’è un ordine o soltanto roba messa via.',
     },
   ],
 

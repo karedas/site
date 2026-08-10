@@ -32,13 +32,17 @@ export type Stat = {
 
 export type ApproachBlock = {
   /**
-   * Short mono tag above the title, written as an identifier rather than as a
-   * phrase. Deliberately English in both locales: it reads as code, not prose,
-   * and Italian does not snake_case gracefully.
+   * Short mono tag above the paragraph, written as an identifier rather than as
+   * a phrase. Deliberately English in both locales: it reads as code, not
+   * prose, and Italian does not snake_case gracefully.
    */
   label: string;
-  title: string;
-  /** HTML: exactly one <em> per body, on the phrase the block turns on. */
+  /**
+   * HTML: opens with a <b> lead and carries no other emphasis. There is no
+   * separate title on purpose. A title above one line of body turned every
+   * block into a slogan, however plainly it was written, so the lead is a
+   * clause inside the sentence instead of a headline over it.
+   */
   body: string;
   tone?: Tone;
 };
