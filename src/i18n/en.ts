@@ -5,13 +5,13 @@ export const en: Copy = {
   langName: 'EN',
 
   meta: {
-    title: 'Andrea Lisi · Staff Engineer · Platform & Governance',
+    title: 'Andrea Lisi · Platform & Governance · Vienna',
     description:
-      'Staff Engineer in Vienna. Eighteen years on the web. I hold together systems that change every day, and I decide how AI gets into them.',
-    ogImageAlt: 'Andrea Lisi, Staff Engineer in Vienna',
+      'Platform and governance in Vienna. Eighteen years on the web. I hold together systems that change every day, and I decide how AI gets into them.',
+    ogImageAlt: 'Andrea Lisi, platform and governance engineer in Vienna',
   },
   aiMeta: {
-    title: 'AI · Andrea Lisi · Staff Engineer',
+    title: 'AI · Andrea Lisi · Platform & Governance',
     description:
       'How I actually work with AI: the work shifted from writing to deciding, and I only delegate what I am able to verify.',
   },
@@ -34,7 +34,7 @@ export const en: Copy = {
   hero: {
     greeting: 'Ciao. My name is',
     tagline: 'I came to code from art.',
-    eyebrow: 'STAFF ENGINEER · PLATFORM & GOVERNANCE · VIENNA',
+    eyebrow: 'PLATFORM & GOVERNANCE · SENIOR SOFTWARE ENGINEER · VIENNA',
     stats: [
       { label: 'EXPERIENCE', value: '18+ years' },
       { label: 'FOCUS', value: 'Platform, governance, AI', tone: 'now' },
@@ -98,9 +98,9 @@ export const en: Copy = {
     {
       years: '2023 · NOW',
       place: 'VIENNA, AT',
-      title: 'Staff Engineer',
+      title: 'Senior Software Engineer',
       company: 'Tricentis',
-      role: 'Platform & Governance · Senior Software Engineer',
+      role: 'Platform & Governance',
       tags: ['Architecture', 'Governance', 'Standards', 'Agentic AI'],
       current: true,
       paragraphs: [
