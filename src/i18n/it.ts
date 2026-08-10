@@ -62,30 +62,33 @@ export const it: Copy = {
 
   approach: [
     {
-      label: 'The_Code',
-      body: '<b>Comincio pulito anche quando è solo una demo.</b> Si capisce da fuori dove va una cosa e cosa può dipendere da cosa, e farlo subito non costa niente. Su un progetto già messo male invece non riscrivo tutto il primo giorno: comincio da dove il risultato si vede, e il file da cui deve passare ogni modifica lo spezzo prima di tutto il resto.',
+      label: 'Art_School',
+      tone: 'root',
+      title: 'L’architettura è una questione visiva, e di rispetto per chi legge',
+      body: '<b>Vengo dall’istituto d’arte</b>, e per me l’ordine di una base di codice non è un vezzo teorico. Quando apro una repository, il modo in cui sono strutturate le cartelle e le dipendenze mi dice subito se il progetto è sano o se è un labirinto. Cerco di scrivere codice che si spieghi da solo: se è evidente dove debba andare una modifica e cosa rischi di influenzare, abbiamo risparmiato ore di debug a chi lavorerà su quel file dopo di noi. Anche quando sviluppo un prototipo veloce o una demo, imposto confini logici puliti fin dall’inizio: non costa tempo in più, ed evita di accumulare debito tecnico invisibile.',
     },
     {
       label: 'The_Rules',
-      body: '<b>Non voglio che le cose funzionino solo perché ci sono io.</b> Quando introduco una regola scrivo il perché, poi la trasformo in un controllo automatico: la ricorda la macchina e non devo ripeterla io. Quello che potrei chiudere in cinque minuti senza che nessuno lo noti lo scrivo e lo passo al team, perché se lo faccio sempre io nessuno sa più che esiste.',
+      title: 'Se una regola è importante, la controlla una macchina',
+      body: '<b>Non credo nella figura dello sviluppatore eroe</b>, e non voglio che la stabilità di un progetto dipenda dalla mia memoria o dalla mia presenza costante. Quando dentro il team decidiamo uno standard o una convenzione architetturale, il mio primo passo è automatizzarla. Se un controllo può eseguirlo un linter, un test di pipeline o uno script che mappa il grafo delle dipendenze, quel lavoro lo delego alla macchina. Così eliminiamo le discussioni ripetitive sulle convenzioni nelle pull request, e liberiamo spazio mentale per la logica applicativa vera.',
     },
     {
       label: 'The_People',
-      body: '<b>Parlo con tutti, e il ruolo non conta.</b> Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma. Il tono serio lo tengo per quello che lo merita davvero, e sono molte meno cose di quante sembrino.',
-    },
-    {
-      label: 'Art_School',
-      tone: 'root',
-      body: '<b>Vengo dall’arte</b>: istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. Una cartella per me è un dipinto, e all’architettura applico lo stesso metro: si vede a colpo d’occhio se dentro c’è un ordine o soltanto roba messa via.',
+      title: 'Comunicazione diretta e orizzontale',
+      body: '<b>I problemi tecnici complessi si risolvono con la chiarezza e l’onestà, non con i titoli sulla carta.</b> Avendo vissuto sia la realtà delle piccole agenzie, dove gestivo in autonomia dalla grafica di stampa fino all’installazione fisica di server e firewall aziendali, sia contesti internazionali strutturati, ho capito che le soluzioni migliori nascono quando si abbattono i filtri gerarchici. Mi piace confrontarmi apertamente con tutti, mantenendo il tono serio solo per le cose che lo meritano davvero.',
     },
   ],
 
   ai: {
-    heading: 'Come ci lavoro davvero',
+    heading: 'Come uso l’AI, senza farmi inquinare il codice',
     paragraphs: [
-      'Quello che l’AI mi ha dato è tenere aperti più fronti di quanti ne reggerei da solo. Il lavoro si è spostato dallo scrivere al decidere, e ormai leggo e correggo molto più codice di quanto ne scriva.',
-      '<b>Delego solo quello che sono in grado di verificare.</b> Di ogni proposta guardo prima se quella cosa deve esistere nel progetto, e solo dopo se funziona: un agente ricostruisce volentieri quello che c’è già, o risolve il sintomo e lascia in piedi la causa. Se leggere una risposta mi costa più che scriverla, non ho risparmiato niente.',
-      '<b>Poi c’è la parte strutturale, che è quella che tiene.</b> Gli stessi confini che valgono per i team devono valere per un contributore che non è una persona: le regole diventano strette e verificabili in pipeline, perché un agente non le intuisce, le legge.',
+      'L’intelligenza artificiale mi permette di gestire molti più fronti di quanti ne coprirei da solo. Ma ha cambiato radicalmente il mio modo di lavorare: oggi scrivo molto meno codice e passo la maggior parte del tempo a leggere, valutare e correggere quello generato. Invece di un semplice esecutore, il mio ruolo è diventato quello di un decisore.',
+    ],
+    rulesLead: 'Nell’usare questi strumenti applico tre regole molto pragmatiche.',
+    rules: [
+      '<b>Delego solo quello che so verificare all’istante.</b> Se impiego più tempo a correggere e comprendere la risposta di un modello rispetto a quanto ci avrei messo a scriverla da zero, allora non sto risparmiando nulla.',
+      '<b>Diffido delle scorciatoie.</b> L’AI è bravissima a curare il sintomo immediato di un bug ignorando la causa strutturale, e se non viene controllata duplica volentieri logiche che esistono già nel progetto. Per questo, prima ancora di verificare se il codice generato funziona, mi chiedo sempre: ha davvero senso che questa roba esista?',
+      '<b>Le macchine non hanno intuito, quindi servono confini di ferro.</b> Un assistente virtuale non “sente” l’architettura e non ne capisce l’eleganza. In progetti complessi, come la nostra monorepo con sedici progetti paralleli, non bastano le raccomandazioni: i limiti architetturali devono essere tradotti in controlli automatici e rigidi direttamente nelle pipeline di rilascio. L’AI non può intuire una regola, ma deve essere costretta a rispettarla da un test che fallisce prima del merge.',
     ],
     backLabel: 'ANDREA LISI',
   },

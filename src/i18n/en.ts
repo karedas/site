@@ -56,30 +56,33 @@ export const en: Copy = {
 
   approach: [
     {
-      label: 'The_Code',
-      body: '<b>I start clean even when it is only a demo.</b> From outside you can see where a thing goes and what may depend on what, and doing that from the start costs nothing. On a codebase already in bad shape I don’t rewrite it all on day one: I start where the result shows, and the file every change has to go through I split before anything else.',
+      label: 'Art_School',
+      tone: 'root',
+      title: 'Architecture is a visual matter, and a matter of respect for the reader',
+      body: '<b>I come from art school</b>, and to me the order of a codebase is not a theoretical nicety. When I open a repository, the way the folders and the dependencies are laid out tells me straight away whether the project is healthy or a maze. I try to write code that explains itself: if it is obvious where a change should go and what it risks affecting, we have saved hours of debugging for whoever works on that file after us. Even on a quick prototype or a demo I set clean logical boundaries from the start: it costs no extra time, and it keeps invisible technical debt from piling up.',
     },
     {
       label: 'The_Rules',
-      body: '<b>I don’t want things working only because I am there.</b> When I bring in a rule I write down why, then I turn it into an automated check: the machine remembers it so I don’t have to repeat myself. What I could close in five minutes without anyone noticing I write up and hand to the team, because if I always do it nobody knows it exists.',
+      title: 'If a rule matters, a machine checks it',
+      body: '<b>I don’t believe in the hero developer</b>, and I don’t want a project’s stability to depend on my memory or on my being constantly around. When the team settles on a standard or an architectural convention, my first move is to automate it. If a check can be run by a linter, by a pipeline test or by a script that maps the dependency graph, that work goes to the machine. It gets the repetitive convention arguments out of pull requests, and it frees up head space for the actual application logic.',
     },
     {
       label: 'The_People',
-      body: '<b>I talk to everyone, and rank does not come into it.</b> I joke, I laugh, and who I talk to was never decided by an org chart. I save the serious tone for what really deserves it, and that is far fewer things than it looks.',
-    },
-    {
-      label: 'Art_School',
-      tone: 'root',
-      body: '<b>I come from art</b>: art school, then years of the violin, and I never stopped drawing. A folder is a painting to me, and I hold architecture to the same standard: you can tell at a glance whether there is an order inside it or just things put away.',
+      title: 'Direct and horizontal',
+      body: '<b>Hard technical problems get solved with clarity and honesty, not with titles on paper.</b> Having lived both the small agency, where I ran everything from print artwork to physically installing company servers and firewalls, and structured international settings, I have learned that the best solutions turn up when the hierarchical filters come down. I like talking openly with everyone, and I keep the serious tone for the things that really deserve it.',
     },
   ],
 
   ai: {
-    heading: 'How I actually work with it',
+    heading: 'How I use AI, without letting it pollute the code',
     paragraphs: [
-      'What AI gave me is keeping more fronts open than I could hold on my own. The work shifted from writing to deciding, and by now I read and correct far more code than I write.',
-      '<b>I only delegate what I am able to verify.</b> With any proposal I look first at whether that thing belongs in the project, and only then at whether it works: an agent will happily rebuild what already exists, or fix the symptom and leave the cause standing. If reading an answer costs me more than writing it, I have saved nothing.',
-      '<b>Then there is the structural part, and it is the part that holds.</b> The same boundaries that apply across teams have to apply to a contributor that isn’t a person: the rules get strict and checkable in the pipeline, because an agent does not sense them, it reads them.',
+      'AI lets me handle far more fronts than I would cover on my own. But it has changed how I work outright: today I write much less code and spend most of my time reading, judging and correcting what was generated. Instead of an executor, my role has become that of a decider.',
+    ],
+    rulesLead: 'Three rules when I use these tools, and all three are pragmatic.',
+    rules: [
+      '<b>I only delegate what I can verify instantly.</b> If correcting and understanding a model’s answer takes me longer than writing it from scratch would have, then I am not saving anything.',
+      '<b>I distrust shortcuts.</b> AI is very good at curing the immediate symptom of a bug while ignoring the structural cause, and left unchecked it will happily duplicate logic that already exists in the project. So before I even check whether the generated code works, I always ask myself: does this thing have any business existing?',
+      '<b>Machines have no intuition, so the boundaries have to be iron.</b> An assistant does not “feel” an architecture and does not understand its elegance. On complex projects, like our monorepo with sixteen parallel projects, recommendations are not enough: architectural limits have to be translated into strict automated checks in the release pipelines. An AI cannot intuit a rule, it has to be forced to respect it by a test that fails before the merge.',
     ],
     backLabel: 'ANDREA LISI',
   },

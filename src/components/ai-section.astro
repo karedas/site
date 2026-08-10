@@ -30,6 +30,12 @@ const { ai } = copy;
       {ai.paragraphs.map((para, i) => (
         <p class:list={{ lede: i === 0 }} set:html={para} />
       ))}
+      <p class="rules-lead">{ai.rulesLead}</p>
+      <ol class="rules">
+        {ai.rules.map((rule) => (
+          <li set:html={rule} />
+        ))}
+      </ol>
     </div>
   </div>
 </section>

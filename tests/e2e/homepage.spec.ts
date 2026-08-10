@@ -91,30 +91,28 @@ for (const locale of ['en', 'it'] as const) {
       for (const [i, block] of copy.approach.entries()) {
         const el = blocks.nth(i);
         await expect(el.locator('.block-label')).toHaveText(block.label);
-        // No headline over the paragraph: a title above a single line is what
-        // made each of these read as a slogan.
-        await expect(el.locator('.block-title')).toHaveCount(0);
-        // The lead opens the sentence, and it is the only emphasis in it.
+        await expect(el.locator('.block-title')).toHaveText(block.title);
+        // The lead opens the paragraph, and it is the only emphasis in it.
         await expect(el.locator('.block-body b')).toHaveCount(1);
-        // Long enough to be prose, short enough that four of them still get
-        // read. Six one-liners was too fragmented; six paragraphs was a brick.
-        const length = plain(block.body).length;
-        expect(length, `${block.label} is ${length}`).toBeGreaterThan(150);
-        expect(length, `${block.label} is ${length}`).toBeLessThan(360);
       }
 
-      // Four, not six: the count is the difference between a discussion and a
-      // deck of cards.
-      expect(copy.approach.length).toBe(4);
+      // Three, because the fourth was about AI and section 02 now says all of
+      // it at length. Saying it twice is the defect this page keeps growing.
+      expect(copy.approach.length).toBe(3);
     });
 
     test('sets the AI section apart as the one enclosed block', async ({ page }) => {
       await page.goto(home);
 
-      await expect(page.locator('.ai .prose p')).toHaveCount(copy.ai.paragraphs.length);
+      const opening = page.locator('.ai .prose > p:not(.rules-lead)');
+      await expect(opening).toHaveCount(copy.ai.paragraphs.length);
       await expect(page.locator('.ai .prose .lede')).toContainText(
         plain(copy.ai.paragraphs[0] ?? '').slice(0, 40),
       );
+      await expect(page.locator('.ai .rules-lead')).toHaveText(copy.ai.rulesLead);
+      // He says three rules, so there had better be three.
+      await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
+      expect(copy.ai.rules.length).toBe(3);
       await expect(page.locator('.ai .plate .eyebrow')).toHaveText(copy.sections.ai.eyebrow);
 
       // Being the only enclosed surface is what distinguishes it, so a second
@@ -285,7 +283,7 @@ for (const locale of ['en', 'it'] as const) {
 
       await expect(page.locator('html')).toHaveAttribute('lang', copy.htmlLang);
       await expect(page.getByRole('heading', { level: 1 })).toContainText(copy.ai.heading);
-      await expect(page.locator('.ai .prose p')).toHaveCount(copy.ai.paragraphs.length);
+      await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
       // Word for word the home section, so it stays out of the index and exists
       // only as a URL that can be handed to someone.
       await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);

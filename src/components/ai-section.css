@@ -45,3 +45,40 @@
   color: var(--head);
   font-weight: 600;
 }
+
+/* He says three rules, so they are numbered: a reader can check the count
+   without recounting, and the numbers make the block scannable at a glance. */
+.ai .rules-lead {
+  margin: 20px 0 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+.ai .rules {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: rule;
+}
+
+.ai .rules li {
+  counter-increment: rule;
+  position: relative;
+  padding-left: 30px;
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+
+.ai .rules li + li {
+  margin-top: 14px;
+}
+
+.ai .rules li::before {
+  content: counter(rule);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--acc);
+}

@@ -38,11 +38,12 @@ export type ApproachBlock = {
    */
   label: string;
   /**
-   * HTML: opens with a <b> lead and carries no other emphasis. There is no
-   * separate title on purpose. A title above one line of body turned every
-   * block into a slogan, however plainly it was written, so the lead is a
-   * clause inside the sentence instead of a headline over it.
+   * A claim with a reason behind it, not a slogan. Titles were dropped once
+   * because mine were aphorisms over one-liners; these are his own, and they
+   * carry an argument, so they earn the line back.
    */
+  title: string;
+  /** HTML: opens with a <b> lead and carries no other emphasis. */
   body: string;
   tone?: Tone;
 };
@@ -113,8 +114,12 @@ export type Copy = {
 
   ai: {
     heading: string;
-    /** HTML: two <b> spans in the whole block, no more. */
+    /** HTML: the opening paragraphs, before the rules. */
     paragraphs: string[];
+    /** The line that hands over to the list. */
+    rulesLead: string;
+    /** HTML: each one opens with a <b> claim and then gives its reason. */
+    rules: string[];
     backLabel: string;
   };
 
