@@ -110,11 +110,13 @@ export const it: Copy = {
       tags: ['Architettura', 'Governance', 'Standard', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'Sono entrato per una sola applicazione. Poco dopo il mio fuoco era <b>l’architettura</b>: la forma del repository, le pipeline, gli standard, e il lavoro continuo per rendere l’insieme più solido.',
-        'Il mio compito è tenere insieme un sistema grande, con dentro parecchi team, mentre cambia ogni giorno.',
-        '<b>Sono un gateway fra i team.</b> Quello che un team costruisce a livello di prodotto è suo. Il mio pezzo è l’infrastruttura che li tiene in piedi, e il modo in cui le cose ci entrano: le direzioni del design, le richieste degli stakeholder e le decisioni sull’AI passano da qui, e le traduco in qualcosa con cui si possa lavorare.',
-        '<b>Decido cosa entra e cosa resta fuori</b>, come è fatta la struttura e dove va ogni cosa. Do la forma, e chi sviluppa lavora dentro quei confini.',
-        '<b>E resto dentro anch’io</b>: quando salta qualcosa che blocca tutti, lo sistemo io.',
+        'Sono entrato in un team a cui era affidata una delle applicazioni frontend di Tosca Cloud, poi diventate due, e ne ho ristrutturato e ridisegnato parti importanti, tanto che in poco tempo sono stato <b>promosso nel team che tiene la governance della piattaforma</b>, e da lì il focus è diventato l’architettura.',
+        '<b>La governance della repository è mia, per intero</b>, ed è il cuore del ruolo: cosa entra e cosa resta fuori, come è strutturata, dove va ogni cosa e quali confini ha davanti ogni team.',
+        '<b>La manutengo a livello architetturale</b>: confini fra i moduli, grafo delle dipendenze, tempi di build e pipeline, con quello che deve fallire in CI prima di arrivare in main, e quando si rompe qualcosa che blocca tutti la correzione la faccio io.',
+        '<b>Aggiornamento e integrazione dei pacchetti</b> su tutta la piattaforma: versioni maggiori, vulnerabilità, e le rotture che assorbo prima che arrivino ai team.',
+        '<b>Costruisco le risorse condivise</b> che i team usano invece di rifarsele ognuno per conto proprio, e smonto le bad practice quando vedo che stanno diventando abitudine.',
+        '<b>Sono il gateway fra il design e i team interni</b> sugli standard: le direzioni arrivano da lì, e io le traduco in regole e componenti con cui si possa lavorare.',
+        '<b>Integro l’AI a tutti i livelli</b>, dalla developer experience alle pipeline, con le stesse regole e gli stessi gate del codice scritto a mano.',
       ],
     },
     {

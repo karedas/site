@@ -104,11 +104,13 @@ export const en: Copy = {
       tags: ['Architecture', 'Governance', 'Standards', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'I came in for a single application. Not long after, my focus was <b>the architecture</b>: the shape of the repository, the pipelines, the standards, and the steady work of making the whole thing hold better.',
-        'My job is holding a large system together, with a good number of teams inside it, while it changes every day.',
-        '<b>I am a gateway between teams.</b> What a team builds at product level is theirs. My part is the infrastructure that keeps them standing, and the way things get in: direction from design, requests from stakeholders and decisions about AI all pass through here, and I turn them into something people can work with.',
-        '<b>I decide what comes in and what stays out</b>, how the structure is shaped and where everything goes. I give it the shape, and the people building work inside those boundaries.',
-        '<b>I’m still in it</b>: when something breaks and blocks everyone, I’m the one who fixes it.',
+        'I came in on a team that had one of Tosca Cloud’s frontend applications, then two, and ended up restructuring and redesigning significant parts of them, so before long I was <b>promoted into the team that holds the platform’s governance</b>, and from there the focus became the architecture.',
+        '<b>The governance of the repository is mine, all of it</b>, and it is the core of the role: what comes in and what stays out, how it is structured, where everything goes and which boundaries each team works inside.',
+        '<b>I maintain it at the architectural level</b>: module boundaries, the dependency graph, build times and pipelines, what has to fail in CI before it reaches main, and when something breaks and blocks everyone the fix is mine.',
+        '<b>Package upgrades and integration</b> across the whole platform: major versions, vulnerabilities, and the breakage I absorb before it reaches the teams.',
+        '<b>I build the shared resources</b> teams use instead of each rebuilding their own, and I take apart bad practice when I see it turning into habit.',
+        '<b>I am the gateway between design and the internal teams</b> on standards: the direction comes from there, and I turn it into rules and components people can work with.',
+        '<b>I integrate AI at every level</b>, from developer experience to the pipelines, on the same rules and the same gates as code written by hand.',
       ],
     },
     {
