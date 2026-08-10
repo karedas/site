@@ -1,20 +1,21 @@
-import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [tsconfigPaths()],
   test: {
-    environment: 'jsdom',
+    /* Nothing here touches the DOM: the components are Astro, so their
+       behaviour is covered end to end in a real browser instead. What is left
+       to unit test is the copy dictionary, which is plain data. */
+    environment: 'node',
     globals: true,
-    setupFiles: ['./tests/unit/setup.ts'],
-    include: ['tests/unit/**/*.test.{ts,tsx}'],
+    include: ['tests/unit/**/*.test.ts'],
     css: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      include: ['src/components/react/**/*.{ts,tsx}'],
-      exclude: ['**/*.test.{ts,tsx}'],
+      include: ['src/i18n/**/*.ts'],
+      exclude: ['**/*.test.ts'],
     },
   },
 });
