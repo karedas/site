@@ -49,7 +49,7 @@ export const it: Copy = {
       { label: 'FORMAZIONE', value: 'Istituto d’Arte, Firenze', tone: 'root' },
     ],
     intro:
-      'Oggi tengo insieme una piattaforma grande, con parecchi team dentro. Mi occupo di come è fatta e di come ci si lavora, e la parte che mi piace di più resta parlare con le persone che la costruiscono.',
+      'Quello che mi tiene acceso è un problema difficile, e non lo lascio finché non è risolto come si deve. Mi fa ancora effetto quando una cosa è fatta bene e si capisce al primo sguardo: è quello che cercavo quando disegnavo. Non mi basta che funzioni, voglio sapere perché.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 

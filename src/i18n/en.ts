@@ -43,7 +43,7 @@ export const en: Copy = {
       { label: 'FOUNDATION', value: 'Art school, Florence', tone: 'root' },
     ],
     intro:
-      'Today I hold a large platform together, with a good number of teams inside it. I look after how it is built and how people work in it, and the part I still like best is talking to the people building it.',
+      'What keeps me switched on is a hard problem, and I don’t leave it until it is solved the way it deserves. It still gets me when something is made well and you see it at first glance: that is what I was after when I was drawing. It is not enough that a thing works, I want to know why.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
