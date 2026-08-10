@@ -63,15 +63,15 @@ export const it: Copy = {
   approach: [
     {
       label: 'The_Code',
-      body: '<b>Comincio pulito anche quando è solo una demo</b>: i confini che si vedono da fuori non costa niente metterli subito. Su un progetto già messo male invece non riscrivo tutto il primo giorno, comincio da dove il risultato si vede, e il punto che frena tutti lo divido prima di ogni altra cosa.',
+      body: '<b>Comincio pulito anche quando è solo una demo.</b> Si capisce da fuori dove va una cosa e cosa può dipendere da cosa, e farlo subito non costa niente. Su un progetto già messo male invece non riscrivo tutto il primo giorno: comincio da dove il risultato si vede, e il file da cui deve passare ogni modifica lo spezzo prima di tutto il resto.',
     },
     {
       label: 'The_Rules',
-      body: '<b>Ogni regola arriva con il suo perché</b>, perché nessuno deve fidarsi di me sulla parola, e quando è chiara smetto di ripeterla: finisce in pipeline. Certe cose potrei chiuderle da solo e nessuno lo saprebbe, e le passo comunque con un documento e una scadenza: se le faccio sempre io, il team smette di sapere che esistono.',
+      body: '<b>Non voglio che le cose funzionino solo perché ci sono io.</b> Quando introduco una regola scrivo il perché, poi la trasformo in un controllo automatico: la ricorda la macchina e non devo ripeterla io. Quello che potrei chiudere in cinque minuti senza che nessuno lo noti lo scrivo e lo passo al team, perché se lo faccio sempre io nessuno sa più che esiste.',
     },
     {
       label: 'The_People',
-      body: '<b>Parlo con tutti, e il ruolo non conta.</b> Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma. Il tono serio lo tengo per quello che lo merita davvero, e sono molte meno cose di quante sembri.',
+      body: '<b>Parlo con tutti, e il ruolo non conta.</b> Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma. Il tono serio lo tengo per quello che lo merita davvero, e sono molte meno cose di quante sembrino.',
     },
     {
       label: 'Art_School',

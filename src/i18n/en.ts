@@ -57,11 +57,11 @@ export const en: Copy = {
   approach: [
     {
       label: 'The_Code',
-      body: '<b>I start clean even when it is only a demo</b>: boundaries that show from outside cost nothing to put in straight away. On a codebase already in bad shape I don’t rewrite it all on day one, I start where the result shows, and the point that slows everyone down I break up before anything else.',
+      body: '<b>I start clean even when it is only a demo.</b> From outside you can see where a thing goes and what may depend on what, and doing that from the start costs nothing. On a codebase already in bad shape I don’t rewrite it all on day one: I start where the result shows, and the file every change has to go through I split before anything else.',
     },
     {
       label: 'The_Rules',
-      body: '<b>Every rule arrives with its reason</b>, because nobody should take my word for it, and once it is settled I stop repeating it: it goes into CI. Some things I could close on my own and nobody would know, and I hand them over anyway with a document and a date: if I keep doing them, the team stops knowing they exist.',
+      body: '<b>I don’t want things working only because I am there.</b> When I bring in a rule I write down why, then I turn it into an automated check: the machine remembers it so I don’t have to repeat myself. What I could close in five minutes without anyone noticing I write up and hand to the team, because if I always do it nobody knows it exists.',
     },
     {
       label: 'The_People',
