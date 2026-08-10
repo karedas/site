@@ -110,13 +110,12 @@ export const it: Copy = {
       tags: ['Architettura', 'Governance', 'Standard', 'Agentic AI'],
       current: true,
       paragraphs: [
-        'Sono entrato in un team a cui era affidata una delle applicazioni di Tosca Cloud, poi diventate due, e ne ho ristrutturato e ridisegnato parti importanti, tanto che in poco tempo sono stato <b>promosso nel team che tiene la governance della piattaforma</b>.',
+        'Sono entrato in un team che sviluppava features per prodotti precisi di Tosca Cloud, Inventory e la simulazione delle API dietro api-playground e api-messages, gomito a gomito con i backend dello stesso team, e quando il progetto è cresciuto <b>mi hanno promosso in un team creato apposta per tenerne le redini</b>, architettura compresa.',
         '<b>Mi occupo della governance della repository</b>, ed è il centro del ruolo: una monorepo a microfrontend con sedici progetti dentro, rilasciati da team diversi e che devono restare un prodotto solo. Cosa entra e cosa resta fuori, come è strutturata, dove va ogni cosa e quali confini ha davanti ogni team.',
-        '<b>La manutengo a livello architetturale</b>: confini fra i moduli, grafo delle dipendenze, tempi di build e pipeline, con quello che deve fallire in CI prima di arrivare in main, e quando si rompe qualcosa che blocca tutti la correzione passa da qui.',
-        '<b>Aggiornamento e integrazione dei pacchetti</b> su tutta la piattaforma: versioni maggiori, vulnerabilità, e le rotture che assorbo prima che arrivino ai team.',
-        '<b>Costruisco le risorse condivise</b> che i team usano invece di rifarsele ognuno per conto proprio, e smonto le bad practice quando vedo che stanno diventando abitudine.',
-        '<b>Faccio da gateway fra il design e i team interni</b> sugli standard: le direzioni arrivano da lì, e le traduco in regole e componenti con cui si possa lavorare.',
-        '<b>Integro l’AI a tutti i livelli</b>, dalla developer experience alle pipeline, con le stesse regole e gli stessi gate del codice scritto a mano.',
+        '<b>Sotto c’è la manutenzione architetturale</b>: confini fra i moduli, grafo delle dipendenze, tempi di build, e le pipeline con quello che deve fallire in CI prima di arrivare in main, compreso il momento in cui si rompe qualcosa che blocca tutti.',
+        '<b>Tengo in ordine le dipendenze e il riuso</b>: aggiornamento e integrazione dei pacchetti su tutta la piattaforma, con le rotture assorbite prima che arrivino ai team, e le risorse condivise costruite una volta invece che da ognuno per conto proprio.',
+        '<b>Sugli standard faccio da gateway fra il design e i team interni</b>: le direzioni arrivano da lì e le traduco in regole e componenti con cui si possa lavorare, smontando le bad practice quando vedo che stanno diventando abitudine.',
+        '<b>L’AI la integro a tutti i livelli</b>, dalla developer experience alle pipeline, con le stesse regole e gli stessi gate del codice scritto a mano.',
       ],
     },
     {
