@@ -93,17 +93,20 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    test('renders the AI section and its link to the deep page', async ({ page }) => {
+    test('sets the AI section apart as the one enclosed block', async ({ page }) => {
       await page.goto(home);
 
       await expect(page.locator('.ai .prose p')).toHaveCount(copy.ai.paragraphs.length);
       await expect(page.locator('.ai .prose .lede')).toContainText(
         plain(copy.ai.paragraphs[0] ?? '').slice(0, 40),
       );
+      await expect(page.locator('.ai .plate .eyebrow')).toHaveText(copy.sections.ai.eyebrow);
 
-      const permalink = page.locator('.ai .permalink');
-      await expect(permalink).toContainText(copy.ai.permalinkLabel);
-      await expect(permalink).toHaveAttribute('href', ai);
+      // Being the only enclosed surface is what distinguishes it, so a second
+      // one appearing anywhere would take that away.
+      await expect(page.locator('.plate')).toHaveCount(1);
+      // The home page itself must stay indexable.
+      await expect(page.locator('meta[name=robots]')).toHaveCount(0);
     });
 
     test('lists four jobs, each with bullets and chips', async ({ page }) => {
@@ -268,8 +271,9 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('html')).toHaveAttribute('lang', copy.htmlLang);
       await expect(page.getByRole('heading', { level: 1 })).toContainText(copy.ai.heading);
       await expect(page.locator('.ai .prose p')).toHaveCount(copy.ai.paragraphs.length);
-      // The link back to itself belongs on the home page only.
-      await expect(page.locator('.ai .permalink')).toHaveCount(0);
+      // Word for word the home section, so it stays out of the index and exists
+      // only as a URL that can be handed to someone.
+      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);
     });
 
     test('keeps its own description under the truncation limit', async ({ page }) => {

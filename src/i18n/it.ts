@@ -96,7 +96,6 @@ export const it: Copy = {
       '<b>Delego solo quello che sono in grado di verificare.</b> Se leggere e capire una risposta mi costa più che scriverla, non ho risparmiato niente: ho solo spostato il lavoro dove si vede meno. Vale per le migrazioni che non si tornano indietro e per i problemi che non riesco ancora a descrivere con precisione, perché lì un agente ti dà una risposta sicura alla domanda sbagliata.',
       'E poi c’è il lavoro strutturale, la parte meno visibile e quella che tiene. Gli stessi confini che valgono per i team ora devono valere per un contributore che non è una persona: le regole diventano strette e verificabili in pipeline, perché un agente non le intuisce, le legge. È governance applicata a un nuovo tipo di contributore, uno che prende alla lettera tutto quello che scrivi.',
     ],
-    permalinkLabel: 'Questa sezione ha una pagina sua',
     backLabel: 'ANDREA LISI',
   },
 

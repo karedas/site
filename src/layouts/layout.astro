@@ -39,6 +39,10 @@ const fontHref =
     <meta name="description" content={meta.description} />
     <meta name="author" content="Andrea Lisi" />
     <link rel="canonical" href={canonicalURL} />
+    {/* The deep page repeats the home section word for word. It exists so the
+        stance can be handed over as its own URL, not to be found in search, so
+        it stays out of the index rather than competing with the home page. */}
+    {page === 'ai' && <meta name="robots" content="noindex, follow" />}
 
     {LOCALES.map((code) => (
       <link

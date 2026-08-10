@@ -92,8 +92,6 @@ export interface Copy {
     heading: string;
     /** HTML: two <b> spans in the whole block, no more. */
     paragraphs: string[];
-    /** Visible label of the link to the /ai page. */
-    permalinkLabel: string;
     backLabel: string;
   };
 

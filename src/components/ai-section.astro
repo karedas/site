@@ -1,7 +1,7 @@
 ---
 import '@/components/ai-section.css';
 import SectionTitle from '@/components/section-title.astro';
-import { getCopy, hrefFor, type Locale } from '@/i18n';
+import { getCopy, type Locale } from '@/i18n';
 
 type Props = {
   locale: Locale;
@@ -13,7 +13,6 @@ const { locale, variant = 'section' } = Astro.props;
 const copy = getCopy(locale);
 const head = copy.sections.ai;
 const { ai } = copy;
-const aiHref = hrefFor(locale, 'ai');
 ---
 <section class="ai section" id="ai">
   {variant === 'section' ? (
@@ -25,16 +24,12 @@ const aiHref = hrefFor(locale, 'ai');
     </h1>
   )}
 
-  <div class="prose" data-reveal>
-    {ai.paragraphs.map((para, i) => (
-      <p class:list={{ lede: i === 0 }} set:html={para} />
-    ))}
+  <div class="plate" data-reveal>
+    <p class="eyebrow">{head.eyebrow}</p>
+    <div class="prose">
+      {ai.paragraphs.map((para, i) => (
+        <p class:list={{ lede: i === 0 }} set:html={para} />
+      ))}
+    </div>
   </div>
-
-  {/* A sentence, not a raw path: the visible text is the accessible name. */}
-  {variant === 'section' && (
-    <a class="permalink" href={aiHref} data-reveal>
-      {ai.permalinkLabel} <span aria-hidden="true">&rarr;</span>
-    </a>
-  )}
 </section>

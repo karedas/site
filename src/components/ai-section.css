@@ -1,9 +1,31 @@
-/* The AI block is the centre of gravity of the page: it gets the accent
-   rule down its left edge and a larger opening paragraph. */
-.ai .prose {
+/* Every other section is prose sitting on the bare background. This one is
+   enclosed, and it is the only enclosed thing on the page, because it is the
+   only section arguing a position rather than listing facts.
+
+   The fill is --panel, which is barely a shade off --bg, so the border does the
+   separating: a hairline all round and the accent on the leading edge. The
+   emerald-washed grounds separated the surface better but pushed body text to
+   4.39:1, under AA, which is not a trade worth making for a tint. */
+.ai .plate {
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-left: 2px solid var(--acc);
-  padding-left: clamp(18px, 3vw, 30px);
-  max-width: 64ch;
+  border-radius: 3px;
+  padding: clamp(24px, 3.4vw, 36px) clamp(20px, 3.4vw, 38px);
+  max-width: 72ch;
+}
+
+/* No other section has one, which is half the point. */
+.ai .eyebrow {
+  margin: 0 0 20px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: var(--acc);
+}
+
+.ai .prose {
+  max-width: 62ch;
 }
 
 .ai .prose .lede {
@@ -22,17 +44,4 @@
 .ai .prose b {
   color: var(--head);
   font-weight: 600;
-}
-
-.ai .permalink {
-  display: inline-block;
-  margin-top: 24px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--dim);
-}
-
-.ai .permalink:hover,
-.ai .permalink:focus-visible {
-  color: var(--acc);
 }

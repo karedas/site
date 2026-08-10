@@ -90,7 +90,6 @@ export const en: Copy = {
       '<b>I only delegate what I am able to verify.</b> If reading and understanding an answer costs me more than writing it, I have saved nothing: I have moved the work somewhere it shows less. That holds for migrations you cannot walk back, and for problems I cannot yet describe precisely, because there an agent hands you a confident answer to the wrong question.',
       'Then there is the structural work, the least visible part and the one that holds. The same boundaries that apply across teams now have to apply to a contributor that isn’t a person: the rules get strict and checkable in the pipeline, because an agent does not sense them, it reads them. It’s governance applied to a new kind of contributor, one that takes everything you write literally.',
     ],
-    permalinkLabel: 'This section has a page of its own',
     backLabel: 'ANDREA LISI',
   },
 
