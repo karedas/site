@@ -1,17 +1,37 @@
 .approach .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
-  gap: 34px 48px;
+  gap: 38px 56px;
 }
 
-/* Each block reads as title then body, so the two need real distance:
-   the title is bigger, brighter and carries the accent tick; the body
-   drops to the muted tone. Without this the list looked flat. */
+/* A hairline down the left of each block, so six of them read as a set of
+   entries rather than as one wall of paragraphs. */
+.approach .block {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+
+/*
+ * Three treatments stacked, each unmistakably a different kind of thing: a mono
+ * tag, a sans title, then one line of body. It replaces the decorative tick
+ * that used to sit before the title, which would only have been noise above a
+ * label that carries actual words.
+ */
+.approach .block-label {
+  margin: 0 0 7px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--acc);
+}
+
+/* The art block takes the lilac here now that the tick is gone. */
+.approach .block-label.tone-root {
+  color: var(--root);
+}
+
 .approach .block-title {
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-  margin: 0 0 9px;
+  margin: 0 0 8px;
   font-size: 17.5px;
   font-weight: 600;
   line-height: 1.3;
@@ -19,30 +39,16 @@
   color: var(--head);
 }
 
-.approach .block-title .tick {
-  flex: none;
-  color: var(--acc);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-/* The block about drawing takes the mark of the hero's art-school line. The
-   title stays the same brightness as the other five, so the list still scans
-   as one list: only the tick changes. */
-.approach .block-title .tick.tone-root {
-  color: var(--root);
-}
-
 .approach .block-body {
   margin: 0;
-  padding-left: 22px;
   font-size: 15px;
   line-height: 1.7;
   color: var(--body);
 }
 
-.approach .block-body b {
+/* One per body, on the phrase the block turns on. Emphasis by colour, never by
+   italics: the display face has no italic worth reading. */
+.approach .block-body em {
+  font-style: normal;
   color: var(--head);
-  font-weight: 600;
 }

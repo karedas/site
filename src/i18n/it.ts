@@ -62,29 +62,35 @@ export const it: Copy = {
 
   approach: [
     {
+      label: 'Clean_Start',
       title: 'Pulito dal primo minuto',
-      body: 'Non esiste per me un progetto avviato sporco. Anche una prima demo la scrivo minimale, ma con ogni pezzo al suo posto, pronto a crescere o a essere buttato. Pulito per me vuol dire che i confini si vedono da fuori: dove va una cosa, e cosa può dipendere da cosa. Mi viene così, e non mi costa un minuto in più.',
+      body: 'Anche una prima demo la scrivo minimale, con <em>i confini che si vedono da fuori</em>. Non mi costa un minuto in più.',
     },
     {
+      label: 'Triage_First',
       title: 'In casa d’altri non brucio niente',
-      body: 'Se arrivo su un progetto messo male non voglio ripulirlo tutto subito: sarebbe il modo più veloce per farmi odiare e non finire niente. Metto delle priorità e comincio da quello che dà risultato immediato, perché chi ci lavora deve vedere il guadagno prima di sentire il costo. Ma c’è sempre quello che frena tutti, il punto da cui ogni modifica deve passare, e quello lo divido prima di ogni altra cosa. Si paga una volta sola.',
+      body: 'Non ripulisco tutto subito: comincio da dove il risultato si vede, e <em>il punto che frena tutti</em> lo divido prima di ogni altra cosa.',
     },
     {
+      label: 'The_Why',
       title: 'Il perché prima della regola',
-      body: 'Prima di imporre una regola vado a cercarmi il motivo, e lo scrivo. La regola arriva sempre insieme al suo perché, e con una scadenza che una persona può reggere. Nessuno deve fidarsi di me sulla parola, e non voglio che lo faccia. Quando è chiara smetto di ripeterla: finisce in pipeline come warning da risolvere, e io passo alla successiva.',
+      body: 'Ogni regola arriva col suo motivo scritto. Quando è chiara <em>smetto di ripeterla</em>: finisce in pipeline.',
     },
     {
+      label: 'No_Org_Chart',
       title: 'Accorcio le distanze',
-      body: 'Con le persone ci parlo, tutte, e non aspetto il momento giusto. Scherzo, rido, e con chi parlo non l’ha mai deciso un organigramma: mi interessa la persona molto prima del ruolo che ha. Il tono serio lo tengo per le cose che lo meritano davvero, e sono molte meno di quante sembri. Sul resto si fa prima a guardarsi in faccia.',
+      body: 'Parlo con tutti, scherzo, e con chi parlo <em>non l’ha mai deciso un organigramma</em>. Il tono serio lo tengo per quello che lo merita.',
     },
     {
-      title: 'A volte il mio lavoro è non risolvere il problema',
-      body: 'Certe cose potrei chiuderle da solo in silenzio, e nessuno se ne accorgerebbe. Preferisco spenderci il tempo che serve a passarle: scrivo il documento, apro il task, avviso il team, do una scadenza. Quel lavoro è loro. Se lo faccio sempre io, smettono di sapere che esiste.',
+      label: 'Hand_It_Over',
+      title: 'A volte il mio lavoro è non risolverlo',
+      body: 'Potrei chiuderle da solo e nessuno se ne accorgerebbe. Le passo, perché <em>se lo faccio sempre io smettono di sapere che esiste</em>.',
     },
     {
+      label: 'Art_School',
       title: 'Una cartella è un dipinto',
       tone: 'root',
-      body: 'Ho fatto l’istituto d’arte, e disegnare non ho mai smesso. Prima il disegno, poi anni di violino. Di un’interfaccia mi interessa se è bella e perché è fatta così, e sono due domande che non riesco a separare. Lo stesso metro lo applico all’architettura: una cartella per me è un dipinto, e si vede a colpo d’occhio se dentro c’è un ordine o soltanto roba messa via.',
+      body: 'Istituto d’arte, poi anni di violino, e disegnare non ho mai smesso. <em>Lo stesso metro lo applico all’architettura</em>.',
     },
   ],
 

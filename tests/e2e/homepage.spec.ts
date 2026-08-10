@@ -83,13 +83,20 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    test('renders all six ways-of-working blocks', async ({ page }) => {
+    test('renders all six ways-of-working blocks, tag then title then a line', async ({ page }) => {
       await page.goto(home);
-      const titles = page.locator('.approach .block-title');
-      await expect(titles).toHaveCount(copy.approach.length);
+      const blocks = page.locator('.approach .block');
+      await expect(blocks).toHaveCount(copy.approach.length);
+
       for (const [i, block] of copy.approach.entries()) {
-        // The title carries a decorative tick before the words.
-        await expect(titles.nth(i)).toContainText(plain(block.title));
+        const el = blocks.nth(i);
+        await expect(el.locator('.block-label')).toHaveText(block.label);
+        await expect(el.locator('.block-title')).toHaveText(block.title);
+        // Kept short on purpose: past roughly this length nobody reads six of
+        // them in a row.
+        expect(plain(block.body).length, block.label).toBeLessThan(160);
+        // Exactly one highlighted phrase per block, never more.
+        await expect(el.locator('.block-body em')).toHaveCount(1);
       }
     });
 
@@ -199,7 +206,7 @@ for (const locale of ['en', 'it'] as const) {
       // Lilac: the art foundation. The school, the block about drawing, the
       // job where the drawing was the job.
       await expect(page.locator('.hero .fact-v.tone-root')).toHaveCount(1);
-      await expect(page.locator('.approach .tick.tone-root')).toHaveCount(1);
+      await expect(page.locator('.approach .block-label.tone-root')).toHaveCount(1);
       await expect(page.locator('.work .chip.root')).toHaveCount(1);
 
       const tones = await page.evaluate(() => {
@@ -229,7 +236,7 @@ for (const locale of ['en', 'it'] as const) {
       await page.goto(home);
 
       await expect(page.getByRole('heading', { level: 1 })).toHaveText('Andrea Lisi.');
-      await expect(page.locator('.approach .block-title')).toHaveCount(copy.approach.length);
+      await expect(page.locator('.approach .block')).toHaveCount(copy.approach.length);
       await expect(page.locator('.work .job')).toHaveCount(copy.work.length);
       await expect(page.locator('.contact .invite')).toBeVisible();
 

@@ -16,11 +16,9 @@ const head = copy.sections.approach;
 
   <div class="grid" data-reveal>
     {copy.approach.map((block) => (
-      <div>
-        <p class="block-title">
-          <span class:list={['tick', block.tone && `tone-${block.tone}`]} aria-hidden="true">▹</span>
-          {block.title}
-        </p>
+      <div class="block">
+        <p class:list={['block-label', block.tone && `tone-${block.tone}`]}>{block.label}</p>
+        <p class="block-title">{block.title}</p>
         <p class="block-body" set:html={block.body} />
       </div>
     ))}

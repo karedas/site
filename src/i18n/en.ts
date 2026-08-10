@@ -56,29 +56,35 @@ export const en: Copy = {
 
   approach: [
     {
+      label: 'Clean_Start',
       title: 'Clean from minute one',
-      body: 'I don’t start dirty. A first demo comes out minimal, but every piece sits where it belongs, ready to grow or be thrown away. Clean, for me, means the boundaries show from outside: where a thing goes, and what is allowed to depend on what. It comes out that way, and it costs me nothing.',
+      body: 'Even a first demo comes out minimal, with <em>the boundaries showing from outside</em>. It costs me nothing.',
     },
     {
+      label: 'Triage_First',
       title: 'In someone else’s house, nothing burns',
-      body: 'When I land on a codebase in bad shape I don’t try to clean all of it: that is the fastest way to get resented and finish nothing. I set priorities and start where the result shows up immediately, because the people working there have to see the gain before they feel the cost. But there is always the thing that slows everyone down, the point every change has to go through, and I break that one up before anything else. You pay for it once.',
+      body: 'I don’t clean all of it at once: I start where the result shows, and <em>the point that slows everyone down</em> I break up before anything else.',
     },
     {
+      label: 'The_Why',
       title: 'The reason before the rule',
-      body: 'Before I impose a rule I go and find the reason, and I write it down. The rule always arrives with its reason attached, and with a deadline a person can live with. Nobody has to take my word for it, and I don’t want them to. Once it is settled I stop repeating it: it goes into CI as a warning that has to be cleared, and I move to the next one.',
+      body: 'Every rule arrives with its reason written down. Once it is settled <em>I stop repeating it</em>: it goes into CI.',
     },
     {
+      label: 'No_Org_Chart',
       title: 'I close the distance',
-      body: 'I talk to people, all of them, and I don’t wait for the right moment. I joke, I laugh, and no org chart has ever decided who I talk to: I care about the person long before the role they hold. I save the serious tone for the things that deserve it, and there are far fewer of those than it looks. For everything else it is quicker to look each other in the face.',
+      body: 'I talk to everyone, I joke, and who I talk to <em>was never decided by an org chart</em>. I save the serious tone for what deserves it.',
     },
     {
+      label: 'Hand_It_Over',
       title: 'Sometimes my job is not solving it',
-      body: 'Some of these things I could close on my own and nobody would ever know. I’d rather spend the time it takes to hand them over: write the document, open the ticket, tell the team, set a date. That work is theirs. If I keep doing it for them, they stop knowing it exists.',
+      body: 'I could close them alone and nobody would know. I hand them over, because <em>if I keep doing it they stop knowing it exists</em>.',
     },
     {
+      label: 'Art_School',
       title: 'A folder is a painting',
       tone: 'root',
-      body: 'I went to art school, and I never stopped drawing. Drawing first, then years of the violin. With an interface I want to know whether it is beautiful and why it was built that way, and those two questions never come apart for me. I hold architecture to the same standard: a folder is a painting to me, and you can tell at a glance whether there is an order inside it or just things put away.',
+      body: 'Art school, then years of the violin, and I never stopped drawing. <em>I hold architecture to the same standard</em>.',
     },
   ],
 

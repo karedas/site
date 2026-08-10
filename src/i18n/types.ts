@@ -31,8 +31,14 @@ export type Stat = {
 };
 
 export type ApproachBlock = {
+  /**
+   * Short mono tag above the title, written as an identifier rather than as a
+   * phrase. Deliberately English in both locales: it reads as code, not prose,
+   * and Italian does not snake_case gracefully.
+   */
+  label: string;
   title: string;
-  /** HTML: the body may carry inline emphasis. */
+  /** HTML: exactly one <em> per body, on the phrase the block turns on. */
   body: string;
   tone?: Tone;
 };
