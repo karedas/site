@@ -64,7 +64,7 @@ export const en: Copy = {
     {
       label: 'The_Rules',
       title: 'If a rule matters, a machine checks it',
-      body: '<b>I don’t believe in the hero developer</b>, and I don’t want a project’s stability to depend on my memory or on my being constantly around. When the team settles on a standard or an architectural convention, my first move is to automate it. If a check can be run by a linter, by a pipeline test or by a script that maps the dependency graph, that work goes to the machine. It gets the repetitive convention arguments out of pull requests, and it frees up head space for the actual application logic.',
+      body: '<b>I don’t believe in the hero developer</b>, and I don’t want a project’s stability to depend on my memory or on my being constantly around. When the team settles on a standard or an architectural convention, my first move is to automate it. If a check can be run by a linter, by a pipeline test or by a script that maps the dependency graph, that work goes to the machine. It gets the repetitive convention arguments out of pull requests, and it frees up head space for the actual application logic. I don’t impose them on authority: I document them, I automate them, and then I come back and show what they saved. If it still feels handed down from above, that one is on me.',
     },
     {
       label: 'The_People',

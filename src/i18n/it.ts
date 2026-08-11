@@ -70,7 +70,7 @@ export const it: Copy = {
     {
       label: 'The_Rules',
       title: 'Se una regola è importante, la controlla una macchina',
-      body: '<b>Non credo nella figura dello sviluppatore eroe</b>, e non voglio che la stabilità di un progetto dipenda dalla mia memoria o dalla mia presenza costante. Quando dentro il team decidiamo uno standard o una convenzione architetturale, il mio primo passo è automatizzarla. Se un controllo può eseguirlo un linter, un test di pipeline o uno script che mappa il grafo delle dipendenze, quel lavoro lo delego alla macchina. Così eliminiamo le discussioni ripetitive sulle convenzioni nelle pull request, e liberiamo spazio mentale per la logica applicativa vera.',
+      body: '<b>Non credo nella figura dello sviluppatore eroe</b>, e non voglio che la stabilità di un progetto dipenda dalla mia memoria o dalla mia presenza costante. Quando dentro il team decidiamo uno standard o una convenzione architetturale, il mio primo passo è automatizzarla. Se un controllo può eseguirlo un linter, un test di pipeline o uno script che mappa il grafo delle dipendenze, quel lavoro lo delego alla macchina. Così eliminiamo le discussioni ripetitive sulle convenzioni nelle pull request, e liberiamo spazio mentale per la logica applicativa vera. Non le impongo per autorità: le documento, le automatizzo, e poi torno a mostrare cosa hanno fatto risparmiare. Se dopo sembra ancora una cosa calata dall’alto, ho sbagliato io.',
     },
     {
       label: 'The_People',
