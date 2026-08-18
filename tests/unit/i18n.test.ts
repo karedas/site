@@ -92,6 +92,16 @@ describe('the work history', () => {
   });
 });
 
+describe('focus and personal projects', () => {
+  it('keeps four focus groups and includes lockhound in both languages', () => {
+    for (const locale of LOCALES) {
+      const copy = getCopy(locale);
+      expect(copy.focus).toHaveLength(4);
+      expect(copy.projects.some((project) => project.name === 'lockhound')).toBe(true);
+    }
+  });
+});
+
 describe('the colour system', () => {
   /* Each named colour has one job and marks one category. Spending a tone
      somewhere new turns it back into decoration, so the count is pinned. */

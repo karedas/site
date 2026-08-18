@@ -122,6 +122,17 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('meta[name=robots]')).toHaveCount(0);
     });
 
+    test('shows the focused skills and personal projects', async ({ page }) => {
+      await page.goto(home);
+
+      await expect(page.locator('.focus .focus-group')).toHaveCount(copy.focus.length);
+      await expect(page.locator('.focus').getByText('TypeScript', { exact: true })).toBeVisible();
+
+      await expect(page.locator('.projects .project')).toHaveCount(copy.projects.length);
+      await expect(page.locator('.projects').getByText('lockhound', { exact: true })).toBeVisible();
+      await expect(page.locator('.projects code')).toHaveText('npx lockhound');
+    });
+
     test('lists four jobs, each with bullets and chips', async ({ page }) => {
       await page.goto(home);
 
@@ -180,13 +191,7 @@ for (const locale of ['en', 'it'] as const) {
 
     test('does not ship the retired copy', async ({ page }) => {
       await page.goto(home);
-      for (const banned of [
-        /quietly/i,
-        /TypeScript/,
-        /five thousand/i,
-        /cinquemila/i,
-        /RAG and embeddings/i,
-      ]) {
+      for (const banned of [/quietly/i, /five thousand/i, /cinquemila/i, /RAG and embeddings/i]) {
         await expect(page.getByText(banned), String(banned)).toHaveCount(0);
       }
     });
@@ -197,12 +202,15 @@ for (const locale of ['en', 'it'] as const) {
      * read as the only thing he does, which is why it was cut the first time.
      * The rule was never the word, it was the position.
      */
-    test('names the architecture as evidence, never as a label', async ({ page }) => {
+    test('keeps the architecture out of the hero and names it where it adds evidence', async ({
+      page,
+    }) => {
       await page.goto(home);
       const architecture = /micro-?frontend|monorepo/i;
 
       await expect(page.locator('.hero').getByText(architecture)).toHaveCount(0);
       await expect(page.locator('.approach').getByText(architecture)).toHaveCount(0);
+      await expect(page.locator('.focus').getByText(architecture).first()).toBeVisible();
       await expect(page.locator('.work').getByText(architecture).first()).toBeVisible();
     });
 
@@ -249,7 +257,9 @@ for (const locale of ['en', 'it'] as const) {
 
       await expect(page.getByRole('heading', { level: 1 })).toHaveText('Andrea Lisi.');
       await expect(page.locator('.approach .block')).toHaveCount(copy.approach.length);
+      await expect(page.locator('.focus .focus-group')).toHaveCount(copy.focus.length);
       await expect(page.locator('.work .job')).toHaveCount(copy.work.length);
+      await expect(page.locator('.projects .project')).toHaveCount(copy.projects.length);
       await expect(page.locator('.contact .invite')).toBeVisible();
 
       await context.close();

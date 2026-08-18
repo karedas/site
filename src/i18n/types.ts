@@ -48,6 +48,19 @@ export type ApproachBlock = {
   tone?: Tone;
 };
 
+export type FocusGroup = {
+  title: string;
+  items: string[];
+};
+
+export type ProjectEntry = {
+  name: string;
+  kind: string;
+  description: string;
+  tags: string[];
+  command?: string;
+};
+
 export type WorkEntry = {
   /** Job title, shown before the company. */
   title: string;
@@ -105,12 +118,16 @@ export type Copy = {
 
   sections: {
     approach: SectionHead;
+    focus: SectionHead;
     ai: LabelledSectionHead;
     experience: SectionHead;
+    projects: SectionHead;
     contact: SectionHead;
   };
 
   approach: ApproachBlock[];
+
+  focus: FocusGroup[];
 
   ai: {
     heading: string;
@@ -124,6 +141,8 @@ export type Copy = {
   };
 
   work: WorkEntry[];
+
+  projects: ProjectEntry[];
 
   /**
    * HTML: the line that closes the career, after the four entries. It only

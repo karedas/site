@@ -3,8 +3,10 @@ import AiSection from '@/components/ai-section.astro';
 import Approach from '@/components/approach.astro';
 import Contact from '@/components/contact.astro';
 import DotField from '@/components/dot-field.astro';
+import Focus from '@/components/focus.astro';
 import Hero from '@/components/hero.astro';
 import Loader from '@/components/loader.astro';
+import Projects from '@/components/projects.astro';
 import SiteFooter from '@/components/site-footer.astro';
 import SiteHeader from '@/components/site-header.astro';
 import Work from '@/components/work.astro';
@@ -25,8 +27,10 @@ const { locale } = Astro.props;
     <main id="main-content">
       <Hero locale={locale} />
       <Approach locale={locale} />
+      <Focus locale={locale} />
       <AiSection locale={locale} />
       <Work locale={locale} />
+      <Projects locale={locale} />
       <Contact locale={locale} />
     </main>
     <SiteFooter locale={locale} />
