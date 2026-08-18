@@ -30,6 +30,11 @@ const FINGERPRINT: Record<Locale, string> = {
   it: 'Quello che l’AI mi ha dato',
 };
 
+const FIRST_APPROACH_FINGERPRINT: Record<Locale, RegExp> = {
+  en: /the boundaries show from outside/,
+  it: /i confini si vedono da fuori/,
+};
+
 for (const locale of ['en', 'it'] as const) {
   const copy = getCopy(locale);
   const home = hrefFor(locale, 'home');
@@ -87,7 +92,7 @@ for (const locale of ['en', 'it'] as const) {
         ).toBeVisible();
       }
       // The prose stays put away until a card opens.
-      await expect(page.getByText('A linter goes in on day one')).not.toBeVisible();
+      await expect(page.getByText(FIRST_APPROACH_FINGERPRINT[locale])).not.toBeVisible();
     });
 
     test('opens a card overlay and closes it again', async ({ page }) => {
@@ -97,7 +102,7 @@ for (const locale of ['en', 'it'] as const) {
       await page.getByRole('button', { name: new RegExp(firstTitle.slice(0, 14)) }).click();
       const dialog = page.locator(`#approach-${locale}-0`);
       await expect(dialog).toBeVisible();
-      await expect(dialog.getByText(/TypeScript/)).toBeVisible();
+      await expect(dialog.getByText(FIRST_APPROACH_FINGERPRINT[locale])).toBeVisible();
 
       await dialog.getByRole('button', { name: copy.ui.close }).click();
       await expect(dialog).not.toBeVisible();
@@ -113,6 +118,16 @@ for (const locale of ['en', 'it'] as const) {
       await expect(
         dialog.getByRole('link', { name: new RegExp(copy.ai.permalinkSuffix) }),
       ).toHaveAttribute('href', ai);
+    });
+
+    test('shows the focused skills and personal projects', async ({ page }) => {
+      await page.goto(home);
+
+      await expect(page.getByRole('heading', { name: copy.sections.focus.title })).toBeVisible();
+      await expect(page.getByText('Micro-frontends', { exact: true }).first()).toBeVisible();
+      await expect(page.getByRole('heading', { name: copy.sections.projects.title })).toBeVisible();
+      await expect(page.getByText('lockhound', { exact: true })).toBeVisible();
+      await expect(page.getByText('npx lockhound', { exact: true }).first()).toBeVisible();
     });
 
     test('walks the timeline: four stops, oldest to current', async ({ page }) => {
@@ -190,7 +205,7 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.getByRole('heading', { level: 1 })).toContainText('Andrea');
       // The noscript stylesheet unfolds every overlay in place.
       await expect(page.getByText(FINGERPRINT[locale])).toBeVisible();
-      await expect(page.getByText('TypeScript').first()).toBeVisible();
+      await expect(page.getByText(FIRST_APPROACH_FINGERPRINT[locale])).toBeVisible();
 
       await context.close();
     });

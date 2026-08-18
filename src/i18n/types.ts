@@ -17,9 +17,23 @@ export type Stat = {
 };
 
 export type ApproachBlock = {
-  /** HTML: the first block carries an inline <code>any</code>. */
+  /** May contain a small amount of inline HTML. */
   title: string;
   body: string;
+};
+
+export type FocusGroup = {
+  title: string;
+  items: string[];
+};
+
+export type ProjectEntry = {
+  name: string;
+  kind: string;
+  glyph: 'kite' | 'path';
+  description: string;
+  tags: string[];
+  command?: string;
 };
 
 export type WorkEntry = {
@@ -74,12 +88,16 @@ export type Copy = {
 
   sections: {
     approach: SectionHead;
+    focus: SectionHead;
     ai: SectionHead;
     experience: SectionHead;
+    projects: SectionHead;
     contact: SectionHead;
   };
 
   approach: ApproachBlock[];
+
+  focus: FocusGroup[];
 
   ai: {
     heading: string;
@@ -97,6 +115,9 @@ export type Copy = {
   };
 
   work: WorkEntry[];
+  projects: {
+    entries: ProjectEntry[];
+  };
 
   contact: {
     cv: string;
