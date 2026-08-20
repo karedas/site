@@ -1,8 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// A port of its own: the suite must never quietly bind to, or reuse, the dev
-// server a human has open on 4321.
-const PORT = 4323;
+// A port of its own: v2's suite sits on 4323 and the dev servers on
+// 4321/4322/4324, so parallel sessions never collide.
+const PORT = 4325;
 const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
@@ -10,8 +10,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  // Every page runs a WebGL loop and a canvas rAF loop. One Chromium per core
-  // starves them all and simple assertions start timing out, so cap the fan-out.
+  // The footer runs a WebGL island; one Chromium per core starves the
+  // rAF loops and simple assertions start timing out. Cap the fan-out.
   workers: process.env.CI ? 1 : 4,
   reporter: process.env.CI ? [['html', { open: 'never' }], ['github']] : 'list',
 
@@ -29,9 +29,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    // Test the artifact that ships. The dev server compiles on demand, so the
-    // first hit from each worker pays a Vite build and the suite measures the
-    // bundler instead of the site.
+    // Test the artifact that ships, not the on-demand dev compiler.
     command: `npm run build && npm run preview -- --host 127.0.0.1 --port ${PORT}`,
     url: BASE_URL,
     reuseExistingServer: !process.env.CI,

@@ -1,12 +1,79 @@
 /* =========================================================
-   Motion. Short, once, on first viewport entry.
-   Logic: src/scripts/reveal.ts
+   Motion. Short, time-based, once. Never scroll-pinned.
+   Logic: src/scripts/reveal.ts, assemble.ts, overlays.ts.
    ========================================================= */
 
-@keyframes alf {
+/* Fade-rise on first viewport entry. */
+[data-rv] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-rv].rv-in,
+html.no-js [data-rv] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scattered letters assembling: spans injected by JS, so without JS the
+   heading is plain text and needs no fallback rules. */
+.split-char {
+  display: inline-block;
+  transform: translate(var(--dx, 0), var(--dy, 0)) rotate(var(--dr, 0deg));
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.5s ease;
+  transition-delay: calc(var(--i, 0) * 26ms);
+  will-change: transform;
+}
+
+.assembled .split-char {
+  transform: none;
+  opacity: 1;
+}
+
+/* Card overlays: native <dialog>, quick entrance, no drama. */
+dialog.overlay {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  padding: 0;
+  max-width: min(620px, calc(100vw - 32px));
+  width: 100%;
+  box-shadow: 0 24px 60px -24px rgba(38, 29, 21, 0.35);
+}
+
+dialog.overlay::backdrop {
+  background: rgba(38, 29, 21, 0.28);
+}
+
+/* Without JS the overlays cannot open: render them inline instead. The
+   no-js class is stripped by an inline script before first paint. */
+html.no-js dialog.overlay {
+  display: block;
+  position: static;
+  box-shadow: none;
+  margin-top: 10px;
+  max-width: none;
+}
+
+html.no-js dialog.overlay [data-overlay-close] {
+  display: none;
+}
+
+dialog.overlay[open] {
+  animation: overlay-in 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes overlay-in {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -14,65 +81,20 @@
   }
 }
 
-@keyframes gdraw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes gin {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes gout {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-/* Hero pieces enter on load, staggered by an inline delay. */
-.enter {
-  animation: alf 0.6s ease both;
-}
-
-/* Everything below the fold enters when it first scrolls in. */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-}
-
-[data-reveal].is-in,
-html.no-js [data-reveal] {
-  opacity: 1;
-  transform: none;
-}
-
-/* The !important here is the point, not an oversight: this block has to beat
-   every animation and transition on the page whatever their specificity or
-   source order, including the inline stagger delays on the hero. Take them out
-   and the reduced-motion promise stops holding, which the e2e suite checks. */
-/* biome-ignore-start lint/complexity/noImportantStyles: an accessibility reset has to win the cascade outright */
 @media (prefers-reduced-motion: reduce) {
-  .loader {
-    display: none !important;
+  [data-rv] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
+  .split-char {
+    transform: none;
+    opacity: 1;
+    transition: none;
   }
 
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
+  dialog.overlay[open] {
+    animation: none;
   }
 }
-/* biome-ignore-end lint/complexity/noImportantStyles: an accessibility reset has to win the cascade outright */

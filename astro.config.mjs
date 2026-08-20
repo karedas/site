@@ -1,3 +1,4 @@
+import react from '@astrojs/react';
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
@@ -9,6 +10,7 @@ export default defineConfig({
     // English stays at the root, Italian lives under /it/.
     routing: { prefixDefaultLocale: false },
   },
+  integrations: [react()],
   vite: {
     cacheDir: '.vite',
   },

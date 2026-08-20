@@ -16,21 +16,22 @@ const meta = page === 'ai' ? copy.aiMeta : copy.meta;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL('/og-image.png', Astro.site).toString();
+/* Roman only: no italic axes, nothing on the site uses them. */
 const fontHref =
-  'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
+  'https://fonts.googleapis.com/css2?family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap';
 ---
 <!doctype html>
 <html lang={copy.htmlLang} class="no-js">
   <head>
     <script is:inline>
-      // Drop the no-js flag before first paint: the reveal styles hide
-      // [data-reveal] blocks, so without JS they must stay visible.
+      // Drop the no-js flag before first paint: entrance styles hide
+      // [data-rv] blocks, so without JS they must stay visible.
       document.documentElement.classList.remove('no-js');
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#0a192f" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#f9f5ec" />
+    <meta name="color-scheme" content="light" />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -39,10 +40,6 @@ const fontHref =
     <meta name="description" content={meta.description} />
     <meta name="author" content="Andrea Lisi" />
     <link rel="canonical" href={canonicalURL} />
-    {/* The deep page repeats the home section word for word. It exists so the
-        stance can be handed over as its own URL, not to be found in search, so
-        it stays out of the index rather than competing with the home page. */}
-    {page === 'ai' && <meta name="robots" content="noindex, follow" />}
 
     {LOCALES.map((code) => (
       <link
@@ -64,6 +61,7 @@ const fontHref =
     <meta property="og:locale" content={locale === 'it' ? 'it_IT' : 'en_US'} />
     <meta property="og:site_name" content="Andrea Lisi" />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -78,10 +76,9 @@ const fontHref =
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {/* Loaded off the critical path: as a plain stylesheet the fonts request
-        blocks first paint. media="print" defers it, scripts/fonts.ts promotes
-        it once it has arrived. */}
+        blocks first paint. media="print" defers it, onload promotes it. */}
     <link rel="preload" as="style" href={fontHref} />
-    <link rel="stylesheet" href={fontHref} media="print" data-fonts />
+    <link rel="stylesheet" href={fontHref} media="print" onload="this.media='all'" />
     <noscript>
       <link rel="stylesheet" href={fontHref} />
     </noscript>
@@ -92,11 +89,13 @@ const fontHref =
     <a class="skip-link" href="#main-content">{copy.skipLink}</a>
     <slot />
     <script>
-      import { initFonts } from '@/scripts/fonts';
+      import { initAssemble } from '@/scripts/assemble';
+      import { initOverlays } from '@/scripts/overlays';
       import { initReveal } from '@/scripts/reveal';
 
-      initFonts();
       initReveal();
+      initAssemble();
+      initOverlays();
     </script>
   </body>
 </html>

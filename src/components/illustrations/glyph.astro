@@ -1,0 +1,103 @@
+---
+/**
+ * Small hand-drawn ink glyphs for the card faces, one per subject.
+ * All share one viewBox and inherit currentColor, so a card can tint
+ * its drawing by setting color.
+ */
+type Props = {
+  name: 'seed' | 'saw' | 'signpost' | 'echo' | 'ticket' | 'violin' | 'kite' | 'path' | 'letter';
+};
+
+const { name } = Astro.props;
+---
+<svg
+  class="glyph"
+  viewBox="0 0 64 64"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  {name === 'seed' && (
+    <>
+      {/* a sprout in a pot: clean from minute one */}
+      <path d="M22 44 L 42 44 L 39 56 L 25 56 Z" />
+      <path d="M32 44 C 32 36, 32 32, 32 28" />
+      <path d="M32 30 C 26 28, 22 23, 22 17 C 28 18, 31 22, 32 28" />
+      <path d="M32 32 C 38 30, 42 25, 42 19 C 36 20, 33 24, 32 30" />
+    </>
+  )}
+  {name === 'saw' && (
+    <>
+      {/* a tall page being sawed in two: the five thousand line file */}
+      <path d="M20 10 L 40 10 L 40 54 L 20 54 Z" />
+      <path d="M24 18 L 36 18 M24 24 L 36 24 M24 30 L 33 30" />
+      <path d="M10 40 L 54 38" stroke-width="2.6" />
+      <path d="M14 40 l 3 4 l 3 -4 l 3 4 l 3 -4" stroke-width="1.6" />
+    </>
+  )}
+  {name === 'signpost' && (
+    <>
+      {/* the reason before the rule: a signpost pointing somewhere real */}
+      <path d="M32 56 L 32 20" />
+      <path d="M32 20 L 50 20 L 56 26 L 50 32 L 32 32 Z" />
+      <path d="M32 38 L 18 38 L 12 43 L 18 48 L 32 48 Z" opacity="0.6" />
+    </>
+  )}
+  {name === 'echo' && (
+    <>
+      {/* I talk, CI repeats: one voice, echoed by the machine */}
+      <path d="M14 22 C 14 15, 20 12, 26 12 C 33 12, 38 16, 38 22 C 38 28, 33 31, 26 31 L 22 31 L 16 37 L 17 30 C 15 28, 14 25, 14 22 Z" />
+      <path d="M44 24 C 48 26, 50 30, 50 34" opacity="0.7" />
+      <path d="M46 18 C 53 21, 56 28, 56 35" opacity="0.45" />
+    </>
+  )}
+  {name === 'ticket' && (
+    <>
+      {/* a ticket handed over: sometimes my job is not solving it */}
+      <path d="M12 24 L 52 24 L 52 33 C 49 33, 49 39, 52 39 L 52 48 L 12 48 L 12 39 C 15 39, 15 33, 12 33 Z" />
+      <path d="M20 32 L 36 32 M20 38 L 30 38" stroke-width="1.6" />
+      <path d="M40 14 C 44 10, 50 10, 52 14" opacity="0.6" />
+    </>
+  )}
+  {name === 'violin' && (
+    <>
+      {/* the violin: where I come from */}
+      <path d="M32 8 L 32 20" />
+      <path d="M28 12 L 36 12" stroke-width="1.6" />
+      <path d="M32 20 C 40 22, 42 28, 38 32 C 44 34, 46 42, 40 48 C 36 52, 28 52, 24 48 C 18 42, 20 34, 26 32 C 22 28, 24 22, 32 20 Z" />
+      <path d="M32 22 L 32 48" stroke-width="1.2" opacity="0.7" />
+      <path d="M27 38 C 25 38, 25 42, 27 42 M37 38 C 39 38, 39 42, 37 42" stroke-width="1.2" opacity="0.7" />
+    </>
+  )}
+  {name === 'kite' && (
+    <>
+      {/* an agent on a string: AI held with a firm hand */}
+      <path d="M38 10 L 54 22 L 40 36 L 28 24 Z" />
+      <path d="M40 36 C 36 42, 30 46, 22 50" opacity="0.8" />
+      <path d="M22 50 L 14 56" />
+      <path d="M36 40 l 4 2 M30 45 l 4 2" stroke-width="1.4" opacity="0.6" />
+    </>
+  )}
+  {name === 'path' && (
+    <>
+      {/* the timeline: commits merging into main */}
+      <path d="M10 44 L 54 44" />
+      <circle cx="18" cy="44" r="3.4" />
+      <circle cx="32" cy="44" r="3.4" />
+      <path d="M32 44 C 38 34, 44 30, 50 30" opacity="0.7" />
+      <circle cx="50" cy="30" r="3.4" opacity="0.8" />
+      <circle cx="48" cy="44" r="3.8" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {name === 'letter' && (
+    <>
+      {/* an envelope with a stamp: write me */}
+      <path d="M12 20 L 52 20 L 52 46 L 12 46 Z" />
+      <path d="M12 22 L 32 36 L 52 22" />
+      <path d="M43 25 L 49 25 L 49 31" stroke-width="1.4" opacity="0.6" />
+    </>
+  )}
+</svg>

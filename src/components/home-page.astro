@@ -1,16 +1,9 @@
 ---
-import AiSection from '@/components/ai-section.astro';
-import Approach from '@/components/approach.astro';
-import Contact from '@/components/contact.astro';
-import DotField from '@/components/dot-field.astro';
-import Focus from '@/components/focus.astro';
+import Bento from '@/components/bento/bento.astro';
+import Footer from '@/components/footer.astro';
 import Hero from '@/components/hero.astro';
-import Loader from '@/components/loader.astro';
-import Projects from '@/components/projects.astro';
-import SiteFooter from '@/components/site-footer.astro';
-import SiteHeader from '@/components/site-header.astro';
-import Work from '@/components/work.astro';
-import type { Locale } from '@/i18n';
+import TopBar from '@/components/top-bar.astro';
+import { hrefFor, type Locale } from '@/i18n';
 import Layout from '@/layouts/layout.astro';
 
 type Props = {
@@ -20,19 +13,10 @@ type Props = {
 const { locale } = Astro.props;
 ---
 <Layout locale={locale} page="home">
-  <Loader />
-  <DotField />
-  <div class="shell">
-    <SiteHeader locale={locale} page="home" />
-    <main id="main-content">
-      <Hero locale={locale} />
-      <Approach locale={locale} />
-      <Focus locale={locale} />
-      <AiSection locale={locale} />
-      <Work locale={locale} />
-      <Projects locale={locale} />
-      <Contact locale={locale} />
-    </main>
-    <SiteFooter locale={locale} />
-  </div>
+  <TopBar locale={locale} page="home" />
+  <main id="main-content">
+    <Hero locale={locale} />
+    <Bento locale={locale} />
+  </main>
+  <Footer aiHref={hrefFor(locale, 'ai')} />
 </Layout>

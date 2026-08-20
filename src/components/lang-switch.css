@@ -2,24 +2,24 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-left: 20px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
+  font: 500 11px var(--mono);
+  letter-spacing: 0.12em;
 }
 
 .lang .opt {
-  color: var(--dim);
+  color: var(--muted);
+  text-decoration: none;
 }
 
 .lang .opt:hover,
 .lang .opt:focus-visible {
-  color: var(--acc);
+  color: var(--accent-ink);
 }
 
 .lang .opt.current {
-  color: var(--head);
+  color: var(--ink);
 }
 
 .lang .sep {
-  color: var(--line);
+  color: var(--hairline);
 }

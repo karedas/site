@@ -1,0 +1,142 @@
+---
+import '@/components/bento/bento.css';
+import AiContent from '@/components/ai-content.astro';
+import OverlayCard from '@/components/bento/overlay-card.astro';
+import TimelineCard from '@/components/bento/timeline-card.astro';
+import Glyph from '@/components/illustrations/glyph.astro';
+import { getCopy, hrefFor, type Locale } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const aiHref = hrefFor(locale, 'ai');
+
+/* One drawing per way of working, in the order the copy tells it. */
+const approachGlyphs = ['seed', 'saw', 'signpost', 'echo', 'ticket', 'violin'] as const;
+
+const approachLabel = copy.sections.approach.title;
+const focusLabel = copy.sections.focus.title;
+const aiLabel = copy.sections.ai.title;
+const contactLabel = copy.sections.contact.title;
+const projectsLabel = copy.sections.projects.title;
+const cvHref = locale === 'it' ? '/andrea-lisi-cv-it.pdf' : '/andrea-lisi-cv.pdf';
+const cvDownload = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
+
+const contactLinks = [
+  { label: copy.contact.cv, href: cvHref, download: cvDownload },
+  { label: copy.contact.github, href: 'https://github.com/karedas' },
+  { label: copy.contact.linkedin, href: 'https://www.linkedin.com/in/andrea-lisi84' },
+  { label: copy.contact.email, href: 'mailto:lisandr84@gmail.com' },
+];
+
+const isExternal = (href: string): boolean => href.startsWith('http');
+---
+<section class="bento table" id="table">
+  {copy.approach.map((block, i) => (
+    <OverlayCard
+      id={`approach-${locale}-${i}`}
+      label={`01 · ${approachLabel}`}
+      title={block.title}
+      glyph={approachGlyphs[i] ?? 'seed'}
+      closeLabel={copy.ui.close}
+    >
+      <p set:html={block.body} />
+    </OverlayCard>
+  ))}
+
+  <section class="focus-panel" id="focus" data-rv aria-labelledby={`focus-title-${locale}`}>
+    <header class="focus-head">
+      <div>
+        <p class="focus-eyebrow label">{copy.sections.focus.eyebrow}</p>
+        <h2 id={`focus-title-${locale}`}>{focusLabel}</h2>
+      </div>
+      <Glyph name="path" />
+    </header>
+    <div class="focus-groups">
+      {copy.focus.map((group) => (
+        <div class="focus-group">
+          <h3>{group.title}</h3>
+          <ul>
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="span-3" id="ai">
+    <OverlayCard
+      id={`ai-${locale}`}
+      label={`02 · ${aiLabel}`}
+      title={copy.ai.heading}
+      glyph="kite"
+      closeLabel={copy.ui.close}
+      tinted
+    >
+      <AiContent locale={locale} />
+      {/* aria-label starts with the visible text: WCAG 2.5.3. */}
+      <p style="margin-top:16px;">
+        <a
+          class="ai-permalink"
+          href={aiHref}
+          aria-label={`${aiHref}, ${copy.ai.permalinkSuffix}`}
+        >
+          {aiHref}
+        </a>
+      </p>
+    </OverlayCard>
+  </div>
+
+  <div class="contact-card span-3" id="contact" data-rv>
+    <span class="card-label label"><span class="tick">04</span> · {contactLabel}</span>
+    <Glyph name="letter" />
+    <p class="contact-links">
+      {contactLinks.map((link) => (
+        <a
+          href={link.href}
+          download={link.download}
+          target={isExternal(link.href) ? '_blank' : undefined}
+          rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </p>
+    <a
+      class="instagram"
+      href="https://www.instagram.com/alandr.1984/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {copy.contact.instagram}
+    </a>
+  </div>
+
+  <TimelineCard locale={locale} />
+
+  <section class="projects" id="projects" data-rv aria-labelledby={`projects-title-${locale}`}>
+    <header class="projects-head">
+      <div>
+        <p class="projects-eyebrow label"><span class="tick">05</span> · {copy.sections.projects.eyebrow}</p>
+        <h2 id={`projects-title-${locale}`}>{projectsLabel}</h2>
+      </div>
+    </header>
+    <div class="project-grid">
+      {copy.projects.entries.map((project) => (
+        <article class="project">
+          <div class="project-mark"><Glyph name={project.glyph} /></div>
+          <p class="project-kind label">{project.kind}</p>
+          <h3>{project.name}</h3>
+          <p class="project-description">{project.description}</p>
+          <div class="project-tags">
+            {project.tags.map((tag) => <span class="chip">{tag}</span>)}
+          </div>
+          {project.command && <code class="project-command">{project.command}</code>}
+        </article>
+      ))}
+    </div>
+  </section>
+</section>

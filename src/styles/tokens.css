@@ -1,56 +1,37 @@
 /* =========================================================
-   Andrea Lisi · tokens
-
-   Navy surfaces, two greys, three colours. Each colour has one
-   job and appears only where that job applies, so a reader picks
-   up the code without being told it:
-
-     --acc   structure and interaction. Numbers, ticks, links,
-             company names. The page's constant.
-     --now   the present tense. What he does now, and the role
-             that is still open.
-     --root  where the eye comes from. The art school, and the
-             places the drawing still shows.
-
-   Every one clears 4.5:1 on --bg and on --panel.
+   Andrea Lisi · v3 "Il tavolo" tokens
+   The CV's paper: warm cream, espresso ink, one burnt-orange
+   accent. Single source of truth.
    ========================================================= */
 
 :root {
-  --bg: #0a192f;
-  --panel: #112240;
-  --line: #233554;
+  /* ---- Surfaces ---- */
+  --paper: #f9f5ec;
+  --card: #fdfaf3;
 
-  --head: #ccd6f6;
-  --body: #8892b0;
-  /* The design shipped #5f6c8c here, which gives 3.36:1 on --bg and fails AA
-     for the dates, the chips and the meta lines it is used on. Lifted to the
-     nearest tone in the same hue that clears 4.5:1. */
-  --dim: #7683a3;
+  /* ---- Ink ---- */
+  --ink: #261d15;
+  --ink-soft: #5a4c3f;
+  /* Dark enough for 11px mono labels on paper: 4.5:1 minimum. */
+  --muted: #6e6150;
 
-  /* Emerald, deliberately greener than the #64ffda mint that every navy
-     portfolio uses: hue 161 against its 166, and darker, so it reads as
-     emerald rather than as that template. 9.5:1 on --bg. */
-  --acc: #35d6a4;
-  --acc-soft: rgba(53, 214, 164, 0.1);
-  --acc-line: rgba(53, 214, 164, 0.22);
+  /* ---- Accent: burnt orange, used small ---- */
+  --accent: #b84715;
+  /* For accent-colored TEXT: passes 4.5:1 on paper and on the tint. */
+  --accent-ink: #9a3a10;
+  --accent-soft: #f8e3d4;
 
-  /* Gold, hue 42. Marks the present: the focus in the hero, the badge on the
-     open role, and that role's dates. 9.4:1 on --bg. */
-  --now: #f0b429;
-  --now-line: rgba(240, 180, 41, 0.4);
+  /* ---- Hairlines ---- */
+  --hairline: #e3d9c7;
+  --hairline-soft: #ece4d4;
 
-  /* Lilac, hue 255. Marks the art foundation wherever it surfaces: the school
-     in the hero, the block about drawing, the design work it started in.
-     8.2:1 on --bg, and far enough from both other hues to never be mistaken
-     for either. */
-  --root: #b8a6f0;
+  /* ---- Typography (roman only, no italics anywhere) ---- */
+  --serif-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --serif-text: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
 
-  /* The dot grid, and the glow that follows the pointer across it. */
-  --dot: #1c2a45;
-
-  --font-sans: "Figtree", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
-
-  --measure: 980px;
-  --gutter: clamp(22px, 5vw, 48px);
+  /* ---- Layout ---- */
+  --table-max: 74rem; /* the whole table */
+  --gutter: clamp(18px, 4vw, 44px);
+  --radius: 4px;
 }

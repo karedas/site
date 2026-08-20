@@ -1,0 +1,239 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: clamp(36px, 6vh, 64px);
+}
+
+/* Default card size: three per row. */
+.bento > * {
+  grid-column: span 2;
+}
+
+/* The AI card and the contact card share a row. */
+.bento > .span-3 {
+  grid-column: span 3;
+}
+
+/* The timeline runs the full width of the table. */
+.bento > .timeline {
+  grid-column: 1 / -1;
+}
+
+/* The focus panel keeps the skills concrete and easy to scan. */
+.focus-panel,
+.projects {
+  grid-column: 1 / -1;
+  padding: 20px 24px 24px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.focus-head,
+.projects-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--hairline-soft);
+  padding-bottom: 16px;
+}
+
+.focus-eyebrow,
+.projects-eyebrow {
+  margin: 0 0 5px;
+  font-size: 10px;
+}
+
+.focus-head h2,
+.projects-head h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.05;
+}
+
+.focus-head .glyph {
+  width: 52px;
+  height: 52px;
+  color: var(--accent-ink);
+}
+
+.focus-groups,
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.focus-group h3 {
+  margin: 0 0 8px;
+  font: 500 11px var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.focus-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.focus-group li {
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.focus-group li:not(:last-child)::after {
+  content: " ·";
+  color: var(--hairline);
+}
+
+.project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  align-items: start;
+  padding: 2px 0 0;
+}
+
+.project + .project {
+  border-left: 1px solid var(--hairline-soft);
+  padding-left: 20px;
+}
+
+.project-mark {
+  grid-row: span 3;
+  color: var(--ink-soft);
+}
+
+.project-mark .glyph {
+  width: 46px;
+  height: 46px;
+}
+
+.project-kind {
+  margin: 3px 0 4px;
+  font-size: 10px;
+}
+
+.project h3 {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.project-description {
+  grid-column: 2;
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.project-tags {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.project-command {
+  grid-column: 2;
+  margin-top: 12px;
+  color: var(--accent-ink);
+}
+
+@media (max-width: 1000px) {
+  .bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bento > *,
+  .bento > .span-3 {
+    grid-column: span 1;
+  }
+
+  .bento > .timeline {
+    grid-column: 1 / -1;
+  }
+
+  .focus-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-panel,
+  .projects {
+    padding: 18px 18px 20px;
+  }
+
+  .focus-groups,
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project + .project {
+    border-left: 0;
+    border-top: 1px solid var(--hairline-soft);
+    padding-top: 20px;
+    padding-left: 0;
+  }
+}
+
+/* ---- Contact card: no overlay, the links are the content. ---- */
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 20px 16px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+}
+
+.contact-card .card-label {
+  font-size: 10px;
+}
+
+.contact-card .glyph {
+  width: 44px;
+  height: 44px;
+  color: var(--ink-soft);
+}
+
+.contact-card .contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0;
+  font-family: var(--serif-display);
+  font-size: 20px;
+}
+
+.contact-card .instagram {
+  font: 400 11px var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ---- Inside the AI overlay ---- */
+.ai-permalink {
+  font: 400 11px var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}

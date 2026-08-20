@@ -1,0 +1,57 @@
+---
+import '@/components/bento/timeline-card.css';
+import { getCopy, type Locale } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const label = copy.sections.experience.title;
+/* Oldest first: the track reads left to right like the CV's git log. */
+const stops = [...copy.work].reverse();
+---
+<section class="timeline" data-rv aria-label={label}>
+  <p class="timeline-label label"><span class="tick">03</span> · {label}</p>
+
+  <div class="track">
+    {stops.map((job, i) => {
+      const id = `job-${locale}-${i}`;
+      const titleId = `${id}-title`;
+      return (
+        <article class:list={['stop-wrap', { current: job.current }]}>
+          <button
+            class:list={['stop', { current: job.current }]}
+            data-overlay-open={id}
+            aria-haspopup="dialog"
+          >
+            <span class="years">{job.years}</span>
+            <span class="company">{job.company}</span>
+            <span class="role">{job.role}</span>
+          </button>
+
+          <dialog id={id} class="overlay stop-overlay" aria-labelledby={titleId}>
+            <div class="overlay-inner">
+              <header class="overlay-head">
+                <h3 class="overlay-title" id={titleId}>{job.company}</h3>
+                <button class="close" data-overlay-close aria-label={copy.ui.close}>&times;</button>
+              </header>
+              <div class="overlay-body">
+                <p class="meta-row">{job.years} · {job.place} · {job.role}</p>
+                {job.paragraphs.map((para) => (
+                  <p set:html={para} />
+                ))}
+                <div class="tags">
+                  {job.tags.map((tag) => (
+                    <span class="chip">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </dialog>
+        </article>
+      );
+    })}
+  </div>
+</section>

@@ -1,15 +1,12 @@
 import AxeBuilder from '@axe-core/playwright';
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
-import { getCopy, hrefFor } from '../../src/i18n';
-
-/** Strip the inline <b> emphasis so copy can be matched as plain text. */
-const plain = (html: string): string => html.replace(/<[^>]+>/g, '');
+import { getCopy, hrefFor, type Locale } from '../../src/i18n';
 
 /**
- * Audit a page at rest. Reduced motion removes the loader and settles every
- * entrance, so axe reads final colours instead of a frame mid-fade, and the
- * scan never competes with animation for CPU.
+ * Audit a page at rest: reduced motion stops the entrances and the hero
+ * field, so axe reads settled colors and never competes with animation
+ * frames for CPU.
  */
 async function auditPage(page: Page, url: string): Promise<void> {
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -20,16 +17,30 @@ async function auditPage(page: Page, url: string): Promise<void> {
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
 
-  const serious = results.violations.filter(
+  const criticalOrSerious = results.violations.filter(
     (v) => v.impact === 'critical' || v.impact === 'serious',
   );
-  expect(serious, JSON.stringify(serious, null, 2)).toEqual([]);
+
+  expect(criticalOrSerious, JSON.stringify(criticalOrSerious, null, 2)).toEqual([]);
 }
+
+/** A phrase that only exists in this locale, to prove the right dict landed. */
+const FINGERPRINT: Record<Locale, string> = {
+  en: 'What AI gave me is the ability',
+  it: 'Quello che l’AI mi ha dato',
+};
+
+const FIRST_APPROACH_FINGERPRINT: Record<Locale, RegExp> = {
+  en: /the boundaries show from outside/,
+  it: /i confini si vedono da fuori/,
+};
 
 for (const locale of ['en', 'it'] as const) {
   const copy = getCopy(locale);
   const home = hrefFor(locale, 'home');
   const ai = hrefFor(locale, 'ai');
+  const cvFilename = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
+  const cvHref = `/${cvFilename}`;
 
   test.describe(`home page (${locale})`, () => {
     test('declares its language and links both alternates', async ({ page }) => {
@@ -57,184 +68,125 @@ for (const locale of ['en', 'it'] as const) {
       expect((description as string).length).toBeLessThan(155);
     });
 
-    test('opens with the greeting, the name and the tagline', async ({ page }) => {
+    test('renders the hero with the assembled name and its accessible label', async ({ page }) => {
       await page.goto(home);
-
-      await expect(page.getByText(copy.hero.greeting)).toBeVisible();
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Andrea Lisi.');
-      await expect(page.getByText(copy.hero.tagline)).toBeVisible();
-      await expect(page.getByText(copy.hero.intro)).toBeVisible();
+      const h1 = page.getByRole('heading', { level: 1 });
+      // The scatter script decorates; the accessible name stays intact.
+      await expect(h1).toHaveAttribute('aria-label', 'Andrea Lisi.');
+      await expect(h1.locator('.split-char').first()).toBeVisible();
+      await expect(page.getByText(copy.hero.intro.slice(0, 40))).toBeVisible();
     });
 
-    test('shows the portrait, served as WebP with a JPEG fallback', async ({ page }) => {
+    test('mounts the hero constellation island', async ({ page }) => {
       await page.goto(home);
-      const img = page.locator('.hero .portrait img');
-      await expect(img).toBeVisible();
-      await expect(img).toHaveAttribute('alt', 'Andrea Lisi');
-      await expect(page.locator('.hero .portrait source')).toHaveAttribute('type', 'image/webp');
-      // The decoded image is the real file, not a broken placeholder.
-      expect(await img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
+      const host = page.getByTestId('hero-field');
+      await expect(host.locator('canvas')).toHaveCount(1);
+      await expect(host).toHaveAttribute('aria-hidden', 'true');
     });
 
-    test('lists the four facts', async ({ page }) => {
+    test('shows all six ways-of-working cards with their titles only', async ({ page }) => {
       await page.goto(home);
-      for (const stat of copy.hero.stats) {
-        await expect(page.locator('.hero .facts').getByText(stat.value)).toBeVisible();
+
+      for (const block of copy.approach) {
+        const plain = block.title.replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '’');
+        await expect(
+          page.getByRole('button', { name: new RegExp(plain.slice(0, 18)) }),
+        ).toBeVisible();
       }
+      // The prose stays put away until a card opens.
+      await expect(page.getByText(FIRST_APPROACH_FINGERPRINT[locale])).not.toBeVisible();
     });
 
-    test('renders the ways-of-working blocks as tagged prose', async ({ page }) => {
+    test('opens a card overlay and closes it again', async ({ page }) => {
       await page.goto(home);
-      const blocks = page.locator('.approach .block');
-      await expect(blocks).toHaveCount(copy.approach.length);
 
-      for (const [i, block] of copy.approach.entries()) {
-        const el = blocks.nth(i);
-        await expect(el.locator('.block-label')).toHaveText(block.label);
-        await expect(el.locator('.block-title')).toHaveText(block.title);
-        // The lead opens the paragraph, and it is the only emphasis in it.
-        await expect(el.locator('.block-body b')).toHaveCount(1);
-      }
+      const firstTitle = (copy.approach[0]?.title ?? '').replace(/<[^>]+>/g, '');
+      await page.getByRole('button', { name: new RegExp(firstTitle.slice(0, 14)) }).click();
+      const dialog = page.locator(`#approach-${locale}-0`);
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByText(FIRST_APPROACH_FINGERPRINT[locale])).toBeVisible();
 
-      // Three, because the fourth was about AI and section 02 now says all of
-      // it at length. Saying it twice is the defect this page keeps growing.
-      expect(copy.approach.length).toBe(3);
+      await dialog.getByRole('button', { name: copy.ui.close }).click();
+      await expect(dialog).not.toBeVisible();
     });
 
-    test('sets the AI section apart as the one enclosed block', async ({ page }) => {
+    test('opens the AI card with the full prose and the deep link', async ({ page }) => {
       await page.goto(home);
 
-      const opening = page.locator('.ai .prose > p:not(.rules-lead)');
-      await expect(opening).toHaveCount(copy.ai.paragraphs.length);
-      await expect(page.locator('.ai .prose .lede')).toContainText(
-        plain(copy.ai.paragraphs[0] ?? '').slice(0, 40),
-      );
-      await expect(page.locator('.ai .rules-lead')).toHaveText(copy.ai.rulesLead);
-      // He says three rules, so there had better be three.
-      await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
-      expect(copy.ai.rules.length).toBe(3);
-      await expect(page.locator('.ai .plate .eyebrow')).toHaveText(copy.sections.ai.eyebrow);
-
-      // Being the only enclosed surface is what distinguishes it, so a second
-      // one appearing anywhere would take that away.
-      await expect(page.locator('.plate')).toHaveCount(1);
-      // The home page itself must stay indexable.
-      await expect(page.locator('meta[name=robots]')).toHaveCount(0);
+      await page.getByRole('button', { name: new RegExp(copy.ai.heading.slice(0, 16)) }).click();
+      const dialog = page.locator(`#ai-${locale}`);
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByText(FINGERPRINT[locale])).toBeVisible();
+      await expect(
+        dialog.getByRole('link', { name: new RegExp(copy.ai.permalinkSuffix) }),
+      ).toHaveAttribute('href', ai);
     });
 
     test('shows the focused skills and personal projects', async ({ page }) => {
       await page.goto(home);
 
-      await expect(page.locator('.focus .focus-group')).toHaveCount(copy.focus.length);
-      await expect(page.locator('.focus').getByText('TypeScript', { exact: true })).toBeVisible();
-
-      await expect(page.locator('.projects .project')).toHaveCount(copy.projects.length);
-      await expect(page.locator('.projects').getByText('lockhound', { exact: true })).toBeVisible();
-      await expect(page.locator('.projects code')).toHaveText('npx lockhound');
-    });
-
-    test('lists four jobs, each with bullets and chips', async ({ page }) => {
-      await page.goto(home);
-
-      const jobs = page.locator('.work .job');
-      await expect(jobs).toHaveCount(copy.work.length);
-
-      for (const [i, job] of copy.work.entries()) {
-        const card = jobs.nth(i);
-        await expect(card.locator('.job-title')).toContainText(job.company);
-        await expect(card.locator('.years')).toHaveText(job.years);
-        await expect(card.locator('.duty')).toHaveCount(job.paragraphs.length);
-        await expect(card.locator('.chip')).toHaveCount(job.tags.length);
-      }
-
-      // The closing line only means anything after the entries, so it has to be
-      // the last thing in the section, not a lead over it.
-      const closing = page.locator('.work .closing');
-      await expect(closing).toHaveText(plain(copy.workClosing));
-      expect(await closing.evaluate((el) => el === el.parentElement?.lastElementChild)).toBe(true);
-    });
-
-    test('closes on an invitation, with the address behind the mail icon', async ({ page }) => {
-      await page.goto(home);
-
-      await expect(page.locator('.contact .invite')).toHaveText(copy.contact.invite);
-      await expect(page.locator('.contact .invite-more')).toHaveText(copy.contact.inviteMore);
-      // The address is a link, not printed text: no duplication with the icon.
-      await expect(page.locator('.contact').getByText('lisandr84@gmail.com')).toHaveCount(0);
+      await expect(page.getByRole('heading', { name: copy.sections.focus.title })).toBeVisible();
       await expect(
-        page.locator('.contact').getByRole('link', { name: copy.contact.email }),
-      ).toHaveAttribute('href', 'mailto:lisandr84@gmail.com');
+        page.getByText(copy.focus[0]?.items[1] ?? '', { exact: true }).first(),
+      ).toBeVisible();
+      await expect(page.getByRole('heading', { name: copy.sections.projects.title })).toBeVisible();
+      await expect(page.getByText('lockhound', { exact: true })).toBeVisible();
+      await expect(page.getByText('npx lockhound', { exact: true }).first()).toBeVisible();
     });
 
-    test('links the CV download in the hero and in the contact block', async ({ page }) => {
+    test('walks the timeline: four stops, oldest to current', async ({ page }) => {
       await page.goto(home);
 
-      for (const scope of ['.hero', '.contact']) {
-        const cv = page.locator(scope).getByRole('link', { name: copy.hero.buttons.cv });
-        await expect(cv).toHaveAttribute('href', '/andrea-lisi-cv.pdf');
+      const stops = page.locator('.timeline .stop .company');
+      await expect(stops).toHaveCount(4);
+      const reversed = [...copy.work].reverse();
+      for (const [i, entry] of reversed.entries()) {
+        await expect(stops.nth(i)).toContainText(entry.company);
       }
+
+      // The current stop opens with the full story.
+      await page.locator('.timeline .stop.current').click();
+      const dialog = page.locator(`#job-${locale}-3`);
+      await expect(dialog).toBeVisible();
+      await expect(dialog.getByText(/monorepo/i).first()).toBeVisible();
     });
 
-    test('serves the CV PDF and the portrait', async ({ request }) => {
-      for (const asset of ['/andrea-lisi-cv.pdf', '/andrea-lisi.webp', '/andrea-lisi.jpg']) {
-        expect((await request.get(asset)).status(), asset).toBe(200);
-      }
-    });
-
-    test('keeps Instagram out of the hero', async ({ page }) => {
+    test('links the CV download in the hero and in the contact card', async ({ page }) => {
       await page.goto(home);
+
+      const heroCv = page.locator('.hero').getByRole('link', { name: copy.hero.buttons.cv });
+      await expect(heroCv).toHaveAttribute('href', cvHref);
+      await expect(heroCv).toHaveAttribute('download', cvFilename);
+
+      const contactCv = page.locator('.contact-card').getByRole('link', { name: copy.contact.cv });
+      await expect(contactCv).toHaveAttribute('href', cvHref);
+      await expect(contactCv).toHaveAttribute('download', cvFilename);
+    });
+
+    test('serves the CV PDF', async ({ request }) => {
+      const res = await request.get(cvHref);
+      expect(res.status()).toBe(200);
+    });
+
+    test('keeps Instagram small and out of the primary links', async ({ page }) => {
+      await page.goto(home);
+
       await expect(page.locator('.hero').getByRole('link', { name: /instagram/i })).toHaveCount(0);
       await expect(
-        page.locator('.contact').getByRole('link', { name: copy.contact.instagram }),
+        page.locator('.contact-card .contact-links').getByRole('link', { name: /instagram/i }),
+      ).toHaveCount(0);
+      await expect(
+        page.locator('.contact-card').getByRole('link', { name: /instagram/i }),
       ).toBeVisible();
     });
 
-    test('does not ship the retired copy', async ({ page }) => {
-      await page.goto(home);
-      for (const banned of [/quietly/i, /five thousand/i, /cinquemila/i, /RAG and embeddings/i]) {
-        await expect(page.getByText(banned), String(banned)).toHaveCount(0);
-      }
-    });
-
-    /*
-     * The architecture is named once, as the thing he governs. In the work
-     * history that is evidence of scale. In the hero or in how-I-work it would
-     * read as the only thing he does, which is why it was cut the first time.
-     * The rule was never the word, it was the position.
-     */
-    test('keeps the architecture out of the hero and names it where it adds evidence', async ({
-      page,
-    }) => {
-      await page.goto(home);
-      const architecture = /micro-?frontend|monorepo/i;
-
-      await expect(page.locator('.hero').getByText(architecture)).toHaveCount(0);
-      await expect(page.locator('.approach').getByText(architecture)).toHaveCount(0);
-      await expect(page.locator('.focus').getByText(architecture).first()).toBeVisible();
-      await expect(page.locator('.work').getByText(architecture).first()).toBeVisible();
-    });
-
-    test('spends its three colours only where each one means something', async ({ page }) => {
+    test('does not ship the flagged copy patterns', async ({ page }) => {
       await page.goto(home);
 
-      // Gold: the present. The focus fact, the badge, and that role's dates.
-      await expect(page.locator('.hero .fact-v.tone-now')).toHaveCount(1);
-      await expect(page.locator('.work .now')).toHaveCount(1);
-      await expect(page.locator('.work .years.live')).toHaveCount(1);
-      await expect(page.locator('.work .job').first().locator('.years.live')).toBeVisible();
-
-      // Lilac: the art foundation. The school, the block about drawing, the
-      // job where the drawing was the job.
-      await expect(page.locator('.hero .fact-v.tone-root')).toHaveCount(1);
-      await expect(page.locator('.approach .block-label.tone-root')).toHaveCount(1);
-      await expect(page.locator('.work .chip.root')).toHaveCount(1);
-
-      const tones = await page.evaluate(() => {
-        const s = getComputedStyle(document.documentElement);
-        return ['--acc', '--now', '--root'].map((n) => s.getPropertyValue(n).trim());
-      });
-      expect(tones.every(Boolean)).toBe(true);
-      expect(new Set(tones).size).toBe(3);
+      await expect(page.getByText(/quietly/i)).toHaveCount(0);
+      await expect(page.getByText(/SYS NOMINAL/)).toHaveCount(0);
+      await expect(page.getByText(/UPTIME/)).toHaveCount(0);
+      await expect(page.getByText(/MMXXVI/)).toHaveCount(0);
     });
 
     test('emits no console errors during load', async ({ page }) => {
@@ -250,29 +202,26 @@ for (const locale of ['en', 'it'] as const) {
       expect(errors).toEqual([]);
     });
 
-    test('renders every block without JavaScript', async ({ browser }) => {
+    test('renders the overlay content inline without JavaScript', async ({ browser }) => {
       const context = await browser.newContext({ javaScriptEnabled: false });
       const page = await context.newPage();
       await page.goto(home);
 
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Andrea Lisi.');
-      await expect(page.locator('.approach .block')).toHaveCount(copy.approach.length);
-      await expect(page.locator('.focus .focus-group')).toHaveCount(copy.focus.length);
-      await expect(page.locator('.work .job')).toHaveCount(copy.work.length);
-      await expect(page.locator('.projects .project')).toHaveCount(copy.projects.length);
-      await expect(page.locator('.contact .invite')).toBeVisible();
+      await expect(page.getByRole('heading', { level: 1 })).toContainText('Andrea');
+      // The noscript stylesheet unfolds every overlay in place.
+      await expect(page.getByText(FINGERPRINT[locale])).toBeVisible();
+      await expect(page.getByText(FIRST_APPROACH_FINGERPRINT[locale])).toBeVisible();
 
       await context.close();
     });
 
-    test('drops the loader under prefers-reduced-motion', async ({ browser }) => {
+    test('respects prefers-reduced-motion (name intact, no scatter)', async ({ browser }) => {
       const context = await browser.newContext({ reducedMotion: 'reduce' });
       const page = await context.newPage();
       await page.goto(home);
-
-      await expect(page.locator('.loader')).toBeHidden();
-      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toContainText('Andrea');
+      await expect(h1.locator('.split-char')).toHaveCount(0);
       await context.close();
     });
 
@@ -281,10 +230,11 @@ for (const locale of ['en', 'it'] as const) {
       await page.goto(home);
 
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-      const overflows = await page.evaluate(
-        () => document.documentElement.scrollWidth > window.innerWidth + 1,
+      await expect(page.locator('.timeline .stop').first()).toBeVisible();
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth > window.innerWidth,
       );
-      expect(overflows).toBe(false);
+      expect(overflow).toBe(false);
     });
 
     test('passes axe accessibility checks (no critical/serious violations)', async ({ page }) => {
@@ -294,15 +244,14 @@ for (const locale of ['en', 'it'] as const) {
   });
 
   test.describe(`the AI deep link (${locale})`, () => {
-    test('carries the same prose on its own page', async ({ page }) => {
+    test('serves the full AI prose on its own page', async ({ page }) => {
       await page.goto(ai);
 
       await expect(page.locator('html')).toHaveAttribute('lang', copy.htmlLang);
-      await expect(page.getByRole('heading', { level: 1 })).toContainText(copy.ai.heading);
-      await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
-      // Word for word the home section, so it stays out of the index and exists
-      // only as a URL that can be handed to someone.
-      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);
+      await expect(page.getByRole('heading', { level: 1 })).toContainText(
+        copy.ai.heading.slice(0, 16),
+      );
+      await expect(page.getByText(FINGERPRINT[locale])).toBeVisible();
     });
 
     test('keeps its own description under the truncation limit', async ({ page }) => {

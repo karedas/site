@@ -1,0 +1,131 @@
+.card {
+  display: flex;
+}
+
+.card .face {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 20px 16px;
+  text-align: left;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.card .face:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -16px rgba(38, 29, 21, 0.35);
+}
+
+.card .card-label {
+  font-size: 10px;
+}
+
+.card .glyph {
+  width: 44px;
+  height: 44px;
+  color: var(--ink-soft);
+  transition: color 0.18s ease;
+}
+
+.card .face:hover .glyph {
+  color: var(--accent-ink);
+}
+
+.card .card-title {
+  font-family: var(--serif-display);
+  font-size: 21px;
+  line-height: 1.15;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.card .plus {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font: 400 16px var(--mono);
+  color: var(--muted);
+  transition: color 0.18s ease;
+}
+
+.card .face {
+  position: relative;
+}
+
+.card .face:hover .plus {
+  color: var(--accent-ink);
+}
+
+/* Tinted variant: the AI card wears the CV's soft orange. */
+.card.tinted .face {
+  background: var(--accent-soft);
+  border-color: rgba(184, 71, 21, 0.35);
+}
+
+.card.tinted .glyph {
+  color: var(--accent-ink);
+}
+
+/* ---- Overlay body ---- */
+.overlay .overlay-inner {
+  padding: 26px 28px 28px;
+}
+
+.overlay .overlay-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.overlay .overlay-title {
+  font-family: var(--serif-display);
+  font-size: 26px;
+}
+
+.overlay .close {
+  font: 400 20px var(--mono);
+  color: var(--muted);
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.overlay .close:hover {
+  color: var(--accent-ink);
+}
+
+.overlay .overlay-body {
+  color: var(--ink-soft);
+}
+
+.overlay .overlay-body p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+.overlay .overlay-body p:last-child {
+  margin-bottom: 0;
+}
+
+.overlay .overlay-body b {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.overlay .overlay-body code {
+  font: 400 0.82em var(--mono);
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  padding: 1px 6px;
+  border-radius: 2px;
+}

@@ -1,0 +1,31 @@
+---
+type Props = {
+  aiHref: string;
+};
+
+const { aiHref } = Astro.props;
+---
+<footer class="site-footer table">
+  <span>ANDREA LISI</span>
+  <span><a href={aiHref}>{aiHref}</a> · &copy; 2026</span>
+</footer>
+
+<style>
+  .site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 20px;
+    border-top: 1px solid var(--hairline);
+    margin-top: 8px;
+    padding-top: 18px;
+    padding-bottom: 30px;
+  }
+
+  .site-footer span,
+  .site-footer a {
+    font: 400 11px var(--mono);
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+</style>
