@@ -22,9 +22,11 @@ const focusLabel = copy.sections.focus.title;
 const aiLabel = copy.sections.ai.title;
 const contactLabel = copy.sections.contact.title;
 const projectsLabel = copy.sections.projects.title;
+const cvHref = locale === 'it' ? '/andrea-lisi-cv-it.pdf' : '/andrea-lisi-cv.pdf';
+const cvDownload = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
 
 const contactLinks = [
-  { label: copy.contact.cv, href: '/andrea-lisi-cv.pdf', download: 'andrea-lisi-cv.pdf' },
+  { label: copy.contact.cv, href: cvHref, download: cvDownload },
   { label: copy.contact.github, href: 'https://github.com/karedas' },
   { label: copy.contact.linkedin, href: 'https://www.linkedin.com/in/andrea-lisi84' },
   { label: copy.contact.email, href: 'mailto:lisandr84@gmail.com' },

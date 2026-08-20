@@ -10,6 +10,8 @@ type Props = {
 
 const { locale } = Astro.props;
 const { hero } = getCopy(locale);
+const cvHref = locale === 'it' ? '/andrea-lisi-cv-it.pdf' : '/andrea-lisi-cv.pdf';
+const cvDownload = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
 ---
 <section class="hero table" id="top">
   <div class="text">
@@ -38,7 +40,7 @@ const { hero } = getCopy(locale);
         {hero.buttons.linkedin}
       </a>
       <a href="mailto:lisandr84@gmail.com">{hero.buttons.email}</a>
-      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">{hero.buttons.cv}</a>
+      <a class="cv" href={cvHref} download={cvDownload}>{hero.buttons.cv}</a>
     </p>
   </div>
 
