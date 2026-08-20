@@ -1,97 +1,176 @@
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px clamp(36px, 6vw, 80px);
   align-items: center;
-  gap: 24px clamp(24px, 4vw, 64px);
-  padding-top: clamp(36px, 8vh, 84px);
-  padding-bottom: clamp(28px, 5vh, 56px);
+  padding: clamp(48px, 11vh, 120px) 0 clamp(44px, 8vh, 80px);
 }
 
-.hero .eyebrow {
-  margin: 0 0 20px;
+.hero .text {
+  flex: 1 1 460px;
+  min-width: min(100%, 460px);
+}
+
+.hero .greeting {
+  margin: 0 0 22px;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--acc);
 }
 
 .hero .name {
-  font-size: clamp(54px, 8.5vw, 108px);
-  line-height: 1;
-  letter-spacing: 0.01em;
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(40px, 7vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
-/* The one drop of accent in the text. */
-.hero .dot {
-  color: var(--accent);
+/*
+ * The line under the name. It used to run at 54px against the name's 72px,
+ * three quarters of its size and the same weight, and at that distance the eye
+ * read the two as one sentence: "Andrea Lisi. Al codice..." looked like the name
+ * had continued into a typo. Half the name's size and a lighter weight, so it
+ * is unmistakably the next thing rather than the rest of the first.
+ */
+.hero .tagline {
+  margin: 12px 0 0;
+  font-weight: 500;
+  font-size: clamp(21px, 3.1vw, 34px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--body);
+  /* Breaks at the comma instead of leaving "al server." alone on a line. */
+  text-wrap: balance;
+  max-width: 24ch;
 }
 
 .hero .intro {
-  max-width: 30em;
-  margin: 22px 0 0;
-  font-size: clamp(18px, 1.7vw, 21px);
-  line-height: 1.55;
-  color: var(--ink-soft);
-  text-wrap: pretty;
+  margin: 28px 0 0;
+  font-size: 16.5px;
+  line-height: 1.7;
+  max-width: 56ch;
+}
+
+.hero .role {
+  margin: 20px 0 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--dim);
 }
 
 .hero .facts {
-  margin: 20px 0 0;
-  font-size: 14px;
-  line-height: 2;
-  color: var(--ink-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 14px 26px;
+  margin: 26px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  max-width: 640px;
 }
 
 .hero .fact-k {
-  margin-right: 6px;
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: var(--dim);
 }
 
-.hero .fact-sep {
-  color: var(--accent);
-  margin: 0 7px;
+.hero .fact-v {
+  display: block;
+  margin-top: 4px;
+  font-size: 14.5px;
+  color: var(--body);
 }
 
-.hero .links {
+/* Both colours appear in this one block, which is what teaches the code:
+   the warm one is what he does now, the cool one is where the eye came from.
+   Each turns up twice more further down the page. */
+.hero .fact-v.tone-now {
+  color: var(--now);
+}
+
+.hero .fact-v.tone-root {
+  color: var(--root);
+}
+
+.hero .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 26px;
-  margin: 24px 0 0;
-  font-size: 16px;
+  gap: 14px 22px;
+  align-items: center;
+  margin-top: 34px;
 }
 
-.hero .links .cv {
-  color: var(--accent-ink);
-  text-decoration-color: var(--accent-soft);
+.hero .cv {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: var(--acc);
+  border: 1px solid var(--acc);
+  border-radius: 4px;
+  padding: 13px 22px;
+  white-space: nowrap;
+  margin-right: 8px;
+  transition: background 0.2s ease;
 }
 
-/* The scene: constellation above, drawn figure at the bottom center. */
-.hero .scene {
-  position: relative;
-  height: clamp(300px, 42vh, 440px);
-  color: var(--ink);
+.hero .cv:hover,
+.hero .cv:focus-visible {
+  background: var(--acc-soft);
+  color: var(--acc);
 }
 
-.hero .scene .omino {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  height: clamp(120px, 18vh, 170px);
-  width: auto;
+.hero .social {
+  display: inline-flex;
+  padding: 4px;
+  color: var(--body);
 }
 
-@media (max-width: 860px) {
+.hero .social:hover,
+.hero .social:focus-visible {
+  color: var(--acc);
+}
+
+.hero .portrait {
+  flex: 0 0 auto;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.hero .portrait img {
+  display: block;
+  width: clamp(150px, 19vw, 212px);
+  height: clamp(150px, 19vw, 212px);
+  border-radius: 50%;
+  object-fit: cover;
+  outline: 2px solid var(--acc);
+  outline-offset: 7px;
+}
+
+/*
+ * Measured: the hero wraps between 740px and 720px, when the text can no longer
+ * hold its 460px minimum beside the portrait. Once it wraps, the portrait lands
+ * last, which put the face below the CV button with nothing after it. Above the
+ * greeting instead, so the reading order is face, name, then the rest.
+ *
+ * Visual order only: the img has no focusable content, and its alt is the name,
+ * so nothing depends on where a screen reader meets it.
+ */
+@media (max-width: 740px) {
   .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
+    gap: 24px;
   }
 
-  .hero .intro {
-    margin-inline: auto;
-  }
-
-  .hero .links {
-    justify-content: center;
-  }
-
-  .hero .scene {
-    height: 260px;
+  .hero .portrait {
     order: -1;
+    /* Left edge shared with the text: the hero has one axis, not two. */
+    margin: 0;
+  }
+
+  .hero .portrait img {
+    width: 104px;
+    height: 104px;
+    outline-offset: 5px;
   }
 }

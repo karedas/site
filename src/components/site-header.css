@@ -1,0 +1,36 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 26px 0;
+}
+
+.site-header .mark {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--acc);
+  flex: none;
+}
+
+.site-header .name {
+  font-weight: 600;
+  color: var(--head);
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+
+.site-header .place {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--dim);
+}
+
+@media (max-width: 520px) {
+  .site-header .place {
+    display: none;
+  }
+
+  .site-header .lang {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,13 @@
+---
+import '@/components/section-title.css';
+
+type Props = {
+  num: string;
+  title: string;
+};
+
+const { num, title } = Astro.props;
+---
+<h2 class="section-title" data-reveal>
+  <span class="num">{num}.</span>{title}<span class="rule" aria-hidden="true"></span>
+</h2>

@@ -1,0 +1,60 @@
+---
+import '@/components/contact.css';
+import Icon from '@/components/icon.astro';
+import SectionTitle from '@/components/section-title.astro';
+import { getCopy, type Locale } from '@/i18n';
+
+type Props = {
+  locale: Locale;
+};
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const head = copy.sections.contact;
+---
+<section class="contact section" id="contact">
+  <SectionTitle num={head.num} title={head.title} />
+
+  <div class="links" data-reveal>
+    <div class="invitation">
+      <p class="invite">{copy.contact.invite}</p>
+      <p class="invite-more">{copy.contact.inviteMore}</p>
+    </div>
+
+    <div class="row">
+      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">
+        {copy.hero.buttons.cv}
+      </a>
+      <a
+        class="social"
+        href="https://github.com/karedas"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.contact.github}
+      >
+        <Icon name="github" />
+      </a>
+      <a
+        class="social"
+        href="https://www.linkedin.com/in/andrea-lisi84"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.contact.linkedin}
+      >
+        <Icon name="linkedin" />
+      </a>
+      <a class="social" href="mailto:lisandr84@gmail.com" aria-label={copy.contact.email}>
+        <Icon name="mail" />
+      </a>
+      <a
+        class="social"
+        href="https://www.instagram.com/alandr.1984/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={copy.contact.instagram}
+      >
+        <Icon name="instagram" />
+      </a>
+    </div>
+  </div>
+</section>

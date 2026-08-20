@@ -7,22 +7,17 @@ export const en: Copy = {
   meta: {
     title: 'Andrea Lisi · Senior Software Engineer · Frontend Platform',
     description:
-      'Senior Software Engineer in Vienna, focused on frontend platforms, monorepos, governance and developer experience across 16 projects and 12+ teams.',
+      'Senior Software Engineer in Vienna, focused on frontend platforms, monorepos and governance across 16 projects and more than 12 teams.',
     ogImageAlt: 'Andrea Lisi, Senior Software Engineer in Vienna',
   },
   aiMeta: {
-    title: 'AI · Andrea Lisi · Staff Engineer',
+    title: 'AI · Andrea Lisi · Frontend Platform & Governance',
     description:
-      'How I actually work with AI: the work shifted from writing to deciding, and most of the value is in knowing when to stop.',
+      'How I use AI in engineering work: generated code follows the same review, testing and verification as code written by hand.',
   },
 
   skipLink: 'Skip to content',
   langSwitchLabel: 'Language',
-
-  ui: {
-    open: 'Open',
-    close: 'Close',
-  },
 
   nav: {
     ariaLabel: 'Section navigation',
@@ -30,58 +25,55 @@ export const en: Copy = {
     items: [
       { num: '00', label: 'Home', target: 'top' },
       { num: '01', label: 'How I work', target: 'approach' },
-      { num: '02', label: 'AI', target: 'ai' },
-      { num: '03', label: 'Experience', target: 'experience' },
-      { num: '04', label: 'Contact', target: 'contact' },
+      { num: '02', label: 'What I work on', target: 'focus' },
+      { num: '03', label: 'AI', target: 'ai' },
+      { num: '04', label: 'Experience', target: 'experience' },
+      { num: '05', label: 'Projects', target: 'projects' },
+      { num: '06', label: 'Contact', target: 'contact' },
     ],
   },
 
   hero: {
+    greeting: 'Ciao. My name is',
+    tagline: 'Frontend platform and governance.',
     eyebrow: 'SENIOR SOFTWARE ENGINEER · FRONTEND PLATFORM & GOVERNANCE · VIENNA',
     stats: [
       { label: 'EXPERIENCE', value: '18+ years' },
-      { label: 'FOCUS', value: 'Frontend platform, governance', accent: true },
+      { label: 'FOCUS', value: 'Frontend platform, governance', tone: 'now' },
       { label: 'BASED', value: 'Vienna, remote or hybrid' },
       { label: 'LANGUAGES', value: 'IT · EN · DE in progress' },
+      { label: 'FOUNDATION', value: 'Art school, Florence', tone: 'root' },
     ],
     intro:
-      'Senior Software Engineer focused on frontend platforms and the problems that appear when many teams work on the same codebase. I got to code through design and music, and I still care what the structure looks like.',
+      'I am a Senior Software Engineer with over 18 years of experience, focused on frontend platforms and the problems that appear when many teams work on the same codebase. I came to code through art and design, and I still care whether the structure makes sense at a glance.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
   sections: {
-    approach: { num: '01', title: 'How I work', eyebrow: 'IN MY OWN WORDS' },
-    focus: { num: '02', title: 'What I work on', eyebrow: 'THE CENTRE OF THE WORK' },
-    ai: { num: '02', title: 'AI', eyebrow: 'AGENTS AND THE RULES THEY WORK IN' },
-    experience: { num: '03', title: 'Experience', eyebrow: 'EIGHTEEN YEARS, FOUR PLACES' },
-    projects: { num: '05', title: 'Personal projects', eyebrow: 'THINGS I BUILD FOR MYSELF' },
-    contact: { num: '04', title: 'Contact', eyebrow: 'CV AND PROFILES' },
+    approach: { num: '01', title: 'How I work' },
+    focus: { num: '02', title: 'What I work on' },
+    ai: { num: '03', title: 'AI', eyebrow: 'TOOLS, REVIEW AND VERIFICATION' },
+    experience: { num: '04', title: 'Experience' },
+    projects: { num: '05', title: 'Personal projects' },
+    contact: { num: '06', title: 'Get in touch' },
   },
 
   approach: [
     {
-      title: 'Clean from minute one',
-      body: 'I don’t start dirty. A first demo comes out minimal, but every piece sits where it belongs, ready to grow or be thrown away. Clean, for me, means the boundaries show from outside: where a thing goes, and what is allowed to depend on what. It comes out that way, and it costs me nothing.',
+      label: 'Art_School',
+      tone: 'root',
+      title: 'I still look at code the way I looked at design',
+      body: '<b>I started in design</b>, then moved through frontend, full-stack work and infrastructure. That background probably explains why I care so much about structure. I like software that makes sense when you look at it, not only when you run it.',
     },
     {
-      title: 'In someone else’s house, nothing burns',
-      body: 'When I land on a codebase in bad shape I don’t try to clean all of it: that is the fastest way to get resented and finish nothing. I set priorities and start where the result shows up immediately, because the people working there have to see the gain before they feel the cost. But there is always the thing that slows everyone down, the point every change has to go through, and I break that one up before anything else. You pay for it once.',
+      label: 'The_Boundaries',
+      title: 'The rules should survive my absence',
+      body: '<b>A large part of my work sits between teams</b>: module boundaries, shared code, dependencies, build tooling and CI. I write down the reason for a rule, then turn it into a check when possible. The codebase should not depend on somebody remembering how things are supposed to work.',
     },
     {
-      title: 'The reason before the rule',
-      body: 'Before I impose a rule I go and find the reason, and I write it down. The rule always arrives with its reason attached, and with a deadline a person can live with. Nobody has to take my word for it, and I don’t want them to.',
-    },
-    {
-      title: 'I do the talking, the machine does the repeating',
-      body: 'I go and talk to people, always, because a rule you explain out loud gets argued with and a rule you write down just gets endured. What I don’t want is to repeat myself forever. Once the rule is settled it goes into CI as a warning that has to be cleared, and I move to the next one.',
-    },
-    {
-      title: 'Sometimes my job is not solving it',
-      body: 'Some of these things I could close on my own and nobody would ever know. I’d rather spend the time it takes to hand them over: write the document, open the ticket, tell the team, set a date. That work is theirs. If I keep doing it for them, they stop knowing it exists.',
-    },
-    {
-      title: 'I come from art',
-      body: 'Graphic design first, then the violin, which I played for years. It is not a past I closed: programming is an art to me, and it has to behave like one. Work done well shows at a glance, and it still holds when you take it apart. I look at an interface and at a folder tree with the same eye, and I usually start with the things people can see.',
+      label: 'Hands_On',
+      title: 'I stay close to the code',
+      body: '<b>I still spend a lot of time in implementation and debugging.</b> I work on shared tooling, investigate platform-wide breakage and automate decisions that would otherwise be repeated in reviews. When a problem belongs to another team, I document it, hand it over clearly and stay available without taking the work away from them.',
     },
   ],
 
@@ -116,18 +108,16 @@ export const en: Copy = {
   ],
 
   ai: {
-    heading: 'How I actually work with it',
+    heading: 'How I use AI in engineering work',
     paragraphs: [
-      'What AI gave me is the ability to keep more fronts open at once than I could hold on my own. While one thing moves I start another. The work shifted from writing to deciding, and putting the problem sharply became the part that actually counts. By now I read and correct far more code than I write.',
-      '<b>Most of the value is in stopping.</b> An agent will offer to rebuild something that already exists, and it will sound convincing. Someone has to hold the whole picture and say no. With anything it proposes I look first at whether it belongs in the project at all, and only then at whether it works. What is left is the simplest shape that holds.',
-      '<b>I also know when not to use it.</b> Going faster gets talked about everywhere, where to stop far less, and that line is something each person ends up drawing alone, in the middle of the work. I drew mine one project at a time, and what I learn from it I write down, like any other rule.',
-      'Then there’s the structural work, the least visible part and the one that holds. The same boundaries that apply across teams now have to apply to a contributor that isn’t a person, and that forces me to write down in full the rules it used to be enough to carry in my head. It’s governance applied to a new kind of contributor, one that reads everything you write and takes it literally.',
+      'AI-assisted and agentic development is part of my workflow, but generated code follows the same standard as any other code. If it cannot be reviewed, tested and verified, it does not go in.',
     ],
-    keywords: [
-      ['Agentic coding in IDE and CI', 'Prompt and context engineering', 'MCP'],
-      ['RAG and embeddings', 'LLM APIs and evals', 'OWASP LLM Top 10', 'Agentic review in CI'],
+    rulesLead: 'Three rules keep that practical.',
+    rules: [
+      '<b>I only delegate what I can verify.</b> If I cannot review and understand the result, doing it faster is not useful.',
+      '<b>I check whether the change belongs before I check whether it works.</b> Agents will rebuild things that already exist and make the suggestion sound convincing. The first question is whether the new code should exist at all.',
+      '<b>The same gates apply to every contributor.</b> Human or generated, code has to respect the same module boundaries, tests and quality checks before it reaches main.',
     ],
-    permalinkSuffix: 'this section on its own page',
     backLabel: 'ANDREA LISI',
   },
 
@@ -135,8 +125,9 @@ export const en: Copy = {
     {
       years: '2023 · NOW',
       place: 'VIENNA, AT',
-      company: 'Tricentis · Tosca Cloud',
-      role: 'Platform & Governance · Senior Software Engineer',
+      title: 'Senior Software Engineer',
+      company: 'Tricentis',
+      context: 'Tosca Cloud',
       tags: ['Micro-frontends', '16 projects', '12+ teams', 'Quality gates'],
       current: true,
       paragraphs: [
@@ -151,8 +142,9 @@ export const en: Copy = {
     {
       years: '2019 · 2023',
       place: 'FLORENCE, IT',
+      title: 'Frontend Developer',
       company: 'Treedom',
-      role: 'Frontend Developer',
+      context: 'E-commerce platform for tree planting',
       tags: ['React', 'Vue', 'GraphQL', 'Storefront migration'],
       paragraphs: [
         'Joined the frontend team and later led the frontend side of the storefront migration away from the monolith, working with React, Vue and GraphQL.',
@@ -164,8 +156,9 @@ export const en: Copy = {
     {
       years: '2017 · 2019',
       place: 'FLORENCE, IT',
+      title: 'Frontend Developer',
       company: 'Forzieri.com',
-      role: 'Frontend Developer',
+      context: 'Luxury e-commerce',
       tags: ['ASP', 'jQuery', 'React', 'Webpack'],
       paragraphs: [
         'Modernized a live luxury e-commerce platform without a full rewrite, moving it from legacy ASP and jQuery to React with a Webpack-based frontend toolchain.',
@@ -177,8 +170,9 @@ export const en: Copy = {
     {
       years: '2007 · 2017',
       place: 'FIGLINE VALDARNO, IT',
+      title: 'Head of Web · Full-Stack Designer',
       company: 'Easysystem',
-      role: 'Head of Web · Full-Stack Designer',
+      context: 'Web agency and IT services',
       tags: ['Design', 'Web', 'Backend', 'Infrastructure'],
       paragraphs: [
         'I joined Easysystem as a designer and gradually ended up doing almost every technical part of client work: web development, backend systems and eventually on-premise infrastructure.',
@@ -190,29 +184,37 @@ export const en: Copy = {
     },
   ],
 
-  projects: {
-    entries: [
-      {
-        name: 'Lumina',
-        kind: 'FANTASY MUD',
-        glyph: 'kite',
-        description:
-          'A fantasy MUD I built end to end, from the Node.js/MongoDB backend to the React client and Cloudflare infrastructure.',
-        tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
-      },
-      {
-        name: 'lockhound',
-        kind: 'WINDOWS CLI',
-        glyph: 'path',
-        description:
-          'Zero-dependency CLI for Windows that finds and terminates processes locking a folder, using the Windows Restart Manager API.',
-        tags: ['npx lockhound', 'Windows', 'Restart Manager API'],
-        command: 'npx lockhound',
-      },
-    ],
+  projects: [
+    {
+      name: 'Lumina',
+      kind: 'FANTASY MUD',
+      description:
+        'A fantasy MUD I built end to end, from the Node.js/MongoDB backend to the React client and Cloudflare infrastructure.',
+      tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
+    },
+    {
+      name: 'lockhound',
+      kind: 'WINDOWS CLI',
+      description:
+        'Zero-dependency CLI for Windows that finds and terminates processes locking a folder, using the Windows Restart Manager API.',
+      tags: ['Windows', 'Restart Manager API', 'Developer tooling'],
+      command: 'npx lockhound',
+    },
+  ],
+
+  workClosing:
+    'I started in design, moved through frontend, backend and infrastructure, and ended up working on the structure shared by many teams. The scale changed but the habit did not: <b>understand how the whole thing fits together, then fix the part that keeps making the same problem return</b>.',
+
+  footer: {
+    built: 'Written, designed and shipped by me.',
   },
 
+  nowBadge: 'CURRENT',
+
   contact: {
+    invite: 'Write any time, even just to talk.',
+    inviteMore:
+      'A new conversation has never once bothered me, and a proposal that makes me curious even less so.',
     cv: 'CV (PDF)',
     github: 'GitHub',
     linkedin: 'LinkedIn',
