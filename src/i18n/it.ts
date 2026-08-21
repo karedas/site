@@ -14,7 +14,7 @@ export const it: Copy = {
   aiMeta: {
     title: 'AI · Andrea Lisi · Frontend Platform & Governance',
     description:
-      'Come uso l’AI nel lavoro di engineering: il codice generato passa dalla stessa revisione, dagli stessi test e dalle stesse verifiche.',
+      'Come uso assistenti AI e agenti nello sviluppo: quando servono, come rivedo il risultato e quali controlli applico.',
   },
 
   skipLink: 'Vai al contenuto',
@@ -46,14 +46,14 @@ export const it: Copy = {
       { label: 'FORMAZIONE', value: 'Istituto d’Arte, Firenze', tone: 'root' },
     ],
     intro:
-      'Sono un Senior Software Engineer con più di 18 anni di esperienza, oggi concentrato sulle piattaforme frontend e sui problemi che emergono quando molti team lavorano sulla stessa codebase. Sono arrivato al codice passando dall’arte e dal design, e mi interessa ancora che la struttura si capisca al primo sguardo.',
+      'Sono un Senior Software Engineer con più di 18 anni di esperienza. Oggi lavoro sulla piattaforma frontend di Tosca Cloud, una monorepo che raccoglie 16 progetti ed è condivisa da più di 12 team. Mi occupo soprattutto di architettura, dipendenze, build e standard condivisi.',
     buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
   },
 
   sections: {
     approach: { num: '01', title: 'Come lavoro' },
     focus: { num: '02', title: 'Su cosa lavoro' },
-    ai: { num: '03', title: 'AI', eyebrow: 'STRUMENTI, REVISIONE E VERIFICA' },
+    ai: { num: '03', title: 'AI', eyebrow: 'USO, REVISIONE E TEST' },
     experience: { num: '04', title: 'Esperienza' },
     projects: { num: '05', title: 'Progetti personali' },
     contact: { num: '06', title: 'Restiamo in contatto' },
@@ -63,18 +63,18 @@ export const it: Copy = {
     {
       label: 'Art_School',
       tone: 'root',
-      title: 'Guardo ancora il codice con l’occhio del design',
-      body: '<b>Ho cominciato dal design</b>, poi sono passato dal frontend al full-stack e all’infrastruttura. Probabilmente è per questo che tengo così tanto alla struttura. Mi piace il software che ha senso quando lo guardi, non solo quando lo esegui.',
+      title: 'Dal design al frontend',
+      body: '<b>Ho cominciato dal design, ma la mia carriera è nel frontend.</b> Nel tempo ho lavorato anche su backend e infrastruttura. Questa esperienza mi aiuta a vedere cosa cambia nel resto del sistema quando intervengo sul frontend.',
     },
     {
       label: 'The_Boundaries',
-      title: 'Le regole devono reggere anche quando non ci sono',
-      body: '<b>Una parte importante del mio lavoro sta fra i team</b>: confini dei moduli, codice condiviso, dipendenze, build tooling e CI. Scrivo il motivo di una regola e, quando posso, la trasformo in un controllo. La codebase non deve dipendere da qualcuno che si ricorda come dovrebbero funzionare le cose.',
+      title: 'Regole e controlli automatici',
+      body: '<b>Lavoro spesso su problemi che coinvolgono più team</b>: confini tra moduli, dipendenze, build e CI. Quando una regola è importante, ne documento il motivo e, se possibile, aggiungo un controllo automatico. Così è il controllo a ricordare la regola, e io evito di ripeterla a decine di persone, una alla volta.',
     },
     {
       label: 'Hands_On',
-      title: 'Resto dentro il codice',
-      body: '<b>Passo ancora molto tempo a implementare e fare debugging.</b> Lavoro sul tooling condiviso, indago i problemi che toccano tutta la piattaforma e automatizzo decisioni che altrimenti si ripeterebbero in ogni review. Quando un problema appartiene a un altro team, lo documento, lo passo in modo chiaro e resto disponibile senza portargli via il lavoro.',
+      title: 'Lavoro sul codice e con i team',
+      body: '<b>Continuo a implementare, fare debugging e lavorare sugli strumenti condivisi.</b> Collaboro ogni giorno con gli sviluppatori dei team, dagli junior ai senior, e mi confronto spesso con i loro manager. Quando una decisione coinvolge più prodotti, lavoro anche con design, security e sales per capire cosa serve e applicarlo in modo coerente.',
     },
   ],
 
@@ -84,40 +84,56 @@ export const it: Copy = {
       items: [
         'Architettura di monorepo',
         'Micro-frontend',
-        'Confini dei moduli',
-        'Architettura delle dipendenze',
-        'RFC',
+        'Confini tra moduli',
+        'Governance delle dipendenze',
+        'RFC tecnici',
       ],
     },
     {
-      title: 'Frontend',
-      items: ['React', 'TypeScript', 'Vue', 'GraphQL', 'Node.js'],
+      title: 'Frontend e integrazioni',
+      items: [
+        'React',
+        'TypeScript',
+        'Vue',
+        'GraphQL',
+        'Node.js',
+        'Integrazione Okta lato frontend',
+        'Gestione JWT',
+        'OpenTelemetry',
+      ],
     },
     {
-      title: 'Tooling e delivery',
-      items: ['Nx', 'Vite', 'Webpack', 'CI/CD', 'Testing', 'Build performance', 'Quality gates'],
+      title: 'Build e rilascio',
+      items: [
+        'Architettura CI',
+        'Automazione delle pipeline',
+        'Cache e performance delle build',
+        'Controlli di qualità',
+        'Test automatici',
+      ],
     },
     {
       title: 'Developer experience',
       items: [
-        'Tool condivisi',
-        'Standard di engineering',
-        'Developer experience',
-        'Workflow assistiti e agentici',
+        'Strumenti condivisi',
+        'Standard tecnici',
+        'Documentazione',
+        'Valutazione di strumenti AI',
       ],
     },
   ],
 
   ai: {
-    heading: 'Come uso l’AI nel lavoro di engineering',
+    heading: 'Come uso l’AI nello sviluppo',
     paragraphs: [
-      'Lo sviluppo assistito e agentico fa parte del mio workflow, ma il codice generato segue gli stessi standard di tutto il resto. Se non può essere revisionato, testato e verificato, non entra.',
+      'Uso assistenti AI e agenti per analizzare il codice di un progetto, preparare modifiche e ridurre il lavoro ripetitivo. Li uso solo se posso capire cosa hanno fatto e verificare che funzioni.',
+      'Li provo su attività reali per capire dove perdono il contesto della codebase. In base a quello aggiorno documentazione, regole e strumenti del repository.',
     ],
-    rulesLead: 'Tre regole tengono questo lavoro sul pratico.',
+    rulesLead: 'In pratica:',
     rules: [
-      '<b>Delego solo quello che so verificare.</b> Se non riesco a revisionare e capire il risultato, farlo più in fretta non serve.',
-      '<b>Prima controllo se la modifica deve esistere, poi se funziona.</b> Gli agenti propongono di ricostruire cose che esistono già e lo fanno in modo convincente. La prima domanda è se quel nuovo codice abbia davvero un posto nel progetto.',
-      '<b>Gli stessi gate valgono per ogni contributore.</b> Scritto da una persona o generato, il codice deve rispettare gli stessi confini dei moduli, gli stessi test e gli stessi controlli di qualità prima di arrivare in main.',
+      '<b>Prima verifico che la modifica serva.</b> Un agente può suggerire di ricostruire qualcosa che nel progetto esiste già.',
+      '<b>Rivedo il risultato come qualsiasi altro contributo.</b> Leggo il diff, eseguo i test e controllo che rispetti i confini del progetto.',
+      '<b>Devo poter spiegare e mantenere ogni modifica.</b> Se non ci riesco, non la uso.',
     ],
     backLabel: 'ANDREA LISI',
   },
@@ -132,12 +148,11 @@ export const it: Copy = {
       tags: ['Microfrontend', '16 progetti', '12+ team', 'Quality gates'],
       current: true,
       paragraphs: [
-        'Lavoro sulla piattaforma frontend dietro Tosca Cloud, una monorepo a micro-frontend condivisa da <b>16 progetti e più di 12 team</b>.',
-        'Mi occupo dell’architettura e della governance della monorepo, dai confini dei moduli alle regole sulle dipendenze e agli standard frontend condivisi.',
-        'Lavoro con il platform architect sulle performance di build, sulla topologia della CI e sui quality gate.',
-        'Gestisco gli aggiornamenti che riguardano tutta la piattaforma e le integrazioni condivise, <b>sistemando il guasto al centro prima che arrivi ai singoli team</b>.',
-        'Rivedo RFC e modifiche trasversali quando toccano i confini del frontend condiviso.',
-        'Trasformo le convenzioni in regole verificabili dalla macchina, per il codice scritto dalle persone e dagli agenti, e continuo a implementare e fare debugging quando il problema riguarda la piattaforma nel suo insieme.',
+        'Lavoro sulla piattaforma frontend di Tosca Cloud, una monorepo a micro-frontend che raccoglie <b>16 progetti ed è condivisa da più di 12 team</b>.',
+        'Lavoro sull’architettura e sulla governance della monorepo, in particolare su confini tra moduli, regole sulle dipendenze e standard frontend condivisi. Rivedo anche gli RFC che coinvolgono il frontend condiviso.',
+        'Amministro la repository di Tosca Cloud su GitHub e automatizzo le pipeline, anche su Azure. Con il platform architect lavoro sulla cache e sulle performance delle build, sulla struttura della CI e sui quality gate.',
+        'Ho integrato OpenTelemetry nel frontend. Dopo il login Okta, gestisco l’integrazione nell’applicazione, inclusi JWT e interceptor HTTP. Quando un problema compare in più progetti, lo indago a livello di piattaforma.',
+        'Valuto regolarmente strumenti AI, tra cui Claude e Cursor, e il modo in cui li usiamo. Quando lo stesso limite si ripresenta, aggiorno la documentazione, le regole o gli strumenti del repository.',
       ],
     },
     {
@@ -148,10 +163,10 @@ export const it: Copy = {
       context: 'Piattaforma e-commerce per piantare alberi',
       tags: ['React', 'Vue', 'GraphQL', 'Migrazione storefront'],
       paragraphs: [
-        'Sono entrato nel team frontend e poi ho guidato la parte frontend della migrazione dello storefront fuori dal monolite, lavorando con React, Vue e GraphQL.',
-        'Ho ricostruito le fondamenta dello storefront mentre l’azienda cresceva da circa 20 a <b>più di 150 persone</b>.',
-        'Ho costruito esperienze per campagne ad alto traffico, su una piattaforma che ha piantato milioni di alberi.',
-        'Nell’ultimo anno ho costruito da zero il frontend degli strumenti back-office interni, lavorando a stretto contatto con il team backend e con le persone che li usavano per le operazioni forestali.',
+        'Nel team frontend ho lavorato alla migrazione dello storefront fuori dal monolite, usando React, Vue e GraphQL.',
+        'Ho contribuito a ricostruire lo storefront mentre l’azienda cresceva da circa 20 a <b>più di 150 persone</b>.',
+        'Ho sviluppato le interfacce per campagne ad alto traffico. Mi confrontavo regolarmente con il team di design e con quello del design system per integrare le richieste e rispettare i mockup e gli standard condivisi.',
+        'Negli ultimi due anni ho sviluppato da zero il frontend degli strumenti back-office interni. Ero l’unico frontend developer del progetto e lavoravo insieme al team backend e alle persone che usavano quegli strumenti per le operazioni forestali.',
       ],
     },
     {
@@ -162,25 +177,23 @@ export const it: Copy = {
       context: 'E-commerce di lusso',
       tags: ['ASP', 'jQuery', 'React', 'Webpack'],
       paragraphs: [
-        'Ho modernizzato una piattaforma e-commerce di lusso live senza un rewrite completo, portandola da ASP legacy e jQuery a React con una toolchain frontend basata su Webpack.',
-        'Ho continuato a rilasciare funzionalità mentre la migrazione era in corso e il negozio di produzione restava online.',
+        'Ho modernizzato un e-commerce di lusso mentre era in produzione. Ho sostituito gradualmente ASP e jQuery con React e una nuova configurazione Webpack.',
+        'Durante la migrazione ho continuato a sviluppare nuove funzionalità senza fermare il negozio.',
         'Ho lavorato sia sullo storefront sia sul CMS interno usato per gli ordini e per la gestione quotidiana del negozio.',
-        'Ho sostituito gradualmente il frontend legacy mentre cambiavo l’architettura sottostante.',
       ],
     },
     {
       years: '2007 · 2017',
       place: 'FIGLINE VALDARNO, IT',
-      title: 'Head of Web · Full-Stack Designer',
+      title: 'Head of Web · Designer & Developer',
       company: 'Easysystem',
       context: 'Agenzia web e servizi IT',
       tags: ['Design', 'Web', 'Backend', 'Infrastruttura'],
       paragraphs: [
-        'Sono entrato in Easysystem come designer e ho finito per occuparmi di quasi tutta la parte tecnica dei progetti: sviluppo web, sistemi backend e infine infrastruttura on-premise.',
+        'Sono entrato come designer. Negli anni ho lavorato anche sullo sviluppo web, sui sistemi backend e sull’infrastruttura installata presso i clienti.',
         'Ho disegnato da zero siti, interfacce, identità visive e materiali stampati per i progetti dei clienti.',
         'Ho costruito e mantenuto applicazioni frontend e backend.',
         'Ho installato server, reti e firewall direttamente nelle aziende dei clienti, comprese le manifatture del distretto toscano della pelle e della moda.',
-        'Ho seguito i progetti dai primi concetti di design allo sviluppo e, in alcuni casi, fino all’infrastruttura su cui giravano.',
       ],
     },
   ],
@@ -190,7 +203,7 @@ export const it: Copy = {
       name: 'Lumina',
       kind: 'FANTASY MUD',
       description:
-        'Un MUD fantasy costruito end to end, dal backend Node.js/MongoDB al client React e all’infrastruttura Cloudflare.',
+        'Un MUD fantasy che ho sviluppato interamente: backend Node.js/MongoDB, client React e infrastruttura Cloudflare.',
       tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
     },
     {
@@ -203,9 +216,6 @@ export const it: Copy = {
     },
   ],
 
-  workClosing:
-    'Ho cominciato dal design, sono passato dal frontend, dal backend e dall’infrastruttura, e sono arrivato a lavorare sulla struttura condivisa da molti team. La scala è cambiata, l’abitudine no: <b>capire come sta insieme il sistema e poi correggere il punto che continua a far tornare lo stesso problema</b>.',
-
   footer: {
     built: 'Scritto, disegnato e messo online da me.',
   },
@@ -213,9 +223,9 @@ export const it: Copy = {
   nowBadge: 'IN CORSO',
 
   contact: {
-    invite: 'Scrivimi quando vuoi, anche solo per parlare.',
-    inviteMore:
-      'Una conversazione nuova non mi ha mai dato fastidio, e una proposta che mi incuriosisce ancora meno.',
+    invite:
+      'Hey! Se ti va di parlare di piattaforme frontend, developer experience o semplicemente di scambiarci due idee, scrivimi.',
+    inviteMore: 'Non serve una proposta formale: anche un messaggio al volo va benissimo.',
     cv: 'CV (PDF)',
     github: 'GitHub',
     linkedin: 'LinkedIn',

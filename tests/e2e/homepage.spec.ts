@@ -146,12 +146,6 @@ for (const locale of ['en', 'it'] as const) {
         await expect(card.locator('.duty')).toHaveCount(job.paragraphs.length);
         await expect(card.locator('.chip')).toHaveCount(job.tags.length);
       }
-
-      // The closing line only means anything after the entries, so it has to be
-      // the last thing in the section, not a lead over it.
-      const closing = page.locator('.work .closing');
-      await expect(closing).toHaveText(plain(copy.workClosing));
-      expect(await closing.evaluate((el) => el === el.parentElement?.lastElementChild)).toBe(true);
     });
 
     test('closes on an invitation, with the address behind the mail icon', async ({ page }) => {
@@ -197,18 +191,16 @@ for (const locale of ['en', 'it'] as const) {
     });
 
     /*
-     * The architecture is named once, as the thing he governs. In the work
-     * history that is evidence of scale. In the hero or in how-I-work it would
-     * read as the only thing he does, which is why it was cut the first time.
-     * The rule was never the word, it was the position.
+     * The hero now opens with the scale of the current platform instead of a
+     * general claim. The focus and work sections then add the technical detail.
      */
-    test('keeps the architecture out of the hero and names it where it adds evidence', async ({
-      page,
-    }) => {
+    test('opens with platform scale and adds architecture detail later', async ({ page }) => {
       await page.goto(home);
       const architecture = /micro-?frontend|monorepo/i;
 
-      await expect(page.locator('.hero').getByText(architecture)).toHaveCount(0);
+      await expect(page.locator('.hero')).toContainText('16');
+      await expect(page.locator('.hero')).toContainText('12');
+      await expect(page.locator('.hero').getByText(architecture)).toHaveCount(1);
       await expect(page.locator('.approach').getByText(architecture)).toHaveCount(0);
       await expect(page.locator('.focus').getByText(architecture).first()).toBeVisible();
       await expect(page.locator('.work').getByText(architecture).first()).toBeVisible();
