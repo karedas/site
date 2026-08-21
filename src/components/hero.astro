@@ -9,6 +9,7 @@ type Props = {
 
 const { locale } = Astro.props;
 const { hero } = getCopy(locale);
+const cvFile = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
 
 /* Hero content is above the fold, so it enters on load with a short stagger
    rather than waiting for a scroll observer. */
@@ -32,7 +33,7 @@ const step = (i: number): string => `animation-delay:${(0.05 * i).toFixed(2)}s`;
     </div>
 
     <div class="actions enter" style={step(6)}>
-      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">{hero.buttons.cv}</a>
+      <a class="cv" href={`/${cvFile}`} download={cvFile}>{hero.buttons.cv}</a>
       <a
         class="social"
         href="https://github.com/karedas"

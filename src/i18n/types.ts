@@ -144,13 +144,6 @@ export type Copy = {
 
   projects: ProjectEntry[];
 
-  /**
-   * HTML: the line that closes the career, after the four entries. It only
-   * works there, because it is about what the steps add up to, and a reader
-   * cannot be told that before being shown them.
-   */
-  workClosing: string;
-
   /** Small print at the very bottom. */
   footer: {
     built: string;
