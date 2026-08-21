@@ -30,6 +30,7 @@ for (const locale of ['en', 'it'] as const) {
   const copy = getCopy(locale);
   const home = hrefFor(locale, 'home');
   const ai = hrefFor(locale, 'ai');
+  const cvPath = locale === 'it' ? '/andrea-lisi-cv-it.pdf' : '/andrea-lisi-cv.pdf';
 
   test.describe(`home page (${locale})`, () => {
     test('declares its language and links both alternates', async ({ page }) => {
@@ -165,12 +166,12 @@ for (const locale of ['en', 'it'] as const) {
 
       for (const scope of ['.hero', '.contact']) {
         const cv = page.locator(scope).getByRole('link', { name: copy.hero.buttons.cv });
-        await expect(cv).toHaveAttribute('href', '/andrea-lisi-cv.pdf');
+        await expect(cv).toHaveAttribute('href', cvPath);
       }
     });
 
     test('serves the CV PDF and the portrait', async ({ request }) => {
-      for (const asset of ['/andrea-lisi-cv.pdf', '/andrea-lisi.webp', '/andrea-lisi.jpg']) {
+      for (const asset of [cvPath, '/andrea-lisi.webp', '/andrea-lisi.jpg']) {
         expect((await request.get(asset)).status(), asset).toBe(200);
       }
     });

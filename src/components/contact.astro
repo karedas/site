@@ -11,6 +11,7 @@ type Props = {
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const head = copy.sections.contact;
+const cvFile = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
 ---
 <section class="contact section" id="contact">
   <SectionTitle num={head.num} title={head.title} />
@@ -22,7 +23,7 @@ const head = copy.sections.contact;
     </div>
 
     <div class="row">
-      <a class="cv" href="/andrea-lisi-cv.pdf" download="andrea-lisi-cv.pdf">
+      <a class="cv" href={`/${cvFile}`} download={cvFile}>
         {copy.hero.buttons.cv}
       </a>
       <a

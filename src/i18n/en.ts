@@ -145,8 +145,8 @@ export const en: Copy = {
         'I work on the frontend platform behind Tosca Cloud, a micro-frontend monorepo containing <b>16 projects and shared by more than 12 teams</b>.',
         'I work on the monorepo’s architecture and governance, particularly module boundaries, dependency rules and shared frontend standards. I also review RFCs that affect the shared frontend.',
         'I administer the Tosca Cloud repository on GitHub and automate its pipelines, including on Azure. With the platform architect, I work on build caching and performance, CI structure and quality gates.',
-        'I integrated OpenTelemetry into the frontend. After the Okta login, I handle the application-side integration, including JWTs and HTTP interceptors. When an issue appears across several projects, I debug it at platform level.',
-        'I regularly evaluate AI tools, including Claude and Cursor, and how we use them. When the same limitation keeps appearing, I update the repository’s documentation, rules or shared tools.',
+        'I implement and maintain integrations shared across multiple frontend applications. These include observability with OpenTelemetry and the application-side authentication flow after the Okta login, including JWT handling and HTTP interceptors. When an issue appears across several projects, I debug it at platform level.',
+        'I regularly evaluate AI tools, including Claude and Cursor, on real repository work. If they keep stumbling over the same parts of the codebase, I improve its documentation, rules or shared tooling.',
       ],
     },
     {
