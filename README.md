@@ -138,11 +138,6 @@ Honored twice: a global `@media (prefers-reduced-motion: reduce)` kill-switch in
 scripts) that skips the rAF loops and renders the canvas and the asteroid as single
 static frames.
 
-## Original design handoff
-
-The "Mission Console" design reference (prototype HTML + notes) came from
-`Redesign Andrea Lisi site.zip`. Production code is in `src/`.
-
 ## License
 
 UNLICENSED — personal site. Code is shared for transparency, not for reuse.
