@@ -42,7 +42,7 @@ export const en: Copy = {
       { label: 'FOCUS', value: 'Frontend platform, governance', tone: 'now' },
       { label: 'BASED', value: 'Vienna, remote or hybrid' },
       { label: 'LANGUAGES', value: 'IT · EN · DE in progress' },
-      { label: 'FOUNDATION', value: 'Art school, Florence', tone: 'root' },
+      { label: 'BACKGROUND', value: 'Web design & UI', tone: 'root' },
     ],
     intro:
       'I’m a Senior Software Engineer with over 18 years of experience. Today I work on the frontend platform behind Tosca Cloud, a monorepo containing 16 projects and shared by more than 12 teams. My focus is architecture, dependencies, builds and shared standards.',
@@ -60,10 +60,10 @@ export const en: Copy = {
 
   approach: [
     {
-      label: 'Art_School',
+      label: 'Web_Design',
       tone: 'root',
-      title: 'From design to frontend engineering',
-      body: '<b>I started in design, but my career is in frontend engineering.</b> Over time I have also worked on backend systems and infrastructure. That experience helps me see what changes elsewhere in the system when I work on the frontend.',
+      title: 'From web design to frontend engineering',
+      body: '<b>I started by designing and building websites, then focused increasingly on frontend engineering.</b> I have also worked on backend systems and infrastructure. That experience helps me see what changes elsewhere in the system when I work on the frontend.',
     },
     {
       label: 'The_Boundaries',
