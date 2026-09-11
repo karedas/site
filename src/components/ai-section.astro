@@ -1,7 +1,7 @@
 ---
 import '@/components/ai-section.css';
 import SectionTitle from '@/components/section-title.astro';
-import { getCopy, type Locale } from '@/i18n';
+import { getCopy, hrefFor, type Locale } from '@/i18n';
 
 type Props = {
   locale: Locale;
@@ -19,12 +19,18 @@ const { ai } = copy;
     <SectionTitle num={head.num} title={ai.heading} />
   ) : (
     <h1 class="section-title" data-reveal>
-      <span class="num">{head.num}.</span>{ai.heading}
+      {ai.heading}
       <span class="rule" aria-hidden="true"></span>
     </h1>
   )}
 
-  <div class="plate" data-reveal>
+  {variant === 'section' ? (
+    <div class="ai-summary">
+      <p>{ai.summary}</p>
+      <a class="text-link" href={hrefFor(locale, 'ai')}>{ai.moreLabel}</a>
+    </div>
+  ) : (
+  <div class="plate">
     <p class="eyebrow">{head.eyebrow}</p>
     <div class="prose">
       {ai.paragraphs.map((para, i) => (
@@ -38,4 +44,6 @@ const { ai } = copy;
       </ol>
     </div>
   </div>
+  )}
+  {variant === 'page' && <a class="text-link ai-back" href={`${hrefFor(locale, 'home')}#ai`}>{ai.backLabel}</a>}
 </section>

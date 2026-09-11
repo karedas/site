@@ -7,13 +7,13 @@ export const en: Copy = {
   meta: {
     title: 'Andrea Lisi · Senior Software Engineer · Frontend Platform',
     description:
-      'Senior Software Engineer in Vienna, focused on frontend platforms, monorepos and governance across 16 projects and more than 12 teams.',
+      'Senior Software Engineer in Vienna. 18+ years building web applications, frontend platforms and developer tools, with a background in web design.',
     ogImageAlt: 'Andrea Lisi, Senior Software Engineer in Vienna',
   },
   aiMeta: {
-    title: 'AI · Andrea Lisi · Frontend Platform & Governance',
+    title: 'AI in development · Andrea Lisi',
     description:
-      'How I use AI assistants and agents in development: where they help, how I review the result and what checks I apply.',
+      'How I evaluate AI tools on repository work and use recurring problems to improve documentation, context and shared tooling.',
   },
 
   skipLink: 'Skip to content',
@@ -35,24 +35,23 @@ export const en: Copy = {
 
   hero: {
     greeting: 'Ciao. My name is',
-    tagline: 'Frontend platform and governance.',
-    eyebrow: 'SENIOR SOFTWARE ENGINEER · FRONTEND PLATFORM & GOVERNANCE · VIENNA',
+    tagline: 'Senior Software Engineer.',
+    eyebrow: 'Frontend engineering, architecture and developer tools',
     stats: [
-      { label: 'EXPERIENCE', value: '18+ years' },
-      { label: 'FOCUS', value: 'Frontend platform, governance', tone: 'now' },
-      { label: 'BASED', value: 'Vienna, remote or hybrid' },
-      { label: 'LANGUAGES', value: 'IT · EN · DE in progress' },
-      { label: 'BACKGROUND', value: 'Web design & UI', tone: 'root' },
+      { label: 'Based in', value: 'Vienna, Austria' },
+      { label: 'Working', value: 'Remote or hybrid', tone: 'now' },
+      { label: 'Background', value: 'Web design & UI', tone: 'root' },
+      { label: 'Languages', value: 'IT · EN · DE in progress' },
     ],
     intro:
-      'I’m a Senior Software Engineer with over 18 years of experience. Today I work on the frontend platform behind Tosca Cloud, a monorepo containing 16 projects and shared by more than 12 teams. My focus is architecture, dependencies, builds and shared standards.',
-    buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
+      'I’ve been building web software for over 18 years, with deep experience in frontend engineering. I develop applications, shared libraries and developer tools. I work with teams on architecture, performance and integrations, and implement the solutions we agree on.',
+    buttons: { github: 'GitHub', linkedin: 'LinkedIn', email: 'Email me', cv: 'Download CV' },
   },
 
   sections: {
     approach: { num: '01', title: 'How I work' },
     focus: { num: '02', title: 'What I work on' },
-    ai: { num: '03', title: 'AI', eyebrow: 'USE, REVIEW AND TESTING' },
+    ai: { num: '03', title: 'AI', eyebrow: 'Repository work' },
     experience: { num: '04', title: 'Experience' },
     projects: { num: '05', title: 'Personal projects' },
     contact: { num: '06', title: 'Get in touch' },
@@ -60,20 +59,17 @@ export const en: Copy = {
 
   approach: [
     {
-      label: 'Web_Design',
       tone: 'root',
-      title: 'From web design to frontend engineering',
-      body: '<b>I started by designing and building websites, then focused increasingly on frontend engineering.</b> I have also worked on backend systems and infrastructure. That experience helps me see what changes elsewhere in the system when I work on the frontend.',
+      title: 'An eye for the interface',
+      body: '<b>I started by designing and building websites.</b> Over the years I’ve also worked on visual identities, print design, backend systems and infrastructure. I work with designers to turn mockups into interfaces that match the design and behave as intended.',
     },
     {
-      label: 'The_Boundaries',
       title: 'Rules and automated checks',
-      body: '<b>I often work on problems that affect several teams</b>: module boundaries, dependencies, builds and CI. When a rule matters, I document the reason and add an automated check where I can. That lets the check do the reminding, so I do not have to repeat the same thing to dozens of people one at a time.',
+      body: '<b>I document shared decisions and automate checks where I can.</b> This applies to dependencies, module boundaries and builds. It also saves me from having the same conversation a dozen times.',
     },
     {
-      label: 'Hands_On',
       title: 'I work on the code and alongside the teams',
-      body: '<b>I continue to implement, debug and work on shared engineering tools.</b> Every day I work with developers across the teams, from junior to senior, and I regularly speak with their managers. When a decision affects several products, I also work with design, security and sales to understand what is needed and apply it consistently.',
+      body: '<b>I write code and debug with developers across the teams, from junior to senior.</b> I regularly work with their managers and with design, security and sales to understand requirements and agree on changes that affect several products.',
     },
   ],
 
@@ -84,52 +80,81 @@ export const en: Copy = {
         'Monorepo architecture',
         'Micro-frontends',
         'Module boundaries',
-        'Dependency governance',
+        'Shared libraries',
         'Technical RFCs',
+        'ADRs',
+        'OpenTelemetry',
+        'JWT & HTTP interceptors',
       ],
     },
     {
-      title: 'Frontend & integrations',
+      title: 'Web development',
       items: [
         'React',
         'TypeScript',
         'Vue',
+        'Zustand',
         'GraphQL',
         'Node.js',
-        'Frontend Okta integration',
-        'JWT handling',
-        'OpenTelemetry',
+        'JavaScript',
+        'HTML & CSS',
       ],
     },
     {
-      title: 'Build & delivery',
+      title: 'Build systems & monorepos',
+      items: ['Nx', 'pnpm workspaces', 'Vite', 'Webpack', 'Build caching', 'Dependency boundaries'],
+    },
+    {
+      title: 'Testing & delivery',
       items: [
-        'CI architecture',
-        'Pipeline automation',
-        'Build caching & performance',
-        'Quality gates',
-        'Automated testing',
+        'Vitest',
+        'Jest',
+        'Playwright',
+        'GitHub Actions',
+        'Azure Pipelines',
+        'Repository administration',
       ],
     },
     {
-      title: 'Developer experience',
-      items: ['Shared tooling', 'Engineering standards', 'Documentation', 'AI tooling evaluation'],
+      title: 'Design & UI engineering',
+      items: [
+        'Figma',
+        'Adobe Creative Cloud',
+        'Design systems',
+        'Design tokens',
+        'Storybook',
+        'Accessibility',
+      ],
+    },
+    {
+      title: 'Performance & developer experience',
+      items: [
+        'Bundle analysis',
+        'Code splitting',
+        'Browser & CDN caching',
+        'Shared tooling',
+        'Documentation',
+        'AI tool evaluation',
+      ],
     },
   ],
 
   ai: {
     heading: 'How I use AI in development',
+    summary:
+      'I manage the adoption of AI tools in the repository. I evaluate Claude, Cursor and other tools on real tasks and define rules and context for their use across teams. Recurring problems help me identify where documentation and shared tooling need improvement.',
+    moreLabel: 'Read about my workflow',
     paragraphs: [
-      'I use AI assistants and agents to analyse a project’s code, prepare changes and reduce repetitive work. I use them only when I can understand what they did and check that it works.',
-      'I test them on real work to see where they lose context in the codebase. I use that to update the repository’s documentation, rules and tooling.',
+      'I manage how AI tools are adopted in the repository and in the teams’ development work. I use and evaluate Claude, Cursor and other assistants to analyse code, prepare changes and reduce repetitive work. I define usage rules and maintain the repository context available to them.',
+      'I pay attention to recurring mistakes: losing context between modules, overlooking an existing implementation or suggesting changes outside the task. I investigate what is missing from the instructions, documentation or shared tooling before trying again.',
     ],
-    rulesLead: 'In practice:',
+    rulesLead: 'What I look at:',
     rules: [
-      '<b>First I check whether the change is needed.</b> An agent can suggest rebuilding something that already exists in the project.',
-      '<b>I review the result like any other contribution.</b> I read the diff, run the tests and check that it respects the project’s boundaries.',
-      '<b>I need to be able to explain and maintain every change.</b> If I cannot, I do not use it.',
+      '<b>The task and its context.</b> I check what the repository already provides and which modules the change should touch. An agent proposing duplicate functionality is a useful sign that it has missed part of that context.',
+      '<b>The recurring problem.</b> If the same mistake keeps coming back, I check whether an instruction is unclear, documentation is missing or a shared tool needs changing.',
+      '<b>The resulting code.</b> I review the diff, run tests and check the integration with the project. I keep changes I can explain and maintain; a plausible answer alone does not tell me whether the software works.',
     ],
-    backLabel: 'ANDREA LISI',
+    backLabel: 'Back to my work',
   },
 
   work: [
@@ -142,11 +167,9 @@ export const en: Copy = {
       tags: ['Micro-frontends', '16 projects', '12+ teams', 'Quality gates'],
       current: true,
       paragraphs: [
-        'I work on the frontend platform behind Tosca Cloud, a micro-frontend monorepo containing <b>16 projects and shared by more than 12 teams</b>.',
-        'I work on the monorepo’s architecture and governance, particularly module boundaries, dependency rules and shared frontend standards. I also review RFCs that affect the shared frontend.',
-        'I administer the Tosca Cloud repository on GitHub and automate its pipelines, including on Azure. With the platform architect, I work on build caching and performance, CI structure and quality gates.',
-        'I implement and maintain integrations shared across multiple frontend applications. These include observability with OpenTelemetry and the application-side authentication flow after the Okta login, including JWT handling and HTTP interceptors. When an issue appears across several projects, I debug it at platform level.',
-        'I regularly evaluate AI tools, including Claude and Cursor, on real repository work. If they keep stumbling over the same parts of the codebase, I improve its documentation, rules or shared tooling.',
+        'Together with the architect on my team, I am a point of contact for technical initiatives that span the entire monorepo. I work with developers across disciplines, engineering managers, principal engineers from other platforms and product stakeholders to assess needs, dependencies and the impact on teams. Through these discussions, we define shared solutions and support their adoption.',
+        'My work includes both technical decisions and implementation: I develop and maintain shared resources, fix cross-project issues and build the infrastructure needed for migrations. I coordinate the integration of new design system versions with the teams and carry out updates myself when needed. When inconsistencies appear between products, I address them in shared configurations and components.',
+        'I also work on performance, build optimization and modernizing development tools. I document decisions in ADRs, define monorepo rules and help teams apply them. Product features remain with their teams, where I can also contribute; my ongoing responsibility is the platform they share.',
       ],
     },
     {
@@ -171,9 +194,9 @@ export const en: Copy = {
       context: 'Luxury e-commerce',
       tags: ['ASP', 'jQuery', 'React', 'Webpack'],
       paragraphs: [
-        'Modernized a luxury e-commerce platform while it was in production. Gradually replaced ASP and jQuery with React and a new Webpack setup.',
-        'Continued to build new features during the migration without taking the shop offline.',
-        'Worked on both the storefront and the internal CMS used for orders and day-to-day shop operations.',
+        'I modernized a luxury e-commerce platform while it was in production, gradually replacing ASP and jQuery with React and a new Webpack setup.',
+        'I continued to build new features during the migration without taking the shop offline.',
+        'I worked on both the storefront and the internal CMS used for orders and day-to-day shop operations.',
       ],
     },
     {
@@ -185,9 +208,9 @@ export const en: Copy = {
       tags: ['Design', 'Web', 'Backend', 'Infrastructure'],
       paragraphs: [
         'I joined as a designer. Over the years I also worked on web development, backend systems and infrastructure installed at client sites.',
-        'Designed websites, interfaces, visual identities and print material from scratch for client projects.',
-        'Built and maintained both frontend and backend applications.',
-        'Installed servers, networks and firewalls on site for client companies, including manufacturers in Tuscany’s leather and fashion district.',
+        'I designed websites, interfaces, visual identities and print material from scratch for client projects.',
+        'I built and maintained both frontend and backend applications.',
+        'I installed servers, networks and firewalls on site for client companies, including manufacturers in Tuscany’s leather and fashion district.',
       ],
     },
   ],
@@ -195,18 +218,30 @@ export const en: Copy = {
   projects: [
     {
       name: 'Lumina',
-      kind: 'FANTASY MUD',
+      kind: 'Game development & web design',
       description:
-        'A fantasy MUD I built myself: a Node.js/MongoDB backend, a React client and Cloudflare infrastructure.',
+        'A multiplayer fantasy game built around text. I develop the Node.js/MongoDB backend, React client and Cloudflare infrastructure.',
       tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
+      href: 'https://luminamud.com/',
+      linkLabel: 'Explore Lumina',
+      detail:
+        'A personal project that brings together interface design, application code and the systems behind the game.',
+      imageAlt:
+        'Lumina’s public website: a fantasy landscape with gold typography and navigation into the game’s world.',
+      caption: 'The project’s website. The game is in development.',
     },
     {
       name: 'lockhound',
-      kind: 'WINDOWS CLI',
+      kind: 'Open-source developer tool',
       description:
-        'Zero-dependency CLI for Windows that finds and terminates processes locking a folder, using the Windows Restart Manager API.',
+        'A Windows CLI that identifies the processes keeping a folder locked. It uses the Windows Restart Manager API and has no package dependencies.',
       tags: ['Windows', 'Restart Manager API', 'Developer tooling'],
       command: 'npx lockhound',
+      href: 'https://github.com/karedas/lockhound',
+      linkLabel: 'Read the code on GitHub',
+      detail:
+        'Run it to inspect the locks. Terminating a process is a separate, explicit action, so you can first see what is holding the folder open.',
+      caption: 'Example usage. Inspect a folder without terminating any process.',
     },
   ],
 
@@ -217,13 +252,14 @@ export const en: Copy = {
   nowBadge: 'CURRENT',
 
   contact: {
-    invite:
-      'Hey! If you want to talk about frontend platforms, developer experience or simply compare notes, send me a message.',
-    inviteMore: 'It doesn’t need to be formal. A quick message is fine too.',
+    invite: 'Hey! Have a project, a technical role or something you’d like to talk about?',
+    inviteMore:
+      'I enjoy building software and working through technical problems with other developers. A quick message is a good place to start.',
     cv: 'CV (PDF)',
     github: 'GitHub',
     linkedin: 'LinkedIn',
     email: 'Email',
     instagram: 'Instagram',
+    writeLabel: 'Email me',
   },
 };

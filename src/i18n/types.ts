@@ -9,11 +9,7 @@ export type SectionHead = {
   title: string;
 };
 
-/**
- * Only the AI section carries a label. It is the one enclosed block on the page,
- * and the label is part of what sets it apart, so the field belongs to that
- * section alone rather than sitting unused on the other three.
- */
+/** Label used on the detailed AI page. */
 export type LabelledSectionHead = SectionHead & {
   eyebrow: string;
 };
@@ -31,17 +27,7 @@ export type Stat = {
 };
 
 export type ApproachBlock = {
-  /**
-   * Short mono tag above the paragraph, written as an identifier rather than as
-   * a phrase. Deliberately English in both locales: it reads as code, not
-   * prose, and Italian does not snake_case gracefully.
-   */
-  label: string;
-  /**
-   * A claim with a reason behind it, not a slogan. Titles were dropped once
-   * because mine were aphorisms over one-liners; these are his own, and they
-   * carry an argument, so they earn the line back.
-   */
+  /** Heading describing a concrete part of the author's work. */
   title: string;
   /** HTML: opens with a <b> lead and carries no other emphasis. */
   body: string;
@@ -59,6 +45,11 @@ export type ProjectEntry = {
   description: string;
   tags: string[];
   command?: string;
+  href: string;
+  linkLabel: string;
+  detail: string;
+  imageAlt?: string;
+  caption: string;
 };
 
 export type WorkEntry = {
@@ -131,6 +122,8 @@ export type Copy = {
 
   ai: {
     heading: string;
+    summary: string;
+    moreLabel: string;
     /** HTML: the opening paragraphs, before the rules. */
     paragraphs: string[];
     /** The line that hands over to the list. */
@@ -162,5 +155,6 @@ export type Copy = {
     linkedin: string;
     email: string;
     instagram: string;
+    writeLabel: string;
   };
 };

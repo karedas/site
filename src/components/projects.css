@@ -1,64 +1,85 @@
 .projects .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px 44px;
+  gap: 36px;
 }
-
 .projects .project {
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
 }
-
 .projects .project-kind {
-  margin: 0 0 8px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+  font-size: 14px;
   color: var(--acc);
 }
-
 .projects h3 {
-  font-size: 21px;
+  font-size: 30px;
   font-weight: 600;
 }
-
 .projects .project-description {
   margin: 12px 0 0;
-  max-width: 48ch;
-  font-size: 15px;
   line-height: 1.7;
 }
-
 .projects .project-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px 16px;
-  margin: 16px 0 0;
+  gap: 6px 14px;
+  margin: 18px 0 0;
   padding: 0;
   list-style: none;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--dim);
 }
-
-.projects .project-tags li:not(:last-child)::after {
-  content: " ·";
-  color: var(--line);
-}
-
-.projects code {
+.projects .project-link {
   display: inline-block;
-  margin-top: 14px;
-  padding: 5px 8px;
-  border: 1px solid var(--acc-line);
-  border-radius: 3px;
+  margin-top: 20px;
+}
+.projects .project-preview {
+  min-width: 0;
+  margin: 0;
+}
+.projects .project-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.projects figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--dim);
+}
+.projects .command-preview {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--panel);
+  padding: 20px 24px 42px;
   font-family: var(--font-mono);
+}
+.projects .terminal-label {
+  display: block;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
   font-size: 12px;
+  color: var(--dim);
+}
+.projects .command-line {
+  margin-top: 28px;
   color: var(--acc);
 }
-
-@media (max-width: 620px) {
+.projects code {
+  font: inherit;
+}
+@media (max-width: 680px) {
+  .projects .project {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
   .projects .project-grid {
-    grid-template-columns: 1fr;
+    gap: 48px;
   }
 }

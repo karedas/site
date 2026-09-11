@@ -1,78 +1,12 @@
-/* =========================================================
-   Motion. Short, once, on first viewport entry.
-   Logic: src/scripts/reveal.ts
-   ========================================================= */
-
-@keyframes alf {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes gdraw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes gin {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes gout {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-/* Hero pieces enter on load, staggered by an inline delay. */
-.enter {
-  animation: alf 0.6s ease both;
-}
-
-/* Everything below the fold enters when it first scrolls in. */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-}
-
-[data-reveal].is-in,
-html.no-js [data-reveal] {
-  opacity: 1;
-  transform: none;
-}
-
-/* The !important here is the point, not an oversight: this block has to beat
-   every animation and transition on the page whatever their specificity or
-   source order, including the inline stagger delays on the hero. Take them out
-   and the reduced-motion promise stops holding, which the e2e suite checks. */
-/* biome-ignore-start lint/complexity/noImportantStyles: an accessibility reset has to win the cascade outright */
+/* Content is immediately visible, with or without JavaScript.
+   Motion is limited to interaction feedback and the current-role indicator. */
+/* biome-ignore-start lint/complexity/noImportantStyles: the accessibility reset must win the cascade */
 @media (prefers-reduced-motion: reduce) {
-  .loader {
-    display: none !important;
-  }
-
   *,
   *::before,
   *::after {
     animation: none !important;
     transition: none !important;
   }
-
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
-/* biome-ignore-end lint/complexity/noImportantStyles: an accessibility reset has to win the cascade outright */
+/* biome-ignore-end lint/complexity/noImportantStyles: the accessibility reset must win the cascade */

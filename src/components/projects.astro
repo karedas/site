@@ -17,13 +17,28 @@ const head = copy.sections.projects;
   <div class="project-grid" data-reveal>
     {copy.projects.map((project) => (
       <article class="project">
+        <div class="project-content">
         <p class="project-kind">{project.kind}</p>
         <h3>{project.name}</h3>
         <p class="project-description">{project.description}</p>
+        <p class="project-description">{project.detail}</p>
         <ul class="project-tags">
           {project.tags.map((tag) => <li>{tag}</li>)}
         </ul>
-        {project.command && <code>{project.command}</code>}
+        <a class="text-link project-link" href={project.href} target="_blank" rel="noopener noreferrer">{project.linkLabel}</a>
+        </div>
+        <figure class:list={['project-preview', { terminal: !!project.command }]}>
+          {project.imageAlt && (
+            <img src="/lumina-preview.webp" alt={project.imageAlt} width="1000" height="563" loading="lazy" decoding="async" />
+          )}
+          {project.command && (
+            <div class="command-preview">
+              <span class="terminal-label">PowerShell</span>
+              <div class="command-line"><span aria-hidden="true">&gt;</span> <code>{project.command}</code></div>
+            </div>
+          )}
+          <figcaption>{project.caption}</figcaption>
+        </figure>
       </article>
     ))}
   </div>

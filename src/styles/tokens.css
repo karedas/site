@@ -21,11 +21,11 @@
   --line: #233554;
 
   --head: #ccd6f6;
-  --body: #8892b0;
+  --body: #a5b2cc;
   /* The design shipped #5f6c8c here, which gives 3.36:1 on --bg and fails AA
      for the dates, the chips and the meta lines it is used on. Lifted to the
      nearest tone in the same hue that clears 4.5:1. */
-  --dim: #7683a3;
+  --dim: #92a1bd;
 
   /* Emerald, deliberately greener than the #64ffda mint that every navy
      portfolio uses: hue 161 against its 166, and darker, so it reads as

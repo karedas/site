@@ -5,7 +5,6 @@ import Contact from '@/components/contact.astro';
 import DotField from '@/components/dot-field.astro';
 import Focus from '@/components/focus.astro';
 import Hero from '@/components/hero.astro';
-import Loader from '@/components/loader.astro';
 import Projects from '@/components/projects.astro';
 import SiteFooter from '@/components/site-footer.astro';
 import SiteHeader from '@/components/site-header.astro';
@@ -20,17 +19,16 @@ type Props = {
 const { locale } = Astro.props;
 ---
 <Layout locale={locale} page="home">
-  <Loader />
   <DotField />
   <div class="shell">
     <SiteHeader locale={locale} page="home" />
     <main id="main-content">
       <Hero locale={locale} />
-      <Approach locale={locale} />
-      <Focus locale={locale} />
-      <AiSection locale={locale} />
-      <Work locale={locale} />
       <Projects locale={locale} />
+      <Work locale={locale} />
+      <Focus locale={locale} />
+      <Approach locale={locale} />
+      <AiSection locale={locale} />
       <Contact locale={locale} />
     </main>
     <SiteFooter locale={locale} />

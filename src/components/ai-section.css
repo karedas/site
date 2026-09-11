@@ -1,26 +1,30 @@
-/* Every other section is prose sitting on the bare background. This one is
-   enclosed, and it is the only enclosed thing on the page, because it is the
-   only section arguing a position rather than listing facts.
-
-   The fill is --panel, which is barely a shade off --bg, so the border does the
-   separating: a hairline all round and the accent on the leading edge. The
-   emerald-washed grounds separated the surface better but pushed body text to
-   4.39:1, under AA, which is not a trade worth making for a tint. */
+/* The detailed workflow has its own page; home uses the shorter summary. */
 .ai .plate {
   background: var(--panel);
   border: 1px solid var(--line);
   border-left: 2px solid var(--acc);
   border-radius: 3px;
   padding: clamp(24px, 3.4vw, 36px) clamp(20px, 3.4vw, 38px);
-  max-width: 72ch;
 }
 
-/* No other section has one, which is half the point. */
+.ai .ai-summary {
+  max-width: 74ch;
+}
+
+.ai .ai-summary p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.ai .ai-back {
+  display: inline-block;
+  margin-top: 28px;
+}
+
 .ai .eyebrow {
   margin: 0 0 20px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
+  font-size: 14px;
   color: var(--acc);
 }
 
@@ -37,7 +41,7 @@
 
 .ai .prose p + p {
   margin: 16px 0 0;
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -46,11 +50,9 @@
   font-weight: 600;
 }
 
-/* He says three rules, so they are numbered: a reader can check the count
-   without recounting, and the numbers make the block scannable at a glance. */
 .ai .rules-lead {
   margin: 20px 0 0;
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.7;
 }
 
@@ -65,7 +67,7 @@
   counter-increment: rule;
   position: relative;
   padding-left: 30px;
-  font-size: 15.5px;
+  font-size: 16px;
   line-height: 1.7;
 }
 
