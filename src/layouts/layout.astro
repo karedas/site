@@ -20,13 +20,8 @@ const fontHref =
   'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
 ---
 <!doctype html>
-<html lang={copy.htmlLang} class="no-js">
+<html lang={copy.htmlLang}>
   <head>
-    <script is:inline>
-      // Drop the no-js flag before first paint: the reveal styles hide
-      // [data-reveal] blocks, so without JS they must stay visible.
-      document.documentElement.classList.remove('no-js');
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0a192f" />
@@ -39,10 +34,6 @@ const fontHref =
     <meta name="description" content={meta.description} />
     <meta name="author" content="Andrea Lisi" />
     <link rel="canonical" href={canonicalURL} />
-    {/* The deep page repeats the home section word for word. It exists so the
-        stance can be handed over as its own URL, not to be found in search, so
-        it stays out of the index rather than competing with the home page. */}
-    {page === 'ai' && <meta name="robots" content="noindex, follow" />}
 
     {LOCALES.map((code) => (
       <link
@@ -93,10 +84,8 @@ const fontHref =
     <slot />
     <script>
       import { initFonts } from '@/scripts/fonts';
-      import { initReveal } from '@/scripts/reveal';
 
       initFonts();
-      initReveal();
     </script>
   </body>
 </html>

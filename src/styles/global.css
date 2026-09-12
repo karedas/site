@@ -32,8 +32,16 @@ a:hover {
   color: var(--acc);
 }
 
+.text-link {
+  color: var(--acc);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  line-height: 1.7;
+}
+
 ::selection {
-  background: rgba(255, 131, 84, 0.22);
+  background: var(--acc-soft);
   color: var(--head);
 }
 

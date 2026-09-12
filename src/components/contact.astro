@@ -23,6 +23,7 @@ const cvFile = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
     </div>
 
     <div class="row">
+      <a class="contact-email" href="mailto:lisandr84@gmail.com">{copy.contact.writeLabel}<Icon name="mail" /></a>
       <a class="cv" href={`/${cvFile}`} download={cvFile}>
         {copy.hero.buttons.cv}
       </a>
@@ -43,9 +44,6 @@ const cvFile = locale === 'it' ? 'andrea-lisi-cv-it.pdf' : 'andrea-lisi-cv.pdf';
         aria-label={copy.contact.linkedin}
       >
         <Icon name="linkedin" />
-      </a>
-      <a class="social" href="mailto:lisandr84@gmail.com" aria-label={copy.contact.email}>
-        <Icon name="mail" />
       </a>
       <a
         class="social"

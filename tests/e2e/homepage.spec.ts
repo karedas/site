@@ -84,15 +84,14 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    test('renders the ways-of-working blocks as tagged prose', async ({ page }) => {
+    test('renders ways of working with headings and a clear opening sentence', async ({ page }) => {
       await page.goto(home);
       const blocks = page.locator('.approach .block');
       await expect(blocks).toHaveCount(copy.approach.length);
 
       for (const [i, block] of copy.approach.entries()) {
         const el = blocks.nth(i);
-        await expect(el.locator('.block-label')).toHaveText(block.label);
-        await expect(el.locator('.block-title')).toHaveText(block.title);
+        await expect(el.getByRole('heading', { level: 3 })).toHaveText(block.title);
         // The lead opens the paragraph, and it is the only emphasis in it.
         await expect(el.locator('.block-body b')).toHaveCount(1);
       }
@@ -102,23 +101,14 @@ for (const locale of ['en', 'it'] as const) {
       expect(copy.approach.length).toBe(3);
     });
 
-    test('sets the AI section apart as the one enclosed block', async ({ page }) => {
+    test('summarizes AI work and links to the detailed workflow', async ({ page }) => {
       await page.goto(home);
 
-      const opening = page.locator('.ai .prose > p:not(.rules-lead)');
-      await expect(opening).toHaveCount(copy.ai.paragraphs.length);
-      await expect(page.locator('.ai .prose .lede')).toContainText(
-        plain(copy.ai.paragraphs[0] ?? '').slice(0, 40),
-      );
-      await expect(page.locator('.ai .rules-lead')).toHaveText(copy.ai.rulesLead);
-      // He says three rules, so there had better be three.
-      await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
-      expect(copy.ai.rules.length).toBe(3);
-      await expect(page.locator('.ai .plate .eyebrow')).toHaveText(copy.sections.ai.eyebrow);
-
-      // Being the only enclosed surface is what distinguishes it, so a second
-      // one appearing anywhere would take that away.
-      await expect(page.locator('.plate')).toHaveCount(1);
+      await expect(page.locator('.ai-summary p')).toHaveText(copy.ai.summary);
+      await expect(page.locator('.ai .rules')).toHaveCount(0);
+      await page.locator('.ai').getByRole('link', { name: copy.ai.moreLabel }).click();
+      await expect(page).toHaveURL(new RegExp(`${ai}/?$`));
+      await expect(page.locator('.ai .prose .lede')).toHaveText(plain(copy.ai.paragraphs[0] ?? ''));
       // The home page itself must stay indexable.
       await expect(page.locator('meta[name=robots]')).toHaveCount(0);
     });
@@ -132,6 +122,18 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('.projects .project')).toHaveCount(copy.projects.length);
       await expect(page.locator('.projects').getByText('lockhound', { exact: true })).toBeVisible();
       await expect(page.locator('.projects code')).toHaveText('npx lockhound');
+      for (const project of copy.projects) {
+        await expect(page.getByRole('link', { name: project.linkLabel })).toHaveAttribute(
+          'href',
+          project.href,
+        );
+      }
+      const preview = page.locator('.project-preview img');
+      await preview.scrollIntoViewIfNeeded();
+      await expect(preview).toBeVisible();
+      await expect
+        .poll(() => preview.evaluate((img: HTMLImageElement) => img.naturalWidth))
+        .toBeGreaterThan(0);
     });
 
     test('lists four jobs, each with bullets and chips', async ({ page }) => {
@@ -149,7 +151,7 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    test('closes on an invitation, with the address behind the mail icon', async ({ page }) => {
+    test('closes on an invitation and a labelled email action', async ({ page }) => {
       await page.goto(home);
 
       await expect(page.locator('.contact .invite')).toHaveText(copy.contact.invite);
@@ -157,7 +159,7 @@ for (const locale of ['en', 'it'] as const) {
       // The address is a link, not printed text: no duplication with the icon.
       await expect(page.locator('.contact').getByText('lisandr84@gmail.com')).toHaveCount(0);
       await expect(
-        page.locator('.contact').getByRole('link', { name: copy.contact.email }),
+        page.locator('.contact').getByRole('link', { name: copy.contact.writeLabel }),
       ).toHaveAttribute('href', 'mailto:lisandr84@gmail.com');
     });
 
@@ -191,20 +193,22 @@ for (const locale of ['en', 'it'] as const) {
       }
     });
 
-    /*
-     * The hero now opens with the scale of the current platform instead of a
-     * general claim. The focus and work sections then add the technical detail.
-     */
-    test('opens with platform scale and adds architecture detail later', async ({ page }) => {
+    test('uses the official title and keeps employer detail out of the personal bio', async ({
+      page,
+    }) => {
       await page.goto(home);
-      const architecture = /micro-?frontend|monorepo/i;
-
-      await expect(page.locator('.hero')).toContainText('16');
-      await expect(page.locator('.hero')).toContainText('12');
-      await expect(page.locator('.hero').getByText(architecture)).toHaveCount(1);
-      await expect(page.locator('.approach').getByText(architecture)).toHaveCount(0);
-      await expect(page.locator('.focus').getByText(architecture).first()).toBeVisible();
-      await expect(page.locator('.work').getByText(architecture).first()).toBeVisible();
+      await expect(page.locator('.hero .tagline')).toHaveText('Senior Software Engineer.');
+      await expect(page.locator('.hero')).not.toContainText(/Tricentis|Tosca Cloud|Staff Engineer/);
+      await expect(page.locator('.work .job-title').first()).toContainText(
+        'Senior Software Engineer',
+      );
+      await expect(page.locator('#examples')).toHaveCount(0);
+      await expect(
+        page
+          .locator('.work')
+          .getByText(/monorepo/i)
+          .first(),
+      ).toBeVisible();
     });
 
     test('spends its three colours only where each one means something', async ({ page }) => {
@@ -219,7 +223,7 @@ for (const locale of ['en', 'it'] as const) {
       // Lilac: the art foundation. The school, the block about drawing, the
       // job where the drawing was the job.
       await expect(page.locator('.hero .fact-v.tone-root')).toHaveCount(1);
-      await expect(page.locator('.approach .block-label.tone-root')).toHaveCount(1);
+      await expect(page.locator('.approach .block-title.tone-root')).toHaveCount(1);
       await expect(page.locator('.work .chip.root')).toHaveCount(1);
 
       const tones = await page.evaluate(() => {
@@ -258,13 +262,14 @@ for (const locale of ['en', 'it'] as const) {
       await context.close();
     });
 
-    test('drops the loader under prefers-reduced-motion', async ({ browser }) => {
+    test('has no loader and respects reduced motion', async ({ browser }) => {
       const context = await browser.newContext({ reducedMotion: 'reduce' });
       const page = await context.newPage();
       await page.goto(home);
 
-      await expect(page.locator('.loader')).toBeHidden();
+      await expect(page.locator('.loader')).toHaveCount(0);
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+      await expect(page.locator('.work .pulse')).toHaveCSS('animation-name', 'none');
 
       await context.close();
     });
@@ -278,6 +283,9 @@ for (const locale of ['en', 'it'] as const) {
         () => document.documentElement.scrollWidth > window.innerWidth + 1,
       );
       expect(overflows).toBe(false);
+      const cv = await page.locator('.hero .cv').boundingBox();
+      expect(cv).not.toBeNull();
+      expect((cv?.y ?? 1000) + (cv?.height ?? 0)).toBeLessThanOrEqual(812);
     });
 
     test('passes axe accessibility checks (no critical/serious violations)', async ({ page }) => {
@@ -287,15 +295,18 @@ for (const locale of ['en', 'it'] as const) {
   });
 
   test.describe(`the AI deep link (${locale})`, () => {
-    test('carries the same prose on its own page', async ({ page }) => {
+    test('carries the detailed workflow on its own indexable page', async ({ page }) => {
       await page.goto(ai);
 
       await expect(page.locator('html')).toHaveAttribute('lang', copy.htmlLang);
       await expect(page.getByRole('heading', { level: 1 })).toContainText(copy.ai.heading);
       await expect(page.locator('.ai .rules > li')).toHaveCount(copy.ai.rules.length);
-      // Word for word the home section, so it stays out of the index and exists
-      // only as a URL that can be handed to someone.
-      await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /noindex/);
+      await expect(page.locator('meta[name=robots]')).toHaveCount(0);
+      await expect(page.locator('.ai .ai-summary')).toHaveCount(0);
+      await expect(page.getByRole('link', { name: copy.ai.backLabel })).toHaveAttribute(
+        'href',
+        `${home}#ai`,
+      );
     });
 
     test('keeps its own description under the truncation limit', async ({ page }) => {

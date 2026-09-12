@@ -8,13 +8,13 @@ export const it: Copy = {
   meta: {
     title: 'Andrea Lisi · Senior Software Engineer · Frontend Platform',
     description:
-      'Senior Software Engineer a Vienna, concentrato su piattaforme frontend, monorepo e governance per 16 progetti e più di 12 team.',
+      'Senior Software Engineer a Vienna. Oltre 18 anni tra applicazioni web, piattaforme frontend e strumenti per sviluppatori, con un percorso nel web design.',
     ogImageAlt: 'Andrea Lisi, Senior Software Engineer a Vienna',
   },
   aiMeta: {
-    title: 'AI · Andrea Lisi · Frontend Platform & Governance',
+    title: 'AI nello sviluppo · Andrea Lisi',
     description:
-      'Come uso assistenti AI e agenti nello sviluppo: quando servono, come rivedo il risultato e quali controlli applico.',
+      'Come valuto gli strumenti AI su attività reali e uso i problemi ricorrenti per migliorare documentazione, contesto e strumenti del repository.',
   },
 
   skipLink: 'Vai al contenuto',
@@ -36,24 +36,23 @@ export const it: Copy = {
 
   hero: {
     greeting: 'Ciao. Mi chiamo',
-    tagline: 'Piattaforma frontend e governance.',
-    eyebrow: 'SENIOR SOFTWARE ENGINEER · FRONTEND PLATFORM & GOVERNANCE · VIENNA',
+    tagline: 'Senior Software Engineer.',
+    eyebrow: 'Sviluppo frontend, architettura e strumenti per sviluppatori',
     stats: [
-      { label: 'ESPERIENZA', value: '18+ anni' },
-      { label: 'FOCUS', value: 'Piattaforma frontend, governance', tone: 'now' },
-      { label: 'BASE', value: 'Vienna, remoto o ibrido' },
-      { label: 'LINGUE', value: 'IT · EN · DE in corso' },
-      { label: 'PERCORSO', value: 'Web design e UI', tone: 'root' },
+      { label: 'Dove vivo', value: 'Vienna, Austria' },
+      { label: 'Come lavoro', value: 'Remoto o ibrido', tone: 'now' },
+      { label: 'Percorso', value: 'Web design e UI', tone: 'root' },
+      { label: 'Lingue', value: 'IT · EN · DE in corso' },
     ],
     intro:
-      'Sono un Senior Software Engineer con più di 18 anni di esperienza. Oggi lavoro sulla piattaforma frontend di Tosca Cloud, una monorepo che raccoglie 16 progetti ed è condivisa da più di 12 team. Mi occupo soprattutto di architettura, dipendenze, build e standard condivisi.',
-    buttons: { github: 'GITHUB', linkedin: 'LINKEDIN', email: 'EMAIL', cv: 'CV.PDF ↓' },
+      'Sviluppo software per il web da oltre 18 anni, con una forte esperienza nel frontend. Realizzo applicazioni, librerie condivise e strumenti per sviluppatori. Lavoro con i team su architettura, performance e integrazioni, dalle decisioni tecniche al codice.',
+    buttons: { github: 'GitHub', linkedin: 'LinkedIn', email: 'Scrivimi', cv: 'Scarica il CV' },
   },
 
   sections: {
     approach: { num: '01', title: 'Come lavoro' },
     focus: { num: '02', title: 'Su cosa lavoro' },
-    ai: { num: '03', title: 'AI', eyebrow: 'USO, REVISIONE E TEST' },
+    ai: { num: '03', title: 'AI', eyebrow: 'Lavoro nel repository' },
     experience: { num: '04', title: 'Esperienza' },
     projects: { num: '05', title: 'Progetti personali' },
     contact: { num: '06', title: 'Restiamo in contatto' },
@@ -61,20 +60,17 @@ export const it: Copy = {
 
   approach: [
     {
-      label: 'Web_Design',
       tone: 'root',
-      title: 'Dal web design al frontend',
-      body: '<b>Ho iniziato progettando e sviluppando siti web, poi mi sono concentrato sempre di più sul frontend.</b> Ho lavorato anche su sistemi backend e infrastruttura. Questa esperienza mi aiuta a vedere cosa cambia nel resto del sistema quando intervengo sul frontend.',
+      title: 'Un occhio all’interfaccia',
+      body: '<b>Ho iniziato progettando e sviluppando siti web.</b> Negli anni ho lavorato anche su identità visive, grafica per la stampa, sistemi backend e infrastruttura. Collaboro con i designer per tradurre i mockup in interfacce fedeli al progetto e con il comportamento previsto.',
     },
     {
-      label: 'The_Boundaries',
       title: 'Regole e controlli automatici',
-      body: '<b>Lavoro spesso su problemi che coinvolgono più team</b>: confini tra moduli, dipendenze, build e CI. Quando una regola è importante, ne documento il motivo e, se possibile, aggiungo un controllo automatico. Così è il controllo a ricordare la regola, e io evito di ripeterla a decine di persone, una alla volta.',
+      body: '<b>Documento le decisioni condivise e, quando posso, automatizzo i controlli.</b> Vale per dipendenze, confini tra moduli e build. Mi evita anche di ripetere la stessa conversazione con una decina di persone, una alla volta.',
     },
     {
-      label: 'Hands_On',
       title: 'Lavoro sul codice e con i team',
-      body: '<b>Continuo a implementare, fare debugging e lavorare sugli strumenti condivisi.</b> Collaboro ogni giorno con gli sviluppatori dei team, dagli junior ai senior, e mi confronto spesso con i loro manager. Quando una decisione coinvolge più prodotti, lavoro anche con design, security e sales per capire cosa serve e applicarlo in modo coerente.',
+      body: '<b>Sviluppo e faccio debugging con gli sviluppatori dei team, dagli junior ai senior.</b> Mi confronto regolarmente con i loro manager e con design, security e sales per capire le richieste e concordare le modifiche che coinvolgono più prodotti.',
     },
   ],
 
@@ -85,38 +81,66 @@ export const it: Copy = {
         'Architettura di monorepo',
         'Micro-frontend',
         'Confini tra moduli',
-        'Governance delle dipendenze',
+        'Librerie condivise',
         'RFC tecnici',
+        'ADR',
+        'OpenTelemetry',
+        'JWT e interceptor HTTP',
       ],
     },
     {
-      title: 'Frontend e integrazioni',
+      title: 'Sviluppo web',
       items: [
         'React',
         'TypeScript',
         'Vue',
+        'Zustand',
         'GraphQL',
         'Node.js',
-        'Integrazione Okta lato frontend',
-        'Gestione JWT',
-        'OpenTelemetry',
+        'JavaScript',
+        'HTML e CSS',
       ],
     },
     {
-      title: 'Build e rilascio',
+      title: 'Build system e monorepo',
       items: [
-        'Architettura CI',
-        'Automazione delle pipeline',
-        'Cache e performance delle build',
-        'Controlli di qualità',
-        'Test automatici',
+        'Nx',
+        'pnpm workspaces',
+        'Vite',
+        'Webpack',
+        'Cache delle build',
+        'Confini delle dipendenze',
       ],
     },
     {
-      title: 'Developer experience',
+      title: 'Test e rilascio',
       items: [
+        'Vitest',
+        'Jest',
+        'Playwright',
+        'GitHub Actions',
+        'Azure Pipelines',
+        'Amministrazione repository',
+      ],
+    },
+    {
+      title: 'Design e sviluppo UI',
+      items: [
+        'Figma',
+        'Adobe Creative Cloud',
+        'Design system',
+        'Design token',
+        'Storybook',
+        'Accessibilità',
+      ],
+    },
+    {
+      title: 'Performance e developer experience',
+      items: [
+        'Analisi dei bundle',
+        'Code splitting',
+        'Cache browser e CDN',
         'Strumenti condivisi',
-        'Standard tecnici',
         'Documentazione',
         'Valutazione di strumenti AI',
       ],
@@ -125,17 +149,20 @@ export const it: Copy = {
 
   ai: {
     heading: 'Come uso l’AI nello sviluppo',
+    summary:
+      'Mi occupo dell’adozione degli strumenti AI nel repository. Valuto Claude, Cursor e altri strumenti su attività reali e definisco regole e contesto per usarli nel lavoro dei team. I problemi ricorrenti mi aiutano a capire dove intervenire su documentazione e strumenti condivisi.',
+    moreLabel: 'Come li uso nel lavoro quotidiano',
     paragraphs: [
-      'Uso assistenti AI e agenti per analizzare il codice di un progetto, preparare modifiche e ridurre il lavoro ripetitivo. Li uso solo se posso capire cosa hanno fatto e verificare che funzioni.',
-      'Li provo su attività reali per capire dove perdono il contesto della codebase. In base a quello aggiorno documentazione, regole e strumenti del repository.',
+      'Mi occupo di come gli strumenti AI vengono adottati nel repository e nel lavoro dei team. Uso e valuto Claude, Cursor e altri assistenti per analizzare il codice, preparare modifiche e ridurre il lavoro ripetitivo. Definisco le regole d’uso e curo il contesto del repository a loro disposizione.',
+      'Guardo soprattutto gli errori che si ripetono: perdere il contesto tra moduli, ignorare un’implementazione già presente o proporre modifiche fuori tema. Prima di riprovare, cerco cosa manca nelle istruzioni, nella documentazione o negli strumenti condivisi.',
     ],
-    rulesLead: 'In pratica:',
+    rulesLead: 'Cosa verifico:',
     rules: [
-      '<b>Prima verifico che la modifica serva.</b> Un agente può suggerire di ricostruire qualcosa che nel progetto esiste già.',
-      '<b>Rivedo il risultato come qualsiasi altro contributo.</b> Leggo il diff, eseguo i test e controllo che rispetti i confini del progetto.',
-      '<b>Devo poter spiegare e mantenere ogni modifica.</b> Se non ci riesco, non la uso.',
+      '<b>L’attività e il suo contesto.</b> Controllo cosa offre già il repository e quali moduli devono essere modificati. Se un agente propone una funzionalità duplicata, è un segnale che gli manca una parte di quel contesto.',
+      '<b>Il problema ricorrente.</b> Se lo stesso errore continua a ripresentarsi, verifico se un’istruzione è poco chiara, manca della documentazione o serve modificare uno strumento condiviso.',
+      '<b>Il codice prodotto.</b> Leggo il diff, eseguo i test e verifico l’integrazione nel progetto. Tengo le modifiche che so spiegare e mantenere: una risposta plausibile, da sola, non mi dice se il software funziona.',
     ],
-    backLabel: 'ANDREA LISI',
+    backLabel: 'Torna al mio lavoro',
   },
 
   work: [
@@ -148,11 +175,9 @@ export const it: Copy = {
       tags: ['Microfrontend', '16 progetti', '12+ team', 'Quality gates'],
       current: true,
       paragraphs: [
-        'Lavoro sulla piattaforma frontend di Tosca Cloud, una monorepo a micro-frontend che raccoglie <b>16 progetti ed è condivisa da più di 12 team</b>.',
-        'Lavoro sull’architettura e sulla governance della monorepo, in particolare su confini tra moduli, regole sulle dipendenze e standard frontend condivisi. Rivedo anche gli RFC che coinvolgono il frontend condiviso.',
-        'Amministro la repository di Tosca Cloud su GitHub e automatizzo le pipeline, anche su Azure. Con il platform architect lavoro sulla cache e sulle performance delle build, sulla struttura della CI e sui quality gate.',
-        'Implemento e mantengo integrazioni condivise tra più applicazioni frontend. Tra queste ci sono l’osservabilità con OpenTelemetry e la parte applicativa dell’autenticazione dopo il login Okta, compresa la gestione dei JWT e degli interceptor HTTP. Quando un problema compare in più progetti, lo indago a livello di piattaforma.',
-        'Valuto regolarmente strumenti AI, tra cui Claude e Cursor, su attività reali nel repository. Se inciampano sempre negli stessi punti, intervengo sulla documentazione, sulle regole o sugli strumenti condivisi.',
+        'Insieme all’architetto del mio team sono un riferimento per le iniziative tecniche che coinvolgono l’intera monorepo. Mi confronto con sviluppatori di diversi ambiti, engineering manager, principal engineer di altre piattaforme e referenti di prodotto per valutare esigenze, dipendenze e impatto sui team. Da questo confronto definiamo le soluzioni condivise e ne accompagniamo l’adozione.',
+        'Il mio lavoro comprende sia le decisioni tecniche sia l’implementazione: sviluppo e mantengo risorse condivise, correggo problemi trasversali e preparo l’infrastruttura necessaria alle migrazioni. Seguo l’integrazione delle nuove versioni del design system, coordinando gli aggiornamenti con i team e intervenendo direttamente quando serve. Quando emergono differenze tra prodotti, lavoro sulle configurazioni e sui componenti comuni per correggerle.',
+        'Mi occupo inoltre di performance, ottimizzazione delle build e modernizzazione degli strumenti di sviluppo. Documento le scelte negli ADR, definisco le regole della monorepo e supporto i team nell’applicarle. Le feature restano ai team di prodotto, ai quali posso contribuire; la mia responsabilità continuativa è la piattaforma che condividono.',
       ],
     },
     {
@@ -201,18 +226,30 @@ export const it: Copy = {
   projects: [
     {
       name: 'Lumina',
-      kind: 'FANTASY MUD',
+      kind: 'Sviluppo di giochi e web design',
       description:
-        'Un MUD fantasy che ho sviluppato interamente: backend Node.js/MongoDB, client React e infrastruttura Cloudflare.',
+        'Un gioco fantasy multiplayer basato sul testo. Sviluppo il backend Node.js/MongoDB, il client React e l’infrastruttura Cloudflare.',
       tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
+      href: 'https://luminamud.com/',
+      linkLabel: 'Esplora Lumina',
+      detail:
+        'Un progetto personale in cui lavoro sia al design delle interfacce sia al codice e ai sistemi che fanno funzionare il gioco.',
+      imageAlt:
+        'Il sito pubblico di Lumina: un paesaggio fantasy con titoli dorati e la navigazione per esplorare il mondo del gioco.',
+      caption: 'Il sito del progetto. Il gioco è in sviluppo.',
     },
     {
       name: 'lockhound',
-      kind: 'WINDOWS CLI',
+      kind: 'Strumento open source per sviluppatori',
       description:
-        'CLI per Windows senza dipendenze che trova e termina i processi che tengono bloccata una cartella, usando la Windows Restart Manager API.',
+        'Una CLI per Windows che identifica i processi che tengono bloccata una cartella. Usa la Windows Restart Manager API e non richiede dipendenze aggiuntive.',
       tags: ['Windows', 'Restart Manager API', 'Developer tooling'],
       command: 'npx lockhound',
+      href: 'https://github.com/karedas/lockhound',
+      linkLabel: 'Leggi il codice su GitHub',
+      detail:
+        'Il comando mostra quali processi bloccano la cartella. Terminarli richiede un’azione separata ed esplicita, così puoi prima vedere cosa sta succedendo.',
+      caption: 'Esempio d’uso. Ispeziona una cartella senza terminare alcun processo.',
     },
   ],
 
@@ -223,9 +260,10 @@ export const it: Copy = {
   nowBadge: 'IN CORSO',
 
   contact: {
-    invite:
-      'Hey! Se ti va di parlare di piattaforme frontend, developer experience o semplicemente di scambiarci due idee, scrivimi.',
-    inviteMore: 'Non serve una proposta formale: anche un messaggio al volo va benissimo.',
+    invite: 'Hey! Hai un progetto, un ruolo tecnico o qualcosa di cui ti va di parlare?',
+    inviteMore:
+      'Mi piace sviluppare software e ragionare sui problemi tecnici con altri sviluppatori. Per cominciare basta un messaggio al volo.',
+    writeLabel: 'Scrivimi',
     cv: 'CV (PDF)',
     github: 'GitHub',
     linkedin: 'LinkedIn',

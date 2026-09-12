@@ -93,10 +93,26 @@ describe('the work history', () => {
 });
 
 describe('focus and personal projects', () => {
-  it('keeps four focus groups and includes lockhound in both languages', () => {
+  it('keeps tool names in capabilities without turning recent tasks into achievements', () => {
     for (const locale of LOCALES) {
       const copy = getCopy(locale);
-      expect(copy.focus).toHaveLength(4);
+      const currentRole = copy.work[0]?.paragraphs.join(' ') ?? '';
+      expect(currentRole).toContain('ADR');
+      expect(currentRole).toContain('design system');
+      expect(currentRole).not.toContain('Playwright');
+      expect(copy.focus.flatMap((group) => group.items)).toContain('Playwright');
+      expect(copy.focus.flatMap((group) => group.items)).toContain('Zustand');
+    }
+  });
+
+  it('groups the skills and links each personal project in both languages', () => {
+    for (const locale of LOCALES) {
+      const copy = getCopy(locale);
+      expect(copy.focus).toHaveLength(6);
+      for (const project of copy.projects) {
+        expect(new URL(project.href).protocol).toBe('https:');
+        expect(project.linkLabel.length).toBeGreaterThan(0);
+      }
       expect(copy.projects.some((project) => project.name === 'lockhound')).toBe(true);
     }
   });
