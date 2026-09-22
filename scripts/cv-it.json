@@ -1,0 +1,130 @@
+{
+  "name": "Andrea Lisi",
+  "title": "Senior Software Engineer",
+  "subtitle": "Sviluppo web, piattaforme frontend e strumenti per sviluppatori",
+  "location": "Vienna, Austria | Remoto o ibrido",
+  "profile": "Sviluppo applicazioni web da oltre 18 anni, con una forte esperienza nel frontend e un percorso iniziato nel web design. Scrivo codice, sviluppo risorse condivise e lavoro con i team su architettura, performance e strumenti di sviluppo. Ho lavorato anche su sistemi backend e infrastruttura.",
+  "jobs": [
+    {
+      "role": "Senior Software Engineer",
+      "company": "Tricentis",
+      "context": "Esperienza su Tosca Cloud",
+      "location": "Vienna, Austria",
+      "dates": "2023 - oggi",
+      "bullet_labels": ["Collaborazione", "Sviluppo", "Migrazioni", "Repository e CI", "AI"],
+      "bullets": [
+        "Ho definito soluzioni per la monorepo con sviluppatori, engineering manager, principal engineer e referenti di prodotto.",
+        "Ho sviluppato librerie e strumenti comuni e risolto problemi trasversali; le feature erano dei team di prodotto. Ho scritto ADR e automatizzato i controlli sulle regole.",
+        "Ho creato l’infrastruttura per aggiornare il design system, supportato i team e aggiornato direttamente componenti e temi condivisi.",
+        "Ho amministrato il repository GitHub e automatizzato GitHub Actions e Azure Pipelines. Ho ottimizzato build e cache e modernizzato gli strumenti.",
+        "Ho valutato Claude, Cursor e altri strumenti su attività reali, curando il contesto del repository e verificando il codice con review e test."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "company": "Treedom",
+      "location": "Firenze, Italia",
+      "dates": "2019 - 2023",
+      "bullets": [
+        "Ho partecipato alla migrazione dello storefront fuori dal monolite con React, Vue e GraphQL.",
+        "Ho sviluppato interfacce per campagne ad alto traffico, collaborando con design e design system per rispettare mockup e standard condivisi.",
+        "Negli ultimi due anni ero l’unico frontend developer nel team backend: ho sviluppato da zero il back-office con gli utenti delle operazioni forestali."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "company": "Forzieri.com",
+      "location": "Firenze, Italia",
+      "dates": "2017 - 2019",
+      "bullets": [
+        "Ho modernizzato il frontend di un e-commerce di lusso in produzione, introducendo gradualmente React e Webpack e continuando a sviluppare funzionalità.",
+        "Ho lavorato sullo storefront e sul CMS interno per ordini e operazioni quotidiane."
+      ]
+    },
+    {
+      "role": "Head of Web - Designer & Developer",
+      "company": "Easysystem",
+      "location": "Figline Valdarno, Italia",
+      "dates": "2007 - 2017",
+      "bullets": [
+        "Ho iniziato dal design e dallo sviluppo di siti web, lavorando poi anche su applicazioni frontend e backend, identità visive e materiali stampati.",
+        "Ho installato server, reti e firewall per aziende clienti del distretto toscano della pelle e della moda."
+      ]
+    }
+  ],
+  "skills": [
+    [
+      "Sviluppo web",
+      "TypeScript | JavaScript | HTML | CSS moderno | DOM e Web API | Interfacce responsive"
+    ],
+    [
+      "Sistemi frontend e architettura",
+      "React | Vue | Zustand | Micro-frontend | Librerie condivise | Confini tra moduli | Standard frontend | RFC | ADR"
+    ],
+    ["Dati e API", "GraphQL/Apollo | REST | WebSocket/Socket.io | Node.js | MongoDB"],
+    [
+      "Integrazioni e osservabilità",
+      "Integrazione frontend dopo il login Okta | JWT | Interceptor HTTP | OpenTelemetry | Integrazioni condivise lato frontend"
+    ],
+    [
+      "Monorepo e gestione dei pacchetti",
+      "Nx | pnpm workspaces | Regole sulle dipendenze | Pacchetti condivisi | Governance del repository"
+    ],
+    [
+      "Build e bundling",
+      "Vite | Webpack | Configurazione build | Cache delle build | Performance delle build"
+    ],
+    [
+      "Test e qualità del codice",
+      "Vitest | Jest | Testing Library | Playwright | Storybook | ESLint | Prettier"
+    ],
+    [
+      "Rilascio e gestione repository",
+      "Git | GitHub | Amministrazione repository | GitHub Actions | Azure Pipelines | CI/CD | Quality gate"
+    ],
+    [
+      "Performance e accessibilità",
+      "Core Web Vitals | Lighthouse | Code splitting | Bundle analysis | Cache browser e CDN | WCAG/ARIA | Navigazione da tastiera"
+    ],
+    [
+      "Design e UI engineering",
+      "Grafica | Identità visive | Figma | Adobe Creative Cloud | Design system | Design token | Implementazione pixel-perfect"
+    ],
+    [
+      "Sviluppo assistito da AI",
+      "Claude | Cursor | Strumenti basati su MCP | Valutazione strumenti | Contesto e regole del repository | Review e test"
+    ],
+    [
+      "Piattaforme e infrastruttura",
+      "Cloudflare | Windows Server | Reti | Firewall | Windows Restart Manager API"
+    ]
+  ],
+  "projects": [
+    {
+      "name": "Lumina",
+      "url": "https://luminamud.com/",
+      "label": "luminamud.com",
+      "body": "Gioco fantasy multiplayer testuale, in sviluppo. Curo design delle interfacce, backend Node.js/MongoDB, client React e infrastruttura Cloudflare."
+    },
+    {
+      "name": "Deepfield",
+      "label": "Esperimento interrotto",
+      "body": "Prototipo di esplorazione spaziale: simulazione, mappe e pannelli di bordo in TypeScript e PixiJS. Design delle interazioni e visualizzazione dei dati."
+    },
+    {
+      "name": "lockhound",
+      "url": "https://github.com/karedas/lockhound",
+      "label": "github.com/karedas/lockhound",
+      "body": "CLI Windows senza dipendenze: identifica i processi che bloccano una cartella tramite la Restart Manager API. La terminazione richiede un’azione esplicita."
+    }
+  ],
+  "education": [
+    [
+      "Certificato tecnico superiore IFTS",
+      "Sviluppo software - diploma di programmatore di applicazioni web Java."
+    ],
+    ["Diploma in Arte", "Istituto Statale d’Arte di Firenze - Arte e Design."]
+  ],
+  "languages": "Italiano: madrelingua | Inglese: professionale | Tedesco: elementare, in corso di studio",
+  "privacy": "Autorizzo il trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR)."
+}

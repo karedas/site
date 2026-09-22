@@ -53,6 +53,20 @@
   line-height: 1.5;
   color: var(--dim);
 }
+.projects .project-gallery {
+  display: grid;
+  gap: 18px;
+}
+.projects .project-gallery a {
+  display: block;
+  color: var(--acc);
+  font-size: 13px;
+  text-underline-offset: 3px;
+}
+.projects .project-gallery span {
+  display: inline-block;
+  margin-top: 7px;
+}
 .projects .command-preview {
   border: 1px solid var(--line);
   border-radius: 5px;

@@ -1,0 +1,130 @@
+{
+  "name": "Andrea Lisi",
+  "title": "Senior Software Engineer",
+  "subtitle": "Web development, frontend platforms and developer tools",
+  "location": "Vienna, Austria | Remote or hybrid",
+  "profile": "I have been building web applications for over 18 years, with deep frontend experience and a background in web design. I write code, build shared resources and work with teams on architecture, performance and developer tools. I have also worked on backend systems and infrastructure.",
+  "jobs": [
+    {
+      "role": "Senior Software Engineer",
+      "company": "Tricentis",
+      "context": "Work on Tosca Cloud",
+      "location": "Vienna, Austria",
+      "dates": "2023 - present",
+      "bullet_labels": ["Collaboration", "Development", "Migrations", "Repository & CI", "AI"],
+      "bullets": [
+        "I defined shared solutions for the monorepo with developers, engineering managers, principal engineers and product stakeholders.",
+        "I built shared libraries and tools and resolved cross-project issues; product teams owned their features. I wrote ADRs and automated checks for repository rules.",
+        "I built the infrastructure for design system upgrades, supported teams through migrations and updated shared components and themes myself.",
+        "I administered the GitHub repository and automated GitHub Actions and Azure Pipelines. I optimized builds and caching and modernized developer tools.",
+        "I evaluated Claude, Cursor and other tools on real tasks, maintained repository context and checked the resulting code through review and tests."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "company": "Treedom",
+      "location": "Florence, Italy",
+      "dates": "2019 - 2023",
+      "bullets": [
+        "I contributed to moving the storefront out of the monolith using React, Vue and GraphQL.",
+        "I built interfaces for high-traffic campaigns, working with design and design system teams to match mockups and shared standards.",
+        "For the final two years, I was the only frontend developer alongside the backend team, building the back-office from scratch with the people running forestry operations."
+      ]
+    },
+    {
+      "role": "Frontend Developer",
+      "company": "Forzieri.com",
+      "location": "Florence, Italy",
+      "dates": "2017 - 2019",
+      "bullets": [
+        "I modernized the frontend of a live luxury e-commerce platform, introducing React and Webpack incrementally while continuing to build features.",
+        "I worked on the storefront and the internal CMS used for orders and daily operations."
+      ]
+    },
+    {
+      "role": "Head of Web - Designer & Developer",
+      "company": "Easysystem",
+      "location": "Figline Valdarno, Italy",
+      "dates": "2007 - 2017",
+      "bullets": [
+        "I started by designing and building websites, then also worked on frontend and backend applications, visual identities and print materials.",
+        "I installed servers, networks and firewalls for clients in Tuscany's leather and fashion district."
+      ]
+    }
+  ],
+  "skills": [
+    [
+      "Web development",
+      "TypeScript | JavaScript | HTML | Modern CSS | DOM & Web APIs | Responsive UI"
+    ],
+    [
+      "Frontend systems & architecture",
+      "React | Vue | Zustand | Micro-frontends | Shared libraries | Module boundaries | Frontend standards | RFC | ADR"
+    ],
+    ["Data & APIs", "GraphQL/Apollo | REST | WebSockets/Socket.io | Node.js | MongoDB"],
+    [
+      "Integrations & observability",
+      "Frontend integration after Okta login | JWT | HTTP interceptors | OpenTelemetry | Shared frontend integrations"
+    ],
+    [
+      "Monorepos & package management",
+      "Nx | pnpm workspaces | Dependency rules | Shared packages | Repository governance"
+    ],
+    [
+      "Build & bundling",
+      "Vite | Webpack | Build configuration | Build caching | Build performance"
+    ],
+    [
+      "Testing & code quality",
+      "Vitest | Jest | Testing Library | Playwright | Storybook | ESLint | Prettier"
+    ],
+    [
+      "Delivery & repository operations",
+      "Git | GitHub | Repository administration | GitHub Actions | Azure Pipelines | CI/CD | Quality gates"
+    ],
+    [
+      "Performance & accessibility",
+      "Core Web Vitals | Lighthouse | Code splitting | Bundle analysis | Browser and CDN caching | WCAG/ARIA | Keyboard navigation"
+    ],
+    [
+      "Design & UI engineering",
+      "Graphic design | Visual identities | Figma | Adobe Creative Cloud | Design systems | Design tokens | Pixel-accurate implementation"
+    ],
+    [
+      "AI-assisted development",
+      "Claude | Cursor | MCP-based tooling | Tool evaluation | Repository context and rules | Review and tests"
+    ],
+    [
+      "Platforms & infrastructure",
+      "Cloudflare | Windows Server | Networking | Firewalls | Windows Restart Manager API"
+    ]
+  ],
+  "projects": [
+    {
+      "name": "Lumina",
+      "url": "https://luminamud.com/",
+      "label": "luminamud.com",
+      "body": "A multiplayer text-based fantasy game, in development. I work on interface design, the Node.js/MongoDB backend, React client and Cloudflare infrastructure."
+    },
+    {
+      "name": "Deepfield",
+      "label": "Discontinued experiment",
+      "body": "A space exploration prototype: simulation, maps and ship panels in TypeScript and PixiJS. Interaction design and data visualization."
+    },
+    {
+      "name": "lockhound",
+      "url": "https://github.com/karedas/lockhound",
+      "label": "github.com/karedas/lockhound",
+      "body": "A zero-dependency Windows CLI that identifies processes locking a folder through the Restart Manager API. Termination requires an explicit action."
+    }
+  ],
+  "education": [
+    [
+      "IFTS Advanced Technical Certificate",
+      "Software Development - Java web application programmer diploma."
+    ],
+    ["Diploma in Arts", "Istituto Statale d'Arte di Firenze - Art and Design."]
+  ],
+  "languages": "Italian: native | English: professional | German: elementary, currently studying",
+  "privacy": "I authorize the processing of my personal data under EU Regulation 2016/679 (GDPR)."
+}

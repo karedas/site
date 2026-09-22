@@ -45,10 +45,12 @@ export type ProjectEntry = {
   description: string;
   tags: string[];
   command?: string;
-  href: string;
-  linkLabel: string;
+  href?: string;
+  linkLabel?: string;
   detail: string;
+  imageSrc?: string;
   imageAlt?: string;
+  gallery?: { src: string; width: number; height: number; alt: string; label: string }[];
   caption: string;
 };
 

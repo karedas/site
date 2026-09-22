@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { DEFAULT_LOCALE, getCopy, hrefFor, isDefault, LOCALES } from '@/i18n';
+import cvEn from '../../scripts/cv-en.json';
+import cvIt from '../../scripts/cv-it.json';
 
 /**
  * Collect every leaf path in an object, arrays included by index, so two
@@ -74,6 +76,50 @@ describe('metadata limits', () => {
 });
 
 describe('the work history', () => {
+  it('keeps both CVs structurally aligned, including all skills and projects', () => {
+    expect(leafPaths(cvEn).sort()).toEqual(leafPaths(cvIt).sort());
+    expect(cvEn.title).toBe(cvIt.title);
+    expect(cvEn.jobs.map((job) => job.company)).toEqual(cvIt.jobs.map((job) => job.company));
+    expect(cvEn.jobs[0]?.context).toBe('Work on Tosca Cloud');
+    expect(cvEn.jobs[0]?.dates).toBe('2023 - present');
+    expect(cvEn.profile).not.toMatch(/Tricentis|Staff Engineer|full.stack/i);
+    expect(cvEn.skills.map(([, entries]) => entries?.split('|').length)).toEqual(
+      cvIt.skills.map(([, entries]) => entries?.split('|').length),
+    );
+    expect(cvEn.projects.map((project) => project.name)).toEqual(
+      cvIt.projects.map((project) => project.name),
+    );
+    expect(cvEn.projects.find((project) => project.name === 'Deepfield')?.url).toBeUndefined();
+    expect(cvEn.skills.flat().join(' ')).toContain('after Okta login');
+    expect(cvEn.projects.find((project) => project.name === 'lockhound')?.body).toContain(
+      'explicit action',
+    );
+  });
+
+  it('keeps the Italian CV aligned with the platform role and design background', () => {
+    expect(cvIt.title).toBe(getCopy('it').work[0]?.title);
+    expect(cvIt.profile).not.toMatch(/Tricentis|Staff Engineer|full.stack/i);
+    const role = cvIt.jobs[0]?.bullets.join(' ') ?? '';
+    for (const term of ['ADR', 'design system', 'GitHub', 'Azure Pipelines', 'team di prodotto']) {
+      expect(role).toContain(term);
+    }
+    expect(role).not.toMatch(/Playwright|Okta|OpenTelemetry/);
+    expect(cvIt.skills).toHaveLength(12);
+    const skills = cvIt.skills.flat().join(' ');
+    for (const term of ['Zustand', 'ADR', 'Nx', 'Vite', 'Webpack', 'Adobe', 'Figma', 'MCP']) {
+      expect(skills).toContain(term);
+    }
+    expect(skills).toContain('dopo il login Okta');
+    expect(cvIt.projects[0]?.body).toContain('in sviluppo');
+    expect(cvIt.projects.find((project) => project.name === 'lockhound')?.body).toContain(
+      'azione esplicita',
+    );
+    expect(cvIt.jobs[0]?.company).toBe('Tricentis');
+    expect(cvIt.jobs[0]?.context).toBe('Esperienza su Tosca Cloud');
+    expect(cvIt.jobs[0]?.dates).toBe('2023 - oggi');
+    expect(cvIt.jobs[0]?.bullet_labels).toHaveLength(cvIt.jobs[0]?.bullets.length ?? 0);
+  });
+
   it('marks exactly one role as current, and it is the first', () => {
     for (const locale of LOCALES) {
       const work = getCopy(locale).work;
@@ -105,16 +151,34 @@ describe('focus and personal projects', () => {
     }
   });
 
-  it('groups the skills and links each personal project in both languages', () => {
+  it('groups the skills and links only publicly accessible projects in both languages', () => {
     for (const locale of LOCALES) {
       const copy = getCopy(locale);
       expect(copy.focus).toHaveLength(6);
       for (const project of copy.projects) {
-        expect(new URL(project.href).protocol).toBe('https:');
-        expect(project.linkLabel.length).toBeGreaterThan(0);
+        if (project.href) {
+          expect(new URL(project.href).protocol).toBe('https:');
+          expect(project.linkLabel?.length).toBeGreaterThan(0);
+        } else {
+          expect(project.name).toBe('Deepfield');
+          expect(project.gallery).toHaveLength(2);
+          expect(project.linkLabel).toBeUndefined();
+        }
       }
       expect(copy.projects.some((project) => project.name === 'lockhound')).toBe(true);
     }
+  });
+
+  it('describes Deepfield as a stopped experiment, not a public product', () => {
+    const project = cvIt.projects.find((entry) => entry.name === 'Deepfield');
+    expect(project?.label).toBe('Esperimento interrotto');
+    expect(project?.url).toBeUndefined();
+    expect(getCopy('it').projects.find((entry) => entry.name === 'Deepfield')?.detail).toContain(
+      'Ho interrotto',
+    );
+    expect(getCopy('en').projects.find((entry) => entry.name === 'Deepfield')?.detail).toContain(
+      'stopped',
+    );
   });
 });
 

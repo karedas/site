@@ -25,11 +25,21 @@ const head = copy.sections.projects;
         <ul class="project-tags">
           {project.tags.map((tag) => <li>{tag}</li>)}
         </ul>
-        <a class="text-link project-link" href={project.href} target="_blank" rel="noopener noreferrer">{project.linkLabel}</a>
+        {project.href && <a class="text-link project-link" href={project.href} target="_blank" rel="noopener noreferrer">{project.linkLabel}</a>}
         </div>
         <figure class:list={['project-preview', { terminal: !!project.command }]}>
-          {project.imageAlt && (
-            <img src="/lumina-preview.webp" alt={project.imageAlt} width="1000" height="563" loading="lazy" decoding="async" />
+          {project.imageAlt && project.imageSrc && (
+            <img src={project.imageSrc} alt={project.imageAlt} width="1000" height="563" loading="lazy" decoding="async" />
+          )}
+          {project.gallery && (
+            <div class="project-gallery">
+              {project.gallery.map((shot) => (
+                <a href={shot.src} target="_blank" rel="noopener noreferrer" aria-label={shot.label}>
+                  <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" decoding="async" />
+                  <span>{shot.label}</span>
+                </a>
+              ))}
+            </div>
           )}
           {project.command && (
             <div class="command-preview">
