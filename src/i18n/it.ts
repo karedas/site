@@ -150,17 +150,17 @@ export const it: Copy = {
   ai: {
     heading: 'Come uso l’AI nello sviluppo',
     summary:
-      'Mi occupo dell’adozione degli strumenti AI nel repository. Valuto Claude, Cursor e altri strumenti su attività reali e definisco regole e contesto per usarli nel lavoro dei team. I problemi ricorrenti mi aiutano a capire dove intervenire su documentazione e strumenti condivisi.',
+      'Valuto gli strumenti AI su attività reali e preparo il repository per il loro uso nei team: istruzioni, documentazione e strumenti condivisi. Quando Claude, Cursor o altri assistenti ripetono lo stesso errore, intervengo su ciò che lo provoca, oltre a correggere il codice prodotto.',
     moreLabel: 'Come li uso nel lavoro quotidiano',
     paragraphs: [
-      'Mi occupo di come gli strumenti AI vengono adottati nel repository e nel lavoro dei team. Uso e valuto Claude, Cursor e altri assistenti per analizzare il codice, preparare modifiche e ridurre il lavoro ripetitivo. Definisco le regole d’uso e curo il contesto del repository a loro disposizione.',
-      'Guardo soprattutto gli errori che si ripetono: perdere il contesto tra moduli, ignorare un’implementazione già presente o proporre modifiche fuori tema. Prima di riprovare, cerco cosa manca nelle istruzioni, nella documentazione o negli strumenti condivisi.',
+      'Il mio lavoro con l’AI riguarda anche il repository su cui lavorano i team. Valuto Claude, Cursor e altri assistenti su attività reali e curo le istruzioni, la documentazione e gli strumenti condivisi che usano per orientarsi nel codice.',
+      'Se un assistente ignora una libreria esistente o perde il contesto tra moduli, correggere la singola risposta non basta. Cerco la causa e aggiorno ciò che manca nel repository, poi verifico se il problema si ripresenta. L’obiettivo è rendere queste correzioni utili anche agli altri team.',
     ],
-    rulesLead: 'Cosa verifico:',
+    rulesLead: 'Su cosa intervengo:',
     rules: [
-      '<b>L’attività e il suo contesto.</b> Controllo cosa offre già il repository e quali moduli devono essere modificati. Se un agente propone una funzionalità duplicata, è un segnale che gli manca una parte di quel contesto.',
-      '<b>Il problema ricorrente.</b> Se lo stesso errore continua a ripresentarsi, verifico se un’istruzione è poco chiara, manca della documentazione o serve modificare uno strumento condiviso.',
-      '<b>Il codice prodotto.</b> Leggo il diff, eseguo i test e verifico l’integrazione nel progetto. Tengo le modifiche che so spiegare e mantenere: una risposta plausibile, da sola, non mi dice se il software funziona.',
+      '<b>Contesto del codice.</b> Rendo espliciti nelle istruzioni e nella documentazione i confini tra moduli, le convenzioni e le implementazioni da riusare.',
+      '<b>Strumenti condivisi.</b> Valuto dove gli assistenti incontrano ostacoli e lavoro sugli strumenti del repository per migliorarne l’uso nei team.',
+      '<b>Verifica delle modifiche.</b> Leggo il diff, eseguo i test e controllo l’integrazione nel progetto. Resto responsabile del codice che adotto e della sua manutenzione.',
     ],
     backLabel: 'Torna al mio lavoro',
   },
@@ -171,13 +171,14 @@ export const it: Copy = {
       place: 'VIENNA, AT',
       title: 'Senior Software Engineer',
       company: 'Tricentis',
-      context: 'Tosca Cloud',
+      context: 'Esperienza su Tosca Cloud',
       tags: ['Microfrontend', '16 progetti', '12+ team', 'Quality gates'],
       current: true,
       paragraphs: [
-        'Insieme all’architetto del mio team sono un riferimento per le iniziative tecniche che coinvolgono l’intera monorepo. Mi confronto con sviluppatori di diversi ambiti, engineering manager, principal engineer di altre piattaforme e referenti di prodotto per valutare esigenze, dipendenze e impatto sui team. Da questo confronto definiamo le soluzioni condivise e ne accompagniamo l’adozione.',
-        'Il mio lavoro comprende sia le decisioni tecniche sia l’implementazione: sviluppo e mantengo risorse condivise, correggo problemi trasversali e preparo l’infrastruttura necessaria alle migrazioni. Seguo l’integrazione delle nuove versioni del design system, coordinando gli aggiornamenti con i team e intervenendo direttamente quando serve. Quando emergono differenze tra prodotti, lavoro sulle configurazioni e sui componenti comuni per correggerle.',
-        'Mi occupo inoltre di performance, ottimizzazione delle build e modernizzazione degli strumenti di sviluppo. Documento le scelte negli ADR, definisco le regole della monorepo e supporto i team nell’applicarle. Le feature restano ai team di prodotto, ai quali posso contribuire; la mia responsabilità continuativa è la piattaforma che condividono.',
+        '<b>Decisioni tra team.</b> Su Tosca Cloud, insieme all’architetto del team, sono stato un riferimento per le iniziative dell’intera monorepo. Ho lavorato con sviluppatori, engineering manager, principal engineer di altre piattaforme e referenti di prodotto per definire le soluzioni condivise.',
+        '<b>Sviluppo della piattaforma.</b> Ho sviluppato e mantenuto librerie, strumenti e configurazioni comuni, risolto problemi trasversali e supportato l’adozione nei team. Il mio lavoro riguardava la piattaforma condivisa; le feature di prodotto erano affidate ai rispettivi team.',
+        '<b>Migrazioni e design system.</b> Ho preparato l’infrastruttura per gli aggiornamenti, coordinandoli con i team e intervenendo direttamente quando necessario. Ho lavorato su componenti e temi condivisi per correggere le differenze tra prodotti.',
+        '<b>Performance e strumenti.</b> Ho ottimizzato build e pipeline e modernizzato gli strumenti di sviluppo. Ho documentato le decisioni negli ADR, definito le regole della monorepo e supportato i team nell’applicarle.',
       ],
     },
     {
@@ -200,9 +201,9 @@ export const it: Copy = {
       title: 'Frontend Developer',
       company: 'Forzieri.com',
       context: 'E-commerce di lusso',
-      tags: ['ASP', 'jQuery', 'React', 'Webpack'],
+      tags: ['React', 'Webpack', 'E-commerce', 'CMS'],
       paragraphs: [
-        'Ho modernizzato un e-commerce di lusso mentre era in produzione. Ho sostituito gradualmente ASP e jQuery con React e una nuova configurazione Webpack.',
+        'Ho modernizzato il frontend di un e-commerce di lusso in produzione, introducendo gradualmente React e una nuova configurazione Webpack.',
         'Durante la migrazione ho continuato a sviluppare nuove funzionalità senza fermare il negozio.',
         'Ho lavorato sia sullo storefront sia sul CMS interno usato per gli ordini e per la gestione quotidiana del negozio.',
       ],
@@ -236,7 +237,34 @@ export const it: Copy = {
         'Un progetto personale in cui lavoro sia al design delle interfacce sia al codice e ai sistemi che fanno funzionare il gioco.',
       imageAlt:
         'Il sito pubblico di Lumina: un paesaggio fantasy con titoli dorati e la navigazione per esplorare il mondo del gioco.',
+      imageSrc: '/lumina-preview.webp',
       caption: 'Il sito del progetto. Il gioco è in sviluppo.',
+    },
+    {
+      name: 'Deepfield',
+      kind: 'Esperimento di interfacce e simulazione',
+      description:
+        'Un prototipo di esplorazione spaziale controllato attraverso mappe, sensori e pannelli di bordo. Ho lavorato sulla simulazione e sulle interfacce per navigare la galassia e gestire i sistemi della nave.',
+      detail:
+        'Ho interrotto lo sviluppo perché non vedevo un percorso sostenibile per portarlo sul mercato. Resta un esperimento in cui ho unito design delle interazioni, visualizzazione dei dati e sviluppo software.',
+      tags: ['TypeScript', 'PixiJS', 'WebGL', 'Simulazione'],
+      gallery: [
+        {
+          src: '/deepfield-map.png',
+          width: 1600,
+          height: 903,
+          alt: 'Deepfield: mappa stellare con pianificazione della rotta, sensori e stato della nave.',
+          label: 'Ingrandisci la mappa stellare',
+        },
+        {
+          src: '/deepfield-ship.png',
+          width: 1600,
+          height: 867,
+          alt: 'Deepfield: schema tecnico della nave con sottosistemi, diagnostica e allarmi.',
+          label: 'Ingrandisci lo schema della nave',
+        },
+      ],
+      caption: 'Schermate del prototipo. Sviluppo interrotto; codice non pubblico.',
     },
     {
       name: 'lockhound',

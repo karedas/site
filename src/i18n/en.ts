@@ -142,17 +142,17 @@ export const en: Copy = {
   ai: {
     heading: 'How I use AI in development',
     summary:
-      'I manage the adoption of AI tools in the repository. I evaluate Claude, Cursor and other tools on real tasks and define rules and context for their use across teams. Recurring problems help me identify where documentation and shared tooling need improvement.',
+      'I evaluate AI tools on real tasks and prepare the repository for teams to use them: instructions, documentation and shared tooling. When Claude, Cursor or other assistants repeat a mistake, I work on its cause as well as correcting the resulting code.',
     moreLabel: 'Read about my workflow',
     paragraphs: [
-      'I manage how AI tools are adopted in the repository and in the teams’ development work. I use and evaluate Claude, Cursor and other assistants to analyse code, prepare changes and reduce repetitive work. I define usage rules and maintain the repository context available to them.',
-      'I pay attention to recurring mistakes: losing context between modules, overlooking an existing implementation or suggesting changes outside the task. I investigate what is missing from the instructions, documentation or shared tooling before trying again.',
+      'My AI work also involves the repository that teams share. I evaluate Claude, Cursor and other assistants on real tasks and maintain the instructions, documentation and shared tools they use to navigate the code.',
+      'When an assistant overlooks an existing library or loses context between modules, correcting that one response is not enough. I investigate the cause, address what is missing in the repository and check whether the problem recurs. The aim is to make those improvements useful to other teams too.',
     ],
-    rulesLead: 'What I look at:',
+    rulesLead: 'What I work on:',
     rules: [
-      '<b>The task and its context.</b> I check what the repository already provides and which modules the change should touch. An agent proposing duplicate functionality is a useful sign that it has missed part of that context.',
-      '<b>The recurring problem.</b> If the same mistake keeps coming back, I check whether an instruction is unclear, documentation is missing or a shared tool needs changing.',
-      '<b>The resulting code.</b> I review the diff, run tests and check the integration with the project. I keep changes I can explain and maintain; a plausible answer alone does not tell me whether the software works.',
+      '<b>Code context.</b> I make module boundaries, conventions and reusable implementations explicit in repository instructions and documentation.',
+      '<b>Shared tooling.</b> I assess where assistants run into obstacles and work on repository tools to improve how teams use them.',
+      '<b>Verification.</b> I review the diff, run tests and check integration with the project. I remain responsible for the code I adopt and its maintenance.',
     ],
     backLabel: 'Back to my work',
   },
@@ -163,13 +163,14 @@ export const en: Copy = {
       place: 'VIENNA, AT',
       title: 'Senior Software Engineer',
       company: 'Tricentis',
-      context: 'Tosca Cloud',
+      context: 'Work on Tosca Cloud',
       tags: ['Micro-frontends', '16 projects', '12+ teams', 'Quality gates'],
       current: true,
       paragraphs: [
-        'Together with the architect on my team, I am a point of contact for technical initiatives that span the entire monorepo. I work with developers across disciplines, engineering managers, principal engineers from other platforms and product stakeholders to assess needs, dependencies and the impact on teams. Through these discussions, we define shared solutions and support their adoption.',
-        'My work includes both technical decisions and implementation: I develop and maintain shared resources, fix cross-project issues and build the infrastructure needed for migrations. I coordinate the integration of new design system versions with the teams and carry out updates myself when needed. When inconsistencies appear between products, I address them in shared configurations and components.',
-        'I also work on performance, build optimization and modernizing development tools. I document decisions in ADRs, define monorepo rules and help teams apply them. Product features remain with their teams, where I can also contribute; my ongoing responsibility is the platform they share.',
+        '<b>Cross-team decisions.</b> On Tosca Cloud, together with the team’s architect, I was a point of contact for initiatives spanning the monorepo. I worked with developers, engineering managers, principal engineers from other platforms and product stakeholders to define shared solutions.',
+        '<b>Platform development.</b> I developed and maintained shared libraries, tools and configurations, fixed cross-project issues and supported adoption across teams. My work focused on the shared platform; product features belonged to their respective teams.',
+        '<b>Migrations and design system.</b> I built the infrastructure for updates, coordinated them with teams and carried them out myself when needed. I worked on shared components and themes to resolve inconsistencies between products.',
+        '<b>Performance and tooling.</b> I optimized builds and pipelines and modernized development tools. I documented decisions in ADRs, defined monorepo rules and helped teams apply them.',
       ],
     },
     {
@@ -192,9 +193,9 @@ export const en: Copy = {
       title: 'Frontend Developer',
       company: 'Forzieri.com',
       context: 'Luxury e-commerce',
-      tags: ['ASP', 'jQuery', 'React', 'Webpack'],
+      tags: ['React', 'Webpack', 'E-commerce', 'CMS'],
       paragraphs: [
-        'I modernized a luxury e-commerce platform while it was in production, gradually replacing ASP and jQuery with React and a new Webpack setup.',
+        'I modernized the frontend of a live luxury e-commerce platform, gradually introducing React and a new Webpack setup.',
         'I continued to build new features during the migration without taking the shop offline.',
         'I worked on both the storefront and the internal CMS used for orders and day-to-day shop operations.',
       ],
@@ -228,7 +229,34 @@ export const en: Copy = {
         'A personal project that brings together interface design, application code and the systems behind the game.',
       imageAlt:
         'Lumina’s public website: a fantasy landscape with gold typography and navigation into the game’s world.',
+      imageSrc: '/lumina-preview.webp',
       caption: 'The project’s website. The game is in development.',
+    },
+    {
+      name: 'Deepfield',
+      kind: 'Interface and simulation experiment',
+      description:
+        'A space exploration prototype operated through maps, sensors and shipboard panels. I worked on the simulation and interfaces for navigating the galaxy and managing the ship’s systems.',
+      detail:
+        'I stopped development because I did not see a sustainable path to bringing it to market. It remains an experiment combining interaction design, data visualization and software development.',
+      tags: ['TypeScript', 'PixiJS', 'WebGL', 'Simulation'],
+      gallery: [
+        {
+          src: '/deepfield-map.png',
+          width: 1600,
+          height: 903,
+          alt: 'Deepfield: star map with route planning, sensors and ship status.',
+          label: 'Enlarge the star map',
+        },
+        {
+          src: '/deepfield-ship.png',
+          width: 1600,
+          height: 867,
+          alt: 'Deepfield: ship engineering schematic with subsystems, diagnostics and alarms.',
+          label: 'Enlarge the ship schematic',
+        },
+      ],
+      caption: 'Prototype screenshots. Development stopped; source code is private.',
     },
     {
       name: 'lockhound',

@@ -123,17 +123,29 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('.projects').getByText('lockhound', { exact: true })).toBeVisible();
       await expect(page.locator('.projects code')).toHaveText('npx lockhound');
       for (const project of copy.projects) {
-        await expect(page.getByRole('link', { name: project.linkLabel })).toHaveAttribute(
-          'href',
-          project.href,
-        );
+        if (project.href && project.linkLabel) {
+          await expect(page.getByRole('link', { name: project.linkLabel })).toHaveAttribute(
+            'href',
+            project.href,
+          );
+        }
+        for (const shot of project.gallery ?? []) {
+          await expect(page.getByRole('link', { name: shot.label })).toHaveAttribute(
+            'href',
+            shot.src,
+          );
+        }
       }
-      const preview = page.locator('.project-preview img');
-      await preview.scrollIntoViewIfNeeded();
-      await expect(preview).toBeVisible();
-      await expect
-        .poll(() => preview.evaluate((img: HTMLImageElement) => img.naturalWidth))
-        .toBeGreaterThan(0);
+      const previews = page.locator('.project-preview img');
+      await expect(previews).toHaveCount(3);
+      for (const preview of await previews.all()) {
+        await preview.scrollIntoViewIfNeeded();
+        await expect(preview).toBeVisible();
+        await expect
+          .poll(() => preview.evaluate((img: HTMLImageElement) => img.naturalWidth))
+          .toBeGreaterThan(0);
+      }
+      await expect(page.locator('a[href="https://github.com/karedas/deepfield"]')).toHaveCount(0);
     });
 
     test('lists four jobs, each with bullets and chips', async ({ page }) => {
@@ -149,6 +161,18 @@ for (const locale of ['en', 'it'] as const) {
         await expect(card.locator('.duty')).toHaveCount(job.paragraphs.length);
         await expect(card.locator('.chip')).toHaveCount(job.tags.length);
       }
+    });
+
+    test('shows experience before projects and gives the current role scannable leads', async ({
+      page,
+    }) => {
+      await page.goto(home);
+      const sections = await page
+        .locator('main > section')
+        .evaluateAll((nodes) => nodes.map((node) => node.id));
+      expect(sections.indexOf('experience')).toBeGreaterThan(sections.indexOf('top'));
+      expect(sections.indexOf('experience')).toBeLessThan(sections.indexOf('projects'));
+      await expect(page.locator('.work .job').first().locator('.duty b')).toHaveCount(4);
     });
 
     test('closes on an invitation and a labelled email action', async ({ page }) => {

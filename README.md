@@ -1,142 +1,82 @@
-# andrea-lisi.com · v2 "Mission Console"
+# andrea-lisi.com
 
-Personal portfolio, second iteration. One-page dark site with a technical HUD aesthetic:
-mono labels, corner crosshairs, a sticky status bar, an animated signal-wave canvas and a
-procedurally generated three.js asteroid whose faces pulse with warm colors.
+Personal portfolio of Andrea Lisi, Senior Software Engineer. Experience, technical
+skills, personal projects and an overview of how I use AI in software development.
+Available in English and Italian, with downloadable CVs.
 
 ## Stack
 
-- **[Astro](https://astro.build/)** — static output, partial hydration via React islands.
-- **React 19** — only for the animated islands (`SignalCanvas`, `Asteroid`).
-- **[three.js](https://threejs.org/)** — the hero asteroid: displaced icosahedron, pulsing
-  vertex-color patches, orbiting fragments and a gold dust ring, scroll-linked rotation.
-- **CSS** — `tokens.css` is the variable source of truth, scoped Astro `<style>` blocks per
-  component. No utility-CSS framework.
-- **[Biome](https://biomejs.dev/)** — single-binary linter + formatter, strict ruleset.
-- **[Vitest](https://vitest.dev/)** + Testing Library — unit tests for hooks and React islands.
-- **[Playwright](https://playwright.dev/)** + axe-core — end-to-end smoke + accessibility checks.
-- **Netlify** — deploy from `netlify.toml` (static `dist/`).
-- **GitHub Actions** — quality (lint + typecheck + unit), build, and E2E + a11y on push / PR.
+- Astro: static HTML, without a client-side framework runtime.
+- TypeScript and CSS: typed content, shared design tokens and component styles.
+- Biome: formatting and linting.
+- Vitest: content, locale parity and routing tests.
+- Playwright and axe-core: browser, download, responsive and accessibility checks.
+- GitHub Actions: quality checks, build and browser tests.
+- Netlify: hosting configuration in `netlify.toml`.
+
+The current design uses a navy background, green accents and Figtree / JetBrains
+Mono typography. Small scripts handle progressive enhancements such as the dot
+field and reveal effects. Content remains available without JavaScript, and motion
+is reduced when the visitor requests it. The former React / Three.js console
+design is no longer part of the site.
 
 ## Development
 
-```bash
+Requires Node.js 22.12 or later and pnpm (the version is pinned in `package.json`).
+
+```sh
 pnpm install
-pnpm dev        # http://localhost:4321
+pnpm dev          # local development, normally on :4321
+pnpm build        # type check and production build in dist/
+pnpm preview      # preview the production build
 ```
 
-## Build
+## Checks
 
-```bash
-pnpm build      # type-check + Astro build -> dist/
-pnpm preview    # serve the production build locally
+```sh
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm verify       # lint, types, unit tests and build
+pnpm test:e2e:install
+pnpm test:e2e
 ```
 
-## Quality gates
+Browser tests use a production preview on port 4323. If a server is already running
+there locally, rebuild it first: the test runner reuses that server. Tests cover
+both languages, navigation, project images, CV downloads, narrow viewports,
+no-JavaScript rendering, reduced motion and automated accessibility checks.
 
-```bash
-pnpm lint       # Biome: lint + format check
-pnpm lint:fix   # Biome: apply fixes
-pnpm format     # Biome: format only
-pnpm typecheck  # astro check (TS + .astro)
-pnpm test       # Vitest unit tests (jsdom)
-pnpm test:watch # Vitest watch mode
-pnpm test:coverage  # coverage report (v8)
-pnpm verify     # lint + typecheck + unit + build (full local CI)
+## Content and structure
+
+```text
+src/i18n/         English and Italian copy, shared types and routing helpers
+src/pages/        /, /it/, /ai and /it/ai
+src/components/   Page sections and their styles
+src/layouts/      HTML shell, metadata, fonts and shared scripts
+src/styles/       Design tokens, global styles and motion preferences
+src/scripts/      Progressive enhancements
+public/           CV PDFs, portraits, project screenshots and favicon
+scripts/          Bilingual CV content and PDF generator
+tests/unit/       Content and routing tests
+tests/e2e/        Browser and accessibility tests
 ```
 
-### End-to-end + a11y
+Edit the two locale files together. Project entries can link to public code or a
+live project; private experiments can instead show screenshots and an explicit
+development status. Deepfield is a discontinued prototype, not a released product,
+and its private repository is not linked from the site.
 
-```bash
-pnpm test:e2e:install   # one-time: install Playwright browsers
-pnpm test:e2e           # build + preview on :4323 + Playwright suite
-```
+The CVs are generated from `scripts/cv-it.json` and `scripts/cv-en.json`; see
+[the CV instructions](scripts/README-cv.md). The generator writes one language at
+a time. Review both the wording and the rendered pages before publishing.
 
-The suite runs against the production build, not the dev server: on-demand
-compilation made the first hit from each worker time out, and the built site is
-what actually ships. Workers are capped at 4 because every page runs a WebGL
-loop and a canvas rAF loop, and one Chromium per core starves them all.
+## Deployment
 
-The E2E suite covers section presence, the absence of the removed sections and of the
-flagged copy patterns, console-error budget, island hydration (canvas + WebGL asteroid),
-the CV download link, the nav labels, the mobile bottom bar, a no-JavaScript render, the
-prefers-reduced-motion path, the `/ai` deep link, and a WCAG 2.1 AA axe scan on both pages.
-
-## Deploy
-
-Netlify auto-builds from the `main` branch using `netlify.toml`. To link a fresh repo:
-connect the GitHub repo in the Netlify UI (no env vars required) — `netlify.toml` handles
-`command`, `publish`, and Node version.
-
-## Structure
-
-```
-src/
-├── layouts/
-│   └── layout.astro               # html shell, fonts, meta, reveal-on-scroll script
-├── pages/                         # thin: each page just picks a locale
-│   ├── index.astro                # /        -> <Home locale="en" />
-│   ├── ai.astro                   # /ai      -> <AiPage locale="en" />
-│   └── it/
-│       ├── index.astro            # /it/     -> <Home locale="it" />
-│       └── ai.astro               # /it/ai   -> <AiPage locale="it" />
-├── i18n/
-│   ├── types.ts                   # the Copy shape both locales must fill
-│   ├── en.ts                      # English, the published voice
-│   ├── it.ts                      # Italian, the author's original voice
-│   └── index.ts                   # locales, getCopy, hrefFor
-├── components/
-│   ├── home-page.astro            # the whole home page, for one locale
-│   ├── ai-page.astro              # the /ai deep link, for one locale
-│   ├── lang-switch.astro          # EN / IT, keeps you on the same page
-│   ├── rail.astro                 # fixed left rail / mobile bottom bar + scrollspy
-│   ├── status-bar.astro           # sticky name + coordinates strip
-│   ├── hero.astro                 # 00 · name, stat strip, buttons, canvas + asteroid
-│   ├── approach.astro             # 01 · "How I work": six prose blocks
-│   ├── ai-section.astro           # 02 · AI, shared by the home page and /ai
-│   ├── work.astro                 # 03 · Experience timeline
-│   ├── contact.astro              # 04 · CV, profiles, email
-│   ├── footer.astro
-│   ├── section-header.astro       # giant outlined number + H2_ + eyebrow
-│   ├── analytics.astro            # GA, production only
-│   └── react/                     # client islands
-│       ├── signal-canvas.tsx      # 2D canvas: sine waves + rising dots
-│       ├── asteroid.tsx           # three.js asteroid (desktop only)
-│       └── use-reduced-motion.ts  # shared media-query hook
-├── data/
-│   └── ai.ts                      # AI copy, shared by the section and the page
-└── styles/
-    ├── tokens.css                 # CSS variables (single source of truth)
-    └── global.css                 # base, section shell, keyframes, reduced motion
-
-public/
-├── andrea-lisi-cv.pdf             # CV download target (copy of D:\CV output)
-├── favicon.svg
-└── robots.txt
-
-tests/
-├── unit/                          # Vitest + Testing Library
-└── e2e/                           # Playwright + axe
-```
-
-## Hydration strategy
-
-| Component       | Directive                        | Why                                          |
-|-----------------|----------------------------------|----------------------------------------------|
-| `SignalCanvas`  | `client:load`                    | Full-bleed hero background, visible at once. |
-| `Asteroid`      | `client:media="(min-width: 720px)"` | WebGL: desktop only, never loads on mobile. |
-
-Everything else is server-rendered at build time. Scrollspy and reveal-on-scroll are plain
-inline scripts (no framework runtime). Reveal-on-scroll hides `[data-rv]` blocks until the
-observer fires, so `<html class="no-js">` plus an inline script in `<head>` keeps every
-block visible when JavaScript never runs.
-
-## Reduced motion
-
-Honored twice: a global `@media (prefers-reduced-motion: reduce)` kill-switch in
-`global.css`, and a JS check (`useReducedMotion` in islands, `matchMedia` in inline
-scripts) that skips the rAF loops and renders the canvas and the asteroid as single
-static frames.
+`netlify.toml` sets `pnpm run build`, the `dist/` output folder, Node 22, asset
+caching and security headers. The repository connection and production branch
+are configured in Netlify. Changes should be reviewed through a pull request
+before merging into the production branch.
 
 ## License
 
