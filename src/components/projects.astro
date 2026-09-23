@@ -34,10 +34,10 @@ const head = copy.sections.projects;
           {project.gallery && (
             <div class="project-gallery">
               {project.gallery.map((shot) => (
-                <a href={shot.src} target="_blank" rel="noopener noreferrer" aria-label={shot.label}>
+                <button type="button" class="preview-trigger" data-preview-open aria-label={shot.label} aria-haspopup="dialog" aria-controls="project-image-preview" disabled>
                   <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" decoding="async" />
                   <span>{shot.label}</span>
-                </a>
+                </button>
               ))}
             </div>
           )}
@@ -53,3 +53,19 @@ const head = copy.sections.projects;
     ))}
   </div>
 </section>
+
+<dialog id="project-image-preview" class="image-preview" aria-label={copy.imagePreview.title}>
+  <div class="image-preview-toolbar">
+    <button type="button" data-preview-zoom aria-pressed="false" data-zoom-label={copy.imagePreview.zoom} data-fit-label={copy.imagePreview.fit}>{copy.imagePreview.zoom}</button>
+    <form method="dialog"><button type="submit">{copy.imagePreview.close} <span aria-hidden="true">×</span></button></form>
+  </div>
+  <div class="image-preview-viewport" tabindex="0" role="region" aria-label={copy.imagePreview.title}>
+    <img data-preview-image alt="" />
+  </div>
+  <p data-preview-caption class="image-preview-caption"></p>
+</dialog>
+
+<script>
+  import { initImagePreview } from '@/scripts/image-preview';
+  initImagePreview();
+</script>

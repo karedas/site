@@ -138,6 +138,7 @@ export type Copy = {
   work: WorkEntry[];
 
   projects: ProjectEntry[];
+  imagePreview: { title: string; close: string; zoom: string; fit: string };
 
   /** Small print at the very bottom. */
   footer: {
