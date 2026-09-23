@@ -216,6 +216,12 @@ export const en: Copy = {
     },
   ],
 
+  imagePreview: {
+    title: 'Image preview',
+    close: 'Close',
+    zoom: 'Original size',
+    fit: 'Fit to screen',
+  },
   projects: [
     {
       name: 'Lumina',

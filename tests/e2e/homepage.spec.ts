@@ -130,9 +130,9 @@ for (const locale of ['en', 'it'] as const) {
           );
         }
         for (const shot of project.gallery ?? []) {
-          await expect(page.getByRole('link', { name: shot.label })).toHaveAttribute(
-            'href',
-            shot.src,
+          await expect(page.getByRole('button', { name: shot.label })).toHaveAttribute(
+            'aria-controls',
+            'project-image-preview',
           );
         }
       }
