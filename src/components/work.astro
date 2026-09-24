@@ -61,6 +61,7 @@ const ROOT_TAGS = new Set(['Design']);
         )}
         <span class:list={['years', { live: job.current }]}>{job.years}</span>
       </div>
+      {job.specialization && <p class="job-specialization">{job.specialization}</p>}
       <p class="meta">{job.context} · {job.place}</p>
 
       <div class="duties">

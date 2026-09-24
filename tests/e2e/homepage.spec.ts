@@ -58,13 +58,15 @@ for (const locale of ['en', 'it'] as const) {
       expect((description as string).length).toBeLessThan(155);
     });
 
-    test('opens with the greeting, the name and the tagline', async ({ page }) => {
+    test('opens with the greeting, the name and the tagline', async ({ page }, testInfo) => {
       await page.goto(home);
 
       await expect(page.getByText(copy.hero.greeting)).toBeVisible();
       await expect(page.getByRole('heading', { level: 1 })).toHaveText('Andrea Lisi.');
       await expect(page.getByText(copy.hero.tagline)).toBeVisible();
+      await expect(page.locator('.hero .specialization')).toHaveText(copy.hero.eyebrow);
       await expect(page.getByText(copy.hero.intro)).toBeVisible();
+      await page.locator('.hero').screenshot({ path: testInfo.outputPath('hero-desktop.png') });
     });
 
     test('shows the portrait, served as WebP with a JPEG fallback', async ({ page }) => {
@@ -226,6 +228,19 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('.work .job-title').first()).toContainText(
         'Senior Software Engineer',
       );
+      await expect(page.locator('.work .job-specialization')).toHaveCount(1);
+      await expect(page.locator('.work .job-specialization')).toHaveText(
+        copy.work[0]?.specialization ?? '',
+      );
+      await expect(page.locator('.work .job').first().locator('.meta')).toContainText(
+        'Tosca Cloud',
+      );
+      for (const tag of ['React', 'TypeScript']) {
+        await expect(
+          page.locator('.work .job').first().locator('.chip').filter({ hasText: tag }),
+        ).toBeVisible();
+        await expect(page.locator('.work .job-title').first()).not.toContainText(tag);
+      }
       await expect(page.locator('#examples')).toHaveCount(0);
       await expect(
         page
@@ -298,7 +313,7 @@ for (const locale of ['en', 'it'] as const) {
       await context.close();
     });
 
-    test('holds together at phone width', async ({ page }) => {
+    test('holds together at phone width', async ({ page }, testInfo) => {
       await page.setViewportSize({ width: 375, height: 812 });
       await page.goto(home);
 
@@ -310,6 +325,11 @@ for (const locale of ['en', 'it'] as const) {
       const cv = await page.locator('.hero .cv').boundingBox();
       expect(cv).not.toBeNull();
       expect((cv?.y ?? 1000) + (cv?.height ?? 0)).toBeLessThanOrEqual(812);
+      await page.locator('.hero').screenshot({ path: testInfo.outputPath('hero-mobile.png') });
+      await page
+        .locator('.work .job')
+        .first()
+        .screenshot({ path: testInfo.outputPath('tricentis-mobile.png') });
     });
 
     test('passes axe accessibility checks (no critical/serious violations)', async ({ page }) => {
