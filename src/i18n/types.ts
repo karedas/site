@@ -60,6 +60,8 @@ export type WorkEntry = {
   years: string;
   place: string;
   company: string;
+  /** Scope of the experience, separate from the official job title. */
+  specialization?: string;
   /**
    * What the place was, on the line under the title. Never the job title again:
    * three of these repeated it word for word, which the phone layout made

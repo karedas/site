@@ -37,7 +37,7 @@ export const it: Copy = {
   hero: {
     greeting: 'Ciao. Mi chiamo',
     tagline: 'Senior Software Engineer.',
-    eyebrow: 'Sviluppo frontend, architettura e strumenti per sviluppatori',
+    eyebrow: 'Piattaforme frontend, strumenti per sviluppatori e design system',
     stats: [
       { label: 'Dove vivo', value: 'Vienna, Austria' },
       { label: 'Come lavoro', value: 'Remoto o ibrido', tone: 'now' },
@@ -171,8 +171,9 @@ export const it: Copy = {
       place: 'VIENNA, AT',
       title: 'Senior Software Engineer',
       company: 'Tricentis',
+      specialization: 'Piattaforma frontend, governance e design system',
       context: 'Esperienza su Tosca Cloud',
-      tags: ['Microfrontend', '16 progetti', '12+ team', 'Quality gates'],
+      tags: ['React', 'TypeScript', 'Microfrontend', '16 progetti', '12+ team', 'Quality gates'],
       current: true,
       paragraphs: [
         '<b>Decisioni tra team.</b> Su Tosca Cloud, insieme all’architetto del team, sono stato un riferimento per le iniziative dell’intera monorepo. Ho lavorato con sviluppatori, engineering manager, principal engineer di altre piattaforme e referenti di prodotto per definire le soluzioni condivise.',
