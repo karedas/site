@@ -44,7 +44,7 @@ export const en: Copy = {
       { label: 'Languages', value: 'IT · EN · DE in progress' },
     ],
     intro:
-      'I’ve been building web software for over 18 years, with deep experience in frontend engineering. I develop applications, shared libraries and developer tools. I work with teams on architecture, performance and integrations, and implement the solutions we agree on.',
+      'I’ve been building web software for over 18 years, mainly in frontend engineering. I develop applications, shared libraries and developer tools. I work with teams on architecture, performance and integrations, and implement the solutions we agree on.',
     buttons: { github: 'GitHub', linkedin: 'LinkedIn', email: 'Email me', cv: 'Download CV' },
   },
 
@@ -142,7 +142,7 @@ export const en: Copy = {
   ai: {
     heading: 'How I use AI in development',
     summary:
-      'I evaluate AI tools on real tasks and prepare the repository for teams to use them: instructions, documentation and shared tooling. When Claude, Cursor or other assistants repeat a mistake, I work on its cause as well as correcting the resulting code.',
+      'I test AI assistants on real development tasks. I maintain repository instructions, documentation and shared tools to help them navigate the code. When Claude, Cursor or another assistant repeats a mistake, I investigate the cause and address it alongside the code correction.',
     moreLabel: 'Read about my workflow',
     paragraphs: [
       'My AI work also involves the repository that teams share. I evaluate Claude, Cursor and other assistants on real tasks and maintain the instructions, documentation and shared tools they use to navigate the code.',
@@ -227,13 +227,12 @@ export const en: Copy = {
     {
       name: 'Lumina',
       kind: 'Game development & web design',
-      description:
-        'A multiplayer fantasy game built around text. I develop the Node.js/MongoDB backend, React client and Cloudflare infrastructure.',
+      description: 'A personal project: a text-based multiplayer fantasy game.',
       tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
       href: 'https://luminamud.com/',
       linkLabel: 'Explore Lumina',
       detail:
-        'A personal project that brings together interface design, application code and the systems behind the game.',
+        'I design the interfaces and develop the React client, Node.js/MongoDB backend and Cloudflare infrastructure.',
       imageAlt:
         'Lumina’s public website: a fantasy landscape with gold typography and navigation into the game’s world.',
       imageSrc: '/lumina-preview.webp',
