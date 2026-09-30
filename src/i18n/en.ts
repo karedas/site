@@ -40,7 +40,6 @@ export const en: Copy = {
     stats: [
       { label: 'Based in', value: 'Vienna, Austria' },
       { label: 'Working', value: 'Remote or hybrid', tone: 'now' },
-      { label: 'Background', value: 'Web design & UI', tone: 'root' },
       { label: 'Languages', value: 'IT · EN · DE in progress' },
     ],
     intro:

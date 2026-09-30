@@ -79,8 +79,10 @@ for (const locale of ['en', 'it'] as const) {
       expect(await img.evaluate((el: HTMLImageElement) => el.naturalWidth)).toBeGreaterThan(0);
     });
 
-    test('lists the four facts', async ({ page }) => {
+    test('lists three practical facts without a design-background highlight', async ({ page }) => {
       await page.goto(home);
+      await expect(page.locator('.hero .fact')).toHaveCount(3);
+      await expect(page.locator('.hero .facts .tone-root')).toHaveCount(0);
       for (const stat of copy.hero.stats) {
         await expect(page.locator('.hero .facts').getByText(stat.value)).toBeVisible();
       }
@@ -259,9 +261,8 @@ for (const locale of ['en', 'it'] as const) {
       await expect(page.locator('.work .years.live')).toHaveCount(1);
       await expect(page.locator('.work .job').first().locator('.years.live')).toBeVisible();
 
-      // Lilac: the art foundation. The school, the block about drawing, the
-      // job where the drawing was the job.
-      await expect(page.locator('.hero .fact-v.tone-root')).toHaveCount(1);
+      // Lilac: design background remains in the detailed story, not the hero.
+      await expect(page.locator('.hero .fact-v.tone-root')).toHaveCount(0);
       await expect(page.locator('.approach .block-title.tone-root')).toHaveCount(1);
       await expect(page.locator('.work .chip.root')).toHaveCount(1);
 

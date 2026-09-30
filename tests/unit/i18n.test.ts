@@ -189,7 +189,8 @@ describe('the colour system', () => {
     for (const locale of LOCALES) {
       const copy = getCopy(locale);
       const facts = copy.hero.stats.filter((s) => s.tone);
-      expect(facts.map((s) => s.tone).sort()).toEqual(['now', 'root']);
+      expect(copy.hero.stats).toHaveLength(3);
+      expect(facts.map((s) => s.tone)).toEqual(['now']);
 
       const toned = copy.approach.filter((b) => b.tone);
       expect(toned.map((b) => b.tone)).toEqual(['root']);
