@@ -44,7 +44,7 @@ export const en: Copy = {
       { label: 'Languages', value: 'IT · EN · DE in progress' },
     ],
     intro:
-      'I’ve been building web software for over 18 years, with deep experience in frontend engineering. I develop applications, shared libraries and developer tools. I work with teams on architecture, performance and integrations, and implement the solutions we agree on.',
+      'Over 18 years building web software, mainly in frontend engineering: applications, shared libraries and developer tools. Architecture, performance and integration work with teams, from technical decisions through to implementation.',
     buttons: { github: 'GitHub', linkedin: 'LinkedIn', email: 'Email me', cv: 'Download CV' },
   },
 
@@ -61,15 +61,15 @@ export const en: Copy = {
     {
       tone: 'root',
       title: 'An eye for the interface',
-      body: '<b>I started by designing and building websites.</b> Over the years I’ve also worked on visual identities, print design, backend systems and infrastructure. I work with designers to turn mockups into interfaces that match the design and behave as intended.',
+      body: '<b>Web design was my starting point.</b> Then came visual identities, print, backend systems and infrastructure. That background still shapes the work with designers: interfaces faithful to the mockups, in both appearance and behaviour.',
     },
     {
       title: 'Rules and automated checks',
-      body: '<b>I document shared decisions and automate checks where I can.</b> This applies to dependencies, module boundaries and builds. It also saves me from having the same conversation a dozen times.',
+      body: '<b>Shared decisions written down; checks automated where possible.</b> Dependencies, module boundaries and builds are part of that work. It also saves me from having the same conversation a dozen times.',
     },
     {
-      title: 'I work on the code and alongside the teams',
-      body: '<b>I write code and debug with developers across the teams, from junior to senior.</b> I regularly work with their managers and with design, security and sales to understand requirements and agree on changes that affect several products.',
+      title: 'Code and collaboration',
+      body: '<b>Development and debugging alongside junior and senior engineers.</b> Regular discussions with their managers and with design, security and sales to clarify requirements and agree on changes across products.',
     },
   ],
 
@@ -142,17 +142,17 @@ export const en: Copy = {
   ai: {
     heading: 'How I use AI in development',
     summary:
-      'I evaluate AI tools on real tasks and prepare the repository for teams to use them: instructions, documentation and shared tooling. When Claude, Cursor or other assistants repeat a mistake, I work on its cause as well as correcting the resulting code.',
+      'Evaluation of Claude, Cursor and other assistants on real development tasks. Repository instructions, documentation and shared tools to help them navigate the code. Recurring mistakes are a starting point for improving that setup, alongside correcting the code.',
     moreLabel: 'Read about my workflow',
     paragraphs: [
-      'My AI work also involves the repository that teams share. I evaluate Claude, Cursor and other assistants on real tasks and maintain the instructions, documentation and shared tools they use to navigate the code.',
-      'When an assistant overlooks an existing library or loses context between modules, correcting that one response is not enough. I investigate the cause, address what is missing in the repository and check whether the problem recurs. The aim is to make those improvements useful to other teams too.',
+      'The work starts with real tasks in a repository shared by several teams: trying Claude, Cursor and other assistants, checking where they struggle, and maintaining the instructions, documentation and tools they use to navigate the code.',
+      'A missed library or lost context between modules is a reason to look beyond the individual response. What is missing in the repository? Does the problem recur after the correction? Those checks guide changes that other teams can use too.',
     ],
     rulesLead: 'What I work on:',
     rules: [
-      '<b>Code context.</b> I make module boundaries, conventions and reusable implementations explicit in repository instructions and documentation.',
-      '<b>Shared tooling.</b> I assess where assistants run into obstacles and work on repository tools to improve how teams use them.',
-      '<b>Verification.</b> I review the diff, run tests and check integration with the project. I remain responsible for the code I adopt and its maintenance.',
+      '<b>Code context.</b> Documentation of module boundaries, conventions and existing implementations to reuse.',
+      '<b>Shared tooling.</b> Assessment of obstacles in assistant workflows and improvements to repository tools used by teams.',
+      '<b>Verification.</b> Diff review, tests and integration checks. Responsibility for the adopted code and its maintenance stays with me.',
     ],
     backLabel: 'Back to my work',
   },
@@ -168,10 +168,10 @@ export const en: Copy = {
       tags: ['React', 'TypeScript', 'Micro-frontends', '16 projects', '12+ teams', 'Quality gates'],
       current: true,
       paragraphs: [
-        '<b>Cross-team decisions.</b> On Tosca Cloud, together with the team’s architect, I was a point of contact for initiatives spanning the monorepo. I worked with developers, engineering managers, principal engineers from other platforms and product stakeholders to define shared solutions.',
-        '<b>Platform development.</b> I developed and maintained shared libraries, tools and configurations, fixed cross-project issues and supported adoption across teams. My work focused on the shared platform; product features belonged to their respective teams.',
-        '<b>Migrations and design system.</b> I built the infrastructure for updates, coordinated them with teams and carried them out myself when needed. I worked on shared components and themes to resolve inconsistencies between products.',
-        '<b>Performance and tooling.</b> I optimized builds and pipelines and modernized development tools. I documented decisions in ADRs, defined monorepo rules and helped teams apply them.',
+        '<b>Cross-team decisions.</b> Point of contact alongside the team’s architect for Tosca Cloud initiatives spanning the monorepo. Definition of shared solutions with developers, engineering managers, principal engineers from other platforms and product stakeholders.',
+        '<b>Platform development.</b> Development and maintenance of shared libraries, tools and configurations; resolution of cross-project issues and support for adoption across teams. Product features remained with their respective teams.',
+        '<b>Migrations and design system.</b> Infrastructure for updates, coordination with teams and hands-on migration work when needed. Updates to shared components and themes to resolve inconsistencies between products.',
+        '<b>Performance and tooling.</b> Build and pipeline optimization, development tool updates, and documentation of decisions in ADRs. Definition of monorepo rules and support for teams applying them.',
       ],
     },
     {
@@ -182,10 +182,10 @@ export const en: Copy = {
       context: 'E-commerce platform for tree planting',
       tags: ['React', 'Vue', 'GraphQL', 'Storefront migration'],
       paragraphs: [
-        'As part of the frontend team, I worked on moving the storefront out of the monolith using React, Vue and GraphQL.',
-        'I helped rebuild the storefront as the company grew from around 20 to <b>more than 150 people</b>.',
-        'I built interfaces for high-traffic campaigns. I worked regularly with the design and design system teams to integrate requests, match the mockups and follow the shared standards.',
-        'For my final two years, I built the frontend for the internal back-office tools from scratch. I was the project’s only frontend developer and worked alongside the backend team and the people who used those tools for forestry operations.',
+        'Contribution to the storefront migration out of the monolith, as part of the frontend team, using React, Vue and GraphQL.',
+        'Storefront redevelopment during the company’s growth from around 20 to <b>more than 150 people</b>.',
+        'Interfaces for high-traffic campaigns, with regular input from the design and design system teams to incorporate requests and follow mockups and shared standards.',
+        'Development of the internal back-office frontend from scratch during the final two years. Sole frontend developer on the project, working with the backend team and the forestry operations staff using the tools.',
       ],
     },
     {
@@ -196,9 +196,9 @@ export const en: Copy = {
       context: 'Luxury e-commerce',
       tags: ['React', 'Webpack', 'E-commerce', 'CMS'],
       paragraphs: [
-        'I modernized the frontend of a live luxury e-commerce platform, gradually introducing React and a new Webpack setup.',
-        'I continued to build new features during the migration without taking the shop offline.',
-        'I worked on both the storefront and the internal CMS used for orders and day-to-day shop operations.',
+        'Gradual introduction of React and a new Webpack setup to modernize the frontend of a live luxury e-commerce platform.',
+        'Delivery of new features throughout the migration, with the shop remaining online.',
+        'Development across the storefront and the internal CMS for orders and day-to-day shop operations.',
       ],
     },
     {
@@ -209,10 +209,10 @@ export const en: Copy = {
       context: 'Web agency and IT services',
       tags: ['Design', 'Web', 'Backend', 'Infrastructure'],
       paragraphs: [
-        'I joined as a designer. Over the years I also worked on web development, backend systems and infrastructure installed at client sites.',
-        'I designed websites, interfaces, visual identities and print material from scratch for client projects.',
-        'I built and maintained both frontend and backend applications.',
-        'I installed servers, networks and firewalls on site for client companies, including manufacturers in Tuscany’s leather and fashion district.',
+        'A role that started in design and expanded into web development, backend systems and infrastructure at client sites.',
+        'Design of websites, interfaces, visual identities and print material from scratch for clients.',
+        'Development and maintenance of frontend and backend applications.',
+        'On-site installation of servers, networks and firewalls, including for manufacturers in Tuscany’s leather and fashion district.',
       ],
     },
   ],
@@ -227,13 +227,12 @@ export const en: Copy = {
     {
       name: 'Lumina',
       kind: 'Game development & web design',
-      description:
-        'A multiplayer fantasy game built around text. I develop the Node.js/MongoDB backend, React client and Cloudflare infrastructure.',
+      description: 'A personal project: a text-based multiplayer fantasy game.',
       tags: ['Node.js', 'MongoDB', 'React', 'Cloudflare'],
       href: 'https://luminamud.com/',
       linkLabel: 'Explore Lumina',
       detail:
-        'A personal project that brings together interface design, application code and the systems behind the game.',
+        'Interface design, React client development, Node.js/MongoDB backend and Cloudflare infrastructure.',
       imageAlt:
         'Lumina’s public website: a fantasy landscape with gold typography and navigation into the game’s world.',
       imageSrc: '/lumina-preview.webp',
@@ -243,9 +242,9 @@ export const en: Copy = {
       name: 'Deepfield',
       kind: 'Interface and simulation experiment',
       description:
-        'A space exploration prototype operated through maps, sensors and shipboard panels. I worked on the simulation and interfaces for navigating the galaxy and managing the ship’s systems.',
+        'A space exploration prototype operated through maps, sensors and shipboard panels. Simulation and interface development for galaxy navigation and ship systems management.',
       detail:
-        'I stopped development because I did not see a sustainable path to bringing it to market. It remains an experiment combining interaction design, data visualization and software development.',
+        'I stopped development because I did not see a sustainable path to bringing it to market. The prototype remains an experiment in interaction design, data visualization and software development.',
       tags: ['TypeScript', 'PixiJS', 'WebGL', 'Simulation'],
       gallery: [
         {
