@@ -41,7 +41,6 @@ export const it: Copy = {
     stats: [
       { label: 'Dove vivo', value: 'Vienna, Austria' },
       { label: 'Come lavoro', value: 'Remoto o ibrido', tone: 'now' },
-      { label: 'Percorso', value: 'Web design e UI', tone: 'root' },
       { label: 'Lingue', value: 'IT · EN · DE in corso' },
     ],
     intro:
