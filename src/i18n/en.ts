@@ -36,7 +36,7 @@ export const en: Copy = {
   hero: {
     greeting: 'Ciao. My name is',
     tagline: 'Senior Software Engineer.',
-    eyebrow: 'Frontend platforms, developer tooling & design systems',
+    eyebrow: 'Frontend platforms, architecture & developer experience',
     stats: [
       { label: 'Based in', value: 'Vienna, Austria' },
       { label: 'Working', value: 'Remote or hybrid', tone: 'now' },
