@@ -8,14 +8,14 @@
     {
       "role": "Senior Software Engineer",
       "company": "Tricentis",
-      "context": "Work on Tosca Cloud",
+      "context": "Experience across Tosca Cloud, Tosca Road and qTest",
       "location": "Vienna, Austria",
       "dates": "2023 - present",
       "bullet_labels": ["Collaboration", "Development", "Migrations", "Repository & CI", "AI"],
       "bullets": [
-        "I defined shared solutions for the monorepo with developers, engineering managers, principal engineers and product stakeholders.",
+        "On Tosca Cloud, spanning 16 projects and 12+ teams, I defined monorepo solutions with developers, engineering managers, principal engineers and product stakeholders.",
         "I built shared libraries and tools and resolved cross-project issues; product teams owned their features. I wrote ADRs and automated checks for repository rules.",
-        "I built the infrastructure for design system upgrades, supported teams through migrations and updated shared components and themes myself.",
+        "I built infrastructure for Tosca Cloud and NeoLoad design system upgrades, supported migrations and updated shared components and themes.",
         "I administered the GitHub repository and automated GitHub Actions and Azure Pipelines. I optimized builds and caching and modernized developer tools.",
         "I evaluated Claude, Cursor and other tools on real tasks, maintained repository context and checked the resulting code through review and tests."
       ]
@@ -26,7 +26,7 @@
       "location": "Florence, Italy",
       "dates": "2019 - 2023",
       "bullets": [
-        "I contributed to moving the storefront out of the monolith using React, Vue and GraphQL.",
+        "I worked on the Vue website and CMS, helped migrate the storefront from a PHP monolith to React and contributed to the Node.js/GraphQL BFF alongside the backend team.",
         "I built interfaces for high-traffic campaigns, working with design and design system teams to match mockups and shared standards.",
         "For the final two years, I was the only frontend developer alongside the backend team, building the back-office from scratch with the people running forestry operations."
       ]
@@ -55,28 +55,28 @@
   "skills": [
     [
       "Web development",
-      "TypeScript | JavaScript | HTML | Modern CSS | DOM & Web APIs | Responsive UI"
+      "TypeScript | JavaScript | HTML | Modern CSS | DOM & Web APIs | Responsive UI | Canvas | SVG | PixiJS/WebGL"
     ],
     [
       "Frontend systems & architecture",
-      "React | Vue | Zustand | Micro-frontends | Shared libraries | Module boundaries | Frontend standards | RFC | ADR"
+      "React | Vue | Zustand | Redux Toolkit | TanStack Query | MUI | Micro-frontends | Shared libraries | Module boundaries | RFC | ADR"
     ],
-    ["Data & APIs", "GraphQL/Apollo | REST | WebSockets/Socket.io | Node.js | MongoDB"],
+    [
+      "Data & APIs",
+      "GraphQL/Apollo | REST | WebSockets/Socket.io | Node.js | MongoDB | PostgreSQL | MySQL"
+    ],
     [
       "Integrations & observability",
-      "Frontend integration after Okta login | JWT | HTTP interceptors | OpenTelemetry | Shared frontend integrations"
+      "Frontend integration after Okta login | JWT | HTTP interceptors | OpenTelemetry"
     ],
     [
       "Monorepos & package management",
-      "Nx | pnpm workspaces | Dependency rules | Shared packages | Repository governance"
+      "Nx | Turborepo | pnpm workspaces | Governance & dependencies"
     ],
-    [
-      "Build & bundling",
-      "Vite | Webpack | Build configuration | Build caching | Build performance"
-    ],
+    ["Build & bundling", "Vite | Webpack | Build caching | Build performance"],
     [
       "Testing & code quality",
-      "Vitest | Jest | Testing Library | Playwright | Storybook | ESLint | Prettier"
+      "Vitest | Jest | Testing Library | Playwright | Storybook | ESLint | Biome | Oxlint | Prettier"
     ],
     [
       "Delivery & repository operations",
@@ -92,7 +92,7 @@
     ],
     [
       "AI-assisted development",
-      "Claude | Cursor | MCP-based tooling | Tool evaluation | Repository context and rules | Review and tests"
+      "Codex | Claude Code | Cursor | GitHub Copilot | MCP-based tooling | Tool evaluation | Repository context and rules | Review and tests"
     ],
     [
       "Platforms & infrastructure",
@@ -109,13 +109,13 @@
     {
       "name": "Deepfield",
       "label": "Discontinued experiment",
-      "body": "A space exploration prototype: simulation, maps and ship panels in TypeScript and PixiJS. Interaction design and data visualization."
+      "body": "A space simulation in TypeScript and PixiJS: maps, ship panels, interaction design and data visualization."
     },
     {
       "name": "lockhound",
       "url": "https://github.com/karedas/lockhound",
       "label": "github.com/karedas/lockhound",
-      "body": "A zero-dependency Windows CLI that identifies processes locking a folder through the Restart Manager API. Termination requires an explicit action."
+      "body": "A zero-dependency Windows CLI to find processes locking a folder. Terminating them requires an explicit action."
     }
   ],
   "education": [
