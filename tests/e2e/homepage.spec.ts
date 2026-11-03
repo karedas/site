@@ -176,7 +176,14 @@ for (const locale of ['en', 'it'] as const) {
         .evaluateAll((nodes) => nodes.map((node) => node.id));
       expect(sections.indexOf('experience')).toBeGreaterThan(sections.indexOf('top'));
       expect(sections.indexOf('experience')).toBeLessThan(sections.indexOf('projects'));
-      await expect(page.locator('.work .job').first().locator('.duty b')).toHaveCount(4);
+      const duties = page.locator('.work .job').first().locator('.duty');
+      const paragraphs = copy.work[0]?.paragraphs ?? [];
+      expect(paragraphs.length).toBeGreaterThan(0);
+      await expect(duties).toHaveCount(paragraphs.length);
+      for (const [index, paragraph] of paragraphs.entries()) {
+        await expect(duties.nth(index).locator('p')).toHaveText(plain(paragraph));
+        await expect(duties.nth(index).locator('b')).toHaveCount(1);
+      }
     });
 
     test('closes on an invitation and a labelled email action', async ({ page }) => {
