@@ -80,7 +80,7 @@ describe('the work history', () => {
     expect(leafPaths(cvEn).sort()).toEqual(leafPaths(cvIt).sort());
     expect(cvEn.title).toBe(cvIt.title);
     expect(cvEn.jobs.map((job) => job.company)).toEqual(cvIt.jobs.map((job) => job.company));
-    expect(cvEn.jobs[0]?.context).toBe('Work on Tosca Cloud');
+    expect(cvEn.jobs[0]?.context).toBe(getCopy('en').work[0]?.context);
     expect(cvEn.jobs[0]?.dates).toBe('2023 - present');
     expect(cvEn.profile).not.toMatch(/Tricentis|Staff Engineer|full.stack/i);
     expect(cvEn.skills.map(([, entries]) => entries?.split('|').length)).toEqual(
@@ -115,7 +115,7 @@ describe('the work history', () => {
       'azione esplicita',
     );
     expect(cvIt.jobs[0]?.company).toBe('Tricentis');
-    expect(cvIt.jobs[0]?.context).toBe('Esperienza su Tosca Cloud');
+    expect(cvIt.jobs[0]?.context).toBe(getCopy('it').work[0]?.context);
     expect(cvIt.jobs[0]?.dates).toBe('2023 - oggi');
     expect(cvIt.jobs[0]?.bullet_labels).toHaveLength(cvIt.jobs[0]?.bullets.length ?? 0);
   });
@@ -144,7 +144,7 @@ describe('focus and personal projects', () => {
       const copy = getCopy(locale);
       const currentRole = copy.work[0]?.paragraphs.join(' ') ?? '';
       expect(currentRole).toContain('ADR');
-      expect(currentRole).toContain('design system');
+      expect(currentRole).toMatch(/design system/i);
       expect(currentRole).not.toContain('Playwright');
       expect(copy.focus.flatMap((group) => group.items)).toContain('Playwright');
       expect(copy.focus.flatMap((group) => group.items)).toContain('Zustand');
